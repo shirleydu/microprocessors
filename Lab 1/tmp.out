@@ -1,0 +1,3 @@
++ C:\PROGRA~2\SDCC\bin\sdcpp.exe -nostdinc -Wall -I"C:\Users\SSP\Documents\Microprocessor Systems\Lab 1" -obj-ext=.rel -DSDCC_MODEL_SMALL -DSDCC_FLOAT_REENT -DSDCC=290 -DSDCC_REVISION=5416 -DSDCC_mcs51 -D__mcs51 -isystem "C:\Program Files (x86)\SDCC\bin\..\include\mcs51" -isystem "C:\Program Files (x86)\SDCC\bin\..\include"  "C:\Users\SSP\Documents\Microprocessor Systems\Lab 1\Hello.c" 
++ C:\PROGRA~2\SDCC\bin\asx8051.exe -plosgffc "Hello.asm"
+C:\Users\SSP\Documents\Microprocessor Systems\Lab 1\Hello.c:99: warning 85: in function main unreferenced local variable : 'choice2'

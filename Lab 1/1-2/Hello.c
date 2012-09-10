@@ -1,13 +1,9 @@
 //------------------------------------------------------------------------------------
-// Hello.c
+// Lab1-2
 //------------------------------------------------------------------------------------
-//8051 Test program to demonstrate serial port I/O.  This program writes a message on
-//the console using the printf() function, and reads characters using the getchar()
-//function.  An ANSI escape sequence is used to clear the screen if a '2' is typed. 
-//A '1' repeats the message and the program responds to other input characters with
-//an appropriate messabge.
-//
-//Any valid keystroke turns on the green LED on the board; invalid entries turn it off
+// This program communicates with an ANSI terminal. A keyboard input is expected.
+// Printable items are displayed on an overwriting line. Non-printable items are 
+// displayed on a scrolling panel with blinking text.
 //------------------------------------------------------------------------------------
 // Includes
 //------------------------------------------------------------------------------------

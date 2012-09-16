@@ -1,6 +1,8 @@
-// Lab1-3.c
 //------------------------------------------------------------------------------------
-// This program takes inputs from port 1 and outputs them to port 2
+// Lab1-1.c
+//------------------------------------------------------------------------------------
+// Receives an input from the keyboard and outputs the key pressed onto the screen
+// Program is terminated by the <ESC> key
 //------------------------------------------------------------------------------------
 // Includes
 //------------------------------------------------------------------------------------
@@ -29,7 +31,6 @@ void UART0_INIT(void);
 void main(void)
 {
 	char choice;
-	
 	WDTCN = 0xDE;						// Disable the watchdog timer
 	WDTCN = 0xAD;						// Note: = "DEAD"!
 	
@@ -39,12 +40,24 @@ void main(void)
 
 	SFRPAGE = UART0_PAGE;				// Direct output to UART0
 
-	printf("Reading inputs to P1\n\r");
+	//print the program info
+	printf("Returns input char. To exit hit ESC.\n\n\r");
 
 	while(1)
 	{
-		P2 = (P1 & 0x1E);		//set P2 outputs equal to P1 inputs; ignore pins 0, 5-7
-		printf("P2: %x P1 : %x\n\r", P2, P1);		//print current values for each port (in hex)
+		choice=getchar();
+		if (choice >= 32 && choice <= 126)
+		{	
+			printf("\n\rThe keyboard character is %c.\n\r", choice);
+		}
+		else
+		{	
+			if(choice ==27){
+				//exitprogram
+				printf("Program exit \n\r");
+				return;
+			}
+		}
 
 	}
 }
@@ -89,9 +102,7 @@ void PORT_INIT(void)
 	XBR1	 = 0x00;
 	XBR2	 = 0x40;					// Enable Crossbar and weak pull-up
 	P0MDOUT |= 0x01;					// Set TX0 on P0.0 pin to push-pull
-	P1MDOUT &= 0xE0;					// Port 1 pins 0-4 to open-drain; pin 0 does not work.
-	P1 |= ~0xE0;						// set pins 0-4 to high-impedence
-	P2MDOUT |= 0x1F;					// Port 2 pins 0-4 to output
+	P1MDOUT	|= 0x40;					// Set green LED ooutput P1.6 to push-pull
 
 	SFRPAGE = SFRPAGE_SAVE;             // Restore SFR page
 }

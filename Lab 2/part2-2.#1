@@ -72,17 +72,13 @@ void main (void)
 	
 	printf("\033[2J");				// Erase screen and move cursor to the home posiiton.
 
-	//Timer0_Init();
-	//TR0 = 1;		//endable timer0
-
-	Timer2_Init();
-	TR2 = 1;
+	Timer2_Init();					
+	TR2 = 1;						//enable timer2
 
 	printf("I am running :D \n\r");
 
 	while (1)
-	{
-		//printf("%X %X\r\n",TH2, TL2); 
+	{ 
 		if (printTime)	//if 1  second, print.
 		{
 			printf("Time = %d\n\r", time);
@@ -99,63 +95,29 @@ void Timer2_Init()		//timer 2 init
 	TMR2CN &= ~0x04;		//ignore outside input
 
 	TMR2CF |= 0x18;		//sysclk/2
-	//TMR2CF |= 0x08;		//sysclk
 	TMR2CF &= 0xFE;		//count up
 	TR2 = 0;			//disable timer
 	TL2 = 0;			//clear low byte of timer count
 	TH2 = 0;			//clear high byte of timer count
-	RCAP2L = 0xD0;	//lowbit for sysclk/2	
-	RCAP2H = 0x9E;	//highbit for sysclk/2
-	//RCAP2L = 0xA0;		//lowbit for sysclk
-	//RCAP2H = 0x3D;		//highbit for sysclk
 
 	SFRPAGE = SFRPAGE_SAVE;
 }
 
 void Timer2_ISR() interrupt 5		//timer2 interrupt
 { 
-
-
-	//TMR2CN &= 0x7F;		//clears overflow flag
-	TF2=0;
-	TL2 =0xD0;
-	TH2 =0x9E;
-	if (overflows == 100 )
+	TF2=0;					//resets interrupt flag
+	TL2 =0xD0;				//reset low byte
+	TH2 =0x9E;				//reset high byte
+	if (overflows == 100 )	//set print flag every 10 .1secs
 	{	
-		time++;	//increment time
-		printTime = 1;		//set flag
-		overflows = 0;
+		time++;				//increment time
+		printTime = 1;		//set print flag
+		overflows = 0;		//reset overflows
 	}
 
 	overflows++;
 }
 	
-
-/*
-void Timer0_Init()		//timer0 init.
-{
-	CKCON &= ~0x08; 	//sysclk/12
-	TMOD &= 0xF0;		//clear bits 0-3 of timer mode register
-	TMOD |= 0x01;		//set timer 0 to mode 1 (16-bit counter/timer)
-	TR0 = 0;			//disable timer
-	TL0 = 0;			//clear low byte of timer count
-	TH0 = 0;			//clear high byte of timer count
-}
-
-void Timer0_ISR() interrupt 1		//timer0 interrupt
-{ 
-	if (overflows == 10 )
-	{
-		TH0 = 0x5E;
-		TL0 = 0x05;
-
-		time++;	//increment time
-		printTime = 1;		//set flag
-		overflows = 0;
-	}
-
-	overflows++;
-}*/
 
 //-------------------------------------------------------------------------------------------
 // SYSCLK_Init
@@ -229,9 +191,7 @@ void PORT_INIT(void)
 	SFRPAGE = CONFIG_PAGE;
 
 	EA		= 1;			// Enable interrupts as selected.
-	//ET0 	= 1;			// Enable Timer 0 overflow interrupt
 	ET2 = 1;				// Enable Timer 2 overflow interrupt
-	//IE |= 0x20;
 
 	XBR0	= 0x04;			// Enable UART0.
 	XBR1	= 0x04;			// /INT0 routed to port pin.

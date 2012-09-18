@@ -104,8 +104,8 @@ void Timer2_Init()		//timer 2 init
 	TR2 = 0;			//disable timer
 	TL2 = 0;			//clear low byte of timer count
 	TH2 = 0;			//clear high byte of timer count
-	RCAP2L = 0xFE;	//lowbit for sysclk/2	
-	RCAP2H = 0xFF;	//highbit for sysclk/2
+	RCAP2L = 0xD0;	//lowbit for sysclk/2	
+	RCAP2H = 0x9E;	//highbit for sysclk/2
 	//RCAP2L = 0xA0;		//lowbit for sysclk
 	//RCAP2H = 0x3D;		//highbit for sysclk
 
@@ -118,6 +118,8 @@ void Timer2_ISR() interrupt 5		//timer2 interrupt
 
 	//TMR2CN &= 0x7F;		//clears overflow flag
 	TF2=0;
+	TL2 =0xD0;
+	TH2 =0x9E;
 	if (overflows == 100 )
 	{	
 		time++;	//increment time

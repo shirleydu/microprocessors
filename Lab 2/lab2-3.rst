@@ -1,0 +1,2335 @@
+                              1 ;--------------------------------------------------------
+                              2 ; File Created by SDCC : free open source ANSI-C Compiler
+                              3 ; Version 2.9.0 #5416 (Mar 22 2009) (MINGW32)
+                              4 ; This file was generated Mon Sep 17 19:58:03 2012
+                              5 ;--------------------------------------------------------
+                              6 	.module lab2_3
+                              7 	.optsdcc -mmcs51 --model-small
+                              8 	
+                              9 ;--------------------------------------------------------
+                             10 ; Public variables in this module
+                             11 ;--------------------------------------------------------
+                             12 	.globl _P7_7
+                             13 	.globl _P7_6
+                             14 	.globl _P7_5
+                             15 	.globl _P7_4
+                             16 	.globl _P7_3
+                             17 	.globl _P7_2
+                             18 	.globl _P7_1
+                             19 	.globl _P7_0
+                             20 	.globl _SPIF
+                             21 	.globl _WCOL
+                             22 	.globl _MODF
+                             23 	.globl _RXOVRN
+                             24 	.globl _NSSMD1
+                             25 	.globl _NSSMD0
+                             26 	.globl _TXBMT
+                             27 	.globl _SPIEN
+                             28 	.globl _P6_7
+                             29 	.globl _P6_6
+                             30 	.globl _P6_5
+                             31 	.globl _P6_4
+                             32 	.globl _P6_3
+                             33 	.globl _P6_2
+                             34 	.globl _P6_1
+                             35 	.globl _P6_0
+                             36 	.globl _AD2EN
+                             37 	.globl _AD2TM
+                             38 	.globl _AD2INT
+                             39 	.globl _AD2BUSY
+                             40 	.globl _AD2CM2
+                             41 	.globl _AD2CM1
+                             42 	.globl _AD2CM0
+                             43 	.globl _AD2WINT
+                             44 	.globl _AD0EN
+                             45 	.globl _AD0TM
+                             46 	.globl _AD0INT
+                             47 	.globl _AD0BUSY
+                             48 	.globl _AD0CM1
+                             49 	.globl _AD0CM0
+                             50 	.globl _AD0WINT
+                             51 	.globl _AD0LJST
+                             52 	.globl _P5_7
+                             53 	.globl _P5_6
+                             54 	.globl _P5_5
+                             55 	.globl _P5_4
+                             56 	.globl _P5_3
+                             57 	.globl _P5_2
+                             58 	.globl _P5_1
+                             59 	.globl _P5_0
+                             60 	.globl _CF
+                             61 	.globl _CR
+                             62 	.globl _CCF5
+                             63 	.globl _CCF4
+                             64 	.globl _CCF3
+                             65 	.globl _CCF2
+                             66 	.globl _CCF1
+                             67 	.globl _CCF0
+                             68 	.globl _CY
+                             69 	.globl _AC
+                             70 	.globl _F0
+                             71 	.globl _RS1
+                             72 	.globl _RS0
+                             73 	.globl _OV
+                             74 	.globl _F1
+                             75 	.globl _P
+                             76 	.globl _P4_7
+                             77 	.globl _P4_6
+                             78 	.globl _P4_5
+                             79 	.globl _P4_4
+                             80 	.globl _P4_3
+                             81 	.globl _P4_2
+                             82 	.globl _P4_1
+                             83 	.globl _P4_0
+                             84 	.globl _TF4
+                             85 	.globl _EXF4
+                             86 	.globl _EXEN4
+                             87 	.globl _TR4
+                             88 	.globl _CT4
+                             89 	.globl _CPRL4
+                             90 	.globl _TF3
+                             91 	.globl _EXF3
+                             92 	.globl _EXEN3
+                             93 	.globl _TR3
+                             94 	.globl _CT3
+                             95 	.globl _CPRL3
+                             96 	.globl _TF2
+                             97 	.globl _EXF2
+                             98 	.globl _EXEN2
+                             99 	.globl _TR2
+                            100 	.globl _CT2
+                            101 	.globl _CPRL2
+                            102 	.globl _MAC0HO
+                            103 	.globl _MAC0Z
+                            104 	.globl _MAC0SO
+                            105 	.globl _MAC0N
+                            106 	.globl _BUSY
+                            107 	.globl _ENSMB
+                            108 	.globl _STA
+                            109 	.globl _STO
+                            110 	.globl _SI
+                            111 	.globl _AA
+                            112 	.globl _SMBFTE
+                            113 	.globl _SMBTOE
+                            114 	.globl _PT2
+                            115 	.globl _PS
+                            116 	.globl _PS0
+                            117 	.globl _PT1
+                            118 	.globl _PX1
+                            119 	.globl _PT0
+                            120 	.globl _PX0
+                            121 	.globl _P3_7
+                            122 	.globl _P3_6
+                            123 	.globl _P3_5
+                            124 	.globl _P3_4
+                            125 	.globl _P3_3
+                            126 	.globl _P3_2
+                            127 	.globl _P3_1
+                            128 	.globl _P3_0
+                            129 	.globl _EA
+                            130 	.globl _ET2
+                            131 	.globl _ES
+                            132 	.globl _ES0
+                            133 	.globl _ET1
+                            134 	.globl _EX1
+                            135 	.globl _ET0
+                            136 	.globl _EX0
+                            137 	.globl _P2_7
+                            138 	.globl _P2_6
+                            139 	.globl _P2_5
+                            140 	.globl _P2_4
+                            141 	.globl _P2_3
+                            142 	.globl _P2_2
+                            143 	.globl _P2_1
+                            144 	.globl _P2_0
+                            145 	.globl _S1MODE
+                            146 	.globl _MCE1
+                            147 	.globl _REN1
+                            148 	.globl _TB81
+                            149 	.globl _RB81
+                            150 	.globl _TI1
+                            151 	.globl _RI1
+                            152 	.globl _SM00
+                            153 	.globl _SM10
+                            154 	.globl _SM20
+                            155 	.globl _REN
+                            156 	.globl _REN0
+                            157 	.globl _TB80
+                            158 	.globl _RB80
+                            159 	.globl _TI
+                            160 	.globl _TI0
+                            161 	.globl _RI
+                            162 	.globl _RI0
+                            163 	.globl _P1_7
+                            164 	.globl _P1_6
+                            165 	.globl _P1_5
+                            166 	.globl _P1_4
+                            167 	.globl _P1_3
+                            168 	.globl _P1_2
+                            169 	.globl _P1_1
+                            170 	.globl _P1_0
+                            171 	.globl _FLHBUSY
+                            172 	.globl _CP1EN
+                            173 	.globl _CP1OUT
+                            174 	.globl _CP1RIF
+                            175 	.globl _CP1FIF
+                            176 	.globl _CP1HYP1
+                            177 	.globl _CP1HYP0
+                            178 	.globl _CP1HYN1
+                            179 	.globl _CP1HYN0
+                            180 	.globl _CP0EN
+                            181 	.globl _CP0OUT
+                            182 	.globl _CP0RIF
+                            183 	.globl _CP0FIF
+                            184 	.globl _CP0HYP1
+                            185 	.globl _CP0HYP0
+                            186 	.globl _CP0HYN1
+                            187 	.globl _CP0HYN0
+                            188 	.globl _TF1
+                            189 	.globl _TR1
+                            190 	.globl _TF0
+                            191 	.globl _TR0
+                            192 	.globl _IE1
+                            193 	.globl _IT1
+                            194 	.globl _IE0
+                            195 	.globl _IT0
+                            196 	.globl _P0_7
+                            197 	.globl _P0_6
+                            198 	.globl _P0_5
+                            199 	.globl _P0_4
+                            200 	.globl _P0_3
+                            201 	.globl _P0_2
+                            202 	.globl _P0_1
+                            203 	.globl _P0_0
+                            204 	.globl _MAC0RND
+                            205 	.globl _MAC0ACC
+                            206 	.globl _MAC0A
+                            207 	.globl _RCAP4
+                            208 	.globl _TMR4
+                            209 	.globl _DAC1
+                            210 	.globl _RCAP3
+                            211 	.globl _TMR3
+                            212 	.globl _PCA0CP5
+                            213 	.globl _PCA0CP4
+                            214 	.globl _PCA0CP3
+                            215 	.globl _PCA0CP2
+                            216 	.globl _PCA0CP1
+                            217 	.globl _PCA0CP0
+                            218 	.globl _PCA0
+                            219 	.globl _DAC0
+                            220 	.globl _ADC0LT
+                            221 	.globl _ADC0GT
+                            222 	.globl _ADC0
+                            223 	.globl _RCAP2
+                            224 	.globl _TMR2
+                            225 	.globl _TMR1
+                            226 	.globl _TMR0
+                            227 	.globl _P7
+                            228 	.globl _P6
+                            229 	.globl _XBR2
+                            230 	.globl _XBR1
+                            231 	.globl _XBR0
+                            232 	.globl _P5
+                            233 	.globl _P4
+                            234 	.globl _FLACL
+                            235 	.globl _P1MDIN
+                            236 	.globl _P3MDOUT
+                            237 	.globl _P2MDOUT
+                            238 	.globl _P1MDOUT
+                            239 	.globl _P0MDOUT
+                            240 	.globl _CCH0LC
+                            241 	.globl _CCH0TN
+                            242 	.globl _CCH0CN
+                            243 	.globl _P7MDOUT
+                            244 	.globl _P6MDOUT
+                            245 	.globl _P5MDOUT
+                            246 	.globl _P4MDOUT
+                            247 	.globl _CCH0MA
+                            248 	.globl _CLKSEL
+                            249 	.globl _SFRPGCN
+                            250 	.globl _PLL0FLT
+                            251 	.globl _PLL0MUL
+                            252 	.globl _PLL0DIV
+                            253 	.globl _OSCXCN
+                            254 	.globl _OSCICL
+                            255 	.globl _OSCICN
+                            256 	.globl _PLL0CN
+                            257 	.globl _FLSTAT
+                            258 	.globl _MAC0RNDH
+                            259 	.globl _MAC0RNDL
+                            260 	.globl _MAC0CF
+                            261 	.globl _MAC0AH
+                            262 	.globl _MAC0AL
+                            263 	.globl _MAC0STA
+                            264 	.globl _MAC0OVR
+                            265 	.globl _MAC0ACC3
+                            266 	.globl _MAC0ACC2
+                            267 	.globl _MAC0ACC1
+                            268 	.globl _MAC0ACC0
+                            269 	.globl _MAC0BH
+                            270 	.globl _MAC0BL
+                            271 	.globl _ADC2CN
+                            272 	.globl _TMR4H
+                            273 	.globl _TMR4L
+                            274 	.globl _RCAP4H
+                            275 	.globl _RCAP4L
+                            276 	.globl _TMR4CF
+                            277 	.globl _TMR4CN
+                            278 	.globl _ADC2LT
+                            279 	.globl _ADC2GT
+                            280 	.globl _ADC2
+                            281 	.globl _ADC2CF
+                            282 	.globl _AMX2SL
+                            283 	.globl _AMX2CF
+                            284 	.globl _CPT1MD
+                            285 	.globl _CPT1CN
+                            286 	.globl _DAC1CN
+                            287 	.globl _DAC1H
+                            288 	.globl _DAC1L
+                            289 	.globl _TMR3H
+                            290 	.globl _TMR3L
+                            291 	.globl _RCAP3H
+                            292 	.globl _RCAP3L
+                            293 	.globl _TMR3CF
+                            294 	.globl _TMR3CN
+                            295 	.globl _SBUF1
+                            296 	.globl _SCON1
+                            297 	.globl _CPT0MD
+                            298 	.globl _CPT0CN
+                            299 	.globl _PCA0CPH1
+                            300 	.globl _PCA0CPL1
+                            301 	.globl _PCA0CPH0
+                            302 	.globl _PCA0CPL0
+                            303 	.globl _PCA0H
+                            304 	.globl _PCA0L
+                            305 	.globl _SPI0CN
+                            306 	.globl _RSTSRC
+                            307 	.globl _PCA0CPH4
+                            308 	.globl _PCA0CPL4
+                            309 	.globl _PCA0CPH3
+                            310 	.globl _PCA0CPL3
+                            311 	.globl _PCA0CPH2
+                            312 	.globl _PCA0CPL2
+                            313 	.globl _ADC0CN
+                            314 	.globl _PCA0CPH5
+                            315 	.globl _PCA0CPL5
+                            316 	.globl _PCA0CPM5
+                            317 	.globl _PCA0CPM4
+                            318 	.globl _PCA0CPM3
+                            319 	.globl _PCA0CPM2
+                            320 	.globl _PCA0CPM1
+                            321 	.globl _PCA0CPM0
+                            322 	.globl _PCA0MD
+                            323 	.globl _PCA0CN
+                            324 	.globl _DAC0CN
+                            325 	.globl _DAC0H
+                            326 	.globl _DAC0L
+                            327 	.globl _REF0CN
+                            328 	.globl _SMB0CR
+                            329 	.globl _TH2
+                            330 	.globl _TMR2H
+                            331 	.globl _TL2
+                            332 	.globl _TMR2L
+                            333 	.globl _RCAP2H
+                            334 	.globl _RCAP2L
+                            335 	.globl _TMR2CF
+                            336 	.globl _TMR2CN
+                            337 	.globl _ADC0LTH
+                            338 	.globl _ADC0LTL
+                            339 	.globl _ADC0GTH
+                            340 	.globl _ADC0GTL
+                            341 	.globl _SMB0ADR
+                            342 	.globl _SMB0DAT
+                            343 	.globl _SMB0STA
+                            344 	.globl _SMB0CN
+                            345 	.globl _ADC0H
+                            346 	.globl _ADC0L
+                            347 	.globl _ADC0CF
+                            348 	.globl _AMX0SL
+                            349 	.globl _AMX0CF
+                            350 	.globl _SADEN0
+                            351 	.globl _FLSCL
+                            352 	.globl _SADDR0
+                            353 	.globl _EMI0CF
+                            354 	.globl __XPAGE
+                            355 	.globl _EMI0CN
+                            356 	.globl _EMI0TC
+                            357 	.globl _SPI0CKR
+                            358 	.globl _SPI0DAT
+                            359 	.globl _SPI0CFG
+                            360 	.globl _SBUF
+                            361 	.globl _SBUF0
+                            362 	.globl _SCON
+                            363 	.globl _SCON0
+                            364 	.globl _SSTA0
+                            365 	.globl _PSCTL
+                            366 	.globl _CKCON
+                            367 	.globl _TH1
+                            368 	.globl _TH0
+                            369 	.globl _TL1
+                            370 	.globl _TL0
+                            371 	.globl _TMOD
+                            372 	.globl _TCON
+                            373 	.globl _WDTCN
+                            374 	.globl _EIP2
+                            375 	.globl _EIP1
+                            376 	.globl _B
+                            377 	.globl _EIE2
+                            378 	.globl _EIE1
+                            379 	.globl _ACC
+                            380 	.globl _PSW
+                            381 	.globl _IP
+                            382 	.globl _PSBANK
+                            383 	.globl _P3
+                            384 	.globl _IE
+                            385 	.globl _P2
+                            386 	.globl _P1
+                            387 	.globl _PCON
+                            388 	.globl _SFRLAST
+                            389 	.globl _SFRNEXT
+                            390 	.globl _SFRPAGE
+                            391 	.globl _DPH
+                            392 	.globl _DPL
+                            393 	.globl _SP
+                            394 	.globl _P0
+                            395 	.globl _buttonPressed
+                            396 	.globl _n
+                            397 	.globl _total
+                            398 	.globl _buttonOverflows
+                            399 	.globl _bounce
+                            400 	.globl _overflows
+                            401 	.globl _putchar
+                            402 	.globl _getchar
+                            403 	.globl _main
+                            404 	.globl _playGame
+                            405 	.globl _SW2_ISR
+                            406 	.globl _Timer0_Init
+                            407 	.globl _Timer0_ISR
+                            408 	.globl _Timer2_Init
+                            409 	.globl _Timer2_ISR
+                            410 	.globl _SYSCLK_INIT
+                            411 	.globl _SYSCLK_INIT2
+                            412 	.globl _PORT_INIT
+                            413 	.globl _UART0_INIT
+                            414 ;--------------------------------------------------------
+                            415 ; special function registers
+                            416 ;--------------------------------------------------------
+                            417 	.area RSEG    (DATA)
+                    0080    418 G$P0$0$0 == 0x0080
+                    0080    419 _P0	=	0x0080
+                    0081    420 G$SP$0$0 == 0x0081
+                    0081    421 _SP	=	0x0081
+                    0082    422 G$DPL$0$0 == 0x0082
+                    0082    423 _DPL	=	0x0082
+                    0083    424 G$DPH$0$0 == 0x0083
+                    0083    425 _DPH	=	0x0083
+                    0084    426 G$SFRPAGE$0$0 == 0x0084
+                    0084    427 _SFRPAGE	=	0x0084
+                    0085    428 G$SFRNEXT$0$0 == 0x0085
+                    0085    429 _SFRNEXT	=	0x0085
+                    0086    430 G$SFRLAST$0$0 == 0x0086
+                    0086    431 _SFRLAST	=	0x0086
+                    0087    432 G$PCON$0$0 == 0x0087
+                    0087    433 _PCON	=	0x0087
+                    0090    434 G$P1$0$0 == 0x0090
+                    0090    435 _P1	=	0x0090
+                    00A0    436 G$P2$0$0 == 0x00a0
+                    00A0    437 _P2	=	0x00a0
+                    00A8    438 G$IE$0$0 == 0x00a8
+                    00A8    439 _IE	=	0x00a8
+                    00B0    440 G$P3$0$0 == 0x00b0
+                    00B0    441 _P3	=	0x00b0
+                    00B1    442 G$PSBANK$0$0 == 0x00b1
+                    00B1    443 _PSBANK	=	0x00b1
+                    00B8    444 G$IP$0$0 == 0x00b8
+                    00B8    445 _IP	=	0x00b8
+                    00D0    446 G$PSW$0$0 == 0x00d0
+                    00D0    447 _PSW	=	0x00d0
+                    00E0    448 G$ACC$0$0 == 0x00e0
+                    00E0    449 _ACC	=	0x00e0
+                    00E6    450 G$EIE1$0$0 == 0x00e6
+                    00E6    451 _EIE1	=	0x00e6
+                    00E7    452 G$EIE2$0$0 == 0x00e7
+                    00E7    453 _EIE2	=	0x00e7
+                    00F0    454 G$B$0$0 == 0x00f0
+                    00F0    455 _B	=	0x00f0
+                    00F6    456 G$EIP1$0$0 == 0x00f6
+                    00F6    457 _EIP1	=	0x00f6
+                    00F7    458 G$EIP2$0$0 == 0x00f7
+                    00F7    459 _EIP2	=	0x00f7
+                    00FF    460 G$WDTCN$0$0 == 0x00ff
+                    00FF    461 _WDTCN	=	0x00ff
+                    0088    462 G$TCON$0$0 == 0x0088
+                    0088    463 _TCON	=	0x0088
+                    0089    464 G$TMOD$0$0 == 0x0089
+                    0089    465 _TMOD	=	0x0089
+                    008A    466 G$TL0$0$0 == 0x008a
+                    008A    467 _TL0	=	0x008a
+                    008B    468 G$TL1$0$0 == 0x008b
+                    008B    469 _TL1	=	0x008b
+                    008C    470 G$TH0$0$0 == 0x008c
+                    008C    471 _TH0	=	0x008c
+                    008D    472 G$TH1$0$0 == 0x008d
+                    008D    473 _TH1	=	0x008d
+                    008E    474 G$CKCON$0$0 == 0x008e
+                    008E    475 _CKCON	=	0x008e
+                    008F    476 G$PSCTL$0$0 == 0x008f
+                    008F    477 _PSCTL	=	0x008f
+                    0091    478 G$SSTA0$0$0 == 0x0091
+                    0091    479 _SSTA0	=	0x0091
+                    0098    480 G$SCON0$0$0 == 0x0098
+                    0098    481 _SCON0	=	0x0098
+                    0098    482 G$SCON$0$0 == 0x0098
+                    0098    483 _SCON	=	0x0098
+                    0099    484 G$SBUF0$0$0 == 0x0099
+                    0099    485 _SBUF0	=	0x0099
+                    0099    486 G$SBUF$0$0 == 0x0099
+                    0099    487 _SBUF	=	0x0099
+                    009A    488 G$SPI0CFG$0$0 == 0x009a
+                    009A    489 _SPI0CFG	=	0x009a
+                    009B    490 G$SPI0DAT$0$0 == 0x009b
+                    009B    491 _SPI0DAT	=	0x009b
+                    009D    492 G$SPI0CKR$0$0 == 0x009d
+                    009D    493 _SPI0CKR	=	0x009d
+                    00A1    494 G$EMI0TC$0$0 == 0x00a1
+                    00A1    495 _EMI0TC	=	0x00a1
+                    00A2    496 G$EMI0CN$0$0 == 0x00a2
+                    00A2    497 _EMI0CN	=	0x00a2
+                    00A2    498 G$_XPAGE$0$0 == 0x00a2
+                    00A2    499 __XPAGE	=	0x00a2
+                    00A3    500 G$EMI0CF$0$0 == 0x00a3
+                    00A3    501 _EMI0CF	=	0x00a3
+                    00A9    502 G$SADDR0$0$0 == 0x00a9
+                    00A9    503 _SADDR0	=	0x00a9
+                    00B7    504 G$FLSCL$0$0 == 0x00b7
+                    00B7    505 _FLSCL	=	0x00b7
+                    00B9    506 G$SADEN0$0$0 == 0x00b9
+                    00B9    507 _SADEN0	=	0x00b9
+                    00BA    508 G$AMX0CF$0$0 == 0x00ba
+                    00BA    509 _AMX0CF	=	0x00ba
+                    00BB    510 G$AMX0SL$0$0 == 0x00bb
+                    00BB    511 _AMX0SL	=	0x00bb
+                    00BC    512 G$ADC0CF$0$0 == 0x00bc
+                    00BC    513 _ADC0CF	=	0x00bc
+                    00BE    514 G$ADC0L$0$0 == 0x00be
+                    00BE    515 _ADC0L	=	0x00be
+                    00BF    516 G$ADC0H$0$0 == 0x00bf
+                    00BF    517 _ADC0H	=	0x00bf
+                    00C0    518 G$SMB0CN$0$0 == 0x00c0
+                    00C0    519 _SMB0CN	=	0x00c0
+                    00C1    520 G$SMB0STA$0$0 == 0x00c1
+                    00C1    521 _SMB0STA	=	0x00c1
+                    00C2    522 G$SMB0DAT$0$0 == 0x00c2
+                    00C2    523 _SMB0DAT	=	0x00c2
+                    00C3    524 G$SMB0ADR$0$0 == 0x00c3
+                    00C3    525 _SMB0ADR	=	0x00c3
+                    00C4    526 G$ADC0GTL$0$0 == 0x00c4
+                    00C4    527 _ADC0GTL	=	0x00c4
+                    00C5    528 G$ADC0GTH$0$0 == 0x00c5
+                    00C5    529 _ADC0GTH	=	0x00c5
+                    00C6    530 G$ADC0LTL$0$0 == 0x00c6
+                    00C6    531 _ADC0LTL	=	0x00c6
+                    00C7    532 G$ADC0LTH$0$0 == 0x00c7
+                    00C7    533 _ADC0LTH	=	0x00c7
+                    00C8    534 G$TMR2CN$0$0 == 0x00c8
+                    00C8    535 _TMR2CN	=	0x00c8
+                    00C9    536 G$TMR2CF$0$0 == 0x00c9
+                    00C9    537 _TMR2CF	=	0x00c9
+                    00CA    538 G$RCAP2L$0$0 == 0x00ca
+                    00CA    539 _RCAP2L	=	0x00ca
+                    00CB    540 G$RCAP2H$0$0 == 0x00cb
+                    00CB    541 _RCAP2H	=	0x00cb
+                    00CC    542 G$TMR2L$0$0 == 0x00cc
+                    00CC    543 _TMR2L	=	0x00cc
+                    00CC    544 G$TL2$0$0 == 0x00cc
+                    00CC    545 _TL2	=	0x00cc
+                    00CD    546 G$TMR2H$0$0 == 0x00cd
+                    00CD    547 _TMR2H	=	0x00cd
+                    00CD    548 G$TH2$0$0 == 0x00cd
+                    00CD    549 _TH2	=	0x00cd
+                    00CF    550 G$SMB0CR$0$0 == 0x00cf
+                    00CF    551 _SMB0CR	=	0x00cf
+                    00D1    552 G$REF0CN$0$0 == 0x00d1
+                    00D1    553 _REF0CN	=	0x00d1
+                    00D2    554 G$DAC0L$0$0 == 0x00d2
+                    00D2    555 _DAC0L	=	0x00d2
+                    00D3    556 G$DAC0H$0$0 == 0x00d3
+                    00D3    557 _DAC0H	=	0x00d3
+                    00D4    558 G$DAC0CN$0$0 == 0x00d4
+                    00D4    559 _DAC0CN	=	0x00d4
+                    00D8    560 G$PCA0CN$0$0 == 0x00d8
+                    00D8    561 _PCA0CN	=	0x00d8
+                    00D9    562 G$PCA0MD$0$0 == 0x00d9
+                    00D9    563 _PCA0MD	=	0x00d9
+                    00DA    564 G$PCA0CPM0$0$0 == 0x00da
+                    00DA    565 _PCA0CPM0	=	0x00da
+                    00DB    566 G$PCA0CPM1$0$0 == 0x00db
+                    00DB    567 _PCA0CPM1	=	0x00db
+                    00DC    568 G$PCA0CPM2$0$0 == 0x00dc
+                    00DC    569 _PCA0CPM2	=	0x00dc
+                    00DD    570 G$PCA0CPM3$0$0 == 0x00dd
+                    00DD    571 _PCA0CPM3	=	0x00dd
+                    00DE    572 G$PCA0CPM4$0$0 == 0x00de
+                    00DE    573 _PCA0CPM4	=	0x00de
+                    00DF    574 G$PCA0CPM5$0$0 == 0x00df
+                    00DF    575 _PCA0CPM5	=	0x00df
+                    00E1    576 G$PCA0CPL5$0$0 == 0x00e1
+                    00E1    577 _PCA0CPL5	=	0x00e1
+                    00E2    578 G$PCA0CPH5$0$0 == 0x00e2
+                    00E2    579 _PCA0CPH5	=	0x00e2
+                    00E8    580 G$ADC0CN$0$0 == 0x00e8
+                    00E8    581 _ADC0CN	=	0x00e8
+                    00E9    582 G$PCA0CPL2$0$0 == 0x00e9
+                    00E9    583 _PCA0CPL2	=	0x00e9
+                    00EA    584 G$PCA0CPH2$0$0 == 0x00ea
+                    00EA    585 _PCA0CPH2	=	0x00ea
+                    00EB    586 G$PCA0CPL3$0$0 == 0x00eb
+                    00EB    587 _PCA0CPL3	=	0x00eb
+                    00EC    588 G$PCA0CPH3$0$0 == 0x00ec
+                    00EC    589 _PCA0CPH3	=	0x00ec
+                    00ED    590 G$PCA0CPL4$0$0 == 0x00ed
+                    00ED    591 _PCA0CPL4	=	0x00ed
+                    00EE    592 G$PCA0CPH4$0$0 == 0x00ee
+                    00EE    593 _PCA0CPH4	=	0x00ee
+                    00EF    594 G$RSTSRC$0$0 == 0x00ef
+                    00EF    595 _RSTSRC	=	0x00ef
+                    00F8    596 G$SPI0CN$0$0 == 0x00f8
+                    00F8    597 _SPI0CN	=	0x00f8
+                    00F9    598 G$PCA0L$0$0 == 0x00f9
+                    00F9    599 _PCA0L	=	0x00f9
+                    00FA    600 G$PCA0H$0$0 == 0x00fa
+                    00FA    601 _PCA0H	=	0x00fa
+                    00FB    602 G$PCA0CPL0$0$0 == 0x00fb
+                    00FB    603 _PCA0CPL0	=	0x00fb
+                    00FC    604 G$PCA0CPH0$0$0 == 0x00fc
+                    00FC    605 _PCA0CPH0	=	0x00fc
+                    00FD    606 G$PCA0CPL1$0$0 == 0x00fd
+                    00FD    607 _PCA0CPL1	=	0x00fd
+                    00FE    608 G$PCA0CPH1$0$0 == 0x00fe
+                    00FE    609 _PCA0CPH1	=	0x00fe
+                    0088    610 G$CPT0CN$0$0 == 0x0088
+                    0088    611 _CPT0CN	=	0x0088
+                    0089    612 G$CPT0MD$0$0 == 0x0089
+                    0089    613 _CPT0MD	=	0x0089
+                    0098    614 G$SCON1$0$0 == 0x0098
+                    0098    615 _SCON1	=	0x0098
+                    0099    616 G$SBUF1$0$0 == 0x0099
+                    0099    617 _SBUF1	=	0x0099
+                    00C8    618 G$TMR3CN$0$0 == 0x00c8
+                    00C8    619 _TMR3CN	=	0x00c8
+                    00C9    620 G$TMR3CF$0$0 == 0x00c9
+                    00C9    621 _TMR3CF	=	0x00c9
+                    00CA    622 G$RCAP3L$0$0 == 0x00ca
+                    00CA    623 _RCAP3L	=	0x00ca
+                    00CB    624 G$RCAP3H$0$0 == 0x00cb
+                    00CB    625 _RCAP3H	=	0x00cb
+                    00CC    626 G$TMR3L$0$0 == 0x00cc
+                    00CC    627 _TMR3L	=	0x00cc
+                    00CD    628 G$TMR3H$0$0 == 0x00cd
+                    00CD    629 _TMR3H	=	0x00cd
+                    00D2    630 G$DAC1L$0$0 == 0x00d2
+                    00D2    631 _DAC1L	=	0x00d2
+                    00D3    632 G$DAC1H$0$0 == 0x00d3
+                    00D3    633 _DAC1H	=	0x00d3
+                    00D4    634 G$DAC1CN$0$0 == 0x00d4
+                    00D4    635 _DAC1CN	=	0x00d4
+                    0088    636 G$CPT1CN$0$0 == 0x0088
+                    0088    637 _CPT1CN	=	0x0088
+                    0089    638 G$CPT1MD$0$0 == 0x0089
+                    0089    639 _CPT1MD	=	0x0089
+                    00BA    640 G$AMX2CF$0$0 == 0x00ba
+                    00BA    641 _AMX2CF	=	0x00ba
+                    00BB    642 G$AMX2SL$0$0 == 0x00bb
+                    00BB    643 _AMX2SL	=	0x00bb
+                    00BC    644 G$ADC2CF$0$0 == 0x00bc
+                    00BC    645 _ADC2CF	=	0x00bc
+                    00BE    646 G$ADC2$0$0 == 0x00be
+                    00BE    647 _ADC2	=	0x00be
+                    00C4    648 G$ADC2GT$0$0 == 0x00c4
+                    00C4    649 _ADC2GT	=	0x00c4
+                    00C6    650 G$ADC2LT$0$0 == 0x00c6
+                    00C6    651 _ADC2LT	=	0x00c6
+                    00C8    652 G$TMR4CN$0$0 == 0x00c8
+                    00C8    653 _TMR4CN	=	0x00c8
+                    00C9    654 G$TMR4CF$0$0 == 0x00c9
+                    00C9    655 _TMR4CF	=	0x00c9
+                    00CA    656 G$RCAP4L$0$0 == 0x00ca
+                    00CA    657 _RCAP4L	=	0x00ca
+                    00CB    658 G$RCAP4H$0$0 == 0x00cb
+                    00CB    659 _RCAP4H	=	0x00cb
+                    00CC    660 G$TMR4L$0$0 == 0x00cc
+                    00CC    661 _TMR4L	=	0x00cc
+                    00CD    662 G$TMR4H$0$0 == 0x00cd
+                    00CD    663 _TMR4H	=	0x00cd
+                    00E8    664 G$ADC2CN$0$0 == 0x00e8
+                    00E8    665 _ADC2CN	=	0x00e8
+                    0091    666 G$MAC0BL$0$0 == 0x0091
+                    0091    667 _MAC0BL	=	0x0091
+                    0092    668 G$MAC0BH$0$0 == 0x0092
+                    0092    669 _MAC0BH	=	0x0092
+                    0093    670 G$MAC0ACC0$0$0 == 0x0093
+                    0093    671 _MAC0ACC0	=	0x0093
+                    0094    672 G$MAC0ACC1$0$0 == 0x0094
+                    0094    673 _MAC0ACC1	=	0x0094
+                    0095    674 G$MAC0ACC2$0$0 == 0x0095
+                    0095    675 _MAC0ACC2	=	0x0095
+                    0096    676 G$MAC0ACC3$0$0 == 0x0096
+                    0096    677 _MAC0ACC3	=	0x0096
+                    0097    678 G$MAC0OVR$0$0 == 0x0097
+                    0097    679 _MAC0OVR	=	0x0097
+                    00C0    680 G$MAC0STA$0$0 == 0x00c0
+                    00C0    681 _MAC0STA	=	0x00c0
+                    00C1    682 G$MAC0AL$0$0 == 0x00c1
+                    00C1    683 _MAC0AL	=	0x00c1
+                    00C2    684 G$MAC0AH$0$0 == 0x00c2
+                    00C2    685 _MAC0AH	=	0x00c2
+                    00C3    686 G$MAC0CF$0$0 == 0x00c3
+                    00C3    687 _MAC0CF	=	0x00c3
+                    00CE    688 G$MAC0RNDL$0$0 == 0x00ce
+                    00CE    689 _MAC0RNDL	=	0x00ce
+                    00CF    690 G$MAC0RNDH$0$0 == 0x00cf
+                    00CF    691 _MAC0RNDH	=	0x00cf
+                    0088    692 G$FLSTAT$0$0 == 0x0088
+                    0088    693 _FLSTAT	=	0x0088
+                    0089    694 G$PLL0CN$0$0 == 0x0089
+                    0089    695 _PLL0CN	=	0x0089
+                    008A    696 G$OSCICN$0$0 == 0x008a
+                    008A    697 _OSCICN	=	0x008a
+                    008B    698 G$OSCICL$0$0 == 0x008b
+                    008B    699 _OSCICL	=	0x008b
+                    008C    700 G$OSCXCN$0$0 == 0x008c
+                    008C    701 _OSCXCN	=	0x008c
+                    008D    702 G$PLL0DIV$0$0 == 0x008d
+                    008D    703 _PLL0DIV	=	0x008d
+                    008E    704 G$PLL0MUL$0$0 == 0x008e
+                    008E    705 _PLL0MUL	=	0x008e
+                    008F    706 G$PLL0FLT$0$0 == 0x008f
+                    008F    707 _PLL0FLT	=	0x008f
+                    0096    708 G$SFRPGCN$0$0 == 0x0096
+                    0096    709 _SFRPGCN	=	0x0096
+                    0097    710 G$CLKSEL$0$0 == 0x0097
+                    0097    711 _CLKSEL	=	0x0097
+                    009A    712 G$CCH0MA$0$0 == 0x009a
+                    009A    713 _CCH0MA	=	0x009a
+                    009C    714 G$P4MDOUT$0$0 == 0x009c
+                    009C    715 _P4MDOUT	=	0x009c
+                    009D    716 G$P5MDOUT$0$0 == 0x009d
+                    009D    717 _P5MDOUT	=	0x009d
+                    009E    718 G$P6MDOUT$0$0 == 0x009e
+                    009E    719 _P6MDOUT	=	0x009e
+                    009F    720 G$P7MDOUT$0$0 == 0x009f
+                    009F    721 _P7MDOUT	=	0x009f
+                    00A1    722 G$CCH0CN$0$0 == 0x00a1
+                    00A1    723 _CCH0CN	=	0x00a1
+                    00A2    724 G$CCH0TN$0$0 == 0x00a2
+                    00A2    725 _CCH0TN	=	0x00a2
+                    00A3    726 G$CCH0LC$0$0 == 0x00a3
+                    00A3    727 _CCH0LC	=	0x00a3
+                    00A4    728 G$P0MDOUT$0$0 == 0x00a4
+                    00A4    729 _P0MDOUT	=	0x00a4
+                    00A5    730 G$P1MDOUT$0$0 == 0x00a5
+                    00A5    731 _P1MDOUT	=	0x00a5
+                    00A6    732 G$P2MDOUT$0$0 == 0x00a6
+                    00A6    733 _P2MDOUT	=	0x00a6
+                    00A7    734 G$P3MDOUT$0$0 == 0x00a7
+                    00A7    735 _P3MDOUT	=	0x00a7
+                    00AD    736 G$P1MDIN$0$0 == 0x00ad
+                    00AD    737 _P1MDIN	=	0x00ad
+                    00B7    738 G$FLACL$0$0 == 0x00b7
+                    00B7    739 _FLACL	=	0x00b7
+                    00C8    740 G$P4$0$0 == 0x00c8
+                    00C8    741 _P4	=	0x00c8
+                    00D8    742 G$P5$0$0 == 0x00d8
+                    00D8    743 _P5	=	0x00d8
+                    00E1    744 G$XBR0$0$0 == 0x00e1
+                    00E1    745 _XBR0	=	0x00e1
+                    00E2    746 G$XBR1$0$0 == 0x00e2
+                    00E2    747 _XBR1	=	0x00e2
+                    00E3    748 G$XBR2$0$0 == 0x00e3
+                    00E3    749 _XBR2	=	0x00e3
+                    00E8    750 G$P6$0$0 == 0x00e8
+                    00E8    751 _P6	=	0x00e8
+                    00F8    752 G$P7$0$0 == 0x00f8
+                    00F8    753 _P7	=	0x00f8
+                    8C8A    754 G$TMR0$0$0 == 0x8c8a
+                    8C8A    755 _TMR0	=	0x8c8a
+                    8D8B    756 G$TMR1$0$0 == 0x8d8b
+                    8D8B    757 _TMR1	=	0x8d8b
+                    CDCC    758 G$TMR2$0$0 == 0xcdcc
+                    CDCC    759 _TMR2	=	0xcdcc
+                    CBCA    760 G$RCAP2$0$0 == 0xcbca
+                    CBCA    761 _RCAP2	=	0xcbca
+                    BFBE    762 G$ADC0$0$0 == 0xbfbe
+                    BFBE    763 _ADC0	=	0xbfbe
+                    C5C4    764 G$ADC0GT$0$0 == 0xc5c4
+                    C5C4    765 _ADC0GT	=	0xc5c4
+                    C7C6    766 G$ADC0LT$0$0 == 0xc7c6
+                    C7C6    767 _ADC0LT	=	0xc7c6
+                    D3D2    768 G$DAC0$0$0 == 0xd3d2
+                    D3D2    769 _DAC0	=	0xd3d2
+                    FAF9    770 G$PCA0$0$0 == 0xfaf9
+                    FAF9    771 _PCA0	=	0xfaf9
+                    FCFB    772 G$PCA0CP0$0$0 == 0xfcfb
+                    FCFB    773 _PCA0CP0	=	0xfcfb
+                    FEFD    774 G$PCA0CP1$0$0 == 0xfefd
+                    FEFD    775 _PCA0CP1	=	0xfefd
+                    EAE9    776 G$PCA0CP2$0$0 == 0xeae9
+                    EAE9    777 _PCA0CP2	=	0xeae9
+                    ECEB    778 G$PCA0CP3$0$0 == 0xeceb
+                    ECEB    779 _PCA0CP3	=	0xeceb
+                    EEED    780 G$PCA0CP4$0$0 == 0xeeed
+                    EEED    781 _PCA0CP4	=	0xeeed
+                    E2E1    782 G$PCA0CP5$0$0 == 0xe2e1
+                    E2E1    783 _PCA0CP5	=	0xe2e1
+                    CDCC    784 G$TMR3$0$0 == 0xcdcc
+                    CDCC    785 _TMR3	=	0xcdcc
+                    CBCA    786 G$RCAP3$0$0 == 0xcbca
+                    CBCA    787 _RCAP3	=	0xcbca
+                    D3D2    788 G$DAC1$0$0 == 0xd3d2
+                    D3D2    789 _DAC1	=	0xd3d2
+                    CDCC    790 G$TMR4$0$0 == 0xcdcc
+                    CDCC    791 _TMR4	=	0xcdcc
+                    CBCA    792 G$RCAP4$0$0 == 0xcbca
+                    CBCA    793 _RCAP4	=	0xcbca
+                    C2C1    794 G$MAC0A$0$0 == 0xc2c1
+                    C2C1    795 _MAC0A	=	0xc2c1
+                    96959493    796 G$MAC0ACC$0$0 == 0x96959493
+                    96959493    797 _MAC0ACC	=	0x96959493
+                    CFCE    798 G$MAC0RND$0$0 == 0xcfce
+                    CFCE    799 _MAC0RND	=	0xcfce
+                            800 ;--------------------------------------------------------
+                            801 ; special function bits
+                            802 ;--------------------------------------------------------
+                            803 	.area RSEG    (DATA)
+                    0080    804 G$P0_0$0$0 == 0x0080
+                    0080    805 _P0_0	=	0x0080
+                    0081    806 G$P0_1$0$0 == 0x0081
+                    0081    807 _P0_1	=	0x0081
+                    0082    808 G$P0_2$0$0 == 0x0082
+                    0082    809 _P0_2	=	0x0082
+                    0083    810 G$P0_3$0$0 == 0x0083
+                    0083    811 _P0_3	=	0x0083
+                    0084    812 G$P0_4$0$0 == 0x0084
+                    0084    813 _P0_4	=	0x0084
+                    0085    814 G$P0_5$0$0 == 0x0085
+                    0085    815 _P0_5	=	0x0085
+                    0086    816 G$P0_6$0$0 == 0x0086
+                    0086    817 _P0_6	=	0x0086
+                    0087    818 G$P0_7$0$0 == 0x0087
+                    0087    819 _P0_7	=	0x0087
+                    0088    820 G$IT0$0$0 == 0x0088
+                    0088    821 _IT0	=	0x0088
+                    0089    822 G$IE0$0$0 == 0x0089
+                    0089    823 _IE0	=	0x0089
+                    008A    824 G$IT1$0$0 == 0x008a
+                    008A    825 _IT1	=	0x008a
+                    008B    826 G$IE1$0$0 == 0x008b
+                    008B    827 _IE1	=	0x008b
+                    008C    828 G$TR0$0$0 == 0x008c
+                    008C    829 _TR0	=	0x008c
+                    008D    830 G$TF0$0$0 == 0x008d
+                    008D    831 _TF0	=	0x008d
+                    008E    832 G$TR1$0$0 == 0x008e
+                    008E    833 _TR1	=	0x008e
+                    008F    834 G$TF1$0$0 == 0x008f
+                    008F    835 _TF1	=	0x008f
+                    0088    836 G$CP0HYN0$0$0 == 0x0088
+                    0088    837 _CP0HYN0	=	0x0088
+                    0089    838 G$CP0HYN1$0$0 == 0x0089
+                    0089    839 _CP0HYN1	=	0x0089
+                    008A    840 G$CP0HYP0$0$0 == 0x008a
+                    008A    841 _CP0HYP0	=	0x008a
+                    008B    842 G$CP0HYP1$0$0 == 0x008b
+                    008B    843 _CP0HYP1	=	0x008b
+                    008C    844 G$CP0FIF$0$0 == 0x008c
+                    008C    845 _CP0FIF	=	0x008c
+                    008D    846 G$CP0RIF$0$0 == 0x008d
+                    008D    847 _CP0RIF	=	0x008d
+                    008E    848 G$CP0OUT$0$0 == 0x008e
+                    008E    849 _CP0OUT	=	0x008e
+                    008F    850 G$CP0EN$0$0 == 0x008f
+                    008F    851 _CP0EN	=	0x008f
+                    0088    852 G$CP1HYN0$0$0 == 0x0088
+                    0088    853 _CP1HYN0	=	0x0088
+                    0089    854 G$CP1HYN1$0$0 == 0x0089
+                    0089    855 _CP1HYN1	=	0x0089
+                    008A    856 G$CP1HYP0$0$0 == 0x008a
+                    008A    857 _CP1HYP0	=	0x008a
+                    008B    858 G$CP1HYP1$0$0 == 0x008b
+                    008B    859 _CP1HYP1	=	0x008b
+                    008C    860 G$CP1FIF$0$0 == 0x008c
+                    008C    861 _CP1FIF	=	0x008c
+                    008D    862 G$CP1RIF$0$0 == 0x008d
+                    008D    863 _CP1RIF	=	0x008d
+                    008E    864 G$CP1OUT$0$0 == 0x008e
+                    008E    865 _CP1OUT	=	0x008e
+                    008F    866 G$CP1EN$0$0 == 0x008f
+                    008F    867 _CP1EN	=	0x008f
+                    0088    868 G$FLHBUSY$0$0 == 0x0088
+                    0088    869 _FLHBUSY	=	0x0088
+                    0090    870 G$P1_0$0$0 == 0x0090
+                    0090    871 _P1_0	=	0x0090
+                    0091    872 G$P1_1$0$0 == 0x0091
+                    0091    873 _P1_1	=	0x0091
+                    0092    874 G$P1_2$0$0 == 0x0092
+                    0092    875 _P1_2	=	0x0092
+                    0093    876 G$P1_3$0$0 == 0x0093
+                    0093    877 _P1_3	=	0x0093
+                    0094    878 G$P1_4$0$0 == 0x0094
+                    0094    879 _P1_4	=	0x0094
+                    0095    880 G$P1_5$0$0 == 0x0095
+                    0095    881 _P1_5	=	0x0095
+                    0096    882 G$P1_6$0$0 == 0x0096
+                    0096    883 _P1_6	=	0x0096
+                    0097    884 G$P1_7$0$0 == 0x0097
+                    0097    885 _P1_7	=	0x0097
+                    0098    886 G$RI0$0$0 == 0x0098
+                    0098    887 _RI0	=	0x0098
+                    0098    888 G$RI$0$0 == 0x0098
+                    0098    889 _RI	=	0x0098
+                    0099    890 G$TI0$0$0 == 0x0099
+                    0099    891 _TI0	=	0x0099
+                    0099    892 G$TI$0$0 == 0x0099
+                    0099    893 _TI	=	0x0099
+                    009A    894 G$RB80$0$0 == 0x009a
+                    009A    895 _RB80	=	0x009a
+                    009B    896 G$TB80$0$0 == 0x009b
+                    009B    897 _TB80	=	0x009b
+                    009C    898 G$REN0$0$0 == 0x009c
+                    009C    899 _REN0	=	0x009c
+                    009C    900 G$REN$0$0 == 0x009c
+                    009C    901 _REN	=	0x009c
+                    009D    902 G$SM20$0$0 == 0x009d
+                    009D    903 _SM20	=	0x009d
+                    009E    904 G$SM10$0$0 == 0x009e
+                    009E    905 _SM10	=	0x009e
+                    009F    906 G$SM00$0$0 == 0x009f
+                    009F    907 _SM00	=	0x009f
+                    0098    908 G$RI1$0$0 == 0x0098
+                    0098    909 _RI1	=	0x0098
+                    0099    910 G$TI1$0$0 == 0x0099
+                    0099    911 _TI1	=	0x0099
+                    009A    912 G$RB81$0$0 == 0x009a
+                    009A    913 _RB81	=	0x009a
+                    009B    914 G$TB81$0$0 == 0x009b
+                    009B    915 _TB81	=	0x009b
+                    009C    916 G$REN1$0$0 == 0x009c
+                    009C    917 _REN1	=	0x009c
+                    009D    918 G$MCE1$0$0 == 0x009d
+                    009D    919 _MCE1	=	0x009d
+                    009F    920 G$S1MODE$0$0 == 0x009f
+                    009F    921 _S1MODE	=	0x009f
+                    00A0    922 G$P2_0$0$0 == 0x00a0
+                    00A0    923 _P2_0	=	0x00a0
+                    00A1    924 G$P2_1$0$0 == 0x00a1
+                    00A1    925 _P2_1	=	0x00a1
+                    00A2    926 G$P2_2$0$0 == 0x00a2
+                    00A2    927 _P2_2	=	0x00a2
+                    00A3    928 G$P2_3$0$0 == 0x00a3
+                    00A3    929 _P2_3	=	0x00a3
+                    00A4    930 G$P2_4$0$0 == 0x00a4
+                    00A4    931 _P2_4	=	0x00a4
+                    00A5    932 G$P2_5$0$0 == 0x00a5
+                    00A5    933 _P2_5	=	0x00a5
+                    00A6    934 G$P2_6$0$0 == 0x00a6
+                    00A6    935 _P2_6	=	0x00a6
+                    00A7    936 G$P2_7$0$0 == 0x00a7
+                    00A7    937 _P2_7	=	0x00a7
+                    00A8    938 G$EX0$0$0 == 0x00a8
+                    00A8    939 _EX0	=	0x00a8
+                    00A9    940 G$ET0$0$0 == 0x00a9
+                    00A9    941 _ET0	=	0x00a9
+                    00AA    942 G$EX1$0$0 == 0x00aa
+                    00AA    943 _EX1	=	0x00aa
+                    00AB    944 G$ET1$0$0 == 0x00ab
+                    00AB    945 _ET1	=	0x00ab
+                    00AC    946 G$ES0$0$0 == 0x00ac
+                    00AC    947 _ES0	=	0x00ac
+                    00AC    948 G$ES$0$0 == 0x00ac
+                    00AC    949 _ES	=	0x00ac
+                    00AD    950 G$ET2$0$0 == 0x00ad
+                    00AD    951 _ET2	=	0x00ad
+                    00AF    952 G$EA$0$0 == 0x00af
+                    00AF    953 _EA	=	0x00af
+                    00B0    954 G$P3_0$0$0 == 0x00b0
+                    00B0    955 _P3_0	=	0x00b0
+                    00B1    956 G$P3_1$0$0 == 0x00b1
+                    00B1    957 _P3_1	=	0x00b1
+                    00B2    958 G$P3_2$0$0 == 0x00b2
+                    00B2    959 _P3_2	=	0x00b2
+                    00B3    960 G$P3_3$0$0 == 0x00b3
+                    00B3    961 _P3_3	=	0x00b3
+                    00B4    962 G$P3_4$0$0 == 0x00b4
+                    00B4    963 _P3_4	=	0x00b4
+                    00B5    964 G$P3_5$0$0 == 0x00b5
+                    00B5    965 _P3_5	=	0x00b5
+                    00B6    966 G$P3_6$0$0 == 0x00b6
+                    00B6    967 _P3_6	=	0x00b6
+                    00B7    968 G$P3_7$0$0 == 0x00b7
+                    00B7    969 _P3_7	=	0x00b7
+                    00B8    970 G$PX0$0$0 == 0x00b8
+                    00B8    971 _PX0	=	0x00b8
+                    00B9    972 G$PT0$0$0 == 0x00b9
+                    00B9    973 _PT0	=	0x00b9
+                    00BA    974 G$PX1$0$0 == 0x00ba
+                    00BA    975 _PX1	=	0x00ba
+                    00BB    976 G$PT1$0$0 == 0x00bb
+                    00BB    977 _PT1	=	0x00bb
+                    00BC    978 G$PS0$0$0 == 0x00bc
+                    00BC    979 _PS0	=	0x00bc
+                    00BC    980 G$PS$0$0 == 0x00bc
+                    00BC    981 _PS	=	0x00bc
+                    00BD    982 G$PT2$0$0 == 0x00bd
+                    00BD    983 _PT2	=	0x00bd
+                    00C0    984 G$SMBTOE$0$0 == 0x00c0
+                    00C0    985 _SMBTOE	=	0x00c0
+                    00C1    986 G$SMBFTE$0$0 == 0x00c1
+                    00C1    987 _SMBFTE	=	0x00c1
+                    00C2    988 G$AA$0$0 == 0x00c2
+                    00C2    989 _AA	=	0x00c2
+                    00C3    990 G$SI$0$0 == 0x00c3
+                    00C3    991 _SI	=	0x00c3
+                    00C4    992 G$STO$0$0 == 0x00c4
+                    00C4    993 _STO	=	0x00c4
+                    00C5    994 G$STA$0$0 == 0x00c5
+                    00C5    995 _STA	=	0x00c5
+                    00C6    996 G$ENSMB$0$0 == 0x00c6
+                    00C6    997 _ENSMB	=	0x00c6
+                    00C7    998 G$BUSY$0$0 == 0x00c7
+                    00C7    999 _BUSY	=	0x00c7
+                    00C0   1000 G$MAC0N$0$0 == 0x00c0
+                    00C0   1001 _MAC0N	=	0x00c0
+                    00C1   1002 G$MAC0SO$0$0 == 0x00c1
+                    00C1   1003 _MAC0SO	=	0x00c1
+                    00C2   1004 G$MAC0Z$0$0 == 0x00c2
+                    00C2   1005 _MAC0Z	=	0x00c2
+                    00C3   1006 G$MAC0HO$0$0 == 0x00c3
+                    00C3   1007 _MAC0HO	=	0x00c3
+                    00C8   1008 G$CPRL2$0$0 == 0x00c8
+                    00C8   1009 _CPRL2	=	0x00c8
+                    00C9   1010 G$CT2$0$0 == 0x00c9
+                    00C9   1011 _CT2	=	0x00c9
+                    00CA   1012 G$TR2$0$0 == 0x00ca
+                    00CA   1013 _TR2	=	0x00ca
+                    00CB   1014 G$EXEN2$0$0 == 0x00cb
+                    00CB   1015 _EXEN2	=	0x00cb
+                    00CE   1016 G$EXF2$0$0 == 0x00ce
+                    00CE   1017 _EXF2	=	0x00ce
+                    00CF   1018 G$TF2$0$0 == 0x00cf
+                    00CF   1019 _TF2	=	0x00cf
+                    00C8   1020 G$CPRL3$0$0 == 0x00c8
+                    00C8   1021 _CPRL3	=	0x00c8
+                    00C9   1022 G$CT3$0$0 == 0x00c9
+                    00C9   1023 _CT3	=	0x00c9
+                    00CA   1024 G$TR3$0$0 == 0x00ca
+                    00CA   1025 _TR3	=	0x00ca
+                    00CB   1026 G$EXEN3$0$0 == 0x00cb
+                    00CB   1027 _EXEN3	=	0x00cb
+                    00CE   1028 G$EXF3$0$0 == 0x00ce
+                    00CE   1029 _EXF3	=	0x00ce
+                    00CF   1030 G$TF3$0$0 == 0x00cf
+                    00CF   1031 _TF3	=	0x00cf
+                    00C8   1032 G$CPRL4$0$0 == 0x00c8
+                    00C8   1033 _CPRL4	=	0x00c8
+                    00C9   1034 G$CT4$0$0 == 0x00c9
+                    00C9   1035 _CT4	=	0x00c9
+                    00CA   1036 G$TR4$0$0 == 0x00ca
+                    00CA   1037 _TR4	=	0x00ca
+                    00CB   1038 G$EXEN4$0$0 == 0x00cb
+                    00CB   1039 _EXEN4	=	0x00cb
+                    00CE   1040 G$EXF4$0$0 == 0x00ce
+                    00CE   1041 _EXF4	=	0x00ce
+                    00CF   1042 G$TF4$0$0 == 0x00cf
+                    00CF   1043 _TF4	=	0x00cf
+                    00C8   1044 G$P4_0$0$0 == 0x00c8
+                    00C8   1045 _P4_0	=	0x00c8
+                    00C9   1046 G$P4_1$0$0 == 0x00c9
+                    00C9   1047 _P4_1	=	0x00c9
+                    00CA   1048 G$P4_2$0$0 == 0x00ca
+                    00CA   1049 _P4_2	=	0x00ca
+                    00CB   1050 G$P4_3$0$0 == 0x00cb
+                    00CB   1051 _P4_3	=	0x00cb
+                    00CC   1052 G$P4_4$0$0 == 0x00cc
+                    00CC   1053 _P4_4	=	0x00cc
+                    00CD   1054 G$P4_5$0$0 == 0x00cd
+                    00CD   1055 _P4_5	=	0x00cd
+                    00CE   1056 G$P4_6$0$0 == 0x00ce
+                    00CE   1057 _P4_6	=	0x00ce
+                    00CF   1058 G$P4_7$0$0 == 0x00cf
+                    00CF   1059 _P4_7	=	0x00cf
+                    00D0   1060 G$P$0$0 == 0x00d0
+                    00D0   1061 _P	=	0x00d0
+                    00D1   1062 G$F1$0$0 == 0x00d1
+                    00D1   1063 _F1	=	0x00d1
+                    00D2   1064 G$OV$0$0 == 0x00d2
+                    00D2   1065 _OV	=	0x00d2
+                    00D3   1066 G$RS0$0$0 == 0x00d3
+                    00D3   1067 _RS0	=	0x00d3
+                    00D4   1068 G$RS1$0$0 == 0x00d4
+                    00D4   1069 _RS1	=	0x00d4
+                    00D5   1070 G$F0$0$0 == 0x00d5
+                    00D5   1071 _F0	=	0x00d5
+                    00D6   1072 G$AC$0$0 == 0x00d6
+                    00D6   1073 _AC	=	0x00d6
+                    00D7   1074 G$CY$0$0 == 0x00d7
+                    00D7   1075 _CY	=	0x00d7
+                    00D8   1076 G$CCF0$0$0 == 0x00d8
+                    00D8   1077 _CCF0	=	0x00d8
+                    00D9   1078 G$CCF1$0$0 == 0x00d9
+                    00D9   1079 _CCF1	=	0x00d9
+                    00DA   1080 G$CCF2$0$0 == 0x00da
+                    00DA   1081 _CCF2	=	0x00da
+                    00DB   1082 G$CCF3$0$0 == 0x00db
+                    00DB   1083 _CCF3	=	0x00db
+                    00DC   1084 G$CCF4$0$0 == 0x00dc
+                    00DC   1085 _CCF4	=	0x00dc
+                    00DD   1086 G$CCF5$0$0 == 0x00dd
+                    00DD   1087 _CCF5	=	0x00dd
+                    00DE   1088 G$CR$0$0 == 0x00de
+                    00DE   1089 _CR	=	0x00de
+                    00DF   1090 G$CF$0$0 == 0x00df
+                    00DF   1091 _CF	=	0x00df
+                    00D8   1092 G$P5_0$0$0 == 0x00d8
+                    00D8   1093 _P5_0	=	0x00d8
+                    00D9   1094 G$P5_1$0$0 == 0x00d9
+                    00D9   1095 _P5_1	=	0x00d9
+                    00DA   1096 G$P5_2$0$0 == 0x00da
+                    00DA   1097 _P5_2	=	0x00da
+                    00DB   1098 G$P5_3$0$0 == 0x00db
+                    00DB   1099 _P5_3	=	0x00db
+                    00DC   1100 G$P5_4$0$0 == 0x00dc
+                    00DC   1101 _P5_4	=	0x00dc
+                    00DD   1102 G$P5_5$0$0 == 0x00dd
+                    00DD   1103 _P5_5	=	0x00dd
+                    00DE   1104 G$P5_6$0$0 == 0x00de
+                    00DE   1105 _P5_6	=	0x00de
+                    00DF   1106 G$P5_7$0$0 == 0x00df
+                    00DF   1107 _P5_7	=	0x00df
+                    00E8   1108 G$AD0LJST$0$0 == 0x00e8
+                    00E8   1109 _AD0LJST	=	0x00e8
+                    00E9   1110 G$AD0WINT$0$0 == 0x00e9
+                    00E9   1111 _AD0WINT	=	0x00e9
+                    00EA   1112 G$AD0CM0$0$0 == 0x00ea
+                    00EA   1113 _AD0CM0	=	0x00ea
+                    00EB   1114 G$AD0CM1$0$0 == 0x00eb
+                    00EB   1115 _AD0CM1	=	0x00eb
+                    00EC   1116 G$AD0BUSY$0$0 == 0x00ec
+                    00EC   1117 _AD0BUSY	=	0x00ec
+                    00ED   1118 G$AD0INT$0$0 == 0x00ed
+                    00ED   1119 _AD0INT	=	0x00ed
+                    00EE   1120 G$AD0TM$0$0 == 0x00ee
+                    00EE   1121 _AD0TM	=	0x00ee
+                    00EF   1122 G$AD0EN$0$0 == 0x00ef
+                    00EF   1123 _AD0EN	=	0x00ef
+                    00E8   1124 G$AD2WINT$0$0 == 0x00e8
+                    00E8   1125 _AD2WINT	=	0x00e8
+                    00E9   1126 G$AD2CM0$0$0 == 0x00e9
+                    00E9   1127 _AD2CM0	=	0x00e9
+                    00EA   1128 G$AD2CM1$0$0 == 0x00ea
+                    00EA   1129 _AD2CM1	=	0x00ea
+                    00EB   1130 G$AD2CM2$0$0 == 0x00eb
+                    00EB   1131 _AD2CM2	=	0x00eb
+                    00EC   1132 G$AD2BUSY$0$0 == 0x00ec
+                    00EC   1133 _AD2BUSY	=	0x00ec
+                    00ED   1134 G$AD2INT$0$0 == 0x00ed
+                    00ED   1135 _AD2INT	=	0x00ed
+                    00EE   1136 G$AD2TM$0$0 == 0x00ee
+                    00EE   1137 _AD2TM	=	0x00ee
+                    00EF   1138 G$AD2EN$0$0 == 0x00ef
+                    00EF   1139 _AD2EN	=	0x00ef
+                    00E8   1140 G$P6_0$0$0 == 0x00e8
+                    00E8   1141 _P6_0	=	0x00e8
+                    00E9   1142 G$P6_1$0$0 == 0x00e9
+                    00E9   1143 _P6_1	=	0x00e9
+                    00EA   1144 G$P6_2$0$0 == 0x00ea
+                    00EA   1145 _P6_2	=	0x00ea
+                    00EB   1146 G$P6_3$0$0 == 0x00eb
+                    00EB   1147 _P6_3	=	0x00eb
+                    00EC   1148 G$P6_4$0$0 == 0x00ec
+                    00EC   1149 _P6_4	=	0x00ec
+                    00ED   1150 G$P6_5$0$0 == 0x00ed
+                    00ED   1151 _P6_5	=	0x00ed
+                    00EE   1152 G$P6_6$0$0 == 0x00ee
+                    00EE   1153 _P6_6	=	0x00ee
+                    00EF   1154 G$P6_7$0$0 == 0x00ef
+                    00EF   1155 _P6_7	=	0x00ef
+                    00F8   1156 G$SPIEN$0$0 == 0x00f8
+                    00F8   1157 _SPIEN	=	0x00f8
+                    00F9   1158 G$TXBMT$0$0 == 0x00f9
+                    00F9   1159 _TXBMT	=	0x00f9
+                    00FA   1160 G$NSSMD0$0$0 == 0x00fa
+                    00FA   1161 _NSSMD0	=	0x00fa
+                    00FB   1162 G$NSSMD1$0$0 == 0x00fb
+                    00FB   1163 _NSSMD1	=	0x00fb
+                    00FC   1164 G$RXOVRN$0$0 == 0x00fc
+                    00FC   1165 _RXOVRN	=	0x00fc
+                    00FD   1166 G$MODF$0$0 == 0x00fd
+                    00FD   1167 _MODF	=	0x00fd
+                    00FE   1168 G$WCOL$0$0 == 0x00fe
+                    00FE   1169 _WCOL	=	0x00fe
+                    00FF   1170 G$SPIF$0$0 == 0x00ff
+                    00FF   1171 _SPIF	=	0x00ff
+                    00F8   1172 G$P7_0$0$0 == 0x00f8
+                    00F8   1173 _P7_0	=	0x00f8
+                    00F9   1174 G$P7_1$0$0 == 0x00f9
+                    00F9   1175 _P7_1	=	0x00f9
+                    00FA   1176 G$P7_2$0$0 == 0x00fa
+                    00FA   1177 _P7_2	=	0x00fa
+                    00FB   1178 G$P7_3$0$0 == 0x00fb
+                    00FB   1179 _P7_3	=	0x00fb
+                    00FC   1180 G$P7_4$0$0 == 0x00fc
+                    00FC   1181 _P7_4	=	0x00fc
+                    00FD   1182 G$P7_5$0$0 == 0x00fd
+                    00FD   1183 _P7_5	=	0x00fd
+                    00FE   1184 G$P7_6$0$0 == 0x00fe
+                    00FE   1185 _P7_6	=	0x00fe
+                    00FF   1186 G$P7_7$0$0 == 0x00ff
+                    00FF   1187 _P7_7	=	0x00ff
+                           1188 ;--------------------------------------------------------
+                           1189 ; overlayable register banks
+                           1190 ;--------------------------------------------------------
+                           1191 	.area REG_BANK_0	(REL,OVR,DATA)
+   0000                    1192 	.ds 8
+                           1193 ;--------------------------------------------------------
+                           1194 ; internal ram data
+                           1195 ;--------------------------------------------------------
+                           1196 	.area DSEG    (DATA)
+                    0000   1197 G$overflows$0$0==.
+   0008                    1198 _overflows::
+   0008                    1199 	.ds 2
+                    0002   1200 G$bounce$0$0==.
+   000A                    1201 _bounce::
+   000A                    1202 	.ds 2
+                    0004   1203 G$buttonOverflows$0$0==.
+   000C                    1204 _buttonOverflows::
+   000C                    1205 	.ds 2
+                    0006   1206 G$total$0$0==.
+   000E                    1207 _total::
+   000E                    1208 	.ds 2
+                    0008   1209 G$n$0$0==.
+   0010                    1210 _n::
+   0010                    1211 	.ds 2
+                           1212 ;--------------------------------------------------------
+                           1213 ; overlayable items in internal ram 
+                           1214 ;--------------------------------------------------------
+                           1215 	.area	OSEG    (OVR,DATA)
+                           1216 	.area	OSEG    (OVR,DATA)
+                           1217 	.area	OSEG    (OVR,DATA)
+                           1218 	.area	OSEG    (OVR,DATA)
+                           1219 	.area	OSEG    (OVR,DATA)
+                           1220 	.area	OSEG    (OVR,DATA)
+                           1221 	.area	OSEG    (OVR,DATA)
+                           1222 ;--------------------------------------------------------
+                           1223 ; Stack segment in internal ram 
+                           1224 ;--------------------------------------------------------
+                           1225 	.area	SSEG	(DATA)
+   0041                    1226 __start__stack:
+   0041                    1227 	.ds	1
+                           1228 
+                           1229 ;--------------------------------------------------------
+                           1230 ; indirectly addressable internal ram data
+                           1231 ;--------------------------------------------------------
+                           1232 	.area ISEG    (DATA)
+                           1233 ;--------------------------------------------------------
+                           1234 ; absolute internal ram data
+                           1235 ;--------------------------------------------------------
+                           1236 	.area IABS    (ABS,DATA)
+                           1237 	.area IABS    (ABS,DATA)
+                           1238 ;--------------------------------------------------------
+                           1239 ; bit data
+                           1240 ;--------------------------------------------------------
+                           1241 	.area BSEG    (BIT)
+                    0000   1242 G$buttonPressed$0$0==.
+   0000                    1243 _buttonPressed::
+   0000                    1244 	.ds 1
+                           1245 ;--------------------------------------------------------
+                           1246 ; paged external ram data
+                           1247 ;--------------------------------------------------------
+                           1248 	.area PSEG    (PAG,XDATA)
+                           1249 ;--------------------------------------------------------
+                           1250 ; external ram data
+                           1251 ;--------------------------------------------------------
+                           1252 	.area XSEG    (XDATA)
+                           1253 ;--------------------------------------------------------
+                           1254 ; absolute external ram data
+                           1255 ;--------------------------------------------------------
+                           1256 	.area XABS    (ABS,XDATA)
+                           1257 ;--------------------------------------------------------
+                           1258 ; external initialized ram data
+                           1259 ;--------------------------------------------------------
+                           1260 	.area XISEG   (XDATA)
+                           1261 	.area HOME    (CODE)
+                           1262 	.area GSINIT0 (CODE)
+                           1263 	.area GSINIT1 (CODE)
+                           1264 	.area GSINIT2 (CODE)
+                           1265 	.area GSINIT3 (CODE)
+                           1266 	.area GSINIT4 (CODE)
+                           1267 	.area GSINIT5 (CODE)
+                           1268 	.area GSINIT  (CODE)
+                           1269 	.area GSFINAL (CODE)
+                           1270 	.area CSEG    (CODE)
+                           1271 ;--------------------------------------------------------
+                           1272 ; interrupt vector 
+                           1273 ;--------------------------------------------------------
+                           1274 	.area HOME    (CODE)
+   0000                    1275 __interrupt_vect:
+   0000 02 00 33           1276 	ljmp	__sdcc_gsinit_startup
+   0003 02 03 08           1277 	ljmp	_SW2_ISR
+   0006                    1278 	.ds	5
+   000B 02 03 2D           1279 	ljmp	_Timer0_ISR
+   000E                    1280 	.ds	5
+   0013 32                 1281 	reti
+   0014                    1282 	.ds	7
+   001B 32                 1283 	reti
+   001C                    1284 	.ds	7
+   0023 32                 1285 	reti
+   0024                    1286 	.ds	7
+   002B 02 03 75           1287 	ljmp	_Timer2_ISR
+                           1288 ;--------------------------------------------------------
+                           1289 ; global & static initialisations
+                           1290 ;--------------------------------------------------------
+                           1291 	.area HOME    (CODE)
+                           1292 	.area GSINIT  (CODE)
+                           1293 	.area GSFINAL (CODE)
+                           1294 	.area GSINIT  (CODE)
+                           1295 	.globl __sdcc_gsinit_startup
+                           1296 	.globl __sdcc_program_startup
+                           1297 	.globl __start__stack
+                           1298 	.globl __mcs51_genXINIT
+                           1299 	.globl __mcs51_genXRAMCLEAR
+                           1300 	.globl __mcs51_genRAMCLEAR
+                    0000   1301 	G$UART0_INIT$0$0 ==.
+                    0000   1302 	C$lab2_3.c$35$1$1 ==.
+                           1303 ;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 2\lab2-3.c:35: int overflows = 0;
+   008C E4                 1304 	clr	a
+   008D F5 08              1305 	mov	_overflows,a
+   008F F5 09              1306 	mov	(_overflows + 1),a
+                    0005   1307 	G$UART0_INIT$0$0 ==.
+                    0005   1308 	C$lab2_3.c$36$1$1 ==.
+                           1309 ;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 2\lab2-3.c:36: short bounce = 5;
+   0091 75 0A 05           1310 	mov	_bounce,#0x05
+   0094 E4                 1311 	clr	a
+   0095 F5 0B              1312 	mov	(_bounce + 1),a
+                    000B   1313 	G$UART0_INIT$0$0 ==.
+                    000B   1314 	C$lab2_3.c$37$1$1 ==.
+                           1315 ;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 2\lab2-3.c:37: int buttonOverflows = 0;
+   0097 E4                 1316 	clr	a
+   0098 F5 0C              1317 	mov	_buttonOverflows,a
+   009A F5 0D              1318 	mov	(_buttonOverflows + 1),a
+                    0010   1319 	G$UART0_INIT$0$0 ==.
+                    0010   1320 	C$lab2_3.c$40$1$1 ==.
+                           1321 ;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 2\lab2-3.c:40: int total = 0;
+   009C E4                 1322 	clr	a
+   009D F5 0E              1323 	mov	_total,a
+   009F F5 0F              1324 	mov	(_total + 1),a
+                    0015   1325 	G$UART0_INIT$0$0 ==.
+                    0015   1326 	C$lab2_3.c$41$1$1 ==.
+                           1327 ;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 2\lab2-3.c:41: int n = 0;
+   00A1 E4                 1328 	clr	a
+   00A2 F5 10              1329 	mov	_n,a
+   00A4 F5 11              1330 	mov	(_n + 1),a
+                    001A   1331 	G$UART0_INIT$0$0 ==.
+                    001A   1332 	C$lab2_3.c$38$1$1 ==.
+                           1333 ;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 2\lab2-3.c:38: bit buttonPressed = 1;
+   00A6 D2 00              1334 	setb	_buttonPressed
+                           1335 	.area GSFINAL (CODE)
+   00B2 02 00 2E           1336 	ljmp	__sdcc_program_startup
+                           1337 ;--------------------------------------------------------
+                           1338 ; Home
+                           1339 ;--------------------------------------------------------
+                           1340 	.area HOME    (CODE)
+                           1341 	.area HOME    (CODE)
+   002E                    1342 __sdcc_program_startup:
+   002E 12 00 C8           1343 	lcall	_main
+                           1344 ;	return from main will lock up
+   0031 80 FE              1345 	sjmp .
+                           1346 ;--------------------------------------------------------
+                           1347 ; code
+                           1348 ;--------------------------------------------------------
+                           1349 	.area CSEG    (CODE)
+                           1350 ;------------------------------------------------------------
+                           1351 ;Allocation info for local variables in function 'putchar'
+                           1352 ;------------------------------------------------------------
+                           1353 ;c                         Allocated to registers r2 
+                           1354 ;------------------------------------------------------------
+                    0000   1355 	G$putchar$0$0 ==.
+                    0000   1356 	C$putget.h$18$0$0 ==.
+                           1357 ;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 2\/putget.h:18: void putchar(char c)
+                           1358 ;	-----------------------------------------
+                           1359 ;	 function putchar
+                           1360 ;	-----------------------------------------
+   00B5                    1361 _putchar:
+                    0002   1362 	ar2 = 0x02
+                    0003   1363 	ar3 = 0x03
+                    0004   1364 	ar4 = 0x04
+                    0005   1365 	ar5 = 0x05
+                    0006   1366 	ar6 = 0x06
+                    0007   1367 	ar7 = 0x07
+                    0000   1368 	ar0 = 0x00
+                    0001   1369 	ar1 = 0x01
+   00B5 AA 82              1370 	mov	r2,dpl
+                    0002   1371 	C$putget.h$20$1$1 ==.
+                           1372 ;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 2\/putget.h:20: while(!TI0); 
+   00B7                    1373 00101$:
+                    0002   1374 	C$putget.h$21$1$1 ==.
+                           1375 ;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 2\/putget.h:21: TI0=0;
+   00B7 10 99 02           1376 	jbc	_TI0,00108$
+   00BA 80 FB              1377 	sjmp	00101$
+   00BC                    1378 00108$:
+                    0007   1379 	C$putget.h$22$1$1 ==.
+                           1380 ;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 2\/putget.h:22: SBUF0 = c;
+   00BC 8A 99              1381 	mov	_SBUF0,r2
+                    0009   1382 	C$putget.h$23$1$1 ==.
+                    0009   1383 	XG$putchar$0$0 ==.
+   00BE 22                 1384 	ret
+                           1385 ;------------------------------------------------------------
+                           1386 ;Allocation info for local variables in function 'getchar'
+                           1387 ;------------------------------------------------------------
+                           1388 ;c                         Allocated to registers 
+                           1389 ;------------------------------------------------------------
+                    000A   1390 	G$getchar$0$0 ==.
+                    000A   1391 	C$putget.h$28$1$1 ==.
+                           1392 ;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 2\/putget.h:28: char getchar(void)
+                           1393 ;	-----------------------------------------
+                           1394 ;	 function getchar
+                           1395 ;	-----------------------------------------
+   00BF                    1396 _getchar:
+                    000A   1397 	C$putget.h$31$1$1 ==.
+                           1398 ;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 2\/putget.h:31: while(!RI0);
+   00BF                    1399 00101$:
+                    000A   1400 	C$putget.h$32$1$1 ==.
+                           1401 ;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 2\/putget.h:32: RI0 =0;
+   00BF 10 98 02           1402 	jbc	_RI0,00108$
+   00C2 80 FB              1403 	sjmp	00101$
+   00C4                    1404 00108$:
+                    000F   1405 	C$putget.h$33$1$1 ==.
+                           1406 ;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 2\/putget.h:33: c = SBUF0;
+   00C4 85 99 82           1407 	mov	dpl,_SBUF0
+                    0012   1408 	C$putget.h$35$1$1 ==.
+                           1409 ;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 2\/putget.h:35: return c;
+                    0012   1410 	C$putget.h$36$1$1 ==.
+                    0012   1411 	XG$getchar$0$0 ==.
+   00C7 22                 1412 	ret
+                           1413 ;------------------------------------------------------------
+                           1414 ;Allocation info for local variables in function 'main'
+                           1415 ;------------------------------------------------------------
+                           1416 ;randnum                   Allocated to registers 
+                           1417 ;------------------------------------------------------------
+                    0013   1418 	G$main$0$0 ==.
+                    0013   1419 	C$lab2_3.c$65$1$1 ==.
+                           1420 ;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 2\lab2-3.c:65: void main (void)
+                           1421 ;	-----------------------------------------
+                           1422 ;	 function main
+                           1423 ;	-----------------------------------------
+   00C8                    1424 _main:
+                    0013   1425 	C$lab2_3.c$70$1$1 ==.
+                           1426 ;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 2\lab2-3.c:70: WDTCN = 0xDE;					// Disable the watchdog timer
+   00C8 75 FF DE           1427 	mov	_WDTCN,#0xDE
+                    0016   1428 	C$lab2_3.c$71$1$1 ==.
+                           1429 ;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 2\lab2-3.c:71: WDTCN = 0xAD;					// Note: = "DEAD"!
+   00CB 75 FF AD           1430 	mov	_WDTCN,#0xAD
+                    0019   1431 	C$lab2_3.c$73$1$1 ==.
+                           1432 ;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 2\lab2-3.c:73: SYSCLK_INIT();					// Initialize the oscillator.
+   00CE 12 03 91           1433 	lcall	_SYSCLK_INIT
+                    001C   1434 	C$lab2_3.c$74$1$1 ==.
+                           1435 ;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 2\lab2-3.c:74: PORT_INIT();					// Configure the Crossbar and GPIO.
+   00D1 12 04 0E           1436 	lcall	_PORT_INIT
+                    001F   1437 	C$lab2_3.c$75$1$1 ==.
+                           1438 ;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 2\lab2-3.c:75: UART0_INIT();					// Initialize UART0.
+   00D4 12 04 2B           1439 	lcall	_UART0_INIT
+                    0022   1440 	C$lab2_3.c$77$1$1 ==.
+                           1441 ;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 2\lab2-3.c:77: SFRPAGE = LEGACY_PAGE;
+   00D7 75 84 00           1442 	mov	_SFRPAGE,#0x00
+                    0025   1443 	C$lab2_3.c$78$1$1 ==.
+                           1444 ;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 2\lab2-3.c:78: IT0		= 1;					// /INT0 is edge triggered, falling-edge.
+   00DA D2 88              1445 	setb	_IT0
+                    0027   1446 	C$lab2_3.c$80$1$1 ==.
+                           1447 ;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 2\lab2-3.c:80: SFRPAGE = CONFIG_PAGE;
+   00DC 75 84 0F           1448 	mov	_SFRPAGE,#0x0F
+                    002A   1449 	C$lab2_3.c$81$1$1 ==.
+                           1450 ;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 2\lab2-3.c:81: EX0		= 1;					// Enable Ext Int 0 only after everything is settled.
+   00DF D2 A8              1451 	setb	_EX0
+                    002C   1452 	C$lab2_3.c$83$1$1 ==.
+                           1453 ;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 2\lab2-3.c:83: SFRPAGE = UART0_PAGE;			// Direct output to UART0
+   00E1 75 84 00           1454 	mov	_SFRPAGE,#0x00
+                    002F   1455 	C$lab2_3.c$85$1$1 ==.
+                           1456 ;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 2\lab2-3.c:85: printf("\033[2J");				// Erase screen and move cursor to the home posiiton.
+   00E4 74 F6              1457 	mov	a,#__str_0
+   00E6 C0 E0              1458 	push	acc
+   00E8 74 0B              1459 	mov	a,#(__str_0 >> 8)
+   00EA C0 E0              1460 	push	acc
+   00EC 74 80              1461 	mov	a,#0x80
+   00EE C0 E0              1462 	push	acc
+   00F0 12 05 A2           1463 	lcall	_printf
+   00F3 15 81              1464 	dec	sp
+   00F5 15 81              1465 	dec	sp
+   00F7 15 81              1466 	dec	sp
+                    0044   1467 	C$lab2_3.c$87$1$1 ==.
+                           1468 ;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 2\lab2-3.c:87: Timer0_Init();
+   00F9 12 03 1B           1469 	lcall	_Timer0_Init
+                    0047   1470 	C$lab2_3.c$88$1$1 ==.
+                           1471 ;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 2\lab2-3.c:88: TR0 = 1;
+   00FC D2 8C              1472 	setb	_TR0
+                    0049   1473 	C$lab2_3.c$90$1$1 ==.
+                           1474 ;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 2\lab2-3.c:90: Timer2_Init();					
+   00FE 12 03 5C           1475 	lcall	_Timer2_Init
+                    004C   1476 	C$lab2_3.c$91$1$1 ==.
+                           1477 ;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 2\lab2-3.c:91: TR2 = 1;						//enable timer2
+   0101 D2 CA              1478 	setb	_TR2
+                    004E   1479 	C$lab2_3.c$95$1$1 ==.
+                           1480 ;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 2\lab2-3.c:95: while (1)
+   0103                    1481 00102$:
+                    004E   1482 	C$lab2_3.c$96$1$1 ==.
+                           1483 ;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 2\lab2-3.c:96: playGame();
+   0103 12 01 08           1484 	lcall	_playGame
+                    0051   1485 	C$lab2_3.c$98$1$1 ==.
+                    0051   1486 	XG$main$0$0 ==.
+   0106 80 FB              1487 	sjmp	00102$
+                           1488 ;------------------------------------------------------------
+                           1489 ;Allocation info for local variables in function 'playGame'
+                           1490 ;------------------------------------------------------------
+                           1491 ;waitTime                  Allocated to registers r2 r3 
+                           1492 ;------------------------------------------------------------
+                    0053   1493 	G$playGame$0$0 ==.
+                    0053   1494 	C$lab2_3.c$100$1$1 ==.
+                           1495 ;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 2\lab2-3.c:100: void playGame()
+                           1496 ;	-----------------------------------------
+                           1497 ;	 function playGame
+                           1498 ;	-----------------------------------------
+   0108                    1499 _playGame:
+                    0053   1500 	C$lab2_3.c$103$1$1 ==.
+                           1501 ;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 2\lab2-3.c:103: n++;						//increments counter for average
+   0108 05 10              1502 	inc	_n
+   010A E4                 1503 	clr	a
+   010B B5 10 02           1504 	cjne	a,_n,00122$
+   010E 05 11              1505 	inc	(_n + 1)
+   0110                    1506 00122$:
+                    005B   1507 	C$lab2_3.c$104$1$1 ==.
+                           1508 ;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 2\lab2-3.c:104: printf("\033[2J");
+   0110 74 F6              1509 	mov	a,#__str_0
+   0112 C0 E0              1510 	push	acc
+   0114 74 0B              1511 	mov	a,#(__str_0 >> 8)
+   0116 C0 E0              1512 	push	acc
+   0118 74 80              1513 	mov	a,#0x80
+   011A C0 E0              1514 	push	acc
+   011C 12 05 A2           1515 	lcall	_printf
+   011F 15 81              1516 	dec	sp
+   0121 15 81              1517 	dec	sp
+   0123 15 81              1518 	dec	sp
+                    0070   1519 	C$lab2_3.c$105$1$1 ==.
+                           1520 ;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 2\lab2-3.c:105: printf("Your Average Response Time is: %d\n\r", total/n);
+   0125 85 10 18           1521 	mov	__divsint_PARM_2,_n
+   0128 85 11 19           1522 	mov	(__divsint_PARM_2 + 1),(_n + 1)
+   012B 85 0E 82           1523 	mov	dpl,_total
+   012E 85 0F 83           1524 	mov	dph,(_total + 1)
+   0131 12 0B BA           1525 	lcall	__divsint
+   0134 AA 82              1526 	mov	r2,dpl
+   0136 AB 83              1527 	mov	r3,dph
+   0138 C0 02              1528 	push	ar2
+   013A C0 03              1529 	push	ar3
+   013C 74 FB              1530 	mov	a,#__str_1
+   013E C0 E0              1531 	push	acc
+   0140 74 0B              1532 	mov	a,#(__str_1 >> 8)
+   0142 C0 E0              1533 	push	acc
+   0144 74 80              1534 	mov	a,#0x80
+   0146 C0 E0              1535 	push	acc
+   0148 12 05 A2           1536 	lcall	_printf
+   014B E5 81              1537 	mov	a,sp
+   014D 24 FB              1538 	add	a,#0xfb
+   014F F5 81              1539 	mov	sp,a
+                    009C   1540 	C$lab2_3.c$106$1$1 ==.
+                           1541 ;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 2\lab2-3.c:106: printf("Ready?\r\n");
+   0151 74 1F              1542 	mov	a,#__str_2
+   0153 C0 E0              1543 	push	acc
+   0155 74 0C              1544 	mov	a,#(__str_2 >> 8)
+   0157 C0 E0              1545 	push	acc
+   0159 74 80              1546 	mov	a,#0x80
+   015B C0 E0              1547 	push	acc
+   015D 12 05 A2           1548 	lcall	_printf
+   0160 15 81              1549 	dec	sp
+   0162 15 81              1550 	dec	sp
+   0164 15 81              1551 	dec	sp
+                    00B1   1552 	C$lab2_3.c$108$1$1 ==.
+                           1553 ;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 2\lab2-3.c:108: srand(TL1);					// seed the random fuction
+   0166 AA 8B              1554 	mov	r2,_TL1
+   0168 7B 00              1555 	mov	r3,#0x00
+   016A 8A 82              1556 	mov	dpl,r2
+   016C 8B 83              1557 	mov	dph,r3
+   016E 12 04 8B           1558 	lcall	_srand
+                    00BC   1559 	C$lab2_3.c$109$1$1 ==.
+                           1560 ;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 2\lab2-3.c:109: waitTime = rand()%100;		//wait 0-1000 millisecs
+   0171 12 04 4F           1561 	lcall	_rand
+   0174 75 18 64           1562 	mov	__modsint_PARM_2,#0x64
+   0177 E4                 1563 	clr	a
+   0178 F5 19              1564 	mov	(__modsint_PARM_2 + 1),a
+   017A 12 0B 84           1565 	lcall	__modsint
+   017D AA 82              1566 	mov	r2,dpl
+   017F AB 83              1567 	mov	r3,dph
+                    00CC   1568 	C$lab2_3.c$111$1$1 ==.
+                           1569 ;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 2\lab2-3.c:111: overflows = 0;
+   0181 E4                 1570 	clr	a
+   0182 F5 08              1571 	mov	_overflows,a
+   0184 F5 09              1572 	mov	(_overflows + 1),a
+                    00D1   1573 	C$lab2_3.c$112$1$1 ==.
+                           1574 ;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 2\lab2-3.c:112: while(overflows < waitTime);
+   0186                    1575 00101$:
+   0186 C3                 1576 	clr	c
+   0187 E5 08              1577 	mov	a,_overflows
+   0189 9A                 1578 	subb	a,r2
+   018A E5 09              1579 	mov	a,(_overflows + 1)
+   018C 64 80              1580 	xrl	a,#0x80
+   018E 8B F0              1581 	mov	b,r3
+   0190 63 F0 80           1582 	xrl	b,#0x80
+   0193 95 F0              1583 	subb	a,b
+   0195 40 EF              1584 	jc	00101$
+                    00E2   1585 	C$lab2_3.c$114$1$1 ==.
+                           1586 ;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 2\lab2-3.c:114: printf("\033[2J");					//clear the screen
+   0197 74 F6              1587 	mov	a,#__str_0
+   0199 C0 E0              1588 	push	acc
+   019B 74 0B              1589 	mov	a,#(__str_0 >> 8)
+   019D C0 E0              1590 	push	acc
+   019F 74 80              1591 	mov	a,#0x80
+   01A1 C0 E0              1592 	push	acc
+   01A3 12 05 A2           1593 	lcall	_printf
+   01A6 15 81              1594 	dec	sp
+   01A8 15 81              1595 	dec	sp
+   01AA 15 81              1596 	dec	sp
+                    00F7   1597 	C$lab2_3.c$115$1$1 ==.
+                           1598 ;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 2\lab2-3.c:115: printf("\033[1;46m");					//change background
+   01AC 74 28              1599 	mov	a,#__str_3
+   01AE C0 E0              1600 	push	acc
+   01B0 74 0C              1601 	mov	a,#(__str_3 >> 8)
+   01B2 C0 E0              1602 	push	acc
+   01B4 74 80              1603 	mov	a,#0x80
+   01B6 C0 E0              1604 	push	acc
+   01B8 12 05 A2           1605 	lcall	_printf
+   01BB 15 81              1606 	dec	sp
+   01BD 15 81              1607 	dec	sp
+   01BF 15 81              1608 	dec	sp
+                    010C   1609 	C$lab2_3.c$116$1$1 ==.
+                           1610 ;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 2\lab2-3.c:116: printf("\033[2J");
+   01C1 74 F6              1611 	mov	a,#__str_0
+   01C3 C0 E0              1612 	push	acc
+   01C5 74 0B              1613 	mov	a,#(__str_0 >> 8)
+   01C7 C0 E0              1614 	push	acc
+   01C9 74 80              1615 	mov	a,#0x80
+   01CB C0 E0              1616 	push	acc
+   01CD 12 05 A2           1617 	lcall	_printf
+   01D0 15 81              1618 	dec	sp
+   01D2 15 81              1619 	dec	sp
+   01D4 15 81              1620 	dec	sp
+                    0121   1621 	C$lab2_3.c$118$1$1 ==.
+                           1622 ;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 2\lab2-3.c:118: overflows = 0;
+   01D6 E4                 1623 	clr	a
+   01D7 F5 08              1624 	mov	_overflows,a
+   01D9 F5 09              1625 	mov	(_overflows + 1),a
+                    0126   1626 	C$lab2_3.c$119$1$1 ==.
+                           1627 ;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 2\lab2-3.c:119: while(overflows<5);
+   01DB                    1628 00104$:
+   01DB C3                 1629 	clr	c
+   01DC E5 08              1630 	mov	a,_overflows
+   01DE 94 05              1631 	subb	a,#0x05
+   01E0 E5 09              1632 	mov	a,(_overflows + 1)
+   01E2 64 80              1633 	xrl	a,#0x80
+   01E4 94 80              1634 	subb	a,#0x80
+   01E6 40 F3              1635 	jc	00104$
+                    0133   1636 	C$lab2_3.c$121$1$1 ==.
+                           1637 ;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 2\lab2-3.c:121: printf("\033[2J");
+   01E8 74 F6              1638 	mov	a,#__str_0
+   01EA C0 E0              1639 	push	acc
+   01EC 74 0B              1640 	mov	a,#(__str_0 >> 8)
+   01EE C0 E0              1641 	push	acc
+   01F0 74 80              1642 	mov	a,#0x80
+   01F2 C0 E0              1643 	push	acc
+   01F4 12 05 A2           1644 	lcall	_printf
+   01F7 15 81              1645 	dec	sp
+   01F9 15 81              1646 	dec	sp
+   01FB 15 81              1647 	dec	sp
+                    0148   1648 	C$lab2_3.c$122$1$1 ==.
+                           1649 ;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 2\lab2-3.c:122: printf("\033[0m");
+   01FD 74 30              1650 	mov	a,#__str_4
+   01FF C0 E0              1651 	push	acc
+   0201 74 0C              1652 	mov	a,#(__str_4 >> 8)
+   0203 C0 E0              1653 	push	acc
+   0205 74 80              1654 	mov	a,#0x80
+   0207 C0 E0              1655 	push	acc
+   0209 12 05 A2           1656 	lcall	_printf
+   020C 15 81              1657 	dec	sp
+   020E 15 81              1658 	dec	sp
+   0210 15 81              1659 	dec	sp
+                    015D   1660 	C$lab2_3.c$124$1$1 ==.
+                           1661 ;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 2\lab2-3.c:124: printf("\033[2J");
+   0212 74 F6              1662 	mov	a,#__str_0
+   0214 C0 E0              1663 	push	acc
+   0216 74 0B              1664 	mov	a,#(__str_0 >> 8)
+   0218 C0 E0              1665 	push	acc
+   021A 74 80              1666 	mov	a,#0x80
+   021C C0 E0              1667 	push	acc
+   021E 12 05 A2           1668 	lcall	_printf
+   0221 15 81              1669 	dec	sp
+   0223 15 81              1670 	dec	sp
+   0225 15 81              1671 	dec	sp
+                    0172   1672 	C$lab2_3.c$125$1$1 ==.
+                           1673 ;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 2\lab2-3.c:125: printf("\033[44m");
+   0227 74 35              1674 	mov	a,#__str_5
+   0229 C0 E0              1675 	push	acc
+   022B 74 0C              1676 	mov	a,#(__str_5 >> 8)
+   022D C0 E0              1677 	push	acc
+   022F 74 80              1678 	mov	a,#0x80
+   0231 C0 E0              1679 	push	acc
+   0233 12 05 A2           1680 	lcall	_printf
+   0236 15 81              1681 	dec	sp
+   0238 15 81              1682 	dec	sp
+   023A 15 81              1683 	dec	sp
+                    0187   1684 	C$lab2_3.c$126$1$1 ==.
+                           1685 ;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 2\lab2-3.c:126: printf("\033[2J");
+   023C 74 F6              1686 	mov	a,#__str_0
+   023E C0 E0              1687 	push	acc
+   0240 74 0B              1688 	mov	a,#(__str_0 >> 8)
+   0242 C0 E0              1689 	push	acc
+   0244 74 80              1690 	mov	a,#0x80
+   0246 C0 E0              1691 	push	acc
+   0248 12 05 A2           1692 	lcall	_printf
+   024B 15 81              1693 	dec	sp
+   024D 15 81              1694 	dec	sp
+   024F 15 81              1695 	dec	sp
+                    019C   1696 	C$lab2_3.c$129$1$1 ==.
+                           1697 ;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 2\lab2-3.c:129: printf("Your Average Response Time is: %d\n\r", total/n);
+   0251 85 10 18           1698 	mov	__divsint_PARM_2,_n
+   0254 85 11 19           1699 	mov	(__divsint_PARM_2 + 1),(_n + 1)
+   0257 85 0E 82           1700 	mov	dpl,_total
+   025A 85 0F 83           1701 	mov	dph,(_total + 1)
+   025D 12 0B BA           1702 	lcall	__divsint
+   0260 AA 82              1703 	mov	r2,dpl
+   0262 AB 83              1704 	mov	r3,dph
+   0264 C0 02              1705 	push	ar2
+   0266 C0 03              1706 	push	ar3
+   0268 74 FB              1707 	mov	a,#__str_1
+   026A C0 E0              1708 	push	acc
+   026C 74 0B              1709 	mov	a,#(__str_1 >> 8)
+   026E C0 E0              1710 	push	acc
+   0270 74 80              1711 	mov	a,#0x80
+   0272 C0 E0              1712 	push	acc
+   0274 12 05 A2           1713 	lcall	_printf
+   0277 E5 81              1714 	mov	a,sp
+   0279 24 FB              1715 	add	a,#0xfb
+   027B F5 81              1716 	mov	sp,a
+                    01C8   1717 	C$lab2_3.c$130$1$1 ==.
+                           1718 ;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 2\lab2-3.c:130: printf("GO!!\n\r");
+   027D 74 3B              1719 	mov	a,#__str_6
+   027F C0 E0              1720 	push	acc
+   0281 74 0C              1721 	mov	a,#(__str_6 >> 8)
+   0283 C0 E0              1722 	push	acc
+   0285 74 80              1723 	mov	a,#0x80
+   0287 C0 E0              1724 	push	acc
+   0289 12 05 A2           1725 	lcall	_printf
+   028C 15 81              1726 	dec	sp
+   028E 15 81              1727 	dec	sp
+   0290 15 81              1728 	dec	sp
+                    01DD   1729 	C$lab2_3.c$132$1$1 ==.
+                           1730 ;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 2\lab2-3.c:132: buttonPressed = 0;
+   0292 C2 00              1731 	clr	_buttonPressed
+                    01DF   1732 	C$lab2_3.c$133$1$1 ==.
+                           1733 ;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 2\lab2-3.c:133: overflows = 0;
+   0294 E4                 1734 	clr	a
+   0295 F5 08              1735 	mov	_overflows,a
+   0297 F5 09              1736 	mov	(_overflows + 1),a
+                    01E4   1737 	C$lab2_3.c$134$1$1 ==.
+                           1738 ;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 2\lab2-3.c:134: while(!buttonPressed);
+   0299                    1739 00107$:
+   0299 30 00 FD           1740 	jnb	_buttonPressed,00107$
+                    01E7   1741 	C$lab2_3.c$136$1$1 ==.
+                           1742 ;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 2\lab2-3.c:136: printf("Time in overflows: %d\n\r", overflows);
+   029C C0 08              1743 	push	_overflows
+   029E C0 09              1744 	push	(_overflows + 1)
+   02A0 74 42              1745 	mov	a,#__str_7
+   02A2 C0 E0              1746 	push	acc
+   02A4 74 0C              1747 	mov	a,#(__str_7 >> 8)
+   02A6 C0 E0              1748 	push	acc
+   02A8 74 80              1749 	mov	a,#0x80
+   02AA C0 E0              1750 	push	acc
+   02AC 12 05 A2           1751 	lcall	_printf
+   02AF E5 81              1752 	mov	a,sp
+   02B1 24 FB              1753 	add	a,#0xfb
+   02B3 F5 81              1754 	mov	sp,a
+                    0200   1755 	C$lab2_3.c$137$1$1 ==.
+                           1756 ;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 2\lab2-3.c:137: total += overflows;
+   02B5 E5 08              1757 	mov	a,_overflows
+   02B7 25 0E              1758 	add	a,_total
+   02B9 F5 0E              1759 	mov	_total,a
+   02BB E5 09              1760 	mov	a,(_overflows + 1)
+   02BD 35 0F              1761 	addc	a,(_total + 1)
+   02BF F5 0F              1762 	mov	(_total + 1),a
+                    020C   1763 	C$lab2_3.c$138$1$1 ==.
+                           1764 ;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 2\lab2-3.c:138: printf("\033[0;0HYour Average Response Time is : %d\n\r", total/n);
+   02C1 85 10 18           1765 	mov	__divsint_PARM_2,_n
+   02C4 85 11 19           1766 	mov	(__divsint_PARM_2 + 1),(_n + 1)
+   02C7 85 0E 82           1767 	mov	dpl,_total
+   02CA 85 0F 83           1768 	mov	dph,(_total + 1)
+   02CD 12 0B BA           1769 	lcall	__divsint
+   02D0 AA 82              1770 	mov	r2,dpl
+   02D2 AB 83              1771 	mov	r3,dph
+   02D4 C0 02              1772 	push	ar2
+   02D6 C0 03              1773 	push	ar3
+   02D8 74 5A              1774 	mov	a,#__str_8
+   02DA C0 E0              1775 	push	acc
+   02DC 74 0C              1776 	mov	a,#(__str_8 >> 8)
+   02DE C0 E0              1777 	push	acc
+   02E0 74 80              1778 	mov	a,#0x80
+   02E2 C0 E0              1779 	push	acc
+   02E4 12 05 A2           1780 	lcall	_printf
+   02E7 E5 81              1781 	mov	a,sp
+   02E9 24 FB              1782 	add	a,#0xfb
+   02EB F5 81              1783 	mov	sp,a
+                    0238   1784 	C$lab2_3.c$141$1$1 ==.
+                           1785 ;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 2\lab2-3.c:141: printf("\033[4;0HPush the button to restart!!\r\n");
+   02ED 74 85              1786 	mov	a,#__str_9
+   02EF C0 E0              1787 	push	acc
+   02F1 74 0C              1788 	mov	a,#(__str_9 >> 8)
+   02F3 C0 E0              1789 	push	acc
+   02F5 74 80              1790 	mov	a,#0x80
+   02F7 C0 E0              1791 	push	acc
+   02F9 12 05 A2           1792 	lcall	_printf
+   02FC 15 81              1793 	dec	sp
+   02FE 15 81              1794 	dec	sp
+   0300 15 81              1795 	dec	sp
+                    024D   1796 	C$lab2_3.c$142$1$1 ==.
+                           1797 ;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 2\lab2-3.c:142: buttonPressed = 0;
+   0302 C2 00              1798 	clr	_buttonPressed
+                    024F   1799 	C$lab2_3.c$143$1$1 ==.
+                           1800 ;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 2\lab2-3.c:143: while(!buttonPressed);
+   0304                    1801 00110$:
+   0304 30 00 FD           1802 	jnb	_buttonPressed,00110$
+                    0252   1803 	C$lab2_3.c$144$1$1 ==.
+                    0252   1804 	XG$playGame$0$0 ==.
+   0307 22                 1805 	ret
+                           1806 ;------------------------------------------------------------
+                           1807 ;Allocation info for local variables in function 'SW2_ISR'
+                           1808 ;------------------------------------------------------------
+                           1809 ;------------------------------------------------------------
+                    0253   1810 	G$SW2_ISR$0$0 ==.
+                    0253   1811 	C$lab2_3.c$146$1$1 ==.
+                           1812 ;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 2\lab2-3.c:146: void SW2_ISR (void) interrupt 0		// Interrupt 0 corresponds to vector address 0003h.
+                           1813 ;	-----------------------------------------
+                           1814 ;	 function SW2_ISR
+                           1815 ;	-----------------------------------------
+   0308                    1816 _SW2_ISR:
+   0308 C0 E0              1817 	push	acc
+                    0255   1818 	C$lab2_3.c$150$1$1 ==.
+                           1819 ;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 2\lab2-3.c:150: if (bounce == 0)
+   030A E5 0A              1820 	mov	a,_bounce
+   030C 45 0B              1821 	orl	a,(_bounce + 1)
+   030E 70 08              1822 	jnz	00103$
+                    025B   1823 	C$lab2_3.c$152$2$2 ==.
+                           1824 ;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 2\lab2-3.c:152: buttonPressed = 1;
+   0310 D2 00              1825 	setb	_buttonPressed
+                    025D   1826 	C$lab2_3.c$153$2$2 ==.
+                           1827 ;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 2\lab2-3.c:153: bounce = 10;
+   0312 75 0A 0A           1828 	mov	_bounce,#0x0A
+   0315 E4                 1829 	clr	a
+   0316 F5 0B              1830 	mov	(_bounce + 1),a
+   0318                    1831 00103$:
+   0318 D0 E0              1832 	pop	acc
+                    0265   1833 	C$lab2_3.c$155$2$1 ==.
+                    0265   1834 	XG$SW2_ISR$0$0 ==.
+   031A 32                 1835 	reti
+                           1836 ;	eliminated unneeded push/pop psw
+                           1837 ;	eliminated unneeded push/pop dpl
+                           1838 ;	eliminated unneeded push/pop dph
+                           1839 ;	eliminated unneeded push/pop b
+                           1840 ;------------------------------------------------------------
+                           1841 ;Allocation info for local variables in function 'Timer0_Init'
+                           1842 ;------------------------------------------------------------
+                           1843 ;------------------------------------------------------------
+                    0266   1844 	G$Timer0_Init$0$0 ==.
+                    0266   1845 	C$lab2_3.c$157$2$1 ==.
+                           1846 ;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 2\lab2-3.c:157: void Timer0_Init()		//timer0 init.
+                           1847 ;	-----------------------------------------
+                           1848 ;	 function Timer0_Init
+                           1849 ;	-----------------------------------------
+   031B                    1850 _Timer0_Init:
+                    0266   1851 	C$lab2_3.c$159$1$1 ==.
+                           1852 ;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 2\lab2-3.c:159: CKCON &= ~0x08; 	//sysclk/12
+   031B 53 8E F7           1853 	anl	_CKCON,#0xF7
+                    0269   1854 	C$lab2_3.c$160$1$1 ==.
+                           1855 ;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 2\lab2-3.c:160: TMOD &= 0xF0;		//clear bits 0-3 of timer mode register
+   031E 53 89 F0           1856 	anl	_TMOD,#0xF0
+                    026C   1857 	C$lab2_3.c$161$1$1 ==.
+                           1858 ;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 2\lab2-3.c:161: TMOD |= 0x01;		//set timer 0 to mode 1 (16-bit counter/timer)
+   0321 43 89 01           1859 	orl	_TMOD,#0x01
+                    026F   1860 	C$lab2_3.c$162$1$1 ==.
+                           1861 ;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 2\lab2-3.c:162: TR0 = 0;			//disable timer
+   0324 C2 8C              1862 	clr	_TR0
+                    0271   1863 	C$lab2_3.c$163$1$1 ==.
+                           1864 ;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 2\lab2-3.c:163: TL0 = 0;			//clear low byte of timer count
+   0326 75 8A 00           1865 	mov	_TL0,#0x00
+                    0274   1866 	C$lab2_3.c$164$1$1 ==.
+                           1867 ;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 2\lab2-3.c:164: TH0 = 0;			//clear high byte of timer count
+   0329 75 8C 00           1868 	mov	_TH0,#0x00
+                    0277   1869 	C$lab2_3.c$165$1$1 ==.
+                    0277   1870 	XG$Timer0_Init$0$0 ==.
+   032C 22                 1871 	ret
+                           1872 ;------------------------------------------------------------
+                           1873 ;Allocation info for local variables in function 'Timer0_ISR'
+                           1874 ;------------------------------------------------------------
+                           1875 ;------------------------------------------------------------
+                    0278   1876 	G$Timer0_ISR$0$0 ==.
+                    0278   1877 	C$lab2_3.c$167$1$1 ==.
+                           1878 ;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 2\lab2-3.c:167: void Timer0_ISR() interrupt 1		//timer0 interrupt
+                           1879 ;	-----------------------------------------
+                           1880 ;	 function Timer0_ISR
+                           1881 ;	-----------------------------------------
+   032D                    1882 _Timer0_ISR:
+   032D C0 E0              1883 	push	acc
+   032F C0 F0              1884 	push	b
+   0331 C0 D0              1885 	push	psw
+   0333 75 D0 00           1886 	mov	psw,#0x00
+                    0281   1887 	C$lab2_3.c$169$1$1 ==.
+                           1888 ;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 2\lab2-3.c:169: TH0 = 0x5E;
+   0336 75 8C 5E           1889 	mov	_TH0,#0x5E
+                    0284   1890 	C$lab2_3.c$170$1$1 ==.
+                           1891 ;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 2\lab2-3.c:170: TL0 = 0x05;
+   0339 75 8A 05           1892 	mov	_TL0,#0x05
+                    0287   1893 	C$lab2_3.c$172$1$1 ==.
+                           1894 ;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 2\lab2-3.c:172: if (bounce > 0)
+   033C C3                 1895 	clr	c
+   033D E4                 1896 	clr	a
+   033E 95 0A              1897 	subb	a,_bounce
+   0340 74 80              1898 	mov	a,#(0x00 ^ 0x80)
+   0342 85 0B F0           1899 	mov	b,(_bounce + 1)
+   0345 63 F0 80           1900 	xrl	b,#0x80
+   0348 95 F0              1901 	subb	a,b
+   034A 50 09              1902 	jnc	00103$
+                    0297   1903 	C$lab2_3.c$173$1$1 ==.
+                           1904 ;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 2\lab2-3.c:173: bounce--;
+   034C 15 0A              1905 	dec	_bounce
+   034E 74 FF              1906 	mov	a,#0xff
+   0350 B5 0A 02           1907 	cjne	a,_bounce,00107$
+   0353 15 0B              1908 	dec	(_bounce + 1)
+   0355                    1909 00107$:
+   0355                    1910 00103$:
+   0355 D0 D0              1911 	pop	psw
+   0357 D0 F0              1912 	pop	b
+   0359 D0 E0              1913 	pop	acc
+                    02A6   1914 	C$lab2_3.c$174$1$1 ==.
+                    02A6   1915 	XG$Timer0_ISR$0$0 ==.
+   035B 32                 1916 	reti
+                           1917 ;	eliminated unneeded push/pop dpl
+                           1918 ;	eliminated unneeded push/pop dph
+                           1919 ;------------------------------------------------------------
+                           1920 ;Allocation info for local variables in function 'Timer2_Init'
+                           1921 ;------------------------------------------------------------
+                           1922 ;SFRPAGE_SAVE              Allocated to registers r2 
+                           1923 ;------------------------------------------------------------
+                    02A7   1924 	G$Timer2_Init$0$0 ==.
+                    02A7   1925 	C$lab2_3.c$176$1$1 ==.
+                           1926 ;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 2\lab2-3.c:176: void Timer2_Init()		//timer 2 init
+                           1927 ;	-----------------------------------------
+                           1928 ;	 function Timer2_Init
+                           1929 ;	-----------------------------------------
+   035C                    1930 _Timer2_Init:
+                    02A7   1931 	C$lab2_3.c$178$1$1 ==.
+                           1932 ;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 2\lab2-3.c:178: char SFRPAGE_SAVE = SFRPAGE;	// Save Current SFR page.
+   035C AA 84              1933 	mov	r2,_SFRPAGE
+                    02A9   1934 	C$lab2_3.c$179$1$1 ==.
+                           1935 ;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 2\lab2-3.c:179: SFRPAGE = CONFIG_PAGE;
+   035E 75 84 0F           1936 	mov	_SFRPAGE,#0x0F
+                    02AC   1937 	C$lab2_3.c$181$1$1 ==.
+                           1938 ;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 2\lab2-3.c:181: TMR2CN &= ~0x04;		//ignore outside input
+   0361 53 C8 FB           1939 	anl	_TMR2CN,#0xFB
+                    02AF   1940 	C$lab2_3.c$183$1$1 ==.
+                           1941 ;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 2\lab2-3.c:183: TMR2CF |= 0x18;		//sysclk/2
+   0364 43 C9 18           1942 	orl	_TMR2CF,#0x18
+                    02B2   1943 	C$lab2_3.c$184$1$1 ==.
+                           1944 ;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 2\lab2-3.c:184: TMR2CF &= 0xFE;		//count up
+   0367 53 C9 FE           1945 	anl	_TMR2CF,#0xFE
+                    02B5   1946 	C$lab2_3.c$185$1$1 ==.
+                           1947 ;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 2\lab2-3.c:185: TR2 = 0;			//disable timer
+   036A C2 CA              1948 	clr	_TR2
+                    02B7   1949 	C$lab2_3.c$186$1$1 ==.
+                           1950 ;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 2\lab2-3.c:186: TL2 = 0;			//clear low byte of timer count
+   036C 75 CC 00           1951 	mov	_TL2,#0x00
+                    02BA   1952 	C$lab2_3.c$187$1$1 ==.
+                           1953 ;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 2\lab2-3.c:187: TH2 = 0;			//clear high byte of timer count
+   036F 75 CD 00           1954 	mov	_TH2,#0x00
+                    02BD   1955 	C$lab2_3.c$189$1$1 ==.
+                           1956 ;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 2\lab2-3.c:189: SFRPAGE = SFRPAGE_SAVE;
+   0372 8A 84              1957 	mov	_SFRPAGE,r2
+                    02BF   1958 	C$lab2_3.c$190$1$1 ==.
+                    02BF   1959 	XG$Timer2_Init$0$0 ==.
+   0374 22                 1960 	ret
+                           1961 ;------------------------------------------------------------
+                           1962 ;Allocation info for local variables in function 'Timer2_ISR'
+                           1963 ;------------------------------------------------------------
+                           1964 ;------------------------------------------------------------
+                    02C0   1965 	G$Timer2_ISR$0$0 ==.
+                    02C0   1966 	C$lab2_3.c$192$1$1 ==.
+                           1967 ;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 2\lab2-3.c:192: void Timer2_ISR() interrupt 5		//timer2 interrupt
+                           1968 ;	-----------------------------------------
+                           1969 ;	 function Timer2_ISR
+                           1970 ;	-----------------------------------------
+   0375                    1971 _Timer2_ISR:
+   0375 C0 E0              1972 	push	acc
+   0377 C0 D0              1973 	push	psw
+   0379 75 D0 00           1974 	mov	psw,#0x00
+                    02C7   1975 	C$lab2_3.c$194$1$1 ==.
+                           1976 ;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 2\lab2-3.c:194: TF2=0;					//resets interrupt flag
+   037C C2 CF              1977 	clr	_TF2
+                    02C9   1978 	C$lab2_3.c$195$1$1 ==.
+                           1979 ;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 2\lab2-3.c:195: TL2 =0xD0;				//reset low byte
+   037E 75 CC D0           1980 	mov	_TL2,#0xD0
+                    02CC   1981 	C$lab2_3.c$196$1$1 ==.
+                           1982 ;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 2\lab2-3.c:196: TH2 =0x9E;				//reset high byte
+   0381 75 CD 9E           1983 	mov	_TH2,#0x9E
+                    02CF   1984 	C$lab2_3.c$197$1$1 ==.
+                           1985 ;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 2\lab2-3.c:197: overflows++;
+   0384 05 08              1986 	inc	_overflows
+   0386 E4                 1987 	clr	a
+   0387 B5 08 02           1988 	cjne	a,_overflows,00103$
+   038A 05 09              1989 	inc	(_overflows + 1)
+   038C                    1990 00103$:
+   038C D0 D0              1991 	pop	psw
+   038E D0 E0              1992 	pop	acc
+                    02DB   1993 	C$lab2_3.c$198$1$1 ==.
+                    02DB   1994 	XG$Timer2_ISR$0$0 ==.
+   0390 32                 1995 	reti
+                           1996 ;	eliminated unneeded push/pop dpl
+                           1997 ;	eliminated unneeded push/pop dph
+                           1998 ;	eliminated unneeded push/pop b
+                           1999 ;------------------------------------------------------------
+                           2000 ;Allocation info for local variables in function 'SYSCLK_INIT'
+                           2001 ;------------------------------------------------------------
+                           2002 ;i                         Allocated to registers r3 r4 
+                           2003 ;SFRPAGE_SAVE              Allocated to registers r2 
+                           2004 ;------------------------------------------------------------
+                    02DC   2005 	G$SYSCLK_INIT$0$0 ==.
+                    02DC   2006 	C$lab2_3.c$207$1$1 ==.
+                           2007 ;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 2\lab2-3.c:207: void SYSCLK_INIT(void)
+                           2008 ;	-----------------------------------------
+                           2009 ;	 function SYSCLK_INIT
+                           2010 ;	-----------------------------------------
+   0391                    2011 _SYSCLK_INIT:
+                    02DC   2012 	C$lab2_3.c$211$1$1 ==.
+                           2013 ;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 2\lab2-3.c:211: char SFRPAGE_SAVE = SFRPAGE;	// Save Current SFR page.
+   0391 AA 84              2014 	mov	r2,_SFRPAGE
+                    02DE   2015 	C$lab2_3.c$212$1$1 ==.
+                           2016 ;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 2\lab2-3.c:212: SFRPAGE = CONFIG_PAGE;
+   0393 75 84 0F           2017 	mov	_SFRPAGE,#0x0F
+                    02E1   2018 	C$lab2_3.c$214$1$1 ==.
+                           2019 ;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 2\lab2-3.c:214: OSCXCN	= 0x67;			// Start external oscillator
+   0396 75 8C 67           2020 	mov	_OSCXCN,#0x67
+                    02E4   2021 	C$lab2_3.c$215$1$1 ==.
+                           2022 ;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 2\lab2-3.c:215: for(i=0; i < 3000; i++);// Wait for the oscillator to start up.
+   0399 7B B8              2023 	mov	r3,#0xB8
+   039B 7C 0B              2024 	mov	r4,#0x0B
+   039D                    2025 00106$:
+   039D 1B                 2026 	dec	r3
+   039E BB FF 01           2027 	cjne	r3,#0xff,00114$
+   03A1 1C                 2028 	dec	r4
+   03A2                    2029 00114$:
+   03A2 EB                 2030 	mov	a,r3
+   03A3 4C                 2031 	orl	a,r4
+   03A4 70 F7              2032 	jnz	00106$
+                    02F1   2033 	C$lab2_3.c$216$1$1 ==.
+                           2034 ;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 2\lab2-3.c:216: while(!(OSCXCN & 0x80));// Check to see if the Crystal Oscillator Valid Flag is set.
+   03A6                    2035 00101$:
+   03A6 E5 8C              2036 	mov	a,_OSCXCN
+   03A8 30 E7 FB           2037 	jnb	acc.7,00101$
+                    02F6   2038 	C$lab2_3.c$217$1$1 ==.
+                           2039 ;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 2\lab2-3.c:217: CLKSEL	= 0x01;			// SYSCLK derived from the External Oscillator circuit.
+   03AB 75 97 01           2040 	mov	_CLKSEL,#0x01
+                    02F9   2041 	C$lab2_3.c$218$1$1 ==.
+                           2042 ;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 2\lab2-3.c:218: OSCICN	= 0x00;			// Disable the internal oscillator.
+   03AE 75 8A 00           2043 	mov	_OSCICN,#0x00
+                    02FC   2044 	C$lab2_3.c$220$1$1 ==.
+                           2045 ;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 2\lab2-3.c:220: SFRPAGE = SFRPAGE_SAVE;	// Restore SFR page.
+   03B1 8A 84              2046 	mov	_SFRPAGE,r2
+                    02FE   2047 	C$lab2_3.c$221$1$1 ==.
+                    02FE   2048 	XG$SYSCLK_INIT$0$0 ==.
+   03B3 22                 2049 	ret
+                           2050 ;------------------------------------------------------------
+                           2051 ;Allocation info for local variables in function 'SYSCLK_INIT2'
+                           2052 ;------------------------------------------------------------
+                           2053 ;i                         Allocated to registers r3 r4 
+                           2054 ;SFRPAGE_SAVE              Allocated to registers r2 
+                           2055 ;------------------------------------------------------------
+                    02FF   2056 	G$SYSCLK_INIT2$0$0 ==.
+                    02FF   2057 	C$lab2_3.c$231$1$1 ==.
+                           2058 ;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 2\lab2-3.c:231: void SYSCLK_INIT2(void)
+                           2059 ;	-----------------------------------------
+                           2060 ;	 function SYSCLK_INIT2
+                           2061 ;	-----------------------------------------
+   03B4                    2062 _SYSCLK_INIT2:
+                    02FF   2063 	C$lab2_3.c$235$1$1 ==.
+                           2064 ;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 2\lab2-3.c:235: char SFRPAGE_SAVE = SFRPAGE;	// Save Current SFR page.
+   03B4 AA 84              2065 	mov	r2,_SFRPAGE
+                    0301   2066 	C$lab2_3.c$236$1$1 ==.
+                           2067 ;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 2\lab2-3.c:236: SFRPAGE = CONFIG_PAGE;
+   03B6 75 84 0F           2068 	mov	_SFRPAGE,#0x0F
+                    0304   2069 	C$lab2_3.c$238$1$1 ==.
+                           2070 ;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 2\lab2-3.c:238: OSCXCN	= 0x67;			// Start external oscillator
+   03B9 75 8C 67           2071 	mov	_OSCXCN,#0x67
+                    0307   2072 	C$lab2_3.c$239$1$1 ==.
+                           2073 ;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 2\lab2-3.c:239: for(i=0; i < 3000; i++);// Wait for the oscillator to start up.
+   03BC 7B B8              2074 	mov	r3,#0xB8
+   03BE 7C 0B              2075 	mov	r4,#0x0B
+   03C0 8B 05              2076 	mov	ar5,r3
+   03C2 8C 06              2077 	mov	ar6,r4
+   03C4                    2078 00109$:
+   03C4 1D                 2079 	dec	r5
+   03C5 BD FF 01           2080 	cjne	r5,#0xff,00125$
+   03C8 1E                 2081 	dec	r6
+   03C9                    2082 00125$:
+   03C9 ED                 2083 	mov	a,r5
+   03CA 4E                 2084 	orl	a,r6
+   03CB 70 F7              2085 	jnz	00109$
+                    0318   2086 	C$lab2_3.c$240$1$1 ==.
+                           2087 ;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 2\lab2-3.c:240: while(!(OSCXCN & 0x80));// Check to see if the Crystal Oscillator Valid Flag is set.
+   03CD                    2088 00101$:
+   03CD E5 8C              2089 	mov	a,_OSCXCN
+   03CF 30 E7 FB           2090 	jnb	acc.7,00101$
+                    031D   2091 	C$lab2_3.c$241$1$1 ==.
+                           2092 ;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 2\lab2-3.c:241: CLKSEL	= 0x01;			// SYSCLK derived from the External Oscillator circuit.
+   03D2 75 97 01           2093 	mov	_CLKSEL,#0x01
+                    0320   2094 	C$lab2_3.c$242$1$1 ==.
+                           2095 ;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 2\lab2-3.c:242: OSCICN	= 0x00;			// Disable the internal oscillator.
+   03D5 75 8A 00           2096 	mov	_OSCICN,#0x00
+                    0323   2097 	C$lab2_3.c$244$1$1 ==.
+                           2098 ;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 2\lab2-3.c:244: SFRPAGE = CONFIG_PAGE;
+   03D8 75 84 0F           2099 	mov	_SFRPAGE,#0x0F
+                    0326   2100 	C$lab2_3.c$245$1$1 ==.
+                           2101 ;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 2\lab2-3.c:245: PLL0CN	= 0x04;
+   03DB 75 89 04           2102 	mov	_PLL0CN,#0x04
+                    0329   2103 	C$lab2_3.c$246$1$1 ==.
+                           2104 ;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 2\lab2-3.c:246: SFRPAGE = LEGACY_PAGE;
+   03DE 75 84 00           2105 	mov	_SFRPAGE,#0x00
+                    032C   2106 	C$lab2_3.c$247$1$1 ==.
+                           2107 ;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 2\lab2-3.c:247: FLSCL	= 0x10;
+   03E1 75 B7 10           2108 	mov	_FLSCL,#0x10
+                    032F   2109 	C$lab2_3.c$248$1$1 ==.
+                           2110 ;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 2\lab2-3.c:248: SFRPAGE = CONFIG_PAGE;
+   03E4 75 84 0F           2111 	mov	_SFRPAGE,#0x0F
+                    0332   2112 	C$lab2_3.c$249$1$1 ==.
+                           2113 ;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 2\lab2-3.c:249: PLL0CN	|= 0x01;
+   03E7 43 89 01           2114 	orl	_PLL0CN,#0x01
+                    0335   2115 	C$lab2_3.c$250$1$1 ==.
+                           2116 ;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 2\lab2-3.c:250: PLL0DIV = 0x04;
+   03EA 75 8D 04           2117 	mov	_PLL0DIV,#0x04
+                    0338   2118 	C$lab2_3.c$251$1$1 ==.
+                           2119 ;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 2\lab2-3.c:251: PLL0FLT = 0x01;
+   03ED 75 8F 01           2120 	mov	_PLL0FLT,#0x01
+                    033B   2121 	C$lab2_3.c$252$1$1 ==.
+                           2122 ;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 2\lab2-3.c:252: PLL0MUL = 0x09;
+   03F0 75 8E 09           2123 	mov	_PLL0MUL,#0x09
+                    033E   2124 	C$lab2_3.c$253$1$1 ==.
+                           2125 ;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 2\lab2-3.c:253: for(i=0; i < 256; i++);
+   03F3 7B 00              2126 	mov	r3,#0x00
+   03F5 7C 01              2127 	mov	r4,#0x01
+   03F7                    2128 00112$:
+   03F7 1B                 2129 	dec	r3
+   03F8 BB FF 01           2130 	cjne	r3,#0xff,00128$
+   03FB 1C                 2131 	dec	r4
+   03FC                    2132 00128$:
+   03FC EB                 2133 	mov	a,r3
+   03FD 4C                 2134 	orl	a,r4
+   03FE 70 F7              2135 	jnz	00112$
+                    034B   2136 	C$lab2_3.c$254$1$1 ==.
+                           2137 ;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 2\lab2-3.c:254: PLL0CN	|= 0x02;
+   0400 43 89 02           2138 	orl	_PLL0CN,#0x02
+                    034E   2139 	C$lab2_3.c$255$1$1 ==.
+                           2140 ;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 2\lab2-3.c:255: while(!(PLL0CN & 0x10));
+   0403                    2141 00104$:
+   0403 E5 89              2142 	mov	a,_PLL0CN
+   0405 30 E4 FB           2143 	jnb	acc.4,00104$
+                    0353   2144 	C$lab2_3.c$256$1$1 ==.
+                           2145 ;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 2\lab2-3.c:256: CLKSEL	= 0x02;			// SYSCLK derived from the PLL.
+   0408 75 97 02           2146 	mov	_CLKSEL,#0x02
+                    0356   2147 	C$lab2_3.c$258$1$1 ==.
+                           2148 ;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 2\lab2-3.c:258: SFRPAGE = SFRPAGE_SAVE;	// Restore SFR page.
+   040B 8A 84              2149 	mov	_SFRPAGE,r2
+                    0358   2150 	C$lab2_3.c$259$1$1 ==.
+                    0358   2151 	XG$SYSCLK_INIT2$0$0 ==.
+   040D 22                 2152 	ret
+                           2153 ;------------------------------------------------------------
+                           2154 ;Allocation info for local variables in function 'PORT_INIT'
+                           2155 ;------------------------------------------------------------
+                           2156 ;SFRPAGE_SAVE              Allocated to registers r2 
+                           2157 ;------------------------------------------------------------
+                    0359   2158 	G$PORT_INIT$0$0 ==.
+                    0359   2159 	C$lab2_3.c$267$1$1 ==.
+                           2160 ;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 2\lab2-3.c:267: void PORT_INIT(void)
+                           2161 ;	-----------------------------------------
+                           2162 ;	 function PORT_INIT
+                           2163 ;	-----------------------------------------
+   040E                    2164 _PORT_INIT:
+                    0359   2165 	C$lab2_3.c$269$1$1 ==.
+                           2166 ;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 2\lab2-3.c:269: char SFRPAGE_SAVE = SFRPAGE;    // Save Current SFR page.
+   040E AA 84              2167 	mov	r2,_SFRPAGE
+                    035B   2168 	C$lab2_3.c$270$1$1 ==.
+                           2169 ;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 2\lab2-3.c:270: SFRPAGE = CONFIG_PAGE;
+   0410 75 84 0F           2170 	mov	_SFRPAGE,#0x0F
+                    035E   2171 	C$lab2_3.c$272$1$1 ==.
+                           2172 ;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 2\lab2-3.c:272: EA		= 1;			// Enable interrupts as selected.
+   0413 D2 AF              2173 	setb	_EA
+                    0360   2174 	C$lab2_3.c$273$1$1 ==.
+                           2175 ;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 2\lab2-3.c:273: ET0 	= 1;			// enable timer 0 overflow interrupts
+   0415 D2 A9              2176 	setb	_ET0
+                    0362   2177 	C$lab2_3.c$274$1$1 ==.
+                           2178 ;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 2\lab2-3.c:274: ET2 = 1;				// Enable Timer 2 overflow interrupt
+   0417 D2 AD              2179 	setb	_ET2
+                    0364   2180 	C$lab2_3.c$276$1$1 ==.
+                           2181 ;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 2\lab2-3.c:276: XBR0	= 0x04;			// Enable UART0.
+   0419 75 E1 04           2182 	mov	_XBR0,#0x04
+                    0367   2183 	C$lab2_3.c$277$1$1 ==.
+                           2184 ;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 2\lab2-3.c:277: XBR1	= 0x04;			// /INT0 routed to port pin.
+   041C 75 E2 04           2185 	mov	_XBR1,#0x04
+                    036A   2186 	C$lab2_3.c$278$1$1 ==.
+                           2187 ;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 2\lab2-3.c:278: XBR2	= 0x40;			// Enable Crossbar and weak pull-ups.
+   041F 75 E3 40           2188 	mov	_XBR2,#0x40
+                    036D   2189 	C$lab2_3.c$280$1$1 ==.
+                           2190 ;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 2\lab2-3.c:280: P0MDOUT = 0x01;			// P0.0 (TX0) is configured as Push-Pull for output.
+   0422 75 A4 01           2191 	mov	_P0MDOUT,#0x01
+                    0370   2192 	C$lab2_3.c$283$1$1 ==.
+                           2193 ;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 2\lab2-3.c:283: P0		= 0x06;			// Additionally, set P0.0=0, P0.1=1, and P0.2=1.
+   0425 75 80 06           2194 	mov	_P0,#0x06
+                    0373   2195 	C$lab2_3.c$285$1$1 ==.
+                           2196 ;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 2\lab2-3.c:285: SFRPAGE = SFRPAGE_SAVE;	// Restore SFR page.
+   0428 8A 84              2197 	mov	_SFRPAGE,r2
+                    0375   2198 	C$lab2_3.c$286$1$1 ==.
+                    0375   2199 	XG$PORT_INIT$0$0 ==.
+   042A 22                 2200 	ret
+                           2201 ;------------------------------------------------------------
+                           2202 ;Allocation info for local variables in function 'UART0_INIT'
+                           2203 ;------------------------------------------------------------
+                           2204 ;SFRPAGE_SAVE              Allocated to registers r2 
+                           2205 ;------------------------------------------------------------
+                    0376   2206 	G$UART0_INIT$0$0 ==.
+                    0376   2207 	C$lab2_3.c$294$1$1 ==.
+                           2208 ;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 2\lab2-3.c:294: void UART0_INIT(void)
+                           2209 ;	-----------------------------------------
+                           2210 ;	 function UART0_INIT
+                           2211 ;	-----------------------------------------
+   042B                    2212 _UART0_INIT:
+                    0376   2213 	C$lab2_3.c$296$1$1 ==.
+                           2214 ;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 2\lab2-3.c:296: char SFRPAGE_SAVE = SFRPAGE;    // Save Current SFR page.
+   042B AA 84              2215 	mov	r2,_SFRPAGE
+                    0378   2216 	C$lab2_3.c$297$1$1 ==.
+                           2217 ;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 2\lab2-3.c:297: SFRPAGE = TIMER01_PAGE;
+   042D 75 84 00           2218 	mov	_SFRPAGE,#0x00
+                    037B   2219 	C$lab2_3.c$299$1$1 ==.
+                           2220 ;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 2\lab2-3.c:299: TCON	 = 0x40;				// Enable Timer 1 running (TR1)
+   0430 75 88 40           2221 	mov	_TCON,#0x40
+                    037E   2222 	C$lab2_3.c$300$1$1 ==.
+                           2223 ;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 2\lab2-3.c:300: TMOD	&= 0x0F;
+   0433 53 89 0F           2224 	anl	_TMOD,#0x0F
+                    0381   2225 	C$lab2_3.c$301$1$1 ==.
+                           2226 ;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 2\lab2-3.c:301: TMOD	|= 0x20;				// Timer1, Mode 2: 8-bit counter/timer with auto-reload.
+   0436 43 89 20           2227 	orl	_TMOD,#0x20
+                    0384   2228 	C$lab2_3.c$302$1$1 ==.
+                           2229 ;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 2\lab2-3.c:302: CKCON	|= 0x10;				// Timer1 uses SYSCLK as time base.
+   0439 43 8E 10           2230 	orl	_CKCON,#0x10
+                    0387   2231 	C$lab2_3.c$304$1$1 ==.
+                           2232 ;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 2\lab2-3.c:304: TH1		 = 0xE8;				// 0xE8 = 232
+   043C 75 8D E8           2233 	mov	_TH1,#0xE8
+                    038A   2234 	C$lab2_3.c$305$1$1 ==.
+                           2235 ;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 2\lab2-3.c:305: TR1		 = 1;					// Start Timer1.
+   043F D2 8E              2236 	setb	_TR1
+                    038C   2237 	C$lab2_3.c$307$1$1 ==.
+                           2238 ;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 2\lab2-3.c:307: SFRPAGE = UART0_PAGE;
+   0441 75 84 00           2239 	mov	_SFRPAGE,#0x00
+                    038F   2240 	C$lab2_3.c$308$1$1 ==.
+                           2241 ;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 2\lab2-3.c:308: SCON0	= 0x50;					// Set Mode 1: 8-Bit UART
+   0444 75 98 50           2242 	mov	_SCON0,#0x50
+                    0392   2243 	C$lab2_3.c$309$1$1 ==.
+                           2244 ;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 2\lab2-3.c:309: SSTA0	 = 0x00;				// SMOD0 = 0, in this mode
+   0447 75 91 00           2245 	mov	_SSTA0,#0x00
+                    0395   2246 	C$lab2_3.c$311$1$1 ==.
+                           2247 ;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 2\lab2-3.c:311: TI0		= 1;					// Indicate TX0 ready.
+   044A D2 99              2248 	setb	_TI0
+                    0397   2249 	C$lab2_3.c$313$1$1 ==.
+                           2250 ;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 2\lab2-3.c:313: SFRPAGE = SFRPAGE_SAVE;			// Restore SFR page.
+   044C 8A 84              2251 	mov	_SFRPAGE,r2
+                    0399   2252 	C$lab2_3.c$314$1$1 ==.
+                    0399   2253 	XG$UART0_INIT$0$0 ==.
+   044E 22                 2254 	ret
+                           2255 	.area CSEG    (CODE)
+                           2256 	.area CONST   (CODE)
+                    0000   2257 Flab2_3$_str_0$0$0 == .
+   0BF6                    2258 __str_0:
+   0BF6 1B                 2259 	.db 0x1B
+   0BF7 5B 32 4A           2260 	.ascii "[2J"
+   0BFA 00                 2261 	.db 0x00
+                    0005   2262 Flab2_3$_str_1$0$0 == .
+   0BFB                    2263 __str_1:
+   0BFB 59 6F 75 72 20 41  2264 	.ascii "Your Average Response Time is: %d"
+        76 65 72 61 67 65
+        20 52 65 73 70 6F
+        6E 73 65 20 54 69
+        6D 65 20 69 73 3A
+        20 25 64
+   0C1C 0A                 2265 	.db 0x0A
+   0C1D 0D                 2266 	.db 0x0D
+   0C1E 00                 2267 	.db 0x00
+                    0029   2268 Flab2_3$_str_2$0$0 == .
+   0C1F                    2269 __str_2:
+   0C1F 52 65 61 64 79 3F  2270 	.ascii "Ready?"
+   0C25 0D                 2271 	.db 0x0D
+   0C26 0A                 2272 	.db 0x0A
+   0C27 00                 2273 	.db 0x00
+                    0032   2274 Flab2_3$_str_3$0$0 == .
+   0C28                    2275 __str_3:
+   0C28 1B                 2276 	.db 0x1B
+   0C29 5B 31 3B 34 36 6D  2277 	.ascii "[1;46m"
+   0C2F 00                 2278 	.db 0x00
+                    003A   2279 Flab2_3$_str_4$0$0 == .
+   0C30                    2280 __str_4:
+   0C30 1B                 2281 	.db 0x1B
+   0C31 5B 30 6D           2282 	.ascii "[0m"
+   0C34 00                 2283 	.db 0x00
+                    003F   2284 Flab2_3$_str_5$0$0 == .
+   0C35                    2285 __str_5:
+   0C35 1B                 2286 	.db 0x1B
+   0C36 5B 34 34 6D        2287 	.ascii "[44m"
+   0C3A 00                 2288 	.db 0x00
+                    0045   2289 Flab2_3$_str_6$0$0 == .
+   0C3B                    2290 __str_6:
+   0C3B 47 4F 21 21        2291 	.ascii "GO!!"
+   0C3F 0A                 2292 	.db 0x0A
+   0C40 0D                 2293 	.db 0x0D
+   0C41 00                 2294 	.db 0x00
+                    004C   2295 Flab2_3$_str_7$0$0 == .
+   0C42                    2296 __str_7:
+   0C42 54 69 6D 65 20 69  2297 	.ascii "Time in overflows: %d"
+        6E 20 6F 76 65 72
+        66 6C 6F 77 73 3A
+        20 25 64
+   0C57 0A                 2298 	.db 0x0A
+   0C58 0D                 2299 	.db 0x0D
+   0C59 00                 2300 	.db 0x00
+                    0064   2301 Flab2_3$_str_8$0$0 == .
+   0C5A                    2302 __str_8:
+   0C5A 1B                 2303 	.db 0x1B
+   0C5B 5B 30 3B 30 48 59  2304 	.ascii "[0;0HYour Average Response Time is : %d"
+        6F 75 72 20 41 76
+        65 72 61 67 65 20
+        52 65 73 70 6F 6E
+        73 65 20 54 69 6D
+        65 20 69 73 20 3A
+        20 25 64
+   0C82 0A                 2305 	.db 0x0A
+   0C83 0D                 2306 	.db 0x0D
+   0C84 00                 2307 	.db 0x00
+                    008F   2308 Flab2_3$_str_9$0$0 == .
+   0C85                    2309 __str_9:
+   0C85 1B                 2310 	.db 0x1B
+   0C86 5B 34 3B 30 48 50  2311 	.ascii "[4;0HPush the button to restart!!"
+        75 73 68 20 74 68
+        65 20 62 75 74 74
+        6F 6E 20 74 6F 20
+        72 65 73 74 61 72
+        74 21 21
+   0CA7 0D                 2312 	.db 0x0D
+   0CA8 0A                 2313 	.db 0x0A
+   0CA9 00                 2314 	.db 0x00
+                           2315 	.area XINIT   (CODE)
+                           2316 	.area CABS    (ABS,CODE)

@@ -32,6 +32,9 @@
 #define BAUDRATE	28800			// UART baud rate in bps
 
 bit SW2press = 0;
+int bounce = 5;
+int overflows = 0;
+int n = 0;
 
 //-------------------------------------------------------------------------------------------
 // Function PROTOTYPES
@@ -43,6 +46,9 @@ void SYSCLK_INIT2(void);
 void UART0_INIT(void);
 
 void SW2_ISR (void) interrupt 0;
+
+void Timer0_Init(void);
+void Timer0_ISR(void) interrupt 1;
 
 //-------------------------------------------------------------------------------------------
 // MAIN Routine
@@ -71,10 +77,40 @@ void main (void)
 	SFRPAGE = CONFIG_PAGE;
 	EX0		= 1;					// Enable Ext Int 0 only after everything is settled.
 
+	SFRPAGE = UART0_PAGE;			// Direct output to UART0
+	
+
+	Timer0_Init();
+	TR0 = 1;
+
+	printf("I'm here. \n\r");
+
 	while (1)
 	{
 	}
 }
+
+void Timer0_Init()		//timer0 init.
+{
+	CKCON &= ~0x08; 	//sysclk/12
+	TMOD &= 0xF0;		//clear bits 0-3 of timer mode register
+	TMOD |= 0x01;		//set timer 0 to mode 1 (16-bit counter/timer)
+	TR0 = 0;			//disable timer
+	TL0 = 0;			//clear low byte of timer count
+	TH0 = 0;			//clear high byte of timer count
+}
+
+void Timer0_ISR() interrupt 1		//timer0 interrupt
+{ 
+	TH0 = 0x5E;
+	TL0 = 0x05;
+
+	overflows++;
+
+	if (bounce > 0)
+		bounce--;
+}
+
 //-------------------------------------------------------------------------------------------
 // Interrupt Service Routines
 //-------------------------------------------------------------------------------------------
@@ -87,7 +123,12 @@ void SW2_ISR (void) interrupt 0		// Interrupt 0 corresponds to vector address 00
 // the keyword "interrupt" defines this as an ISR and the number is determined by the 
 // Priority Order number in Table 11.4 in the 8051 reference manual.
 {
-	printf("/INT0 has been grounded!\n\n\r");
+	if (bounce == 0)
+	{
+		bounce = 10;
+		printf("/INT0 has been grounded! %d\n\n\r", n);
+		n++;
+	}
 }
 
 //-------------------------------------------------------------------------------------------
@@ -162,14 +203,15 @@ void PORT_INIT(void)
 	SFRPAGE = CONFIG_PAGE;
 
 	EA		= 1;			// Enable interrupts as selected.
+	ET0 	= 1;			// enable timer 0 overflow interrupts
 
 	XBR0	= 0x04;			// Enable UART0.
 	XBR1	= 0x04;			// /INT0 routed to port pin.
 	XBR2	= 0x40;			// Enable Crossbar and weak pull-ups.
 
 	P0MDOUT = 0x01;			// P0.0 (TX0) is configured as Push-Pull for output.
-					// P0.1 (RX0) is configure as Open-Drain input.
-					// P0.2 (SW2 through jumper wire) is configured as Open_Drain for input.
+							// P0.1 (RX0) is configure as Open-Drain input.
+							// P0.2 (SW2 through jumper wire) is configured as Open_Drain for input.
 	P0		= 0x06;			// Additionally, set P0.0=0, P0.1=1, and P0.2=1.
 
 	SFRPAGE = SFRPAGE_SAVE;	// Restore SFR page.

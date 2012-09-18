@@ -31,9 +31,10 @@
 #define SYSCLK		22118400		// Output of crystal oscillator
 #define BAUDRATE	28800			// UART baud rate in bps
 
-bit printTime = 0; 		//flag to print time.
+bit SW2press = 0;
+int bounce = 5;
 int overflows = 0;
-int time = 0;
+int n = 0;
 
 //-------------------------------------------------------------------------------------------
 // Function PROTOTYPES
@@ -44,8 +45,10 @@ void SYSCLK_INIT(void);
 void SYSCLK_INIT2(void);
 void UART0_INIT(void);
 
+void SW2_ISR (void) interrupt 0;
+
 void Timer0_Init(void);
-void Timer0_ISR (void) interrupt 1;
+void Timer0_ISR(void) interrupt 1;
 
 //-------------------------------------------------------------------------------------------
 // MAIN Routine
@@ -65,25 +68,25 @@ void main (void)
 	SFRPAGE = LEGACY_PAGE;
 	IT0		= 1;					// /INT0 is edge triggered, falling-edge.
 
+	SFRPAGE = UART0_PAGE;			// Direct output to UART0
+	
+	printf("\033[2J");				// Erase screen and move cursor to the home posiiton.
+	printf("MPS Interrupt Switch Test\n\n\r");
+	printf("Ground /INT0 on P0.2 to generate an interrupt.\n\n\r");
+
 	SFRPAGE = CONFIG_PAGE;
 	EX0		= 1;					// Enable Ext Int 0 only after everything is settled.
 
 	SFRPAGE = UART0_PAGE;			// Direct output to UART0
 	
-	printf("\033[2J");				// Erase screen and move cursor to the home posiiton.
 
 	Timer0_Init();
-	TR0 = 1;		//endable timer0
+	TR0 = 1;
 
-	printf("I am running :D \n\r");
+	printf("I'm here. \n\r");
 
 	while (1)
 	{
-		if (printTime)	//if 1/10th of a second, print.
-		{
-			printf("Time = %d\n\r", time);
-			printTime = 0;
-		}
 	}
 }
 
@@ -99,17 +102,33 @@ void Timer0_Init()		//timer0 init.
 
 void Timer0_ISR() interrupt 1		//timer0 interrupt
 { 
-	if (overflows == 6 )
-	{
-		TH0 = 0x5E;
-		TL0 = 0x05;
-
-		time++;	//increment time
-		printTime = 1;		//set flag
-		overflows = 0;
-	}
+	TH0 = 0x5E;
+	TL0 = 0x05;
 
 	overflows++;
+
+	if (bounce >0)
+		bounce--;
+}
+
+//-------------------------------------------------------------------------------------------
+// Interrupt Service Routines
+//-------------------------------------------------------------------------------------------
+// NOTE: this is an example of what NOT to do in an interrupt handler. No I/O should be done
+// in ISRs since I/O is very slow and the handler must execute very quickly.
+//
+// This routine stops Timer0 when the user presses SW2.
+//
+void SW2_ISR (void) interrupt 0		// Interrupt 0 corresponds to vector address 0003h.
+// the keyword "interrupt" defines this as an ISR and the number is determined by the 
+// Priority Order number in Table 11.4 in the 8051 reference manual.
+{
+	if (bounce == 0)
+	{
+		bounce = 10;
+		printf("/INT0 has been grounded! %d\n\n\r", n);
+		n++;
+	}
 }
 
 //-------------------------------------------------------------------------------------------
@@ -184,11 +203,16 @@ void PORT_INIT(void)
 	SFRPAGE = CONFIG_PAGE;
 
 	EA		= 1;			// Enable interrupts as selected.
-	ET0 	= 1;			// Enable Timer 0 overflow interrupt
+	ET0 	= 1;			// enable timer 0 overflow interrupts
 
 	XBR0	= 0x04;			// Enable UART0.
 	XBR1	= 0x04;			// /INT0 routed to port pin.
 	XBR2	= 0x40;			// Enable Crossbar and weak pull-ups.
+
+	P0MDOUT = 0x01;			// P0.0 (TX0) is configured as Push-Pull for output.
+							// P0.1 (RX0) is configure as Open-Drain input.
+							// P0.2 (SW2 through jumper wire) is configured as Open_Drain for input.
+	P0		= 0x06;			// Additionally, set P0.0=0, P0.1=1, and P0.2=1.
 
 	SFRPAGE = SFRPAGE_SAVE;	// Restore SFR page.
 }

@@ -104,7 +104,7 @@ void Timer0_ISR() interrupt 1		//timer0 interrupt
 		TH0 = 0x5E;
 		TL0 = 0x05;
 
-		time++;	//increment time
+		time++;				//increment time
 		printTime = 1;		//set flag
 		overflows = 0;
 	}

@@ -79,7 +79,7 @@ void main (void)
 
 	while (1)
 	{
-		if (printTime)	//if 1/10th of a second, print.
+		if (printTime)	//if 1 of a second, print.
 		{
 			printf("Time = %d\n\r", time);
 			printTime = 0;
@@ -98,12 +98,15 @@ void Timer0_Init()		//timer0 init.
 }
 
 void Timer0_ISR() interrupt 1		//timer0 interrupt
-{ 
-	if (overflows == 10 )
-	{
-		TH0 = 0x5E;
-		TL0 = 0x05;
+{
+	//TH0 = 0x5E;
+ 	//TL0 = 0x05;
+	
+	TH0 = 0xB8;
+	TL0 = 0x00;
 
+	if (overflows == 100 )
+	{
 		time++;				//increment time
 		printTime = 1;		//set flag
 		overflows = 0;

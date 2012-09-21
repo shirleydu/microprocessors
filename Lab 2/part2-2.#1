@@ -106,9 +106,12 @@ void Timer2_Init()		//timer 2 init
 void Timer2_ISR() interrupt 5		//timer2 interrupt
 { 
 	TF2=0;					//resets interrupt flag
-	TL2 =0xD0;				//reset low byte
-	TH2 =0x9E;				//reset high byte
-	if (overflows == 100 )	//set print flag every 10 .1secs
+	//TL2 =0xD0;				//reset low byte
+	//TH2 =0x9E;				//reset high byte
+	TL2=0xCC;
+	TH2=0xD4;
+
+	if (overflows == 1000 )	//set print flag every 10 .1secs
 	{	
 		time++;				//increment time
 		printTime = 1;		//set print flag
@@ -227,6 +230,4 @@ void UART0_INIT(void)
 	
 	SFRPAGE = SFRPAGE_SAVE;			// Restore SFR page.
 }
-
-
 

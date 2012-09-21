@@ -108,6 +108,9 @@ void Timer2_ISR() interrupt 5		//timer2 interrupt
 	TF2=0;					//resets interrupt flag
 	TL2 =0xD0;				//reset low byte
 	TH2 =0x9E;				//reset high byte
+	//TL2=0xCC;
+	//TH2=0xD4;
+
 	if (overflows == 100 )	//set print flag every 10 .1secs
 	{	
 		time++;				//increment time

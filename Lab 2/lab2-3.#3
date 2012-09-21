@@ -32,13 +32,13 @@
 #define SYSCLK		22118400		// Output of crystal oscillator
 #define BAUDRATE	28800			// UART baud rate in bps
 
-int overflows = 0;
-short bounce = 5;
-int buttonOverflows = 0;
-bit buttonPressed = 1;
+int overflows = 0;					//timer2 overflows
+short bounce = 5;					//bounce wait (in overflows)
+bit buttonPressed = 1;				//if SW2 is pressed
+bit gameStarted = 0;				//if game started
 
-int total = 0;
-int n = 0;
+int total = 0;						//sum of all time
+int n = 0;							//number of games played
 
 //-------------------------------------------------------------------------------------------
 // Function PROTOTYPES
@@ -49,7 +49,9 @@ void SYSCLK_INIT(void);
 void SYSCLK_INIT2(void);
 void UART0_INIT(void);
 
+void SW1_ISR (void) interrupt 2;
 void SW2_ISR (void) interrupt 0;
+//add another switch for reset display
 
 void Timer0_Init(void);
 void Timer0_ISR(void) interrupt 1;
@@ -76,15 +78,17 @@ void main (void)
 
 	SFRPAGE = LEGACY_PAGE;
 	IT0		= 1;					// /INT0 is edge triggered, falling-edge.
+	IT1		= 1;					// INT1 falling-edge-triggered
 
 	SFRPAGE = CONFIG_PAGE;
 	EX0		= 1;					// Enable Ext Int 0 only after everything is settled.
+	EX1 	= 1;					// Enable External Interrupt 2
 
 	SFRPAGE = UART0_PAGE;			// Direct output to UART0
 	
 	printf("\033[2J");				// Erase screen and move cursor to the home posiiton.
 
-	Timer0_Init();
+	Timer0_Init();					//enable timer0
 	TR0 = 1;
 
 	Timer2_Init();					
@@ -100,18 +104,32 @@ void main (void)
 void playGame()
 {	
 	int waitTime = 0;
-	n++;						//increments counter for average
+	n++;									//increments counter for average
 	printf("\033[2J");
 	printf("Your Average Response Time is: %d\n\r", total/n);
 	printf("Ready?\r\n");
+	gameStarted = 0;
 
-	srand(TL1);					// seed the random fuction
-	waitTime = rand()%100;		//wait 0-1000 millisecs
+	srand(TL1);								// seed the random fuction
+	waitTime = rand()%100;					//wait 0-1000 millisecs
 
 	overflows = 0;
 	while(overflows < waitTime);
+
+	if (gameStarted)
+	{
+		total += 200;
+
+		//wait for restart button press
+		printf("\033[4;0HPush the button for next round!! (push other button to reset)\r\n");
+		buttonPressed = 0;
+		while(!buttonPressed);
+
+		return;
+	}
+
 	//flash screen
-	printf("\033[2J");					//clear the screen
+	printf("\033[2J");						//clear the screen
 	printf("\033[1;46m");					//change background
 	printf("\033[2J");
 	//wait a lil bit
@@ -126,21 +144,30 @@ void playGame()
 	printf("\033[2J");
 
 	// move cursor, print cheating go message
-	printf("Your Average Response Time is: %d\n\r", total/n);
+	printf("Your Average Response Time is: %d    ms\n\r", total/n);
 	printf("GO!!\n\r");
+
+	gameStarted = 1;
 		
 	buttonPressed = 0;
 	overflows = 0;
 	while(!buttonPressed);
 	//print average
-	printf("Time in overflows: %d\n\r", overflows);
+	printf("Time: %d    ms\n\r", overflows);
 	total += overflows;
-	printf("\033[0;0HYour Average Response Time is : %d\n\r", total/n);
+	printf("\033[0;0HYour Average Response Time is : %d    ms\n\r", total/n);
 
-	//pause for a lil bit
-	printf("\033[3;0HPush the button to restart!!\r\n");
+	//wait for restart button press
+	printf("\033[4;0HPush the button for next round!! (push other button to reset)\r\n");
 	buttonPressed = 0;
 	while(!buttonPressed);
+}
+
+void SW1_ISR (void) interrupt 2
+{
+	printf("\033[0;0HYour Average Response Time is : 0    ms\n\r");
+	n = 0;
+	total = 0;
 }
 
 void SW2_ISR (void) interrupt 0		// Interrupt 0 corresponds to vector address 0003h.
@@ -152,6 +179,13 @@ void SW2_ISR (void) interrupt 0		// Interrupt 0 corresponds to vector address 00
 		buttonPressed = 1;
 		bounce = 10;
 	}
+
+	if (!gameStarted)
+	{
+		printf("Too early! Penalty time +200!\n\r");
+		gameStarted = 1;
+	}
+	
 }
 
 void Timer0_Init()		//timer0 init.
@@ -274,13 +308,14 @@ void PORT_INIT(void)
 	ET2 = 1;				// Enable Timer 2 overflow interrupt
 
 	XBR0	= 0x04;			// Enable UART0.
-	XBR1	= 0x04;			// /INT0 routed to port pin.
+	XBR1	= 0x14;			// /INT0, INT1 routed to port pin.
 	XBR2	= 0x40;			// Enable Crossbar and weak pull-ups.
 
 	P0MDOUT = 0x01;			// P0.0 (TX0) is configured as Push-Pull for output.
 							// P0.1 (RX0) is configure as Open-Drain input.
 							// P0.2 (SW2 through jumper wire) is configured as Open_Drain for input.
-	P0		= 0x06;			// Additionally, set P0.0=0, P0.1=1, and P0.2=1.
+							// P0.3 open-drain
+	P0		= 0x0E;			// Additionally, set P0.0=0, P0.1=1, P0.2=1, P0.3=1.
 
 	SFRPAGE = SFRPAGE_SAVE;	// Restore SFR page.
 }

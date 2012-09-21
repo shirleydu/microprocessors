@@ -89,7 +89,7 @@ void main (void)
 
 void Timer0_Init()		//timer0 init.
 {
-	CKCON &= ~0x08; 	//sysclk/12
+	CKCON &= ~0x09; 	//sysclk/4
 	TMOD &= 0xF0;		//clear bits 0-3 of timer mode register
 	TMOD |= 0x01;		//set timer 0 to mode 1 (16-bit counter/timer)
 	TR0 = 0;			//disable timer
@@ -99,13 +99,14 @@ void Timer0_Init()		//timer0 init.
 
 void Timer0_ISR() interrupt 1		//timer0 interrupt
 {
- 	TL0 = 0x05;
-	TH0 = 0x5E;
+	//TH0 = 0x5E;
+ 	//TL0 = 0x05;
 	
+	TH0 = 0xEA;
+	TL0 = 0x66;
+
 	if (overflows == 100 )
 	{
-		
-
 		time++;				//increment time
 		printTime = 1;		//set flag
 		overflows = 0;

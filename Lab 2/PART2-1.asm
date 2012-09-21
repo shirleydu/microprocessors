@@ -1,9 +1,9 @@
 ;--------------------------------------------------------
 ; File Created by SDCC : free open source ANSI-C Compiler
 ; Version 2.9.0 #5416 (Mar 22 2009) (MINGW32)
-; This file was generated Thu Sep 20 17:03:16 2012
+; This file was generated Thu Sep 20 17:37:32 2012
 ;--------------------------------------------------------
-	.module IntrptEx
+	.module PART2_1
 	.optsdcc -mmcs51 --model-small
 	
 ;--------------------------------------------------------
@@ -392,16 +392,14 @@
 	.globl _DPL
 	.globl _SP
 	.globl _P0
-	.globl _SW2press
-	.globl _n
+	.globl _printTime
+	.globl _time
 	.globl _overflows
-	.globl _bounce
 	.globl _putchar
 	.globl _getchar
 	.globl _main
 	.globl _Timer0_Init
 	.globl _Timer0_ISR
-	.globl _SW2_ISR
 	.globl _SYSCLK_INIT
 	.globl _SYSCLK_INIT2
 	.globl _PORT_INIT
@@ -1186,31 +1184,14 @@ _P7_7	=	0x00ff
 	.area REG_BANK_0	(REL,OVR,DATA)
 	.ds 8
 ;--------------------------------------------------------
-; overlayable bit register bank
-;--------------------------------------------------------
-	.area BIT_BANK	(REL,OVR,DATA)
-bits:
-	.ds 1
-	b0 = bits[0]
-	b1 = bits[1]
-	b2 = bits[2]
-	b3 = bits[3]
-	b4 = bits[4]
-	b5 = bits[5]
-	b6 = bits[6]
-	b7 = bits[7]
-;--------------------------------------------------------
 ; internal ram data
 ;--------------------------------------------------------
 	.area DSEG    (DATA)
-G$bounce$0$0==.
-_bounce::
-	.ds 2
 G$overflows$0$0==.
 _overflows::
 	.ds 2
-G$n$0$0==.
-_n::
+G$time$0$0==.
+_time::
 	.ds 2
 ;--------------------------------------------------------
 ; overlayable items in internal ram 
@@ -1241,8 +1222,8 @@ __start__stack:
 ; bit data
 ;--------------------------------------------------------
 	.area BSEG    (BIT)
-G$SW2press$0$0==.
-_SW2press::
+G$printTime$0$0==.
+_printTime::
 	.ds 1
 ;--------------------------------------------------------
 ; paged external ram data
@@ -1276,8 +1257,8 @@ _SW2press::
 	.area HOME    (CODE)
 __interrupt_vect:
 	ljmp	__sdcc_gsinit_startup
-	ljmp	_SW2_ISR
-	.ds	5
+	reti
+	.ds	7
 	ljmp	_Timer0_ISR
 ;--------------------------------------------------------
 ; global & static initialisations
@@ -1293,27 +1274,21 @@ __interrupt_vect:
 	.globl __mcs51_genXRAMCLEAR
 	.globl __mcs51_genRAMCLEAR
 	G$UART0_INIT$0$0 ==.
-	C$IntrptEx.c$35$1$1 ==.
-;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 2\IntrptEx.c:35: int bounce = 5;
-	mov	_bounce,#0x05
-	clr	a
-	mov	(_bounce + 1),a
-	G$UART0_INIT$0$0 ==.
-	C$IntrptEx.c$36$1$1 ==.
-;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 2\IntrptEx.c:36: int overflows = 0;
+	C$PART2_1.c$35$1$1 ==.
+;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 2\PART2-1.c:35: int overflows = 0;
 	clr	a
 	mov	_overflows,a
 	mov	(_overflows + 1),a
 	G$UART0_INIT$0$0 ==.
-	C$IntrptEx.c$37$1$1 ==.
-;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 2\IntrptEx.c:37: int n = 0;
+	C$PART2_1.c$36$1$1 ==.
+;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 2\PART2-1.c:36: int time = 0;
 	clr	a
-	mov	_n,a
-	mov	(_n + 1),a
+	mov	_time,a
+	mov	(_time + 1),a
 	G$UART0_INIT$0$0 ==.
-	C$IntrptEx.c$34$1$1 ==.
-;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 2\IntrptEx.c:34: bit SW2press = 0;
-	clr	_SW2press
+	C$PART2_1.c$34$1$1 ==.
+;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 2\PART2-1.c:34: bit printTime = 0; 		//flag to print time.
+	clr	_printTime
 	.area GSFINAL (CODE)
 	ljmp	__sdcc_program_startup
 ;--------------------------------------------------------
@@ -1398,38 +1373,44 @@ _getchar:
 ;randnum                   Allocated to registers 
 ;------------------------------------------------------------
 	G$main$0$0 ==.
-	C$IntrptEx.c$56$1$1 ==.
-;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 2\IntrptEx.c:56: void main (void)
+	C$PART2_1.c$53$1$1 ==.
+;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 2\PART2-1.c:53: void main (void)
 ;	-----------------------------------------
 ;	 function main
 ;	-----------------------------------------
 _main:
-	C$IntrptEx.c$61$1$1 ==.
-;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 2\IntrptEx.c:61: WDTCN = 0xDE;					// Disable the watchdog timer
+	C$PART2_1.c$58$1$1 ==.
+;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 2\PART2-1.c:58: WDTCN = 0xDE;					// Disable the watchdog timer
 	mov	_WDTCN,#0xDE
-	C$IntrptEx.c$62$1$1 ==.
-;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 2\IntrptEx.c:62: WDTCN = 0xAD;					// Note: = "DEAD"!
+	C$PART2_1.c$59$1$1 ==.
+;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 2\PART2-1.c:59: WDTCN = 0xAD;					// Note: = "DEAD"!
 	mov	_WDTCN,#0xAD
-	C$IntrptEx.c$64$1$1 ==.
-;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 2\IntrptEx.c:64: SYSCLK_INIT();					// Initialize the oscillator.
+	C$PART2_1.c$61$1$1 ==.
+;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 2\PART2-1.c:61: SYSCLK_INIT();					// Initialize the oscillator.
 	lcall	_SYSCLK_INIT
-	C$IntrptEx.c$65$1$1 ==.
-;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 2\IntrptEx.c:65: PORT_INIT();					// Configure the Crossbar and GPIO.
+	C$PART2_1.c$62$1$1 ==.
+;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 2\PART2-1.c:62: PORT_INIT();					// Configure the Crossbar and GPIO.
 	lcall	_PORT_INIT
-	C$IntrptEx.c$66$1$1 ==.
-;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 2\IntrptEx.c:66: UART0_INIT();					// Initialize UART0.
+	C$PART2_1.c$63$1$1 ==.
+;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 2\PART2-1.c:63: UART0_INIT();					// Initialize UART0.
 	lcall	_UART0_INIT
-	C$IntrptEx.c$68$1$1 ==.
-;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 2\IntrptEx.c:68: SFRPAGE = LEGACY_PAGE;
+	C$PART2_1.c$65$1$1 ==.
+;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 2\PART2-1.c:65: SFRPAGE = LEGACY_PAGE;
 	mov	_SFRPAGE,#0x00
-	C$IntrptEx.c$69$1$1 ==.
-;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 2\IntrptEx.c:69: IT0		= 1;					// /INT0 is edge triggered, falling-edge.
+	C$PART2_1.c$66$1$1 ==.
+;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 2\PART2-1.c:66: IT0		= 1;					// /INT0 is edge triggered, falling-edge.
 	setb	_IT0
-	C$IntrptEx.c$71$1$1 ==.
-;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 2\IntrptEx.c:71: SFRPAGE = UART0_PAGE;			// Direct output to UART0
+	C$PART2_1.c$68$1$1 ==.
+;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 2\PART2-1.c:68: SFRPAGE = CONFIG_PAGE;
+	mov	_SFRPAGE,#0x0F
+	C$PART2_1.c$69$1$1 ==.
+;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 2\PART2-1.c:69: EX0		= 1;					// Enable Ext Int 0 only after everything is settled.
+	setb	_EX0
+	C$PART2_1.c$71$1$1 ==.
+;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 2\PART2-1.c:71: SFRPAGE = UART0_PAGE;			// Direct output to UART0
 	mov	_SFRPAGE,#0x00
-	C$IntrptEx.c$73$1$1 ==.
-;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 2\IntrptEx.c:73: printf("\033[2J");				// Erase screen and move cursor to the home posiiton.
+	C$PART2_1.c$73$1$1 ==.
+;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 2\PART2-1.c:73: printf("\033[2J");				// Erase screen and move cursor to the home posiiton.
 	mov	a,#__str_0
 	push	acc
 	mov	a,#(__str_0 >> 8)
@@ -1440,8 +1421,14 @@ _main:
 	dec	sp
 	dec	sp
 	dec	sp
-	C$IntrptEx.c$74$1$1 ==.
-;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 2\IntrptEx.c:74: printf("MPS Interrupt Switch Test\n\n\r");
+	C$PART2_1.c$75$1$1 ==.
+;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 2\PART2-1.c:75: Timer0_Init();
+	lcall	_Timer0_Init
+	C$PART2_1.c$76$1$1 ==.
+;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 2\PART2-1.c:76: TR0 = 1;		//endable timer0
+	setb	_TR0
+	C$PART2_1.c$78$1$1 ==.
+;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 2\PART2-1.c:78: printf("I am running :D \n\r");
 	mov	a,#__str_1
 	push	acc
 	mov	a,#(__str_1 >> 8)
@@ -1452,8 +1439,16 @@ _main:
 	dec	sp
 	dec	sp
 	dec	sp
-	C$IntrptEx.c$75$1$1 ==.
-;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 2\IntrptEx.c:75: printf("Ground /INT0 on P0.2 to generate an interrupt.\n\n\r");
+	C$PART2_1.c$80$1$1 ==.
+;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 2\PART2-1.c:80: while (1)
+00104$:
+	C$PART2_1.c$82$2$2 ==.
+;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 2\PART2-1.c:82: if (printTime)	//if 1 of a second, print.
+	jnb	_printTime,00104$
+	C$PART2_1.c$84$3$3 ==.
+;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 2\PART2-1.c:84: printf("Time = %d\n\r", time);
+	push	_time
+	push	(_time + 1)
 	mov	a,#__str_2
 	push	acc
 	mov	a,#(__str_2 >> 8)
@@ -1461,72 +1456,45 @@ _main:
 	mov	a,#0x80
 	push	acc
 	lcall	_printf
-	dec	sp
-	dec	sp
-	dec	sp
-	C$IntrptEx.c$77$1$1 ==.
-;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 2\IntrptEx.c:77: SFRPAGE = CONFIG_PAGE;
-	mov	_SFRPAGE,#0x0F
-	C$IntrptEx.c$78$1$1 ==.
-;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 2\IntrptEx.c:78: EX0		= 1;					// Enable Ext Int 0 only after everything is settled.
-	setb	_EX0
-	C$IntrptEx.c$80$1$1 ==.
-;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 2\IntrptEx.c:80: SFRPAGE = UART0_PAGE;			// Direct output to UART0
-	mov	_SFRPAGE,#0x00
-	C$IntrptEx.c$83$1$1 ==.
-;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 2\IntrptEx.c:83: Timer0_Init();
-	lcall	_Timer0_Init
-	C$IntrptEx.c$84$1$1 ==.
-;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 2\IntrptEx.c:84: TR0 = 1;
-	setb	_TR0
-	C$IntrptEx.c$86$1$1 ==.
-;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 2\IntrptEx.c:86: printf("I'm here. \n\r");
-	mov	a,#__str_3
-	push	acc
-	mov	a,#(__str_3 >> 8)
-	push	acc
-	mov	a,#0x80
-	push	acc
-	lcall	_printf
-	dec	sp
-	dec	sp
-	dec	sp
-	C$IntrptEx.c$88$1$1 ==.
-;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 2\IntrptEx.c:88: while (1)
-00102$:
-	C$IntrptEx.c$91$1$1 ==.
+	mov	a,sp
+	add	a,#0xfb
+	mov	sp,a
+	C$PART2_1.c$85$3$3 ==.
+;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 2\PART2-1.c:85: printTime = 0;
+	clr	_printTime
+	C$PART2_1.c$88$1$1 ==.
 	XG$main$0$0 ==.
-	sjmp	00102$
+	sjmp	00104$
 ;------------------------------------------------------------
 ;Allocation info for local variables in function 'Timer0_Init'
 ;------------------------------------------------------------
 ;------------------------------------------------------------
 	G$Timer0_Init$0$0 ==.
-	C$IntrptEx.c$93$1$1 ==.
-;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 2\IntrptEx.c:93: void Timer0_Init()		//timer0 init.
+	C$PART2_1.c$90$1$1 ==.
+;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 2\PART2-1.c:90: void Timer0_Init()		//timer0 init.
 ;	-----------------------------------------
 ;	 function Timer0_Init
 ;	-----------------------------------------
 _Timer0_Init:
-	C$IntrptEx.c$95$1$1 ==.
-;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 2\IntrptEx.c:95: CKCON &= ~0x08; 	//sysclk/12
-	anl	_CKCON,#0xF7
-	C$IntrptEx.c$96$1$1 ==.
-;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 2\IntrptEx.c:96: TMOD &= 0xF0;		//clear bits 0-3 of timer mode register
+	C$PART2_1.c$92$1$1 ==.
+;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 2\PART2-1.c:92: CKCON &= ~0x09; 	//sysclk/4
+	anl	_CKCON,#0xF6
+	C$PART2_1.c$93$1$1 ==.
+;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 2\PART2-1.c:93: TMOD &= 0xF0;		//clear bits 0-3 of timer mode register
 	anl	_TMOD,#0xF0
-	C$IntrptEx.c$97$1$1 ==.
-;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 2\IntrptEx.c:97: TMOD |= 0x01;		//set timer 0 to mode 1 (16-bit counter/timer)
+	C$PART2_1.c$94$1$1 ==.
+;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 2\PART2-1.c:94: TMOD |= 0x01;		//set timer 0 to mode 1 (16-bit counter/timer)
 	orl	_TMOD,#0x01
-	C$IntrptEx.c$98$1$1 ==.
-;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 2\IntrptEx.c:98: TR0 = 0;			//disable timer
+	C$PART2_1.c$95$1$1 ==.
+;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 2\PART2-1.c:95: TR0 = 0;			//disable timer
 	clr	_TR0
-	C$IntrptEx.c$99$1$1 ==.
-;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 2\IntrptEx.c:99: TL0 = 0;			//clear low byte of timer count
+	C$PART2_1.c$96$1$1 ==.
+;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 2\PART2-1.c:96: TL0 = 0;			//clear low byte of timer count
 	mov	_TL0,#0x00
-	C$IntrptEx.c$100$1$1 ==.
-;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 2\IntrptEx.c:100: TH0 = 0;			//clear high byte of timer count
+	C$PART2_1.c$97$1$1 ==.
+;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 2\PART2-1.c:97: TH0 = 0;			//clear high byte of timer count
 	mov	_TH0,#0x00
-	C$IntrptEx.c$101$1$1 ==.
+	C$PART2_1.c$98$1$1 ==.
 	XG$Timer0_Init$0$0 ==.
 	ret
 ;------------------------------------------------------------
@@ -1534,130 +1502,62 @@ _Timer0_Init:
 ;------------------------------------------------------------
 ;------------------------------------------------------------
 	G$Timer0_ISR$0$0 ==.
-	C$IntrptEx.c$103$1$1 ==.
-;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 2\IntrptEx.c:103: void Timer0_ISR() interrupt 1		//timer0 interrupt
+	C$PART2_1.c$100$1$1 ==.
+;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 2\PART2-1.c:100: void Timer0_ISR() interrupt 1		//timer0 interrupt
 ;	-----------------------------------------
 ;	 function Timer0_ISR
 ;	-----------------------------------------
 _Timer0_ISR:
 	push	acc
-	push	b
 	push	psw
 	mov	psw,#0x00
-	C$IntrptEx.c$105$1$1 ==.
-;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 2\IntrptEx.c:105: TH0 = 0x5E;
-	mov	_TH0,#0x5E
-	C$IntrptEx.c$106$1$1 ==.
-;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 2\IntrptEx.c:106: TL0 = 0x05;
-	mov	_TL0,#0x05
-	C$IntrptEx.c$108$1$1 ==.
-;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 2\IntrptEx.c:108: overflows++;
+	C$PART2_1.c$105$1$1 ==.
+;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 2\PART2-1.c:105: TH0 = 0xEA;
+	mov	_TH0,#0xEA
+	C$PART2_1.c$106$1$1 ==.
+;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 2\PART2-1.c:106: TL0 = 0x66;
+	mov	_TL0,#0x66
+	C$PART2_1.c$108$1$1 ==.
+;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 2\PART2-1.c:108: if (overflows == 100 )
+	mov	a,#0x64
+	cjne	a,_overflows,00106$
+	clr	a
+	cjne	a,(_overflows + 1),00106$
+	sjmp	00107$
+00106$:
+	sjmp	00102$
+00107$:
+	C$PART2_1.c$110$2$2 ==.
+;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 2\PART2-1.c:110: time++;				//increment time
+	inc	_time
+	clr	a
+	cjne	a,_time,00108$
+	inc	(_time + 1)
+00108$:
+	C$PART2_1.c$111$2$2 ==.
+;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 2\PART2-1.c:111: printTime = 1;		//set flag
+	setb	_printTime
+	C$PART2_1.c$112$2$2 ==.
+;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 2\PART2-1.c:112: overflows = 0;
+	clr	a
+	mov	_overflows,a
+	mov	(_overflows + 1),a
+00102$:
+	C$PART2_1.c$115$1$1 ==.
+;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 2\PART2-1.c:115: overflows++;
 	inc	_overflows
 	clr	a
-	cjne	a,_overflows,00106$
+	cjne	a,_overflows,00109$
 	inc	(_overflows + 1)
-00106$:
-	C$IntrptEx.c$110$1$1 ==.
-;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 2\IntrptEx.c:110: if (bounce > 0)
-	clr	c
-	clr	a
-	subb	a,_bounce
-	mov	a,#(0x00 ^ 0x80)
-	mov	b,(_bounce + 1)
-	xrl	b,#0x80
-	subb	a,b
-	jnc	00103$
-	C$IntrptEx.c$111$1$1 ==.
-;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 2\IntrptEx.c:111: bounce--;
-	dec	_bounce
-	mov	a,#0xff
-	cjne	a,_bounce,00108$
-	dec	(_bounce + 1)
-00108$:
-00103$:
+00109$:
 	pop	psw
-	pop	b
 	pop	acc
-	C$IntrptEx.c$112$1$1 ==.
+	C$PART2_1.c$116$1$1 ==.
 	XG$Timer0_ISR$0$0 ==.
 	reti
 ;	eliminated unneeded push/pop dpl
 ;	eliminated unneeded push/pop dph
-;------------------------------------------------------------
-;Allocation info for local variables in function 'SW2_ISR'
-;------------------------------------------------------------
-;------------------------------------------------------------
-	G$SW2_ISR$0$0 ==.
-	C$IntrptEx.c$122$1$1 ==.
-;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 2\IntrptEx.c:122: void SW2_ISR (void) interrupt 0		// Interrupt 0 corresponds to vector address 0003h.
-;	-----------------------------------------
-;	 function SW2_ISR
-;	-----------------------------------------
-_SW2_ISR:
-	push	bits
-	push	acc
-	push	b
-	push	dpl
-	push	dph
-	push	(0+2)
-	push	(0+3)
-	push	(0+4)
-	push	(0+5)
-	push	(0+6)
-	push	(0+7)
-	push	(0+0)
-	push	(0+1)
-	push	psw
-	mov	psw,#0x00
-	C$IntrptEx.c$126$1$1 ==.
-;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 2\IntrptEx.c:126: if (bounce == 0)
-	mov	a,_bounce
-	orl	a,(_bounce + 1)
-	jnz	00103$
-	C$IntrptEx.c$128$2$2 ==.
-;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 2\IntrptEx.c:128: bounce = 10;
-	mov	_bounce,#0x0A
-	clr	a
-	mov	(_bounce + 1),a
-	C$IntrptEx.c$129$2$2 ==.
-;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 2\IntrptEx.c:129: printf("/INT0 has been grounded! %d\n\n\r", n);
-	push	_n
-	push	(_n + 1)
-	mov	a,#__str_4
-	push	acc
-	mov	a,#(__str_4 >> 8)
-	push	acc
-	mov	a,#0x80
-	push	acc
-	lcall	_printf
-	mov	a,sp
-	add	a,#0xfb
-	mov	sp,a
-	C$IntrptEx.c$130$2$2 ==.
-;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 2\IntrptEx.c:130: n++;
-	inc	_n
-	clr	a
-	cjne	a,_n,00107$
-	inc	(_n + 1)
-00107$:
-00103$:
-	pop	psw
-	pop	(0+1)
-	pop	(0+0)
-	pop	(0+7)
-	pop	(0+6)
-	pop	(0+5)
-	pop	(0+4)
-	pop	(0+3)
-	pop	(0+2)
-	pop	dph
-	pop	dpl
-	pop	b
-	pop	acc
-	pop	bits
-	C$IntrptEx.c$132$2$1 ==.
-	XG$SW2_ISR$0$0 ==.
-	reti
+;	eliminated unneeded push/pop b
 ;------------------------------------------------------------
 ;Allocation info for local variables in function 'SYSCLK_INIT'
 ;------------------------------------------------------------
@@ -1665,23 +1565,23 @@ _SW2_ISR:
 ;SFRPAGE_SAVE              Allocated to registers r2 
 ;------------------------------------------------------------
 	G$SYSCLK_INIT$0$0 ==.
-	C$IntrptEx.c$140$2$1 ==.
-;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 2\IntrptEx.c:140: void SYSCLK_INIT(void)
+	C$PART2_1.c$124$1$1 ==.
+;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 2\PART2-1.c:124: void SYSCLK_INIT(void)
 ;	-----------------------------------------
 ;	 function SYSCLK_INIT
 ;	-----------------------------------------
 _SYSCLK_INIT:
-	C$IntrptEx.c$144$1$1 ==.
-;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 2\IntrptEx.c:144: char SFRPAGE_SAVE = SFRPAGE;	// Save Current SFR page.
+	C$PART2_1.c$128$1$1 ==.
+;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 2\PART2-1.c:128: char SFRPAGE_SAVE = SFRPAGE;	// Save Current SFR page.
 	mov	r2,_SFRPAGE
-	C$IntrptEx.c$145$1$1 ==.
-;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 2\IntrptEx.c:145: SFRPAGE = CONFIG_PAGE;
+	C$PART2_1.c$129$1$1 ==.
+;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 2\PART2-1.c:129: SFRPAGE = CONFIG_PAGE;
 	mov	_SFRPAGE,#0x0F
-	C$IntrptEx.c$147$1$1 ==.
-;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 2\IntrptEx.c:147: OSCXCN	= 0x67;			// Start external oscillator
+	C$PART2_1.c$131$1$1 ==.
+;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 2\PART2-1.c:131: OSCXCN	= 0x67;			// Start external oscillator
 	mov	_OSCXCN,#0x67
-	C$IntrptEx.c$148$1$1 ==.
-;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 2\IntrptEx.c:148: for(i=0; i < 3000; i++);// Wait for the oscillator to start up.
+	C$PART2_1.c$132$1$1 ==.
+;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 2\PART2-1.c:132: for(i=0; i < 3000; i++);// Wait for the oscillator to start up.
 	mov	r3,#0xB8
 	mov	r4,#0x0B
 00106$:
@@ -1692,21 +1592,21 @@ _SYSCLK_INIT:
 	mov	a,r3
 	orl	a,r4
 	jnz	00106$
-	C$IntrptEx.c$149$1$1 ==.
-;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 2\IntrptEx.c:149: while(!(OSCXCN & 0x80));// Check to see if the Crystal Oscillator Valid Flag is set.
+	C$PART2_1.c$133$1$1 ==.
+;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 2\PART2-1.c:133: while(!(OSCXCN & 0x80));// Check to see if the Crystal Oscillator Valid Flag is set.
 00101$:
 	mov	a,_OSCXCN
 	jnb	acc.7,00101$
-	C$IntrptEx.c$150$1$1 ==.
-;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 2\IntrptEx.c:150: CLKSEL	= 0x01;			// SYSCLK derived from the External Oscillator circuit.
+	C$PART2_1.c$134$1$1 ==.
+;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 2\PART2-1.c:134: CLKSEL	= 0x01;			// SYSCLK derived from the External Oscillator circuit.
 	mov	_CLKSEL,#0x01
-	C$IntrptEx.c$151$1$1 ==.
-;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 2\IntrptEx.c:151: OSCICN	= 0x00;			// Disable the internal oscillator.
+	C$PART2_1.c$135$1$1 ==.
+;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 2\PART2-1.c:135: OSCICN	= 0x00;			// Disable the internal oscillator.
 	mov	_OSCICN,#0x00
-	C$IntrptEx.c$153$1$1 ==.
-;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 2\IntrptEx.c:153: SFRPAGE = SFRPAGE_SAVE;	// Restore SFR page.
+	C$PART2_1.c$137$1$1 ==.
+;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 2\PART2-1.c:137: SFRPAGE = SFRPAGE_SAVE;	// Restore SFR page.
 	mov	_SFRPAGE,r2
-	C$IntrptEx.c$154$1$1 ==.
+	C$PART2_1.c$138$1$1 ==.
 	XG$SYSCLK_INIT$0$0 ==.
 	ret
 ;------------------------------------------------------------
@@ -1716,23 +1616,23 @@ _SYSCLK_INIT:
 ;SFRPAGE_SAVE              Allocated to registers r2 
 ;------------------------------------------------------------
 	G$SYSCLK_INIT2$0$0 ==.
-	C$IntrptEx.c$164$1$1 ==.
-;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 2\IntrptEx.c:164: void SYSCLK_INIT2(void)
+	C$PART2_1.c$148$1$1 ==.
+;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 2\PART2-1.c:148: void SYSCLK_INIT2(void)
 ;	-----------------------------------------
 ;	 function SYSCLK_INIT2
 ;	-----------------------------------------
 _SYSCLK_INIT2:
-	C$IntrptEx.c$168$1$1 ==.
-;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 2\IntrptEx.c:168: char SFRPAGE_SAVE = SFRPAGE;	// Save Current SFR page.
+	C$PART2_1.c$152$1$1 ==.
+;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 2\PART2-1.c:152: char SFRPAGE_SAVE = SFRPAGE;	// Save Current SFR page.
 	mov	r2,_SFRPAGE
-	C$IntrptEx.c$169$1$1 ==.
-;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 2\IntrptEx.c:169: SFRPAGE = CONFIG_PAGE;
+	C$PART2_1.c$153$1$1 ==.
+;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 2\PART2-1.c:153: SFRPAGE = CONFIG_PAGE;
 	mov	_SFRPAGE,#0x0F
-	C$IntrptEx.c$171$1$1 ==.
-;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 2\IntrptEx.c:171: OSCXCN	= 0x67;			// Start external oscillator
+	C$PART2_1.c$155$1$1 ==.
+;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 2\PART2-1.c:155: OSCXCN	= 0x67;			// Start external oscillator
 	mov	_OSCXCN,#0x67
-	C$IntrptEx.c$172$1$1 ==.
-;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 2\IntrptEx.c:172: for(i=0; i < 3000; i++);// Wait for the oscillator to start up.
+	C$PART2_1.c$156$1$1 ==.
+;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 2\PART2-1.c:156: for(i=0; i < 3000; i++);// Wait for the oscillator to start up.
 	mov	r3,#0xB8
 	mov	r4,#0x0B
 	mov	ar5,r3
@@ -1745,46 +1645,46 @@ _SYSCLK_INIT2:
 	mov	a,r5
 	orl	a,r6
 	jnz	00109$
-	C$IntrptEx.c$173$1$1 ==.
-;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 2\IntrptEx.c:173: while(!(OSCXCN & 0x80));// Check to see if the Crystal Oscillator Valid Flag is set.
+	C$PART2_1.c$157$1$1 ==.
+;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 2\PART2-1.c:157: while(!(OSCXCN & 0x80));// Check to see if the Crystal Oscillator Valid Flag is set.
 00101$:
 	mov	a,_OSCXCN
 	jnb	acc.7,00101$
-	C$IntrptEx.c$174$1$1 ==.
-;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 2\IntrptEx.c:174: CLKSEL	= 0x01;			// SYSCLK derived from the External Oscillator circuit.
+	C$PART2_1.c$158$1$1 ==.
+;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 2\PART2-1.c:158: CLKSEL	= 0x01;			// SYSCLK derived from the External Oscillator circuit.
 	mov	_CLKSEL,#0x01
-	C$IntrptEx.c$175$1$1 ==.
-;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 2\IntrptEx.c:175: OSCICN	= 0x00;			// Disable the internal oscillator.
+	C$PART2_1.c$159$1$1 ==.
+;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 2\PART2-1.c:159: OSCICN	= 0x00;			// Disable the internal oscillator.
 	mov	_OSCICN,#0x00
-	C$IntrptEx.c$177$1$1 ==.
-;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 2\IntrptEx.c:177: SFRPAGE = CONFIG_PAGE;
+	C$PART2_1.c$161$1$1 ==.
+;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 2\PART2-1.c:161: SFRPAGE = CONFIG_PAGE;
 	mov	_SFRPAGE,#0x0F
-	C$IntrptEx.c$178$1$1 ==.
-;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 2\IntrptEx.c:178: PLL0CN	= 0x04;
+	C$PART2_1.c$162$1$1 ==.
+;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 2\PART2-1.c:162: PLL0CN	= 0x04;
 	mov	_PLL0CN,#0x04
-	C$IntrptEx.c$179$1$1 ==.
-;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 2\IntrptEx.c:179: SFRPAGE = LEGACY_PAGE;
+	C$PART2_1.c$163$1$1 ==.
+;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 2\PART2-1.c:163: SFRPAGE = LEGACY_PAGE;
 	mov	_SFRPAGE,#0x00
-	C$IntrptEx.c$180$1$1 ==.
-;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 2\IntrptEx.c:180: FLSCL	= 0x10;
+	C$PART2_1.c$164$1$1 ==.
+;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 2\PART2-1.c:164: FLSCL	= 0x10;
 	mov	_FLSCL,#0x10
-	C$IntrptEx.c$181$1$1 ==.
-;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 2\IntrptEx.c:181: SFRPAGE = CONFIG_PAGE;
+	C$PART2_1.c$165$1$1 ==.
+;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 2\PART2-1.c:165: SFRPAGE = CONFIG_PAGE;
 	mov	_SFRPAGE,#0x0F
-	C$IntrptEx.c$182$1$1 ==.
-;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 2\IntrptEx.c:182: PLL0CN	|= 0x01;
+	C$PART2_1.c$166$1$1 ==.
+;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 2\PART2-1.c:166: PLL0CN	|= 0x01;
 	orl	_PLL0CN,#0x01
-	C$IntrptEx.c$183$1$1 ==.
-;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 2\IntrptEx.c:183: PLL0DIV = 0x04;
+	C$PART2_1.c$167$1$1 ==.
+;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 2\PART2-1.c:167: PLL0DIV = 0x04;
 	mov	_PLL0DIV,#0x04
-	C$IntrptEx.c$184$1$1 ==.
-;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 2\IntrptEx.c:184: PLL0FLT = 0x01;
+	C$PART2_1.c$168$1$1 ==.
+;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 2\PART2-1.c:168: PLL0FLT = 0x01;
 	mov	_PLL0FLT,#0x01
-	C$IntrptEx.c$185$1$1 ==.
-;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 2\IntrptEx.c:185: PLL0MUL = 0x09;
+	C$PART2_1.c$169$1$1 ==.
+;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 2\PART2-1.c:169: PLL0MUL = 0x09;
 	mov	_PLL0MUL,#0x09
-	C$IntrptEx.c$186$1$1 ==.
-;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 2\IntrptEx.c:186: for(i=0; i < 256; i++);
+	C$PART2_1.c$170$1$1 ==.
+;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 2\PART2-1.c:170: for(i=0; i < 256; i++);
 	mov	r3,#0x00
 	mov	r4,#0x01
 00112$:
@@ -1795,21 +1695,21 @@ _SYSCLK_INIT2:
 	mov	a,r3
 	orl	a,r4
 	jnz	00112$
-	C$IntrptEx.c$187$1$1 ==.
-;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 2\IntrptEx.c:187: PLL0CN	|= 0x02;
+	C$PART2_1.c$171$1$1 ==.
+;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 2\PART2-1.c:171: PLL0CN	|= 0x02;
 	orl	_PLL0CN,#0x02
-	C$IntrptEx.c$188$1$1 ==.
-;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 2\IntrptEx.c:188: while(!(PLL0CN & 0x10));
+	C$PART2_1.c$172$1$1 ==.
+;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 2\PART2-1.c:172: while(!(PLL0CN & 0x10));
 00104$:
 	mov	a,_PLL0CN
 	jnb	acc.4,00104$
-	C$IntrptEx.c$189$1$1 ==.
-;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 2\IntrptEx.c:189: CLKSEL	= 0x02;			// SYSCLK derived from the PLL.
+	C$PART2_1.c$173$1$1 ==.
+;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 2\PART2-1.c:173: CLKSEL	= 0x02;			// SYSCLK derived from the PLL.
 	mov	_CLKSEL,#0x02
-	C$IntrptEx.c$191$1$1 ==.
-;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 2\IntrptEx.c:191: SFRPAGE = SFRPAGE_SAVE;	// Restore SFR page.
+	C$PART2_1.c$175$1$1 ==.
+;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 2\PART2-1.c:175: SFRPAGE = SFRPAGE_SAVE;	// Restore SFR page.
 	mov	_SFRPAGE,r2
-	C$IntrptEx.c$192$1$1 ==.
+	C$PART2_1.c$176$1$1 ==.
 	XG$SYSCLK_INIT2$0$0 ==.
 	ret
 ;------------------------------------------------------------
@@ -1818,43 +1718,37 @@ _SYSCLK_INIT2:
 ;SFRPAGE_SAVE              Allocated to registers r2 
 ;------------------------------------------------------------
 	G$PORT_INIT$0$0 ==.
-	C$IntrptEx.c$200$1$1 ==.
-;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 2\IntrptEx.c:200: void PORT_INIT(void)
+	C$PART2_1.c$184$1$1 ==.
+;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 2\PART2-1.c:184: void PORT_INIT(void)
 ;	-----------------------------------------
 ;	 function PORT_INIT
 ;	-----------------------------------------
 _PORT_INIT:
-	C$IntrptEx.c$202$1$1 ==.
-;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 2\IntrptEx.c:202: char SFRPAGE_SAVE = SFRPAGE;    // Save Current SFR page.
+	C$PART2_1.c$186$1$1 ==.
+;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 2\PART2-1.c:186: char SFRPAGE_SAVE = SFRPAGE;    // Save Current SFR page.
 	mov	r2,_SFRPAGE
-	C$IntrptEx.c$203$1$1 ==.
-;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 2\IntrptEx.c:203: SFRPAGE = CONFIG_PAGE;
+	C$PART2_1.c$187$1$1 ==.
+;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 2\PART2-1.c:187: SFRPAGE = CONFIG_PAGE;
 	mov	_SFRPAGE,#0x0F
-	C$IntrptEx.c$205$1$1 ==.
-;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 2\IntrptEx.c:205: EA		= 1;			// Enable interrupts as selected.
+	C$PART2_1.c$189$1$1 ==.
+;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 2\PART2-1.c:189: EA		= 1;			// Enable interrupts as selected.
 	setb	_EA
-	C$IntrptEx.c$206$1$1 ==.
-;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 2\IntrptEx.c:206: ET0 	= 1;			// enable timer 0 overflow interrupts
+	C$PART2_1.c$190$1$1 ==.
+;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 2\PART2-1.c:190: ET0 	= 1;			// Enable Timer 0 overflow interrupt
 	setb	_ET0
-	C$IntrptEx.c$208$1$1 ==.
-;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 2\IntrptEx.c:208: XBR0	= 0x04;			// Enable UART0.
+	C$PART2_1.c$192$1$1 ==.
+;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 2\PART2-1.c:192: XBR0	= 0x04;			// Enable UART0.
 	mov	_XBR0,#0x04
-	C$IntrptEx.c$209$1$1 ==.
-;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 2\IntrptEx.c:209: XBR1	= 0x04;			// /INT0 routed to port pin.
+	C$PART2_1.c$193$1$1 ==.
+;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 2\PART2-1.c:193: XBR1	= 0x04;			// /INT0 routed to port pin.
 	mov	_XBR1,#0x04
-	C$IntrptEx.c$210$1$1 ==.
-;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 2\IntrptEx.c:210: XBR2	= 0x40;			// Enable Crossbar and weak pull-ups.
+	C$PART2_1.c$194$1$1 ==.
+;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 2\PART2-1.c:194: XBR2	= 0x40;			// Enable Crossbar and weak pull-ups.
 	mov	_XBR2,#0x40
-	C$IntrptEx.c$212$1$1 ==.
-;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 2\IntrptEx.c:212: P0MDOUT = 0x01;			// P0.0 (TX0) is configured as Push-Pull for output.
-	mov	_P0MDOUT,#0x01
-	C$IntrptEx.c$215$1$1 ==.
-;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 2\IntrptEx.c:215: P0		= 0x06;			// Additionally, set P0.0=0, P0.1=1, and P0.2=1.
-	mov	_P0,#0x06
-	C$IntrptEx.c$217$1$1 ==.
-;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 2\IntrptEx.c:217: SFRPAGE = SFRPAGE_SAVE;	// Restore SFR page.
+	C$PART2_1.c$196$1$1 ==.
+;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 2\PART2-1.c:196: SFRPAGE = SFRPAGE_SAVE;	// Restore SFR page.
 	mov	_SFRPAGE,r2
-	C$IntrptEx.c$218$1$1 ==.
+	C$PART2_1.c$197$1$1 ==.
 	XG$PORT_INIT$0$0 ==.
 	ret
 ;------------------------------------------------------------
@@ -1863,85 +1757,70 @@ _PORT_INIT:
 ;SFRPAGE_SAVE              Allocated to registers r2 
 ;------------------------------------------------------------
 	G$UART0_INIT$0$0 ==.
-	C$IntrptEx.c$226$1$1 ==.
-;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 2\IntrptEx.c:226: void UART0_INIT(void)
+	C$PART2_1.c$205$1$1 ==.
+;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 2\PART2-1.c:205: void UART0_INIT(void)
 ;	-----------------------------------------
 ;	 function UART0_INIT
 ;	-----------------------------------------
 _UART0_INIT:
-	C$IntrptEx.c$228$1$1 ==.
-;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 2\IntrptEx.c:228: char SFRPAGE_SAVE = SFRPAGE;    // Save Current SFR page.
+	C$PART2_1.c$207$1$1 ==.
+;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 2\PART2-1.c:207: char SFRPAGE_SAVE = SFRPAGE;    // Save Current SFR page.
 	mov	r2,_SFRPAGE
-	C$IntrptEx.c$229$1$1 ==.
-;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 2\IntrptEx.c:229: SFRPAGE = TIMER01_PAGE;
+	C$PART2_1.c$208$1$1 ==.
+;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 2\PART2-1.c:208: SFRPAGE = TIMER01_PAGE;
 	mov	_SFRPAGE,#0x00
-	C$IntrptEx.c$231$1$1 ==.
-;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 2\IntrptEx.c:231: TCON	 = 0x40;				// Enable Timer 1 running (TR1)
+	C$PART2_1.c$210$1$1 ==.
+;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 2\PART2-1.c:210: TCON	 = 0x40;				// Enable Timer 1 running (TR1)
 	mov	_TCON,#0x40
-	C$IntrptEx.c$232$1$1 ==.
-;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 2\IntrptEx.c:232: TMOD	&= 0x0F;
+	C$PART2_1.c$211$1$1 ==.
+;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 2\PART2-1.c:211: TMOD	&= 0x0F;
 	anl	_TMOD,#0x0F
-	C$IntrptEx.c$233$1$1 ==.
-;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 2\IntrptEx.c:233: TMOD	|= 0x20;				// Timer1, Mode 2: 8-bit counter/timer with auto-reload.
+	C$PART2_1.c$212$1$1 ==.
+;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 2\PART2-1.c:212: TMOD	|= 0x20;				// Timer1, Mode 2: 8-bit counter/timer with auto-reload.
 	orl	_TMOD,#0x20
-	C$IntrptEx.c$234$1$1 ==.
-;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 2\IntrptEx.c:234: CKCON	|= 0x10;				// Timer1 uses SYSCLK as time base.
+	C$PART2_1.c$213$1$1 ==.
+;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 2\PART2-1.c:213: CKCON	|= 0x10;				// Timer1 uses SYSCLK as time base.
 	orl	_CKCON,#0x10
-	C$IntrptEx.c$236$1$1 ==.
-;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 2\IntrptEx.c:236: TH1		 = 0xE8;				// 0xE8 = 232
+	C$PART2_1.c$215$1$1 ==.
+;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 2\PART2-1.c:215: TH1		 = 0xE8;				// 0xE8 = 232
 	mov	_TH1,#0xE8
-	C$IntrptEx.c$237$1$1 ==.
-;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 2\IntrptEx.c:237: TR1		 = 1;					// Start Timer1.
+	C$PART2_1.c$216$1$1 ==.
+;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 2\PART2-1.c:216: TR1		 = 1;					// Start Timer1.
 	setb	_TR1
-	C$IntrptEx.c$239$1$1 ==.
-;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 2\IntrptEx.c:239: SFRPAGE = UART0_PAGE;
+	C$PART2_1.c$218$1$1 ==.
+;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 2\PART2-1.c:218: SFRPAGE = UART0_PAGE;
 	mov	_SFRPAGE,#0x00
-	C$IntrptEx.c$240$1$1 ==.
-;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 2\IntrptEx.c:240: SCON0	= 0x50;					// Set Mode 1: 8-Bit UART
+	C$PART2_1.c$219$1$1 ==.
+;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 2\PART2-1.c:219: SCON0	= 0x50;					// Set Mode 1: 8-Bit UART
 	mov	_SCON0,#0x50
-	C$IntrptEx.c$241$1$1 ==.
-;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 2\IntrptEx.c:241: SSTA0	 = 0x00;				// SMOD0 = 0, in this mode
+	C$PART2_1.c$220$1$1 ==.
+;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 2\PART2-1.c:220: SSTA0	 = 0x00;				// SMOD0 = 0, in this mode
 	mov	_SSTA0,#0x00
-	C$IntrptEx.c$243$1$1 ==.
-;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 2\IntrptEx.c:243: TI0		= 1;					// Indicate TX0 ready.
+	C$PART2_1.c$222$1$1 ==.
+;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 2\PART2-1.c:222: TI0		= 1;					// Indicate TX0 ready.
 	setb	_TI0
-	C$IntrptEx.c$245$1$1 ==.
-;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 2\IntrptEx.c:245: SFRPAGE = SFRPAGE_SAVE;			// Restore SFR page.
+	C$PART2_1.c$224$1$1 ==.
+;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 2\PART2-1.c:224: SFRPAGE = SFRPAGE_SAVE;			// Restore SFR page.
 	mov	_SFRPAGE,r2
-	C$IntrptEx.c$246$1$1 ==.
+	C$PART2_1.c$225$1$1 ==.
 	XG$UART0_INIT$0$0 ==.
 	ret
 	.area CSEG    (CODE)
 	.area CONST   (CODE)
-FIntrptEx$_str_0$0$0 == .
+FPART2_1$_str_0$0$0 == .
 __str_0:
 	.db 0x1B
 	.ascii "[2J"
 	.db 0x00
-FIntrptEx$_str_1$0$0 == .
+FPART2_1$_str_1$0$0 == .
 __str_1:
-	.ascii "MPS Interrupt Switch Test"
-	.db 0x0A
+	.ascii "I am running :D "
 	.db 0x0A
 	.db 0x0D
 	.db 0x00
-FIntrptEx$_str_2$0$0 == .
+FPART2_1$_str_2$0$0 == .
 __str_2:
-	.ascii "Ground /INT0 on P0.2 to generate an interrupt."
-	.db 0x0A
-	.db 0x0A
-	.db 0x0D
-	.db 0x00
-FIntrptEx$_str_3$0$0 == .
-__str_3:
-	.ascii "I'm here. "
-	.db 0x0A
-	.db 0x0D
-	.db 0x00
-FIntrptEx$_str_4$0$0 == .
-__str_4:
-	.ascii "/INT0 has been grounded! %d"
-	.db 0x0A
+	.ascii "Time = %d"
 	.db 0x0A
 	.db 0x0D
 	.db 0x00

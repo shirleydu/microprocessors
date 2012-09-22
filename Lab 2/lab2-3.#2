@@ -165,7 +165,7 @@ void playGame()
 
 void SW1_ISR (void) interrupt 2
 {
-	printf("\033[0;0HYour Average Response Time is : 0    ms\n\r");
+	printf("\033[0;0HYour Average Response Time is :   0    ms\n\r");
 	n = 0;
 	total = 0;
 }
@@ -182,7 +182,7 @@ void SW2_ISR (void) interrupt 0		// Interrupt 0 corresponds to vector address 00
 
 	if (!gameStarted)
 	{
-		printf("Too early! Penalty time +200ms!\n\r");
+		printf("Too early! Penalty time +200  ms!\n\r");
 		gameStarted = 1;
 	}
 	

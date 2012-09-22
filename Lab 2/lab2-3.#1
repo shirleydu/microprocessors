@@ -111,7 +111,7 @@ void playGame()
 	gameStarted = 0;
 
 	srand(TL1);								// seed the random fuction
-	waitTime = rand()%100;					//wait 0-1000 millisecs
+	waitTime = rand()%100;					//wait 0-100 millisecs
 
 	overflows = 0;
 	while(overflows < waitTime);
@@ -165,7 +165,7 @@ void playGame()
 
 void SW1_ISR (void) interrupt 2
 {
-	printf("\033[0;0HYour Average Response Time is : 0    ms\n\r");
+	printf("\033[0;0HYour Average Response Time is :   0    ms\n\r");
 	n = 0;
 	total = 0;
 }

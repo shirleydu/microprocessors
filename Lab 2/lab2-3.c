@@ -111,7 +111,7 @@ void playGame()
 	gameStarted = 0;
 
 	srand(TL1);								// seed the random fuction
-	waitTime = rand()%100;					//wait 0-1000 millisecs
+	waitTime = rand()%100;					// wait 0-100 millisecs
 
 	overflows = 0;
 	while(overflows < waitTime);

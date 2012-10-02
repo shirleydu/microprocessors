@@ -36,6 +36,8 @@ int overflows = 0;
 //------------------------------------------------------------------------------------
 void main(void)
 {
+	char charmander;
+
 	WDTCN = 0xDE;						// Disable the watchdog timer
 	WDTCN = 0xAD;						// Note: = "DEAD"!
 	
@@ -45,21 +47,44 @@ void main(void)
 	PORT_INIT();						// Initialize the Crossbar and GPIO
 	//Interrupts_Init();					// Initialize interrupts
 
-
 	SFRPAGE = UART0_PAGE;				// Direct output to UART0
 
 	printf("\033[2J");
 	printf("I am UART0 :D\n\n\r");
 
 
-
 	SFRPAGE = UART1_PAGE;				// Direct output to UART1
 
 	printf("\033[2J");
 	printf("I am UART1.\n\n\r");
+
+	SFRPAGE = UART0_PAGE;
 	while(1)
 	{
-		printf("hi\r\n");
+		SFRPAGE = UART0_PAGE;				// Direct output to UART0
+
+		if (RI0 == 1)
+		{
+			charmander = SBUF0;
+			printf("%c", charmander);
+			SFRPAGE = UART1_PAGE;
+			printf("%c", charmander);
+			SFRPAGE = UART0_PAGE;
+			RI0 = 0;
+		}
+
+		SFRPAGE = UART1_PAGE;				// Direct output to UART1
+
+		
+		if (RI1 == 1)
+		{
+			charmander = SBUF1;
+			printf("%c", charmander);
+			SFRPAGE = UART0_PAGE;
+			printf("%c", charmander);
+			SFRPAGE = UART1_PAGE;
+			RI1 = 0;
+		}
 	}
 
 }

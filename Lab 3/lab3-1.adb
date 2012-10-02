@@ -12,6 +12,7 @@ F:G$Timer1_ISR$0$0({2}DF,SV:S),Z,0,0,1,3,0
 F:G$Timer2_ISR$0$0({2}DF,SV:S),Z,0,0,1,5,0
 F:G$Timer2_ISR$0$0({2}DF,SV:S),Z,0,0,1,5,0
 S:G$overflows$0$0({2}SI:S),E,0,0
+S:Lmain$charmander$1$1({1}SC:S),R,0,0,[r2]
 S:G$P0$0$0({1}SC:U),I,0,0
 S:G$SP$0$0({1}SC:U),I,0,0
 S:G$DPL$0$0({1}SC:U),I,0,0
@@ -409,4 +410,4 @@ S:G$printf_tiny$0$0({2}DF,SV:S),C,0,0
 S:Flab3_1$_str_0$0$0({5}DA5,SC:S),D,0,0
 S:Flab3_1$_str_1$0$0({17}DA17,SC:S),D,0,0
 S:Flab3_1$_str_2$0$0({15}DA15,SC:S),D,0,0
-S:Flab3_1$_str_3$0$0({5}DA5,SC:S),D,0,0
+S:Flab3_1$_str_3$0$0({3}DA3,SC:S),D,0,0

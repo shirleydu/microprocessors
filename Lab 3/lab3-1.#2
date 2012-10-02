@@ -26,6 +26,7 @@ void UART_INIT(void);
 void SPI_Init(void);
 void Interrupts_Init(void);
 void Timer_Init(void);
+void Timer1_ISR(void) interrupt 3;
 void Timer2_ISR (void) interrupt 5;
 
 int overflows = 0;
@@ -35,7 +36,6 @@ int overflows = 0;
 //------------------------------------------------------------------------------------
 void main(void)
 {
-	char choice;
 	WDTCN = 0xDE;						// Disable the watchdog timer
 	WDTCN = 0xAD;						// Note: = "DEAD"!
 	
@@ -43,7 +43,7 @@ void main(void)
 	Timer_Init();						// Initialize timer
 	UART_INIT();						// Initialize UARTs
 	PORT_INIT();						// Initialize the Crossbar and GPIO
-	Interrupts_Init();					// Initialize interrupts
+	//Interrupts_Init();					// Initialize interrupts
 
 
 	SFRPAGE = UART0_PAGE;				// Direct output to UART0
@@ -53,10 +53,15 @@ void main(void)
 
 
 
-	SFRPAGE = UART1_PAGE;				// Direct output to UART0
+	SFRPAGE = UART1_PAGE;				// Direct output to UART1
 
 	printf("\033[2J");
 	printf("I am UART1.\n\n\r");
+	while(1)
+	{
+		printf("hi\r\n");
+	}
+
 }
 
 //------------------------------------------------------------------------------------
@@ -95,13 +100,18 @@ void PORT_INIT(void)
 	SFRPAGE = CONFIG_PAGE;
 
 	EA=1;
-	ET2 = 1;	
+	ET2 = 1;
+	ET1 = 1;	
 
-	P0MDOUT = 0x41;
-	P0 &= ~0x41;
+//	P0MDOUT = 0x41;
+//	P0 &= ~0x41;
+
+	P0MDOUT = 0x05;			//0.0 and 0.2 are pp
+	P0 &= 0x05;			//high imped
+	//P0 = 0x08;
 
 	XBR0	= 0x04;			// Enable UART0.
-	XBR2	= 0x40;			// Enable Crossbar and weak pull-ups.
+	XBR2	= 0x44;			// Enable Crossbar and weak pull-ups and uart1.
 
 	SFRPAGE = SFRPAGE_SAVE;	// Restore SFR page.
 }
@@ -122,8 +132,8 @@ void UART_INIT(void)
 	TI0 = 1;
 
     SFRPAGE = UART1_PAGE;
-    SCON1 = 0x50;
-	//TI0 = 1;
+    SCON1 = 0x10;
+	TI1 = 1;
 
 	SFRPAGE = SFRPAGE_SAVE;             // Restore SFR page
 }
@@ -140,7 +150,7 @@ void SPI_Init(void)
 
 void Interrupts_Init(void)
 {
-	IE = 0xB0;
+	IE = 0xB8;
 	EIE1 = 0x08;
     EIE2 = 0x40;
 }
@@ -150,30 +160,32 @@ void Timer_Init(void)
 	char SFRPAGE_SAVE = SFRPAGE;
 
     SFRPAGE = TIMER01_PAGE;
-	TCON	 = 0x40;				// enable timer1?
+	TCON	 = 0x40;				// enable timer1
     TMOD	&= 0x0F;
 	TMOD	|= 0x20;				// Timer1, Mode 2: 8-bit counter/timer with auto-reload.
-    TMOD = 0x20;
     CKCON |= 0x10;
-	TH1 = 0xFA;						//set baudrate 115200
+	TH1 = 0xF4;						//set baudrate 115200
+	TR1 = 1;						//start timer1 
 
     SFRPAGE = TMR2_PAGE;
     TMR2CN = 0x04;
     TMR2CF = 0x08;
     RCAP2L = 0x70;					//set baudrate 9600
     RCAP2H = 0xFF;
-
-	TR1 = 1;						//enable timer1 
-	TR2 = 1;						//enable timer2
+	TR2 = 1;						//start timer2
 
 	SFRPAGE = SFRPAGE_SAVE;         // Restore SFR page
 }
 
-
+void Timer1_ISR(void) interrupt 3
+{
+//	TF1 = 0;
+	//printf("%d\n\r", overflows);
+}
 
 void Timer2_ISR (void) interrupt 5
 {
-	overflows++;
+	//overflows++;
 	//printf("%d\n\r", overflows);
 	TF2 = 0;
 }

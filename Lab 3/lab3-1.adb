@@ -8,10 +8,10 @@ F:G$UART_INIT$0$0({2}DF,SV:S),Z,0,0,0,0,0
 F:G$SPI_Init$0$0({2}DF,SV:S),Z,0,0,0,0,0
 F:G$Interrupts_Init$0$0({2}DF,SV:S),Z,0,0,0,0,0
 F:G$Timer_Init$0$0({2}DF,SV:S),Z,0,0,0,0,0
+F:G$Timer1_ISR$0$0({2}DF,SV:S),Z,0,0,1,3,0
 F:G$Timer2_ISR$0$0({2}DF,SV:S),Z,0,0,1,5,0
 F:G$Timer2_ISR$0$0({2}DF,SV:S),Z,0,0,1,5,0
 S:G$overflows$0$0({2}SI:S),E,0,0
-S:Lmain$choice$1$1({1}SC:S),E,0,0
 S:G$P0$0$0({1}SC:U),I,0,0
 S:G$SP$0$0({1}SC:U),I,0,0
 S:G$DPL$0$0({1}SC:U),I,0,0

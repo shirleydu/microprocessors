@@ -3,187 +3,153 @@
 Symbol Table
 
     A                                                              00D6 
-  E A$lab3-1$1267                                                  0000 GR
-  E A$lab3-1$1268                                                  0003 GR
-  E A$lab3-1$1270                                                  000B GR
-  E A$lab3-1$1272                                                  0013 GR
-  E A$lab3-1$1274                                                  001B GR
-  E A$lab3-1$1276                                                  0023 GR
-  E A$lab3-1$1278                                                  002B GR
- 15 A$lab3-1$1295                                                  0000 GR
- 15 A$lab3-1$1296                                                  0001 GR
- 15 A$lab3-1$1297                                                  0003 GR
- 16 A$lab3-1$1299                                                  0000 GR
-  E A$lab3-1$1306                                                  002E GR
-  E A$lab3-1$1308                                                  0031 GR
- 17 A$lab3-1$1333                                                  0000 GR
- 17 A$lab3-1$1339                                                  0002 GR
- 17 A$lab3-1$1340                                                  0005 GR
- 17 A$lab3-1$1344                                                  0007 GR
- 17 A$lab3-1$1347                                                  0009 GR
- 17 A$lab3-1$1365                                                  000A GR
- 17 A$lab3-1$1366                                                  000D GR
- 17 A$lab3-1$1370                                                  000F GR
- 17 A$lab3-1$1375                                                  0012 GR
- 17 A$lab3-1$1390                                                  0013 GR
- 17 A$lab3-1$1393                                                  0016 GR
- 17 A$lab3-1$1396                                                  0019 GR
- 17 A$lab3-1$1399                                                  001C GR
- 17 A$lab3-1$1402                                                  001F GR
- 17 A$lab3-1$1405                                                  0022 GR
- 17 A$lab3-1$1408                                                  0025 GR
- 17 A$lab3-1$1411                                                  0028 GR
- 17 A$lab3-1$1414                                                  002B GR
- 17 A$lab3-1$1415                                                  002D GR
- 17 A$lab3-1$1416                                                  002F GR
- 17 A$lab3-1$1417                                                  0031 GR
- 17 A$lab3-1$1418                                                  0033 GR
- 17 A$lab3-1$1419                                                  0035 GR
- 17 A$lab3-1$1420                                                  0037 GR
- 17 A$lab3-1$1421                                                  003A GR
- 17 A$lab3-1$1422                                                  003C GR
- 17 A$lab3-1$1423                                                  003E GR
- 17 A$lab3-1$1426                                                  0040 GR
- 17 A$lab3-1$1427                                                  0042 GR
- 17 A$lab3-1$1428                                                  0044 GR
- 17 A$lab3-1$1429                                                  0046 GR
- 17 A$lab3-1$1430                                                  0048 GR
- 17 A$lab3-1$1431                                                  004A GR
- 17 A$lab3-1$1432                                                  004C GR
- 17 A$lab3-1$1433                                                  004F GR
- 17 A$lab3-1$1434                                                  0051 GR
- 17 A$lab3-1$1435                                                  0053 GR
- 17 A$lab3-1$1438                                                  0055 GR
- 17 A$lab3-1$1441                                                  0058 GR
- 17 A$lab3-1$1442                                                  005A GR
- 17 A$lab3-1$1443                                                  005C GR
- 17 A$lab3-1$1444                                                  005E GR
- 17 A$lab3-1$1445                                                  0060 GR
- 17 A$lab3-1$1446                                                  0062 GR
- 17 A$lab3-1$1447                                                  0064 GR
- 17 A$lab3-1$1448                                                  0067 GR
- 17 A$lab3-1$1449                                                  0069 GR
- 17 A$lab3-1$1450                                                  006B GR
- 17 A$lab3-1$1453                                                  006D GR
- 17 A$lab3-1$1454                                                  006F GR
- 17 A$lab3-1$1455                                                  0071 GR
- 17 A$lab3-1$1456                                                  0073 GR
- 17 A$lab3-1$1457                                                  0075 GR
- 17 A$lab3-1$1458                                                  0077 GR
- 17 A$lab3-1$1459                                                  0079 GR
- 17 A$lab3-1$1460                                                  007C GR
- 17 A$lab3-1$1461                                                  007E GR
- 17 A$lab3-1$1462                                                  0080 GR
- 17 A$lab3-1$1465                                                  0082 GR
- 17 A$lab3-1$1481                                                  0083 GR
- 17 A$lab3-1$1484                                                  0085 GR
- 17 A$lab3-1$1487                                                  0088 GR
- 17 A$lab3-1$1490                                                  008B GR
- 17 A$lab3-1$1491                                                  008D GR
- 17 A$lab3-1$1493                                                  008F GR
- 17 A$lab3-1$1494                                                  0090 GR
- 17 A$lab3-1$1495                                                  0093 GR
- 17 A$lab3-1$1497                                                  0094 GR
- 17 A$lab3-1$1498                                                  0095 GR
- 17 A$lab3-1$1499                                                  0096 GR
- 17 A$lab3-1$1503                                                  0098 GR
- 17 A$lab3-1$1504                                                  009A GR
- 17 A$lab3-1$1507                                                  009D GR
- 17 A$lab3-1$1510                                                  00A0 GR
- 17 A$lab3-1$1513                                                  00A3 GR
- 17 A$lab3-1$1516                                                  00A5 GR
- 17 A$lab3-1$1531                                                  00A6 GR
- 17 A$lab3-1$1534                                                  00A8 GR
- 17 A$lab3-1$1537                                                  00AB GR
- 17 A$lab3-1$1540                                                  00AD GR
- 17 A$lab3-1$1543                                                  00AF GR
- 17 A$lab3-1$1546                                                  00B2 GR
- 17 A$lab3-1$1549                                                  00B5 GR
- 17 A$lab3-1$1552                                                  00B8 GR
- 17 A$lab3-1$1555                                                  00BB GR
- 17 A$lab3-1$1558                                                  00BD GR
- 17 A$lab3-1$1573                                                  00BE GR
- 17 A$lab3-1$1576                                                  00C0 GR
- 17 A$lab3-1$1579                                                  00C3 GR
- 17 A$lab3-1$1582                                                  00C6 GR
- 17 A$lab3-1$1585                                                  00C9 GR
- 17 A$lab3-1$1588                                                  00CB GR
- 17 A$lab3-1$1591                                                  00CE GR
- 17 A$lab3-1$1594                                                  00D1 GR
- 17 A$lab3-1$1597                                                  00D3 GR
- 17 A$lab3-1$1612                                                  00D4 GR
- 17 A$lab3-1$1615                                                  00D6 GR
- 17 A$lab3-1$1618                                                  00D9 GR
- 17 A$lab3-1$1621                                                  00DC GR
- 17 A$lab3-1$1624                                                  00DE GR
- 17 A$lab3-1$1638                                                  00DF GR
- 17 A$lab3-1$1641                                                  00E2 GR
- 17 A$lab3-1$1644                                                  00E5 GR
- 17 A$lab3-1$1647                                                  00E8 GR
- 17 A$lab3-1$1662                                                  00E9 GR
- 17 A$lab3-1$1665                                                  00EB GR
- 17 A$lab3-1$1668                                                  00EE GR
- 17 A$lab3-1$1671                                                  00F1 GR
- 17 A$lab3-1$1674                                                  00F4 GR
- 17 A$lab3-1$1677                                                  00F7 GR
- 17 A$lab3-1$1680                                                  00FA GR
- 17 A$lab3-1$1683                                                  00FD GR
- 17 A$lab3-1$1686                                                  0100 GR
- 17 A$lab3-1$1689                                                  0103 GR
- 17 A$lab3-1$1692                                                  0106 GR
- 17 A$lab3-1$1695                                                  0109 GR
- 17 A$lab3-1$1698                                                  010C GR
- 17 A$lab3-1$1701                                                  010F GR
- 17 A$lab3-1$1704                                                  0111 GR
- 17 A$lab3-1$1707                                                  0113 GR
- 17 A$lab3-1$1710                                                  0115 GR
- 17 A$lab3-1$1722                                                  0116 GR
- 17 A$lab3-1$1723                                                  0118 GR
- 17 A$lab3-1$1724                                                  011A GR
- 17 A$lab3-1$1725                                                  011C GR
- 17 A$lab3-1$1726                                                  011E GR
- 17 A$lab3-1$1727                                                  0120 GR
- 17 A$lab3-1$1728                                                  0122 GR
- 17 A$lab3-1$1729                                                  0124 GR
- 17 A$lab3-1$1730                                                  0126 GR
- 17 A$lab3-1$1731                                                  0128 GR
- 17 A$lab3-1$1732                                                  012A GR
- 17 A$lab3-1$1733                                                  012C GR
- 17 A$lab3-1$1734                                                  012E GR
- 17 A$lab3-1$1735                                                  0130 GR
- 17 A$lab3-1$1736                                                  0132 GR
- 17 A$lab3-1$1739                                                  0135 GR
- 17 A$lab3-1$1740                                                  0137 GR
- 17 A$lab3-1$1741                                                  0138 GR
- 17 A$lab3-1$1742                                                  013B GR
- 17 A$lab3-1$1746                                                  013D GR
- 17 A$lab3-1$1747                                                  013F GR
- 17 A$lab3-1$1748                                                  0141 GR
- 17 A$lab3-1$1749                                                  0143 GR
- 17 A$lab3-1$1750                                                  0145 GR
- 17 A$lab3-1$1751                                                  0147 GR
- 17 A$lab3-1$1752                                                  0149 GR
- 17 A$lab3-1$1753                                                  014B GR
- 17 A$lab3-1$1754                                                  014D GR
- 17 A$lab3-1$1755                                                  0150 GR
- 17 A$lab3-1$1756                                                  0152 GR
- 17 A$lab3-1$1757                                                  0154 GR
- 17 A$lab3-1$1760                                                  0156 GR
- 17 A$lab3-1$1761                                                  0158 GR
- 17 A$lab3-1$1762                                                  015A GR
- 17 A$lab3-1$1763                                                  015C GR
- 17 A$lab3-1$1764                                                  015E GR
- 17 A$lab3-1$1765                                                  0160 GR
- 17 A$lab3-1$1766                                                  0162 GR
- 17 A$lab3-1$1767                                                  0164 GR
- 17 A$lab3-1$1768                                                  0166 GR
- 17 A$lab3-1$1769                                                  0168 GR
- 17 A$lab3-1$1770                                                  016A GR
- 17 A$lab3-1$1771                                                  016C GR
- 17 A$lab3-1$1772                                                  016E GR
- 17 A$lab3-1$1773                                                  0170 GR
- 17 A$lab3-1$1774                                                  0172 GR
- 17 A$lab3-1$1777                                                  0174 GR
+  D A$lab3-1$1254                                                  0000 GR
+  D A$lab3-1$1255                                                  0003 GR
+  D A$lab3-1$1257                                                  000B GR
+  D A$lab3-1$1259                                                  0013 GR
+  D A$lab3-1$1261                                                  001B GR
+  D A$lab3-1$1263                                                  0023 GR
+  D A$lab3-1$1265                                                  002B GR
+ 14 A$lab3-1$1282                                                  0000 GR
+ 14 A$lab3-1$1283                                                  0001 GR
+ 14 A$lab3-1$1284                                                  0003 GR
+ 15 A$lab3-1$1286                                                  0000 GR
+  D A$lab3-1$1293                                                  002E GR
+  D A$lab3-1$1295                                                  0031 GR
+ 16 A$lab3-1$1320                                                  0000 GR
+ 16 A$lab3-1$1326                                                  0002 GR
+ 16 A$lab3-1$1327                                                  0005 GR
+ 16 A$lab3-1$1331                                                  0007 GR
+ 16 A$lab3-1$1334                                                  0009 GR
+ 16 A$lab3-1$1352                                                  000A GR
+ 16 A$lab3-1$1353                                                  000D GR
+ 16 A$lab3-1$1357                                                  000F GR
+ 16 A$lab3-1$1362                                                  0012 GR
+ 16 A$lab3-1$1376                                                  0013 GR
+ 16 A$lab3-1$1379                                                  0016 GR
+ 16 A$lab3-1$1382                                                  0019 GR
+ 16 A$lab3-1$1385                                                  001C GR
+ 16 A$lab3-1$1388                                                  001F GR
+ 16 A$lab3-1$1391                                                  0022 GR
+ 16 A$lab3-1$1394                                                  0025 GR
+ 16 A$lab3-1$1397                                                  0028 GR
+ 16 A$lab3-1$1398                                                  002A GR
+ 16 A$lab3-1$1399                                                  002C GR
+ 16 A$lab3-1$1400                                                  002E GR
+ 16 A$lab3-1$1401                                                  0030 GR
+ 16 A$lab3-1$1402                                                  0032 GR
+ 16 A$lab3-1$1403                                                  0034 GR
+ 16 A$lab3-1$1404                                                  0037 GR
+ 16 A$lab3-1$1405                                                  0039 GR
+ 16 A$lab3-1$1406                                                  003B GR
+ 16 A$lab3-1$1409                                                  003D GR
+ 16 A$lab3-1$1410                                                  003F GR
+ 16 A$lab3-1$1411                                                  0041 GR
+ 16 A$lab3-1$1412                                                  0043 GR
+ 16 A$lab3-1$1413                                                  0045 GR
+ 16 A$lab3-1$1414                                                  0047 GR
+ 16 A$lab3-1$1415                                                  0049 GR
+ 16 A$lab3-1$1416                                                  004C GR
+ 16 A$lab3-1$1417                                                  004E GR
+ 16 A$lab3-1$1418                                                  0050 GR
+ 16 A$lab3-1$1421                                                  0052 GR
+ 16 A$lab3-1$1424                                                  0055 GR
+ 16 A$lab3-1$1425                                                  0057 GR
+ 16 A$lab3-1$1426                                                  0059 GR
+ 16 A$lab3-1$1427                                                  005B GR
+ 16 A$lab3-1$1428                                                  005D GR
+ 16 A$lab3-1$1429                                                  005F GR
+ 16 A$lab3-1$1430                                                  0061 GR
+ 16 A$lab3-1$1431                                                  0064 GR
+ 16 A$lab3-1$1432                                                  0066 GR
+ 16 A$lab3-1$1433                                                  0068 GR
+ 16 A$lab3-1$1436                                                  006A GR
+ 16 A$lab3-1$1437                                                  006C GR
+ 16 A$lab3-1$1438                                                  006E GR
+ 16 A$lab3-1$1439                                                  0070 GR
+ 16 A$lab3-1$1440                                                  0072 GR
+ 16 A$lab3-1$1441                                                  0074 GR
+ 16 A$lab3-1$1442                                                  0076 GR
+ 16 A$lab3-1$1443                                                  0079 GR
+ 16 A$lab3-1$1444                                                  007B GR
+ 16 A$lab3-1$1445                                                  007D GR
+ 16 A$lab3-1$1451                                                  007F GR
+ 16 A$lab3-1$1452                                                  0081 GR
+ 16 A$lab3-1$1453                                                  0083 GR
+ 16 A$lab3-1$1454                                                  0085 GR
+ 16 A$lab3-1$1455                                                  0087 GR
+ 16 A$lab3-1$1456                                                  0089 GR
+ 16 A$lab3-1$1457                                                  008B GR
+ 16 A$lab3-1$1458                                                  008E GR
+ 16 A$lab3-1$1459                                                  0090 GR
+ 16 A$lab3-1$1460                                                  0092 GR
+ 16 A$lab3-1$1463                                                  0094 GR
+ 16 A$lab3-1$1479                                                  0096 GR
+ 16 A$lab3-1$1482                                                  0098 GR
+ 16 A$lab3-1$1485                                                  009B GR
+ 16 A$lab3-1$1488                                                  009E GR
+ 16 A$lab3-1$1489                                                  00A0 GR
+ 16 A$lab3-1$1491                                                  00A2 GR
+ 16 A$lab3-1$1492                                                  00A3 GR
+ 16 A$lab3-1$1493                                                  00A6 GR
+ 16 A$lab3-1$1495                                                  00A7 GR
+ 16 A$lab3-1$1496                                                  00A8 GR
+ 16 A$lab3-1$1497                                                  00A9 GR
+ 16 A$lab3-1$1501                                                  00AB GR
+ 16 A$lab3-1$1502                                                  00AD GR
+ 16 A$lab3-1$1505                                                  00B0 GR
+ 16 A$lab3-1$1508                                                  00B3 GR
+ 16 A$lab3-1$1511                                                  00B6 GR
+ 16 A$lab3-1$1514                                                  00B8 GR
+ 16 A$lab3-1$1529                                                  00B9 GR
+ 16 A$lab3-1$1532                                                  00BB GR
+ 16 A$lab3-1$1535                                                  00BE GR
+ 16 A$lab3-1$1538                                                  00C0 GR
+ 16 A$lab3-1$1541                                                  00C2 GR
+ 16 A$lab3-1$1544                                                  00C4 GR
+ 16 A$lab3-1$1547                                                  00C7 GR
+ 16 A$lab3-1$1550                                                  00CA GR
+ 16 A$lab3-1$1553                                                  00CD GR
+ 16 A$lab3-1$1556                                                  00D0 GR
+ 16 A$lab3-1$1559                                                  00D2 GR
+ 16 A$lab3-1$1574                                                  00D3 GR
+ 16 A$lab3-1$1577                                                  00D5 GR
+ 16 A$lab3-1$1580                                                  00D8 GR
+ 16 A$lab3-1$1583                                                  00DB GR
+ 16 A$lab3-1$1586                                                  00DE GR
+ 16 A$lab3-1$1589                                                  00E0 GR
+ 16 A$lab3-1$1592                                                  00E3 GR
+ 16 A$lab3-1$1595                                                  00E6 GR
+ 16 A$lab3-1$1598                                                  00E8 GR
+ 16 A$lab3-1$1601                                                  00EA GR
+ 16 A$lab3-1$1616                                                  00EB GR
+ 16 A$lab3-1$1619                                                  00ED GR
+ 16 A$lab3-1$1622                                                  00F0 GR
+ 16 A$lab3-1$1625                                                  00F3 GR
+ 16 A$lab3-1$1628                                                  00F5 GR
+ 16 A$lab3-1$1642                                                  00F6 GR
+ 16 A$lab3-1$1645                                                  00F9 GR
+ 16 A$lab3-1$1648                                                  00FC GR
+ 16 A$lab3-1$1651                                                  00FF GR
+ 16 A$lab3-1$1666                                                  0100 GR
+ 16 A$lab3-1$1669                                                  0102 GR
+ 16 A$lab3-1$1672                                                  0105 GR
+ 16 A$lab3-1$1675                                                  0108 GR
+ 16 A$lab3-1$1678                                                  010B GR
+ 16 A$lab3-1$1681                                                  010E GR
+ 16 A$lab3-1$1684                                                  0111 GR
+ 16 A$lab3-1$1687                                                  0114 GR
+ 16 A$lab3-1$1690                                                  0116 GR
+ 16 A$lab3-1$1693                                                  0119 GR
+ 16 A$lab3-1$1696                                                  011C GR
+ 16 A$lab3-1$1699                                                  011F GR
+ 16 A$lab3-1$1702                                                  0122 GR
+ 16 A$lab3-1$1705                                                  0125 GR
+ 16 A$lab3-1$1708                                                  0127 GR
+ 16 A$lab3-1$1711                                                  0129 GR
+ 16 A$lab3-1$1727                                                  012A GR
+ 16 A$lab3-1$1746                                                  012B GR
+ 16 A$lab3-1$1749                                                  012D GR
     AC                                                             00D6 
     ACC                                                            00E0 
     ACC.0                                                          00E0 
@@ -203,98 +169,100 @@ Symbol Table
     B.5                                                            00F5 
     B.6                                                            00F6 
     B.7                                                            00F7 
- 17 C$lab3_1.c$100$1$1                                          =  00AF GR
- 17 C$lab3_1.c$101$1$1                                          =  00B2 GR
- 17 C$lab3_1.c$103$1$1                                          =  00B5 GR
- 17 C$lab3_1.c$104$1$1                                          =  00B8 GR
- 17 C$lab3_1.c$106$1$1                                          =  00BB GR
- 17 C$lab3_1.c$107$1$1                                          =  00BD GR
- 17 C$lab3_1.c$115$1$1                                          =  00BE GR
- 17 C$lab3_1.c$117$1$1                                          =  00BE GR
- 17 C$lab3_1.c$119$1$1                                          =  00C0 GR
- 17 C$lab3_1.c$120$1$1                                          =  00C3 GR
- 17 C$lab3_1.c$121$1$1                                          =  00C6 GR
- 17 C$lab3_1.c$122$1$1                                          =  00C9 GR
- 17 C$lab3_1.c$124$1$1                                          =  00CB GR
- 17 C$lab3_1.c$125$1$1                                          =  00CE GR
- 17 C$lab3_1.c$128$1$1                                          =  00D1 GR
- 17 C$lab3_1.c$129$1$1                                          =  00D3 GR
- 17 C$lab3_1.c$131$1$1                                          =  00D4 GR
- 17 C$lab3_1.c$133$1$1                                          =  00D4 GR
- 17 C$lab3_1.c$135$1$1                                          =  00D6 GR
- 17 C$lab3_1.c$136$1$1                                          =  00D9 GR
- 17 C$lab3_1.c$138$1$1                                          =  00DC GR
- 17 C$lab3_1.c$139$1$1                                          =  00DE GR
- 17 C$lab3_1.c$141$1$1                                          =  00DF GR
- 17 C$lab3_1.c$143$1$1                                          =  00DF GR
- 17 C$lab3_1.c$144$1$1                                          =  00E2 GR
- 17 C$lab3_1.c$145$1$1                                          =  00E5 GR
- 17 C$lab3_1.c$146$1$1                                          =  00E8 GR
- 17 C$lab3_1.c$148$1$1                                          =  00E9 GR
- 17 C$lab3_1.c$150$1$1                                          =  00E9 GR
- 17 C$lab3_1.c$152$1$1                                          =  00EB GR
- 17 C$lab3_1.c$153$1$1                                          =  00EE GR
- 17 C$lab3_1.c$154$1$1                                          =  00F1 GR
- 17 C$lab3_1.c$155$1$1                                          =  00F4 GR
- 17 C$lab3_1.c$156$1$1                                          =  00F7 GR
- 17 C$lab3_1.c$157$1$1                                          =  00FA GR
- 17 C$lab3_1.c$158$1$1                                          =  00FD GR
- 17 C$lab3_1.c$160$1$1                                          =  0100 GR
- 17 C$lab3_1.c$161$1$1                                          =  0103 GR
- 17 C$lab3_1.c$162$1$1                                          =  0106 GR
- 17 C$lab3_1.c$163$1$1                                          =  0109 GR
- 17 C$lab3_1.c$164$1$1                                          =  010C GR
- 17 C$lab3_1.c$166$1$1                                          =  010F GR
- 17 C$lab3_1.c$167$1$1                                          =  0111 GR
- 17 C$lab3_1.c$169$1$1                                          =  0113 GR
- 17 C$lab3_1.c$170$1$1                                          =  0115 GR
- 17 C$lab3_1.c$174$1$1                                          =  0116 GR
- 17 C$lab3_1.c$176$1$1                                          =  0135 GR
- 17 C$lab3_1.c$177$1$1                                          =  013D GR
- 17 C$lab3_1.c$178$1$1                                          =  0156 GR
- 17 C$lab3_1.c$179$1$1                                          =  0174 GR
- 15 C$lab3_1.c$31$1$1                                           =  0000 GR
- 17 C$lab3_1.c$36$1$1                                           =  0013 GR
- 17 C$lab3_1.c$39$1$1                                           =  0013 GR
- 17 C$lab3_1.c$40$1$1                                           =  0016 GR
- 17 C$lab3_1.c$42$1$1                                           =  0019 GR
- 17 C$lab3_1.c$43$1$1                                           =  001C GR
- 17 C$lab3_1.c$44$1$1                                           =  001F GR
- 17 C$lab3_1.c$45$1$1                                           =  0022 GR
- 17 C$lab3_1.c$46$1$1                                           =  0025 GR
- 17 C$lab3_1.c$49$1$1                                           =  0028 GR
- 17 C$lab3_1.c$51$1$1                                           =  002B GR
- 17 C$lab3_1.c$52$1$1                                           =  0040 GR
- 17 C$lab3_1.c$56$1$1                                           =  0055 GR
- 17 C$lab3_1.c$58$1$1                                           =  0058 GR
- 17 C$lab3_1.c$59$1$1                                           =  006D GR
- 17 C$lab3_1.c$60$1$1                                           =  0082 GR
- 17 C$lab3_1.c$68$1$1                                           =  0083 GR
- 17 C$lab3_1.c$73$1$1                                           =  0083 GR
- 17 C$lab3_1.c$74$1$1                                           =  0085 GR
- 17 C$lab3_1.c$76$1$1                                           =  0088 GR
- 17 C$lab3_1.c$77$1$1                                           =  008B GR
- 17 C$lab3_1.c$78$1$1                                           =  0098 GR
- 17 C$lab3_1.c$79$1$1                                           =  009D GR
- 17 C$lab3_1.c$80$1$1                                           =  00A0 GR
- 17 C$lab3_1.c$82$1$1                                           =  00A3 GR
- 17 C$lab3_1.c$83$1$1                                           =  00A5 GR
- 17 C$lab3_1.c$91$1$1                                           =  00A6 GR
- 17 C$lab3_1.c$93$1$1                                           =  00A6 GR
- 17 C$lab3_1.c$95$1$1                                           =  00A8 GR
- 17 C$lab3_1.c$97$1$1                                           =  00AB GR
- 17 C$lab3_1.c$98$1$1                                           =  00AD GR
- 17 C$putget.h$18$0$0                                           =  0000 GR
- 17 C$putget.h$20$1$1                                           =  0002 GR
- 17 C$putget.h$21$1$1                                           =  0002 GR
- 17 C$putget.h$22$1$1                                           =  0007 GR
- 17 C$putget.h$23$1$1                                           =  0009 GR
- 17 C$putget.h$28$1$1                                           =  000A GR
- 17 C$putget.h$31$1$1                                           =  000A GR
- 17 C$putget.h$32$1$1                                           =  000A GR
- 17 C$putget.h$33$1$1                                           =  000F GR
- 17 C$putget.h$35$1$1                                           =  0012 GR
- 17 C$putget.h$36$1$1                                           =  0012 GR
+ 16 C$lab3_1.c$100$1$1                                          =  00BB GR
+ 16 C$lab3_1.c$102$1$1                                          =  00BE GR
+ 16 C$lab3_1.c$103$1$1                                          =  00C0 GR
+ 16 C$lab3_1.c$104$1$1                                          =  00C2 GR
+ 16 C$lab3_1.c$109$1$1                                          =  00C4 GR
+ 16 C$lab3_1.c$110$1$1                                          =  00C7 GR
+ 16 C$lab3_1.c$113$1$1                                          =  00CA GR
+ 16 C$lab3_1.c$114$1$1                                          =  00CD GR
+ 16 C$lab3_1.c$116$1$1                                          =  00D0 GR
+ 16 C$lab3_1.c$117$1$1                                          =  00D2 GR
+ 16 C$lab3_1.c$125$1$1                                          =  00D3 GR
+ 16 C$lab3_1.c$127$1$1                                          =  00D3 GR
+ 16 C$lab3_1.c$129$1$1                                          =  00D5 GR
+ 16 C$lab3_1.c$130$1$1                                          =  00D8 GR
+ 16 C$lab3_1.c$131$1$1                                          =  00DB GR
+ 16 C$lab3_1.c$132$1$1                                          =  00DE GR
+ 16 C$lab3_1.c$134$1$1                                          =  00E0 GR
+ 16 C$lab3_1.c$135$1$1                                          =  00E3 GR
+ 16 C$lab3_1.c$136$1$1                                          =  00E6 GR
+ 16 C$lab3_1.c$138$1$1                                          =  00E8 GR
+ 16 C$lab3_1.c$139$1$1                                          =  00EA GR
+ 16 C$lab3_1.c$141$1$1                                          =  00EB GR
+ 16 C$lab3_1.c$143$1$1                                          =  00EB GR
+ 16 C$lab3_1.c$145$1$1                                          =  00ED GR
+ 16 C$lab3_1.c$146$1$1                                          =  00F0 GR
+ 16 C$lab3_1.c$148$1$1                                          =  00F3 GR
+ 16 C$lab3_1.c$149$1$1                                          =  00F5 GR
+ 16 C$lab3_1.c$151$1$1                                          =  00F6 GR
+ 16 C$lab3_1.c$153$1$1                                          =  00F6 GR
+ 16 C$lab3_1.c$154$1$1                                          =  00F9 GR
+ 16 C$lab3_1.c$155$1$1                                          =  00FC GR
+ 16 C$lab3_1.c$156$1$1                                          =  00FF GR
+ 16 C$lab3_1.c$158$1$1                                          =  0100 GR
+ 16 C$lab3_1.c$160$1$1                                          =  0100 GR
+ 16 C$lab3_1.c$162$1$1                                          =  0102 GR
+ 16 C$lab3_1.c$163$1$1                                          =  0105 GR
+ 16 C$lab3_1.c$164$1$1                                          =  0108 GR
+ 16 C$lab3_1.c$165$1$1                                          =  010B GR
+ 16 C$lab3_1.c$166$1$1                                          =  010E GR
+ 16 C$lab3_1.c$167$1$1                                          =  0111 GR
+ 16 C$lab3_1.c$168$1$1                                          =  0114 GR
+ 16 C$lab3_1.c$170$1$1                                          =  0116 GR
+ 16 C$lab3_1.c$171$1$1                                          =  0119 GR
+ 16 C$lab3_1.c$172$1$1                                          =  011C GR
+ 16 C$lab3_1.c$173$1$1                                          =  011F GR
+ 16 C$lab3_1.c$174$1$1                                          =  0122 GR
+ 16 C$lab3_1.c$175$1$1                                          =  0125 GR
+ 16 C$lab3_1.c$177$1$1                                          =  0127 GR
+ 16 C$lab3_1.c$178$1$1                                          =  0129 GR
+ 16 C$lab3_1.c$180$1$1                                          =  012A GR
+ 16 C$lab3_1.c$184$1$1                                          =  012A GR
+ 16 C$lab3_1.c$186$1$1                                          =  012B GR
+ 16 C$lab3_1.c$190$1$1                                          =  012B GR
+ 16 C$lab3_1.c$191$1$1                                          =  012D GR
+ 14 C$lab3_1.c$32$1$1                                           =  0000 GR
+ 16 C$lab3_1.c$37$1$1                                           =  0013 GR
+ 16 C$lab3_1.c$39$1$1                                           =  0013 GR
+ 16 C$lab3_1.c$40$1$1                                           =  0016 GR
+ 16 C$lab3_1.c$42$1$1                                           =  0019 GR
+ 16 C$lab3_1.c$43$1$1                                           =  001C GR
+ 16 C$lab3_1.c$44$1$1                                           =  001F GR
+ 16 C$lab3_1.c$45$1$1                                           =  0022 GR
+ 16 C$lab3_1.c$49$1$1                                           =  0025 GR
+ 16 C$lab3_1.c$51$1$1                                           =  0028 GR
+ 16 C$lab3_1.c$52$1$1                                           =  003D GR
+ 16 C$lab3_1.c$56$1$1                                           =  0052 GR
+ 16 C$lab3_1.c$58$1$1                                           =  0055 GR
+ 16 C$lab3_1.c$59$1$1                                           =  006A GR
+ 16 C$lab3_1.c$60$1$1                                           =  007F GR
+ 16 C$lab3_1.c$62$2$2                                           =  007F GR
+ 16 C$lab3_1.c$65$1$1                                           =  0094 GR
+ 16 C$lab3_1.c$73$1$1                                           =  0096 GR
+ 16 C$lab3_1.c$78$1$1                                           =  0096 GR
+ 16 C$lab3_1.c$79$1$1                                           =  0098 GR
+ 16 C$lab3_1.c$81$1$1                                           =  009B GR
+ 16 C$lab3_1.c$82$1$1                                           =  009E GR
+ 16 C$lab3_1.c$83$1$1                                           =  00AB GR
+ 16 C$lab3_1.c$84$1$1                                           =  00B0 GR
+ 16 C$lab3_1.c$85$1$1                                           =  00B3 GR
+ 16 C$lab3_1.c$87$1$1                                           =  00B6 GR
+ 16 C$lab3_1.c$88$1$1                                           =  00B8 GR
+ 16 C$lab3_1.c$96$1$1                                           =  00B9 GR
+ 16 C$lab3_1.c$98$1$1                                           =  00B9 GR
+ 16 C$putget.h$18$0$0                                           =  0000 GR
+ 16 C$putget.h$20$1$1                                           =  0002 GR
+ 16 C$putget.h$21$1$1                                           =  0002 GR
+ 16 C$putget.h$22$1$1                                           =  0007 GR
+ 16 C$putget.h$23$1$1                                           =  0009 GR
+ 16 C$putget.h$28$1$1                                           =  000A GR
+ 16 C$putget.h$31$1$1                                           =  000A GR
+ 16 C$putget.h$32$1$1                                           =  000A GR
+ 16 C$putget.h$33$1$1                                           =  000F GR
+ 16 C$putget.h$35$1$1                                           =  0012 GR
+ 16 C$putget.h$36$1$1                                           =  0012 GR
     CPRL2                                                          00C8 
     CT2                                                            00C9 
     CY                                                             00D7 
@@ -310,10 +278,10 @@ Symbol Table
     EXEN2                                                          00CB 
     EXF2                                                           00CE 
     F0                                                             00D5 
- 18 Flab3_1$_str_0$0$0                                          =  0000 GR
- 18 Flab3_1$_str_1$0$0                                          =  0005 GR
- 18 Flab3_1$_str_2$0$0                                          =  0016 GR
- 18 Flab3_1$_str_3$0$0                                          =  0025 GR
+ 17 Flab3_1$_str_0$0$0                                          =  0000 GR
+ 17 Flab3_1$_str_1$0$0                                          =  0005 GR
+ 17 Flab3_1$_str_2$0$0                                          =  0016 GR
+ 17 Flab3_1$_str_3$0$0                                          =  0025 GR
     G$AA$0$0                                                    =  00C2 G
     G$AC$0$0                                                    =  00D6 G
     G$ACC$0$0                                                   =  00E0 G
@@ -440,7 +408,7 @@ Symbol Table
     G$IP$0$0                                                    =  00B8 G
     G$IT0$0$0                                                   =  0088 G
     G$IT1$0$0                                                   =  008A G
- 17 G$Interrupts_Init$0$0                                       =  00DF GR
+ 16 G$Interrupts_Init$0$0                                       =  00F6 GR
     G$MAC0A$0$0                                                 =  C2C1 G
     G$MAC0ACC$0$0                                               =  96959493 G
     G$MAC0ACC0$0$0                                              =  0093 G
@@ -585,7 +553,7 @@ Symbol Table
     G$PLL0DIV$0$0                                               =  008D G
     G$PLL0FLT$0$0                                               =  008F G
     G$PLL0MUL$0$0                                               =  008E G
- 17 G$PORT_INIT$0$0                                             =  00A6 GR
+ 16 G$PORT_INIT$0$0                                             =  00B9 GR
     G$PS$0$0                                                    =  00BC G
     G$PS0$0$0                                                   =  00BC G
     G$PSBANK$0$0                                                =  00B1 G
@@ -649,11 +617,11 @@ Symbol Table
     G$SPI0DAT$0$0                                               =  009B G
     G$SPIEN$0$0                                                 =  00F8 G
     G$SPIF$0$0                                                  =  00FF G
- 17 G$SPI_Init$0$0                                              =  00D4 GR
+ 16 G$SPI_Init$0$0                                              =  00EB GR
     G$SSTA0$0$0                                                 =  0091 G
     G$STA$0$0                                                   =  00C5 G
     G$STO$0$0                                                   =  00C4 G
- 17 G$SYSCLK_INIT$0$0                                           =  0083 GR
+ 16 G$SYSCLK_INIT$0$0                                           =  0096 GR
     G$TB80$0$0                                                  =  009B G
     G$TB81$0$0                                                  =  009B G
     G$TCON$0$0                                                  =  0088 G
@@ -695,19 +663,20 @@ Symbol Table
     G$TR3$0$0                                                   =  00CA G
     G$TR4$0$0                                                   =  00CA G
     G$TXBMT$0$0                                                 =  00F9 G
- 17 G$Timer2_ISR$0$0                                            =  0116 GR
- 17 G$Timer_Init$0$0                                            =  00E9 GR
- 17 G$UART_INIT$0$0                                             =  00BE GR
+ 16 G$Timer1_ISR$0$0                                            =  012A GR
+ 16 G$Timer2_ISR$0$0                                            =  012B GR
+ 16 G$Timer_Init$0$0                                            =  0100 GR
+ 16 G$UART_INIT$0$0                                             =  00D3 GR
     G$WCOL$0$0                                                  =  00FE G
     G$WDTCN$0$0                                                 =  00FF G
     G$XBR0$0$0                                                  =  00E1 G
     G$XBR1$0$0                                                  =  00E2 G
     G$XBR2$0$0                                                  =  00E3 G
     G$_XPAGE$0$0                                                =  00A2 G
- 17 G$getchar$0$0                                               =  000A GR
- 17 G$main$0$0                                                  =  0013 GR
-  4 G$overflows$0$0                                             =  0000 GR
- 17 G$putchar$0$0                                               =  0000 GR
+ 16 G$getchar$0$0                                               =  000A GR
+ 16 G$main$0$0                                                  =  0013 GR
+  3 G$overflows$0$0                                             =  0000 GR
+ 16 G$putchar$0$0                                               =  0000 GR
     IE                                                             00A8 
     IE.0                                                           00A8 
     IE.1                                                           00A9 
@@ -841,16 +810,17 @@ Symbol Table
     TR1                                                            008E 
     TR2                                                            00CA 
     TXD                                                            00B1 
- 17 XG$Interrupts_Init$0$0                                      =  00E8 GR
- 17 XG$PORT_INIT$0$0                                            =  00BD GR
- 17 XG$SPI_Init$0$0                                             =  00DE GR
- 17 XG$SYSCLK_INIT$0$0                                          =  00A5 GR
- 17 XG$Timer2_ISR$0$0                                           =  0174 GR
- 17 XG$Timer_Init$0$0                                           =  0115 GR
- 17 XG$UART_INIT$0$0                                            =  00D3 GR
- 17 XG$getchar$0$0                                              =  0012 GR
- 17 XG$main$0$0                                                 =  0082 GR
- 17 XG$putchar$0$0                                              =  0009 GR
+ 16 XG$Interrupts_Init$0$0                                      =  00FF GR
+ 16 XG$PORT_INIT$0$0                                            =  00D2 GR
+ 16 XG$SPI_Init$0$0                                             =  00F5 GR
+ 16 XG$SYSCLK_INIT$0$0                                          =  00B8 GR
+ 16 XG$Timer1_ISR$0$0                                           =  012A GR
+ 16 XG$Timer2_ISR$0$0                                           =  012D GR
+ 16 XG$Timer_Init$0$0                                           =  0129 GR
+ 16 XG$UART_INIT$0$0                                            =  00EA GR
+ 16 XG$getchar$0$0                                              =  0012 GR
+ 16 XG$main$0$0                                                 =  0094 GR
+ 16 XG$putchar$0$0                                              =  0009 GR
     _AA                                                         =  00C2 G
     _AC                                                         =  00D6 G
     _ACC                                                        =  00E0 G
@@ -977,7 +947,7 @@ Symbol Table
     _IP                                                         =  00B8 G
     _IT0                                                        =  0088 G
     _IT1                                                        =  008A G
- 17 _Interrupts_Init                                               00DF GR
+ 16 _Interrupts_Init                                               00F6 GR
     _MAC0A                                                      =  C2C1 G
     _MAC0ACC                                                    =  96959493 G
     _MAC0ACC0                                                   =  0093 G
@@ -1122,7 +1092,7 @@ Symbol Table
     _PLL0DIV                                                    =  008D G
     _PLL0FLT                                                    =  008F G
     _PLL0MUL                                                    =  008E G
- 17 _PORT_INIT                                                     00A6 GR
+ 16 _PORT_INIT                                                     00B9 GR
     _PS                                                         =  00BC G
     _PS0                                                        =  00BC G
     _PSBANK                                                     =  00B1 G
@@ -1186,11 +1156,11 @@ Symbol Table
     _SPI0DAT                                                    =  009B G
     _SPIEN                                                      =  00F8 G
     _SPIF                                                       =  00FF G
- 17 _SPI_Init                                                      00D4 GR
+ 16 _SPI_Init                                                      00EB GR
     _SSTA0                                                      =  0091 G
     _STA                                                        =  00C5 G
     _STO                                                        =  00C4 G
- 17 _SYSCLK_INIT                                                   0083 GR
+ 16 _SYSCLK_INIT                                                   0096 GR
     _TB80                                                       =  009B G
     _TB81                                                       =  009B G
     _TCON                                                       =  0088 G
@@ -1232,31 +1202,32 @@ Symbol Table
     _TR3                                                        =  00CA G
     _TR4                                                        =  00CA G
     _TXBMT                                                      =  00F9 G
- 17 _Timer2_ISR                                                    0116 GR
- 17 _Timer_Init                                                    00E9 GR
- 17 _UART_INIT                                                     00BE GR
+ 16 _Timer1_ISR                                                    012A GR
+ 16 _Timer2_ISR                                                    012B GR
+ 16 _Timer_Init                                                    0100 GR
+ 16 _UART_INIT                                                     00D3 GR
     _WCOL                                                       =  00FE G
     _WDTCN                                                      =  00FF G
     _XBR0                                                       =  00E1 G
     _XBR1                                                       =  00E2 G
     _XBR2                                                       =  00E3 G
     __XPAGE                                                     =  00A2 G
-  E __interrupt_vect                                               0000 R
+  D __interrupt_vect                                               0000 R
     __mcs51_genRAMCLEAR                                            **** GX
     __mcs51_genXINIT                                               **** GX
     __mcs51_genXRAMCLEAR                                           **** GX
     __sdcc_gsinit_startup                                          **** GX
-  E __sdcc_program_startup                                         002E GR
-  6 __start__stack                                                 0000 GR
- 18 __str_0                                                        0000 R
- 18 __str_1                                                        0005 R
- 18 __str_2                                                        0016 R
- 18 __str_3                                                        0025 R
- 17 _getchar                                                       000A GR
- 17 _main                                                          0013 GR
-  4 _overflows                                                     0000 GR
+  D __sdcc_program_startup                                         002E GR
+  5 __start__stack                                                 0000 GR
+ 17 __str_0                                                        0000 R
+ 17 __str_1                                                        0005 R
+ 17 __str_2                                                        0016 R
+ 17 __str_3                                                        0025 R
+ 16 _getchar                                                       000A GR
+ 16 _main                                                          0013 GR
+  3 _overflows                                                     0000 GR
     _printf                                                        **** GX
- 17 _putchar                                                       0000 GR
+ 16 _putchar                                                       0000 GR
     a                                                              00D6 
     ac                                                             00D6 
     acc                                                            00E0 
@@ -1285,15 +1256,6 @@ Symbol Table
     b.5                                                            00F5 
     b.6                                                            00F6 
     b.7                                                            00F7 
-  3 b0                                                          =  8000 R
-  3 b1                                                          =  8100 R
-  3 b2                                                          =  8200 R
-  3 b3                                                          =  8300 R
-  3 b4                                                          =  8400 R
-  3 b5                                                          =  8500 R
-  3 b6                                                          =  8600 R
-  3 b7                                                          =  8700 R
-  3 bits                                                           0000 R
     cprl2                                                          00C8 
     ct2                                                            00C9 
     cy                                                             00D7 
@@ -1450,27 +1412,26 @@ Area Table
    0 _CODE                                                                              size    0   flags 0
    1 RSEG                                                                               size    0   flags 0
    2 REG_BANK_0                                                                         size    8   flags 4
-   3 BIT_BANK                                                                           size    1   flags 4
-   4 DSEG                                                                               size    2   flags 0
-   5 OSEG                                                                               size    0   flags 4
-   6 SSEG                                                                               size    1   flags 0
-   7 ISEG                                                                               size    0   flags 0
-   8 IABS                                                                               size    0   flags 8
-   9 BSEG                                                                               size    0   flags 80
-   A PSEG                                                                               size    0   flags 50
-   B XSEG                                                                               size    0   flags 40
-   C XABS                                                                               size    0   flags 48
-   D XISEG                                                                              size    0   flags 40
-   E HOME                                                                               size   33   flags 20
-   F GSINIT0                                                                            size    0   flags 20
-  10 GSINIT1                                                                            size    0   flags 20
-  11 GSINIT2                                                                            size    0   flags 20
-  12 GSINIT3                                                                            size    0   flags 20
-  13 GSINIT4                                                                            size    0   flags 20
-  14 GSINIT5                                                                            size    0   flags 20
-  15 GSINIT                                                                             size    5   flags 20
-  16 GSFINAL                                                                            size    3   flags 20
-  17 CSEG                                                                               size  175   flags 20
-  18 CONST                                                                              size   2A   flags 20
-  19 XINIT                                                                              size    0   flags 20
-  1A CABS                                                                               size    0   flags 28
+   3 DSEG                                                                               size    2   flags 0
+   4 OSEG                                                                               size    0   flags 4
+   5 SSEG                                                                               size    1   flags 0
+   6 ISEG                                                                               size    0   flags 0
+   7 IABS                                                                               size    0   flags 8
+   8 BSEG                                                                               size    0   flags 80
+   9 PSEG                                                                               size    0   flags 50
+   A XSEG                                                                               size    0   flags 40
+   B XABS                                                                               size    0   flags 48
+   C XISEG                                                                              size    0   flags 40
+   D HOME                                                                               size   33   flags 20
+   E GSINIT0                                                                            size    0   flags 20
+   F GSINIT1                                                                            size    0   flags 20
+  10 GSINIT2                                                                            size    0   flags 20
+  11 GSINIT3                                                                            size    0   flags 20
+  12 GSINIT4                                                                            size    0   flags 20
+  13 GSINIT5                                                                            size    0   flags 20
+  14 GSINIT                                                                             size    5   flags 20
+  15 GSFINAL                                                                            size    3   flags 20
+  16 CSEG                                                                               size  12E   flags 20
+  17 CONST                                                                              size   2A   flags 20
+  18 XINIT                                                                              size    0   flags 20
+  19 CABS                                                                               size    0   flags 28

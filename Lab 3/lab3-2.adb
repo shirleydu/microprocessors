@@ -1,4 +1,4 @@
-M:lab3_1
+M:lab3_2
 F:G$putchar$0$0({2}DF,SV:S),Z,0,0,0,0,0
 F:G$getchar$0$0({2}DF,SC:S),Z,0,0,0,0,0
 F:G$main$0$0({2}DF,SV:S),Z,0,0,0,0,0
@@ -6,10 +6,14 @@ F:G$SYSCLK_INIT$0$0({2}DF,SV:S),Z,0,0,0,0,0
 F:G$PORT_INIT$0$0({2}DF,SV:S),Z,0,0,0,0,0
 F:G$UART_INIT$0$0({2}DF,SV:S),Z,0,0,0,0,0
 F:G$Timer_Init$0$0({2}DF,SV:S),Z,0,0,0,0,0
-F:G$Timer2_ISR$0$0({2}DF,SV:S),Z,0,0,1,5,0
-F:G$Timer2_ISR$0$0({2}DF,SV:S),Z,0,0,1,5,0
-S:G$overflows$0$0({2}SI:S),E,0,0
+F:G$UART0_ISR$0$0({2}DF,SV:S),Z,0,0,1,4,0
+F:G$UART1_ISR$0$0({2}DF,SV:S),Z,0,0,1,20,0
+F:G$UART1_ISR$0$0({2}DF,SV:S),Z,0,0,1,20,0
+F:G$UART1_ISR$0$0({2}DF,SV:S),Z,0,0,1,20,0
+S:G$input$0$0({1}SC:S),E,0,0
 S:Lmain$input$1$1({1}SC:S),R,0,0,[r2]
+S:G$print0$0$0({1}SB0$1:U),H,0,0
+S:G$print1$0$0({1}SB0$1:U),H,0,0
 S:G$P0$0$0({1}SC:U),I,0,0
 S:G$SP$0$0({1}SC:U),I,0,0
 S:G$DPL$0$0({1}SC:U),I,0,0
@@ -404,7 +408,8 @@ S:G$gets$0$0({2}DF,DG,SC:S),C,0,0
 S:G$printf_fast$0$0({2}DF,SV:S),C,0,0
 S:G$printf_fast_f$0$0({2}DF,SV:S),C,0,0
 S:G$printf_tiny$0$0({2}DF,SV:S),C,0,0
-S:Flab3_1$_str_0$0$0({5}DA5,SC:S),D,0,0
-S:Flab3_1$_str_1$0$0({17}DA17,SC:S),D,0,0
-S:Flab3_1$_str_2$0$0({15}DA15,SC:S),D,0,0
-S:Flab3_1$_str_3$0$0({3}DA3,SC:S),D,0,0
+S:Flab3_2$_str_0$0$0({5}DA5,SC:S),D,0,0
+S:Flab3_2$_str_1$0$0({17}DA17,SC:S),D,0,0
+S:Flab3_2$_str_2$0$0({15}DA15,SC:S),D,0,0
+S:Flab3_2$_str_3$0$0({3}DA3,SC:S),D,0,0
+S:Flab3_2$_str_4$0$0({3}DA3,SC:S),D,0,0

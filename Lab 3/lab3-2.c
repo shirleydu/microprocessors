@@ -30,6 +30,7 @@ void UART1_ISR(void) interrupt 20;
 char input;
 bit print0 = 0;
 bit print1 = 0;
+bit UART0_off = 0;
 
 //------------------------------------------------------------------------------------
 // MAIN Routine
@@ -61,10 +62,16 @@ void main(void)
 
 	while(1)
 	{
+		/*
+		SFRPAGE = UART1_PAGE;
+		printf("RI1: %d TI1: %d ", RI1, TI1);
+
+		SFRPAGE = UART0_PAGE;
+		printf("RI0: %d TI0: %d ", RI0, TI0);*/
+
 		if (print1 == 1)
 		{
 			SFRPAGE = UART1_PAGE;
-			printf("hi");
 			input = SBUF1;
 			printf("%c", input);
 			SFRPAGE = UART0_PAGE;
@@ -81,6 +88,14 @@ void main(void)
 			printf("%c", input);
 			print0 = 0;
 		}
+
+		if (EIP2 == 0x40){
+			EIP2 &=~0x40;
+		}
+		else{
+			EIP2 |= 0x40;
+		}
+		
 	}
 
 }
@@ -142,13 +157,12 @@ void PORT_INIT(void)
 void UART_INIT(void)
 {
 	char SFRPAGE_SAVE = SFRPAGE;	
-	
 
 	SFRPAGE = UART0_PAGE;
     SCON0 = 0x50;						//8bit UART, UART0 reception enabled
 	SSTA0 = 0x05;						//UART0 use timer2 for baudrate
 	TI0 = 1;							//clears transmit flag
-//	ES0 = 1;							// enable UART0 interrupts
+	ES0 = 1;							// enable UART0 interrupts
 
     SFRPAGE = UART1_PAGE;
     SCON1 = 0x10;						//8bit UART, UART1 reception enabled
@@ -187,8 +201,9 @@ void UART0_ISR(void) interrupt 4
 	if (RI0 == 1)
 	{
 		print0 = 1;
-		RI0 = 0;
 	}
+
+	RI0 = 0;
 }
 
 void UART1_ISR(void) interrupt 20
@@ -197,8 +212,9 @@ void UART1_ISR(void) interrupt 20
 	if (RI1 == 1)
 	{
 		print1 = 1;
-		RI1 = 0;
 	}
+
+	RI1 = 0;
 }
 
 

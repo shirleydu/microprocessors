@@ -37,13 +37,13 @@ CABS                               0000   0000 =      0. bytes (ABS,CON,CODE)
   0C:0002    l_OSEG
   0C:0003    l_GSFINAL
   0C:0003    l_GSINIT0
-  0C:0004    l_GSINIT
+  0C:0006    l_GSINIT
   0C:0006    l_ISEG
   0C:0008    l_REG_BANK_0
   0C:0008    s_REG_BANK_1
   0C:000A    l_GSINIT2
   0C:000B    s_OSEG
-  0C:000C    l_BSEG
+  0C:000D    l_BSEG
   0C:0010    s_REG_BANK_2
   0C:0018    s_BIT_BANK
   0C:0018    s_REG_BANK_3
@@ -51,7 +51,7 @@ CABS                               0000   0000 =      0. bytes (ABS,CON,CODE)
   0C:0020    s__CODE
   0C:0022    l_GSINIT3
   0C:002A    l_GSINIT4
-  0C:0036    l_CONST
+  0C:0033    l_CONST
   0C:003B    s_RSEG
   0C:003B    s_SSEG
   0C:0073    l_DSEG
@@ -65,11 +65,11 @@ CABS                               0000   0000 =      0. bytes (ABS,CON,CODE)
   0C:0100    l_IRAM
   0C:0104    s_GSINIT
   0C:0104    s_GSINIT5
-  0C:0108    s_GSFINAL
-  0C:010B    s_CSEG
-  0C:07C4    l_CSEG
-  0C:08CF    s_CONST
-  0C:0905    s_XINIT
+  0C:010A    s_GSFINAL
+  0C:010D    s_CSEG
+  0C:07BF    l_CSEG
+  0C:08CC    s_CONST
+  0C:08FF    s_XINIT
 
 
 
@@ -861,7 +861,7 @@ Hexadecimal
 
 Area                               Addr   Size   Decimal Bits  (Attributes)
 --------------------------------   ----   ----   ------- ----- ------------
-BSEG                               0000   000C =     12. bits  (REL,CON,BIT)
+BSEG                               0000   000D =     13. bits  (REL,CON,BIT)
 
       Value  Global
    --------  --------------------------------
@@ -869,6 +869,8 @@ BSEG                               0000   000C =     12. bits  (REL,CON,BIT)
   0B:0000    _print0
   0B:0001    G$print1$0$0
   0B:0001    _print1
+  0B:0002    G$UART0_off$0$0
+  0B:0002    _UART0_off
 
 
 Hexadecimal
@@ -921,31 +923,31 @@ HOME                               0000   00AB =    171. bytes (REL,CON,CODE)
 
       Value  Global
    --------  --------------------------------
-  0C:0000    A$lab3-2$1259
-  0C:0003    A$lab3-2$1260
-  0C:000B    A$lab3-2$1262
-  0C:0013    A$lab3-2$1264
-  0C:001B    A$lab3-2$1266
-  0C:0023    A$lab3-2$1268
-  0C:002B    A$lab3-2$1270
-  0C:0033    A$lab3-2$1272
-  0C:003B    A$lab3-2$1274
-  0C:0043    A$lab3-2$1276
-  0C:004B    A$lab3-2$1278
-  0C:0053    A$lab3-2$1280
-  0C:005B    A$lab3-2$1282
-  0C:0063    A$lab3-2$1284
-  0C:006B    A$lab3-2$1286
-  0C:0073    A$lab3-2$1288
-  0C:007B    A$lab3-2$1290
-  0C:0083    A$lab3-2$1292
-  0C:008B    A$lab3-2$1294
-  0C:0093    A$lab3-2$1296
-  0C:009B    A$lab3-2$1298
-  0C:00A3    A$lab3-2$1300
-  0C:00A6    A$lab3-2$1330
+  0C:0000    A$lab3-2$1263
+  0C:0003    A$lab3-2$1264
+  0C:000B    A$lab3-2$1266
+  0C:0013    A$lab3-2$1268
+  0C:001B    A$lab3-2$1270
+  0C:0023    A$lab3-2$1272
+  0C:002B    A$lab3-2$1274
+  0C:0033    A$lab3-2$1276
+  0C:003B    A$lab3-2$1278
+  0C:0043    A$lab3-2$1280
+  0C:004B    A$lab3-2$1282
+  0C:0053    A$lab3-2$1284
+  0C:005B    A$lab3-2$1286
+  0C:0063    A$lab3-2$1288
+  0C:006B    A$lab3-2$1290
+  0C:0073    A$lab3-2$1292
+  0C:007B    A$lab3-2$1294
+  0C:0083    A$lab3-2$1296
+  0C:008B    A$lab3-2$1298
+  0C:0093    A$lab3-2$1300
+  0C:009B    A$lab3-2$1302
+  0C:00A3    A$lab3-2$1304
+  0C:00A6    A$lab3-2$1338
   0C:00A6    __sdcc_program_startup
-  0C:00A9    A$lab3-2$1332
+  0C:00A9    A$lab3-2$1340
 
 Hexadecimal
 
@@ -985,385 +987,385 @@ Hexadecimal
 
 Area                               Addr   Size   Decimal Bytes (Attributes)
 --------------------------------   ----   ----   ------- ----- ------------
-GSINIT                             0104   0004 =      4. bytes (REL,CON,CODE)
+GSINIT                             0104   0006 =      6. bytes (REL,CON,CODE)
 
       Value  Global
    --------  --------------------------------
-  0C:0104    A$lab3-2$1317
-  0C:0104    C$lab3_2.c$31$2$1
-  0C:0106    A$lab3-2$1321
-  0C:0106    C$lab3_2.c$32$2$1
+  0C:0104    A$lab3-2$1321
+  0C:0104    C$lab3_2.c$31$1$1
+  0C:0106    A$lab3-2$1325
+  0C:0106    C$lab3_2.c$32$1$1
+  0C:0108    A$lab3-2$1329
+  0C:0108    C$lab3_2.c$33$1$1
 
 Hexadecimal
 
 Area                               Addr   Size   Decimal Bytes (Attributes)
 --------------------------------   ----   ----   ------- ----- ------------
-GSFINAL                            0108   0003 =      3. bytes (REL,CON,CODE)
+GSFINAL                            010A   0003 =      3. bytes (REL,CON,CODE)
 
       Value  Global
    --------  --------------------------------
-  0C:0108    A$lab3-2$1323
+  0C:010A    A$lab3-2$1331
 
 Hexadecimal
 
 Area                               Addr   Size   Decimal Bytes (Attributes)
 --------------------------------   ----   ----   ------- ----- ------------
-CSEG                               010B   07C4 =   1988. bytes (REL,CON,CODE)
+CSEG                               010D   07BF =   1983. bytes (REL,CON,CODE)
 
       Value  Global
    --------  --------------------------------
-  0C:010B    A$lab3-2$1357
-  0C:010B    C$putget.h$18$0$0
-  0C:010B    G$putchar$0$0
-  0C:010B    _putchar
-  0C:010D    A$lab3-2$1363
-  0C:010D    C$putget.h$20$1$1
-  0C:010D    C$putget.h$21$1$1
-  0C:0110    A$lab3-2$1364
-  0C:0112    A$lab3-2$1368
-  0C:0112    C$putget.h$22$1$1
-  0C:0114    A$lab3-2$1371
-  0C:0114    C$putget.h$23$1$1
-  0C:0114    XG$putchar$0$0
-  0C:0115    A$lab3-2$1389
-  0C:0115    C$putget.h$28$1$1
-  0C:0115    C$putget.h$31$1$1
-  0C:0115    C$putget.h$32$1$1
-  0C:0115    G$getchar$0$0
-  0C:0115    _getchar
-  0C:0118    A$lab3-2$1390
-  0C:011A    A$lab3-2$1394
-  0C:011A    C$putget.h$33$1$1
-  0C:011D    A$lab3-2$1399
-  0C:011D    C$putget.h$35$1$1
-  0C:011D    C$putget.h$36$1$1
-  0C:011D    XG$getchar$0$0
-  0C:011E    A$lab3-2$1414
-  0C:011E    C$lab3_2.c$37$1$1
-  0C:011E    C$lab3_2.c$41$1$1
-  0C:011E    G$main$0$0
-  0C:011E    _main
-  0C:0121    A$lab3-2$1417
-  0C:0121    C$lab3_2.c$42$1$1
-  0C:0124    A$lab3-2$1420
-  0C:0124    C$lab3_2.c$44$1$1
-  0C:0127    A$lab3-2$1423
-  0C:0127    C$lab3_2.c$45$1$1
-  0C:012A    A$lab3-2$1426
-  0C:012A    C$lab3_2.c$46$1$1
-  0C:012D    A$lab3-2$1429
-  0C:012D    C$lab3_2.c$47$1$1
-  0C:0130    A$lab3-2$1432
-  0C:0130    C$lab3_2.c$49$1$1
-  0C:0133    A$lab3-2$1435
-  0C:0133    C$lab3_2.c$51$1$1
-  0C:0135    A$lab3-2$1436
-  0C:0137    A$lab3-2$1437
-  0C:0139    A$lab3-2$1438
-  0C:013B    A$lab3-2$1439
-  0C:013D    A$lab3-2$1440
-  0C:013F    A$lab3-2$1441
-  0C:0142    A$lab3-2$1442
-  0C:0144    A$lab3-2$1443
-  0C:0146    A$lab3-2$1444
-  0C:0148    A$lab3-2$1447
-  0C:0148    C$lab3_2.c$52$1$1
-  0C:014A    A$lab3-2$1448
-  0C:014C    A$lab3-2$1449
-  0C:014E    A$lab3-2$1450
-  0C:0150    A$lab3-2$1451
-  0C:0152    A$lab3-2$1452
-  0C:0154    A$lab3-2$1453
-  0C:0157    A$lab3-2$1454
-  0C:0159    A$lab3-2$1455
-  0C:015B    A$lab3-2$1456
-  0C:015D    A$lab3-2$1459
-  0C:015D    C$lab3_2.c$55$1$1
-  0C:0160    A$lab3-2$1462
-  0C:0160    C$lab3_2.c$57$1$1
-  0C:0162    A$lab3-2$1463
-  0C:0164    A$lab3-2$1464
-  0C:0166    A$lab3-2$1465
-  0C:0168    A$lab3-2$1466
-  0C:016A    A$lab3-2$1467
-  0C:016C    A$lab3-2$1468
-  0C:016F    A$lab3-2$1469
-  0C:0171    A$lab3-2$1470
-  0C:0173    A$lab3-2$1471
-  0C:0175    A$lab3-2$1474
-  0C:0175    C$lab3_2.c$58$1$1
-  0C:0177    A$lab3-2$1475
-  0C:0179    A$lab3-2$1476
-  0C:017B    A$lab3-2$1477
-  0C:017D    A$lab3-2$1478
-  0C:017F    A$lab3-2$1479
-  0C:0181    A$lab3-2$1480
-  0C:0184    A$lab3-2$1481
-  0C:0186    A$lab3-2$1482
-  0C:0188    A$lab3-2$1483
-  0C:018A    A$lab3-2$1486
-  0C:018A    C$lab3_2.c$60$1$1
-  0C:018D    A$lab3-2$1492
-  0C:018D    C$lab3_2.c$62$1$1
-  0C:018D    C$lab3_2.c$64$2$2
-  0C:0190    A$lab3-2$1495
-  0C:0190    C$lab3_2.c$66$3$3
-  0C:0193    A$lab3-2$1498
-  0C:0193    C$lab3_2.c$67$3$3
-  0C:0195    A$lab3-2$1499
-  0C:0197    A$lab3-2$1500
-  0C:0199    A$lab3-2$1501
-  0C:019B    A$lab3-2$1502
-  0C:019D    A$lab3-2$1503
-  0C:019F    A$lab3-2$1504
-  0C:01A2    A$lab3-2$1505
-  0C:01A4    A$lab3-2$1506
-  0C:01A6    A$lab3-2$1507
-  0C:01A8    A$lab3-2$1512
-  0C:01A8    C$lab3_2.c$68$3$3
-  0C:01A8    C$lab3_2.c$69$3$3
-  0C:01AA    A$lab3-2$1513
-  0C:01AB    A$lab3-2$1514
-  0C:01AC    A$lab3-2$1515
-  0C:01AE    A$lab3-2$1516
-  0C:01AF    A$lab3-2$1517
-  0C:01B1    A$lab3-2$1518
-  0C:01B3    A$lab3-2$1519
-  0C:01B5    A$lab3-2$1520
-  0C:01B7    A$lab3-2$1521
-  0C:01B9    A$lab3-2$1522
-  0C:01BB    A$lab3-2$1523
-  0C:01BD    A$lab3-2$1524
-  0C:01BF    A$lab3-2$1525
-  0C:01C1    A$lab3-2$1526
-  0C:01C3    A$lab3-2$1527
-  0C:01C6    A$lab3-2$1528
-  0C:01C8    A$lab3-2$1529
-  0C:01CA    A$lab3-2$1530
-  0C:01CC    A$lab3-2$1533
-  0C:01CC    C$lab3_2.c$70$3$3
-  0C:01CF    A$lab3-2$1536
-  0C:01CF    C$lab3_2.c$71$3$3
-  0C:01D1    A$lab3-2$1537
-  0C:01D3    A$lab3-2$1538
-  0C:01D5    A$lab3-2$1539
-  0C:01D7    A$lab3-2$1540
-  0C:01D9    A$lab3-2$1541
-  0C:01DB    A$lab3-2$1542
-  0C:01DE    A$lab3-2$1543
-  0C:01E0    A$lab3-2$1544
-  0C:01E2    A$lab3-2$1545
-  0C:01E4    A$lab3-2$1548
-  0C:01E4    C$lab3_2.c$72$3$3
-  0C:01E6    A$lab3-2$1552
-  0C:01E6    C$lab3_2.c$75$1$2
-  0C:01E9    A$lab3-2$1555
-  0C:01E9    C$lab3_2.c$77$3$4
-  0C:01EC    A$lab3-2$1560
-  0C:01EC    C$lab3_2.c$78$3$4
-  0C:01EC    C$lab3_2.c$79$3$4
-  0C:01EE    A$lab3-2$1561
-  0C:01EF    A$lab3-2$1562
-  0C:01F0    A$lab3-2$1563
-  0C:01F2    A$lab3-2$1564
-  0C:01F3    A$lab3-2$1565
-  0C:01F5    A$lab3-2$1566
-  0C:01F7    A$lab3-2$1567
-  0C:01F9    A$lab3-2$1568
-  0C:01FB    A$lab3-2$1569
-  0C:01FD    A$lab3-2$1570
-  0C:01FF    A$lab3-2$1571
-  0C:0201    A$lab3-2$1572
-  0C:0203    A$lab3-2$1573
-  0C:0205    A$lab3-2$1574
-  0C:0207    A$lab3-2$1575
-  0C:020A    A$lab3-2$1576
-  0C:020C    A$lab3-2$1577
-  0C:020E    A$lab3-2$1578
-  0C:0210    A$lab3-2$1581
-  0C:0210    C$lab3_2.c$80$3$4
-  0C:0213    A$lab3-2$1584
-  0C:0213    C$lab3_2.c$81$3$4
-  0C:0215    A$lab3-2$1585
-  0C:0217    A$lab3-2$1586
-  0C:0219    A$lab3-2$1587
-  0C:021B    A$lab3-2$1588
-  0C:021D    A$lab3-2$1589
-  0C:021F    A$lab3-2$1590
-  0C:0222    A$lab3-2$1591
-  0C:0224    A$lab3-2$1592
-  0C:0226    A$lab3-2$1593
-  0C:0228    A$lab3-2$1596
-  0C:0228    C$lab3_2.c$82$3$4
-  0C:022A    A$lab3-2$1599
-  0C:022A    C$lab3_2.c$86$1$1
-  0C:022A    XG$main$0$0
-  0C:022D    A$lab3-2$1615
-  0C:022D    C$lab3_2.c$94$1$1
-  0C:022D    C$lab3_2.c$99$1$1
-  0C:022D    G$SYSCLK_INIT$0$0
-  0C:022D    _SYSCLK_INIT
-  0C:022F    A$lab3-2$1618
-  0C:022F    C$lab3_2.c$100$1$1
-  0C:0232    A$lab3-2$1621
-  0C:0232    C$lab3_2.c$102$1$1
-  0C:0235    A$lab3-2$1624
-  0C:0235    C$lab3_2.c$103$1$1
-  0C:0237    A$lab3-2$1625
-  0C:0239    A$lab3-2$1627
-  0C:023A    A$lab3-2$1628
-  0C:023D    A$lab3-2$1629
-  0C:023E    A$lab3-2$1631
-  0C:023F    A$lab3-2$1632
-  0C:0240    A$lab3-2$1633
-  0C:0242    A$lab3-2$1637
-  0C:0242    C$lab3_2.c$104$1$1
-  0C:0244    A$lab3-2$1638
-  0C:0247    A$lab3-2$1641
-  0C:0247    C$lab3_2.c$105$1$1
-  0C:024A    A$lab3-2$1644
-  0C:024A    C$lab3_2.c$106$1$1
-  0C:024D    A$lab3-2$1647
-  0C:024D    C$lab3_2.c$108$1$1
-  0C:024F    A$lab3-2$1650
-  0C:024F    C$lab3_2.c$109$1$1
-  0C:024F    XG$SYSCLK_INIT$0$0
-  0C:0250    A$lab3-2$1665
-  0C:0250    C$lab3_2.c$117$1$1
-  0C:0250    C$lab3_2.c$119$1$1
-  0C:0250    G$PORT_INIT$0$0
-  0C:0250    _PORT_INIT
-  0C:0252    A$lab3-2$1668
-  0C:0252    C$lab3_2.c$121$1$1
-  0C:0255    A$lab3-2$1671
-  0C:0255    C$lab3_2.c$123$1$1
-  0C:0257    A$lab3-2$1674
-  0C:0257    C$lab3_2.c$124$1$1
-  0C:0259    A$lab3-2$1677
-  0C:0259    C$lab3_2.c$125$1$1
-  0C:025B    A$lab3-2$1680
-  0C:025B    C$lab3_2.c$127$1$1
-  0C:025E    A$lab3-2$1683
-  0C:025E    C$lab3_2.c$128$1$1
-  0C:0261    A$lab3-2$1686
-  0C:0261    C$lab3_2.c$130$1$1
-  0C:0264    A$lab3-2$1689
-  0C:0264    C$lab3_2.c$131$1$1
-  0C:0267    A$lab3-2$1692
-  0C:0267    C$lab3_2.c$133$1$1
-  0C:0269    A$lab3-2$1695
-  0C:0269    C$lab3_2.c$134$1$1
-  0C:0269    XG$PORT_INIT$0$0
-  0C:026A    A$lab3-2$1710
-  0C:026A    C$lab3_2.c$142$1$1
-  0C:026A    C$lab3_2.c$144$1$1
-  0C:026A    G$UART_INIT$0$0
-  0C:026A    _UART_INIT
-  0C:026C    A$lab3-2$1713
-  0C:026C    C$lab3_2.c$147$1$1
-  0C:026F    A$lab3-2$1716
-  0C:026F    C$lab3_2.c$148$1$1
-  0C:0272    A$lab3-2$1719
-  0C:0272    C$lab3_2.c$149$1$1
-  0C:0275    A$lab3-2$1722
-  0C:0275    C$lab3_2.c$150$1$1
-  0C:0277    A$lab3-2$1725
-  0C:0277    C$lab3_2.c$153$1$1
-  0C:027A    A$lab3-2$1728
-  0C:027A    C$lab3_2.c$154$1$1
-  0C:027D    A$lab3-2$1731
-  0C:027D    C$lab3_2.c$155$1$1
-  0C:027F    A$lab3-2$1734
-  0C:027F    C$lab3_2.c$156$1$1
-  0C:0282    A$lab3-2$1737
-  0C:0282    C$lab3_2.c$158$1$1
-  0C:0284    A$lab3-2$1740
-  0C:0284    C$lab3_2.c$159$1$1
-  0C:0284    XG$UART_INIT$0$0
-  0C:0285    A$lab3-2$1755
-  0C:0285    C$lab3_2.c$161$1$1
-  0C:0285    C$lab3_2.c$163$1$1
-  0C:0285    G$Timer_Init$0$0
-  0C:0285    _Timer_Init
-  0C:0287    A$lab3-2$1758
-  0C:0287    C$lab3_2.c$165$1$1
-  0C:028A    A$lab3-2$1761
-  0C:028A    C$lab3_2.c$166$1$1
-  0C:028D    A$lab3-2$1764
-  0C:028D    C$lab3_2.c$167$1$1
-  0C:0290    A$lab3-2$1767
-  0C:0290    C$lab3_2.c$168$1$1
-  0C:0293    A$lab3-2$1770
-  0C:0293    C$lab3_2.c$169$1$1
-  0C:0296    A$lab3-2$1773
-  0C:0296    C$lab3_2.c$170$1$1
-  0C:0299    A$lab3-2$1776
-  0C:0299    C$lab3_2.c$171$1$1
-  0C:029B    A$lab3-2$1779
-  0C:029B    C$lab3_2.c$173$1$1
-  0C:029E    A$lab3-2$1782
-  0C:029E    C$lab3_2.c$174$1$1
-  0C:02A1    A$lab3-2$1785
-  0C:02A1    C$lab3_2.c$175$1$1
-  0C:02A4    A$lab3-2$1788
-  0C:02A4    C$lab3_2.c$176$1$1
-  0C:02A7    A$lab3-2$1791
-  0C:02A7    C$lab3_2.c$177$1$1
-  0C:02AA    A$lab3-2$1794
-  0C:02AA    C$lab3_2.c$178$1$1
-  0C:02AC    A$lab3-2$1797
-  0C:02AC    C$lab3_2.c$180$1$1
-  0C:02AE    A$lab3-2$1800
-  0C:02AE    C$lab3_2.c$181$1$1
-  0C:02AE    XG$Timer_Init$0$0
-  0C:02AF    A$lab3-2$1814
-  0C:02AF    C$lab3_2.c$184$1$1
-  0C:02AF    C$lab3_2.c$186$1$1
-  0C:02AF    G$UART0_ISR$0$0
-  0C:02AF    _UART0_ISR
-  0C:02B2    A$lab3-2$1817
-  0C:02B2    C$lab3_2.c$187$1$1
-  0C:02B5    A$lab3-2$1820
-  0C:02B5    C$lab3_2.c$189$2$2
-  0C:02B7    A$lab3-2$1823
-  0C:02B7    C$lab3_2.c$190$2$2
-  0C:02B9    A$lab3-2$1827
-  0C:02B9    C$lab3_2.c$192$2$1
-  0C:02B9    XG$UART0_ISR$0$0
-  0C:02BA    A$lab3-2$1846
-  0C:02BA    C$lab3_2.c$194$2$1
-  0C:02BA    C$lab3_2.c$196$1$1
-  0C:02BA    G$UART1_ISR$0$0
-  0C:02BA    _UART1_ISR
-  0C:02BD    A$lab3-2$1849
-  0C:02BD    C$lab3_2.c$197$1$1
-  0C:02C0    A$lab3-2$1852
-  0C:02C0    C$lab3_2.c$199$2$2
-  0C:02C2    A$lab3-2$1855
-  0C:02C2    C$lab3_2.c$200$2$2
-  0C:02C4    A$lab3-2$1859
-  0C:02C4    C$lab3_2.c$202$2$1
-  0C:02C4    XG$UART1_ISR$0$0
-  0C:02D0    _vprintf
-  0C:02E9    _printf
-  0C:03A9    __print_format
-  0C:0897    _strlen
-  0C:08AF    __gptrget
-  0C:08CB    __sdcc_external_startup
+  0C:010D    A$lab3-2$1365
+  0C:010D    C$putget.h$18$0$0
+  0C:010D    G$putchar$0$0
+  0C:010D    _putchar
+  0C:010F    A$lab3-2$1371
+  0C:010F    C$putget.h$20$1$1
+  0C:010F    C$putget.h$21$1$1
+  0C:0112    A$lab3-2$1372
+  0C:0114    A$lab3-2$1376
+  0C:0114    C$putget.h$22$1$1
+  0C:0116    A$lab3-2$1379
+  0C:0116    C$putget.h$23$1$1
+  0C:0116    XG$putchar$0$0
+  0C:0117    A$lab3-2$1397
+  0C:0117    C$putget.h$28$1$1
+  0C:0117    C$putget.h$31$1$1
+  0C:0117    C$putget.h$32$1$1
+  0C:0117    G$getchar$0$0
+  0C:0117    _getchar
+  0C:011A    A$lab3-2$1398
+  0C:011C    A$lab3-2$1402
+  0C:011C    C$putget.h$33$1$1
+  0C:011F    A$lab3-2$1407
+  0C:011F    C$putget.h$35$1$1
+  0C:011F    C$putget.h$36$1$1
+  0C:011F    XG$getchar$0$0
+  0C:0120    A$lab3-2$1422
+  0C:0120    C$lab3_2.c$38$1$1
+  0C:0120    C$lab3_2.c$42$1$1
+  0C:0120    G$main$0$0
+  0C:0120    _main
+  0C:0123    A$lab3-2$1425
+  0C:0123    C$lab3_2.c$43$1$1
+  0C:0126    A$lab3-2$1428
+  0C:0126    C$lab3_2.c$45$1$1
+  0C:0129    A$lab3-2$1431
+  0C:0129    C$lab3_2.c$46$1$1
+  0C:012C    A$lab3-2$1434
+  0C:012C    C$lab3_2.c$47$1$1
+  0C:012F    A$lab3-2$1437
+  0C:012F    C$lab3_2.c$48$1$1
+  0C:0132    A$lab3-2$1440
+  0C:0132    C$lab3_2.c$50$1$1
+  0C:0135    A$lab3-2$1443
+  0C:0135    C$lab3_2.c$52$1$1
+  0C:0137    A$lab3-2$1444
+  0C:0139    A$lab3-2$1445
+  0C:013B    A$lab3-2$1446
+  0C:013D    A$lab3-2$1447
+  0C:013F    A$lab3-2$1448
+  0C:0141    A$lab3-2$1449
+  0C:0144    A$lab3-2$1450
+  0C:0146    A$lab3-2$1451
+  0C:0148    A$lab3-2$1452
+  0C:014A    A$lab3-2$1455
+  0C:014A    C$lab3_2.c$53$1$1
+  0C:014C    A$lab3-2$1456
+  0C:014E    A$lab3-2$1457
+  0C:0150    A$lab3-2$1458
+  0C:0152    A$lab3-2$1459
+  0C:0154    A$lab3-2$1460
+  0C:0156    A$lab3-2$1461
+  0C:0159    A$lab3-2$1462
+  0C:015B    A$lab3-2$1463
+  0C:015D    A$lab3-2$1464
+  0C:015F    A$lab3-2$1467
+  0C:015F    C$lab3_2.c$56$1$1
+  0C:0162    A$lab3-2$1470
+  0C:0162    C$lab3_2.c$58$1$1
+  0C:0164    A$lab3-2$1471
+  0C:0166    A$lab3-2$1472
+  0C:0168    A$lab3-2$1473
+  0C:016A    A$lab3-2$1474
+  0C:016C    A$lab3-2$1475
+  0C:016E    A$lab3-2$1476
+  0C:0171    A$lab3-2$1477
+  0C:0173    A$lab3-2$1478
+  0C:0175    A$lab3-2$1479
+  0C:0177    A$lab3-2$1482
+  0C:0177    C$lab3_2.c$59$1$1
+  0C:0179    A$lab3-2$1483
+  0C:017B    A$lab3-2$1484
+  0C:017D    A$lab3-2$1485
+  0C:017F    A$lab3-2$1486
+  0C:0181    A$lab3-2$1487
+  0C:0183    A$lab3-2$1488
+  0C:0186    A$lab3-2$1489
+  0C:0188    A$lab3-2$1490
+  0C:018A    A$lab3-2$1491
+  0C:018C    A$lab3-2$1494
+  0C:018C    C$lab3_2.c$61$1$1
+  0C:018F    A$lab3-2$1500
+  0C:018F    C$lab3_2.c$63$1$1
+  0C:018F    C$lab3_2.c$72$2$2
+  0C:0192    A$lab3-2$1503
+  0C:0192    C$lab3_2.c$74$3$3
+  0C:0195    A$lab3-2$1508
+  0C:0195    C$lab3_2.c$75$3$3
+  0C:0195    C$lab3_2.c$76$3$3
+  0C:0197    A$lab3-2$1509
+  0C:0198    A$lab3-2$1510
+  0C:0199    A$lab3-2$1511
+  0C:019B    A$lab3-2$1512
+  0C:019C    A$lab3-2$1513
+  0C:019E    A$lab3-2$1514
+  0C:01A0    A$lab3-2$1515
+  0C:01A2    A$lab3-2$1516
+  0C:01A4    A$lab3-2$1517
+  0C:01A6    A$lab3-2$1518
+  0C:01A8    A$lab3-2$1519
+  0C:01AA    A$lab3-2$1520
+  0C:01AC    A$lab3-2$1521
+  0C:01AE    A$lab3-2$1522
+  0C:01B0    A$lab3-2$1523
+  0C:01B3    A$lab3-2$1524
+  0C:01B5    A$lab3-2$1525
+  0C:01B7    A$lab3-2$1526
+  0C:01B9    A$lab3-2$1529
+  0C:01B9    C$lab3_2.c$77$3$3
+  0C:01BC    A$lab3-2$1532
+  0C:01BC    C$lab3_2.c$78$3$3
+  0C:01BE    A$lab3-2$1533
+  0C:01C0    A$lab3-2$1534
+  0C:01C2    A$lab3-2$1535
+  0C:01C4    A$lab3-2$1536
+  0C:01C6    A$lab3-2$1537
+  0C:01C8    A$lab3-2$1538
+  0C:01CB    A$lab3-2$1539
+  0C:01CD    A$lab3-2$1540
+  0C:01CF    A$lab3-2$1541
+  0C:01D1    A$lab3-2$1544
+  0C:01D1    C$lab3_2.c$79$3$3
+  0C:01D3    A$lab3-2$1548
+  0C:01D3    C$lab3_2.c$82$2$2
+  0C:01D6    A$lab3-2$1551
+  0C:01D6    C$lab3_2.c$84$3$4
+  0C:01D9    A$lab3-2$1556
+  0C:01D9    C$lab3_2.c$85$3$4
+  0C:01D9    C$lab3_2.c$86$3$4
+  0C:01DB    A$lab3-2$1557
+  0C:01DC    A$lab3-2$1558
+  0C:01DD    A$lab3-2$1559
+  0C:01DF    A$lab3-2$1560
+  0C:01E0    A$lab3-2$1561
+  0C:01E2    A$lab3-2$1562
+  0C:01E4    A$lab3-2$1563
+  0C:01E6    A$lab3-2$1564
+  0C:01E8    A$lab3-2$1565
+  0C:01EA    A$lab3-2$1566
+  0C:01EC    A$lab3-2$1567
+  0C:01EE    A$lab3-2$1568
+  0C:01F0    A$lab3-2$1569
+  0C:01F2    A$lab3-2$1570
+  0C:01F4    A$lab3-2$1571
+  0C:01F7    A$lab3-2$1572
+  0C:01F9    A$lab3-2$1573
+  0C:01FB    A$lab3-2$1574
+  0C:01FD    A$lab3-2$1577
+  0C:01FD    C$lab3_2.c$87$3$4
+  0C:0200    A$lab3-2$1580
+  0C:0200    C$lab3_2.c$88$3$4
+  0C:0202    A$lab3-2$1581
+  0C:0204    A$lab3-2$1582
+  0C:0206    A$lab3-2$1583
+  0C:0208    A$lab3-2$1584
+  0C:020A    A$lab3-2$1585
+  0C:020C    A$lab3-2$1586
+  0C:020F    A$lab3-2$1587
+  0C:0211    A$lab3-2$1588
+  0C:0213    A$lab3-2$1589
+  0C:0215    A$lab3-2$1592
+  0C:0215    C$lab3_2.c$89$3$4
+  0C:0217    A$lab3-2$1596
+  0C:0217    C$lab3_2.c$92$2$2
+  0C:0219    A$lab3-2$1597
+  0C:021C    A$lab3-2$1600
+  0C:021C    C$lab3_2.c$93$3$5
+  0C:021F    A$lab3-2$1601
+  0C:0222    A$lab3-2$1605
+  0C:0222    C$lab3_2.c$96$3$6
+  0C:0225    A$lab3-2$1608
+  0C:0225    C$lab3_2.c$101$1$1
+  0C:0225    XG$main$0$0
+  0C:0228    A$lab3-2$1624
+  0C:0228    C$lab3_2.c$109$1$1
+  0C:0228    C$lab3_2.c$114$1$1
+  0C:0228    G$SYSCLK_INIT$0$0
+  0C:0228    _SYSCLK_INIT
+  0C:022A    A$lab3-2$1627
+  0C:022A    C$lab3_2.c$115$1$1
+  0C:022D    A$lab3-2$1630
+  0C:022D    C$lab3_2.c$117$1$1
+  0C:0230    A$lab3-2$1633
+  0C:0230    C$lab3_2.c$118$1$1
+  0C:0232    A$lab3-2$1634
+  0C:0234    A$lab3-2$1636
+  0C:0235    A$lab3-2$1637
+  0C:0238    A$lab3-2$1638
+  0C:0239    A$lab3-2$1640
+  0C:023A    A$lab3-2$1641
+  0C:023B    A$lab3-2$1642
+  0C:023D    A$lab3-2$1646
+  0C:023D    C$lab3_2.c$119$1$1
+  0C:023F    A$lab3-2$1647
+  0C:0242    A$lab3-2$1650
+  0C:0242    C$lab3_2.c$120$1$1
+  0C:0245    A$lab3-2$1653
+  0C:0245    C$lab3_2.c$121$1$1
+  0C:0248    A$lab3-2$1656
+  0C:0248    C$lab3_2.c$123$1$1
+  0C:024A    A$lab3-2$1659
+  0C:024A    C$lab3_2.c$124$1$1
+  0C:024A    XG$SYSCLK_INIT$0$0
+  0C:024B    A$lab3-2$1674
+  0C:024B    C$lab3_2.c$132$1$1
+  0C:024B    C$lab3_2.c$134$1$1
+  0C:024B    G$PORT_INIT$0$0
+  0C:024B    _PORT_INIT
+  0C:024D    A$lab3-2$1677
+  0C:024D    C$lab3_2.c$136$1$1
+  0C:0250    A$lab3-2$1680
+  0C:0250    C$lab3_2.c$138$1$1
+  0C:0252    A$lab3-2$1683
+  0C:0252    C$lab3_2.c$139$1$1
+  0C:0254    A$lab3-2$1686
+  0C:0254    C$lab3_2.c$140$1$1
+  0C:0256    A$lab3-2$1689
+  0C:0256    C$lab3_2.c$142$1$1
+  0C:0259    A$lab3-2$1692
+  0C:0259    C$lab3_2.c$143$1$1
+  0C:025C    A$lab3-2$1695
+  0C:025C    C$lab3_2.c$145$1$1
+  0C:025F    A$lab3-2$1698
+  0C:025F    C$lab3_2.c$146$1$1
+  0C:0262    A$lab3-2$1701
+  0C:0262    C$lab3_2.c$148$1$1
+  0C:0264    A$lab3-2$1704
+  0C:0264    C$lab3_2.c$149$1$1
+  0C:0264    XG$PORT_INIT$0$0
+  0C:0265    A$lab3-2$1719
+  0C:0265    C$lab3_2.c$157$1$1
+  0C:0265    C$lab3_2.c$159$1$1
+  0C:0265    G$UART_INIT$0$0
+  0C:0265    _UART_INIT
+  0C:0267    A$lab3-2$1722
+  0C:0267    C$lab3_2.c$161$1$1
+  0C:026A    A$lab3-2$1725
+  0C:026A    C$lab3_2.c$162$1$1
+  0C:026D    A$lab3-2$1728
+  0C:026D    C$lab3_2.c$163$1$1
+  0C:0270    A$lab3-2$1731
+  0C:0270    C$lab3_2.c$164$1$1
+  0C:0272    A$lab3-2$1734
+  0C:0272    C$lab3_2.c$165$1$1
+  0C:0274    A$lab3-2$1737
+  0C:0274    C$lab3_2.c$167$1$1
+  0C:0277    A$lab3-2$1740
+  0C:0277    C$lab3_2.c$168$1$1
+  0C:027A    A$lab3-2$1743
+  0C:027A    C$lab3_2.c$169$1$1
+  0C:027C    A$lab3-2$1746
+  0C:027C    C$lab3_2.c$170$1$1
+  0C:027F    A$lab3-2$1749
+  0C:027F    C$lab3_2.c$172$1$1
+  0C:0281    A$lab3-2$1752
+  0C:0281    C$lab3_2.c$173$1$1
+  0C:0281    XG$UART_INIT$0$0
+  0C:0282    A$lab3-2$1767
+  0C:0282    C$lab3_2.c$175$1$1
+  0C:0282    C$lab3_2.c$177$1$1
+  0C:0282    G$Timer_Init$0$0
+  0C:0282    _Timer_Init
+  0C:0284    A$lab3-2$1770
+  0C:0284    C$lab3_2.c$179$1$1
+  0C:0287    A$lab3-2$1773
+  0C:0287    C$lab3_2.c$180$1$1
+  0C:028A    A$lab3-2$1776
+  0C:028A    C$lab3_2.c$181$1$1
+  0C:028D    A$lab3-2$1779
+  0C:028D    C$lab3_2.c$182$1$1
+  0C:0290    A$lab3-2$1782
+  0C:0290    C$lab3_2.c$183$1$1
+  0C:0293    A$lab3-2$1785
+  0C:0293    C$lab3_2.c$184$1$1
+  0C:0296    A$lab3-2$1788
+  0C:0296    C$lab3_2.c$185$1$1
+  0C:0298    A$lab3-2$1791
+  0C:0298    C$lab3_2.c$187$1$1
+  0C:029B    A$lab3-2$1794
+  0C:029B    C$lab3_2.c$188$1$1
+  0C:029E    A$lab3-2$1797
+  0C:029E    C$lab3_2.c$189$1$1
+  0C:02A1    A$lab3-2$1800
+  0C:02A1    C$lab3_2.c$190$1$1
+  0C:02A4    A$lab3-2$1803
+  0C:02A4    C$lab3_2.c$191$1$1
+  0C:02A7    A$lab3-2$1806
+  0C:02A7    C$lab3_2.c$192$1$1
+  0C:02A9    A$lab3-2$1809
+  0C:02A9    C$lab3_2.c$194$1$1
+  0C:02AB    A$lab3-2$1812
+  0C:02AB    C$lab3_2.c$195$1$1
+  0C:02AB    XG$Timer_Init$0$0
+  0C:02AC    A$lab3-2$1826
+  0C:02AC    C$lab3_2.c$198$1$1
+  0C:02AC    C$lab3_2.c$200$1$1
+  0C:02AC    G$UART0_ISR$0$0
+  0C:02AC    _UART0_ISR
+  0C:02AF    A$lab3-2$1829
+  0C:02AF    C$lab3_2.c$201$1$1
+  0C:02B2    A$lab3-2$1832
+  0C:02B2    C$lab3_2.c$203$2$2
+  0C:02B4    A$lab3-2$1836
+  0C:02B4    C$lab3_2.c$206$1$1
+  0C:02B6    A$lab3-2$1839
+  0C:02B6    C$lab3_2.c$207$1$1
+  0C:02B6    XG$UART0_ISR$0$0
+  0C:02B7    A$lab3-2$1858
+  0C:02B7    C$lab3_2.c$209$1$1
+  0C:02B7    C$lab3_2.c$211$1$1
+  0C:02B7    G$UART1_ISR$0$0
+  0C:02B7    _UART1_ISR
+  0C:02BA    A$lab3-2$1861
+  0C:02BA    C$lab3_2.c$212$1$1
+  0C:02BD    A$lab3-2$1864
+  0C:02BD    C$lab3_2.c$214$2$2
+  0C:02BF    A$lab3-2$1868
+  0C:02BF    C$lab3_2.c$217$1$1
+  0C:02C1    A$lab3-2$1871
+  0C:02C1    C$lab3_2.c$218$1$1
+  0C:02C1    XG$UART1_ISR$0$0
+  0C:02CD    _vprintf
+  0C:02E6    _printf
+  0C:03A6    __print_format
+  0C:0894    _strlen
+  0C:08AC    __gptrget
+  0C:08C8    __sdcc_external_startup
 
 Hexadecimal
 
 Area                               Addr   Size   Decimal Bytes (Attributes)
 --------------------------------   ----   ----   ------- ----- ------------
-CONST                              08CF   0036 =     54. bytes (REL,CON,CODE)
+CONST                              08CC   0033 =     51. bytes (REL,CON,CODE)
 
       Value  Global
    --------  --------------------------------
-  0C:08CF    Flab3_2$_str_0$0$0
-  0C:08D4    Flab3_2$_str_1$0$0
-  0C:08E5    Flab3_2$_str_2$0$0
-  0C:08F4    Flab3_2$_str_3$0$0
-  0C:08F7    Flab3_2$_str_4$0$0
+  0C:08CC    Flab3_2$_str_0$0$0
+  0C:08D1    Flab3_2$_str_1$0$0
+  0C:08E2    Flab3_2$_str_2$0$0
+  0C:08F1    Flab3_2$_str_3$0$0
 
 ASxxxx Linker V01.75 + NoICE + SDCC Feb 1999,  page 1.
 

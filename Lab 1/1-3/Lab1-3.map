@@ -992,22 +992,22 @@ CSEG                               0064   06D5 =   1749. bytes (REL,CON,CODE)
   0C:0076    C$putget.h$36$1$1
   0C:0076    XG$getchar$0$0
   0C:0077    A$main$1349
-  0C:0077    C$main.c$23$1$1
-  0C:0077    C$main.c$27$1$1
+  0C:0077    C$main.c$29$1$1
+  0C:0077    C$main.c$33$1$1
   0C:0077    G$main$0$0
   0C:0077    _main
   0C:007A    A$main$1352
-  0C:007A    C$main.c$28$1$1
+  0C:007A    C$main.c$34$1$1
   0C:007D    A$main$1355
-  0C:007D    C$main.c$30$1$1
+  0C:007D    C$main.c$36$1$1
   0C:0080    A$main$1358
-  0C:0080    C$main.c$31$1$1
+  0C:0080    C$main.c$37$1$1
   0C:0083    A$main$1361
-  0C:0083    C$main.c$32$1$1
+  0C:0083    C$main.c$38$1$1
   0C:0086    A$main$1364
-  0C:0086    C$main.c$34$1$1
+  0C:0086    C$main.c$40$1$1
   0C:0089    A$main$1367
-  0C:0089    C$main.c$36$1$1
+  0C:0089    C$main.c$42$1$1
   0C:008B    A$main$1368
   0C:008D    A$main$1369
   0C:008F    A$main$1370
@@ -1018,12 +1018,12 @@ CSEG                               0064   06D5 =   1749. bytes (REL,CON,CODE)
   0C:009A    A$main$1375
   0C:009C    A$main$1376
   0C:009E    A$main$1382
-  0C:009E    C$main.c$38$1$1
-  0C:009E    C$main.c$41$2$2
+  0C:009E    C$main.c$44$1$1
+  0C:009E    C$main.c$46$2$2
   0C:00A0    A$main$1383
   0C:00A2    A$main$1384
   0C:00A4    A$main$1387
-  0C:00A4    C$main.c$42$2$2
+  0C:00A4    C$main.c$47$2$2
   0C:00A6    A$main$1388
   0C:00A8    A$main$1389
   0C:00AA    A$main$1390
@@ -1042,19 +1042,19 @@ CSEG                               0064   06D5 =   1749. bytes (REL,CON,CODE)
   0C:00C5    A$main$1403
   0C:00C7    A$main$1404
   0C:00C9    A$main$1407
-  0C:00C9    C$main.c$45$1$1
+  0C:00C9    C$main.c$50$1$1
   0C:00C9    XG$main$0$0
   0C:00CB    A$main$1423
-  0C:00CB    C$main.c$53$1$1
   0C:00CB    C$main.c$58$1$1
+  0C:00CB    C$main.c$63$1$1
   0C:00CB    G$SYSCLK_INIT$0$0
   0C:00CB    _SYSCLK_INIT
   0C:00CD    A$main$1426
-  0C:00CD    C$main.c$59$1$1
+  0C:00CD    C$main.c$64$1$1
   0C:00D0    A$main$1429
-  0C:00D0    C$main.c$61$1$1
+  0C:00D0    C$main.c$66$1$1
   0C:00D3    A$main$1432
-  0C:00D3    C$main.c$62$1$1
+  0C:00D3    C$main.c$67$1$1
   0C:00D5    A$main$1433
   0C:00D7    A$main$1435
   0C:00D8    A$main$1436
@@ -1063,74 +1063,74 @@ CSEG                               0064   06D5 =   1749. bytes (REL,CON,CODE)
   0C:00DD    A$main$1440
   0C:00DE    A$main$1441
   0C:00E0    A$main$1445
-  0C:00E0    C$main.c$63$1$1
+  0C:00E0    C$main.c$68$1$1
   0C:00E2    A$main$1446
   0C:00E5    A$main$1449
-  0C:00E5    C$main.c$64$1$1
+  0C:00E5    C$main.c$69$1$1
   0C:00E8    A$main$1452
-  0C:00E8    C$main.c$65$1$1
+  0C:00E8    C$main.c$70$1$1
   0C:00EB    A$main$1455
-  0C:00EB    C$main.c$67$1$1
+  0C:00EB    C$main.c$72$1$1
   0C:00ED    A$main$1458
-  0C:00ED    C$main.c$68$1$1
+  0C:00ED    C$main.c$73$1$1
   0C:00ED    XG$SYSCLK_INIT$0$0
   0C:00EE    A$main$1473
-  0C:00EE    C$main.c$76$1$1
-  0C:00EE    C$main.c$80$1$1
+  0C:00EE    C$main.c$81$1$1
+  0C:00EE    C$main.c$85$1$1
   0C:00EE    G$PORT_INIT$0$0
   0C:00EE    _PORT_INIT
   0C:00F0    A$main$1476
-  0C:00F0    C$main.c$81$1$1
+  0C:00F0    C$main.c$86$1$1
   0C:00F3    A$main$1479
-  0C:00F3    C$main.c$83$1$1
+  0C:00F3    C$main.c$88$1$1
   0C:00F6    A$main$1482
-  0C:00F6    C$main.c$84$1$1
+  0C:00F6    C$main.c$89$1$1
   0C:00F9    A$main$1485
-  0C:00F9    C$main.c$85$1$1
+  0C:00F9    C$main.c$90$1$1
   0C:00FC    A$main$1488
-  0C:00FC    C$main.c$86$1$1
+  0C:00FC    C$main.c$91$1$1
   0C:00FF    A$main$1491
-  0C:00FF    C$main.c$87$1$1
+  0C:00FF    C$main.c$92$1$1
   0C:0102    A$main$1494
-  0C:0102    C$main.c$88$1$1
+  0C:0102    C$main.c$93$1$1
   0C:0105    A$main$1497
-  0C:0105    C$main.c$89$1$1
+  0C:0105    C$main.c$94$1$1
   0C:0108    A$main$1500
-  0C:0108    C$main.c$92$1$1
+  0C:0108    C$main.c$96$1$1
   0C:010A    A$main$1503
-  0C:010A    C$main.c$93$1$1
+  0C:010A    C$main.c$97$1$1
   0C:010A    XG$PORT_INIT$0$0
   0C:010B    A$main$1518
-  0C:010B    C$main.c$101$1$1
   0C:010B    C$main.c$105$1$1
+  0C:010B    C$main.c$109$1$1
   0C:010B    G$UART0_INIT$0$0
   0C:010B    _UART0_INIT
   0C:010D    A$main$1521
-  0C:010D    C$main.c$106$1$1
+  0C:010D    C$main.c$110$1$1
   0C:0110    A$main$1524
-  0C:0110    C$main.c$108$1$1
+  0C:0110    C$main.c$112$1$1
   0C:0113    A$main$1527
-  0C:0113    C$main.c$109$1$1
+  0C:0113    C$main.c$113$1$1
   0C:0116    A$main$1530
-  0C:0116    C$main.c$110$1$1
+  0C:0116    C$main.c$114$1$1
   0C:0119    A$main$1533
-  0C:0119    C$main.c$111$1$1
+  0C:0119    C$main.c$115$1$1
   0C:011C    A$main$1536
-  0C:011C    C$main.c$113$1$1
+  0C:011C    C$main.c$117$1$1
   0C:011F    A$main$1539
-  0C:011F    C$main.c$114$1$1
+  0C:011F    C$main.c$118$1$1
   0C:0121    A$main$1542
-  0C:0121    C$main.c$116$1$1
+  0C:0121    C$main.c$120$1$1
   0C:0124    A$main$1545
-  0C:0124    C$main.c$117$1$1
+  0C:0124    C$main.c$121$1$1
   0C:0127    A$main$1548
-  0C:0127    C$main.c$118$1$1
+  0C:0127    C$main.c$122$1$1
   0C:012A    A$main$1551
-  0C:012A    C$main.c$121$1$1
+  0C:012A    C$main.c$125$1$1
   0C:012C    A$main$1554
-  0C:012C    C$main.c$123$1$1
+  0C:012C    C$main.c$127$1$1
   0C:012E    A$main$1557
-  0C:012E    C$main.c$124$1$1
+  0C:012E    C$main.c$128$1$1
   0C:012E    XG$UART0_INIT$0$0
   0C:013A    _vprintf
   0C:0153    _printf
@@ -1154,7 +1154,7 @@ CONST                              0739   0033 =     51. bytes (REL,CON,CODE)
 
 Files Linked      [ module(s) ]
 
-C:\Users\SSP\Documents\Microprocessor Systems\Lab1-3\main.rel
+C:\Users\SSP\Documents\Microprocessor Systems\Lab 1\1-3\main.rel
 
 Libraries Linked            [   object  file   ]
 

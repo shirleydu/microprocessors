@@ -1,7 +1,7 @@
 ;--------------------------------------------------------
 ; File Created by SDCC : free open source ANSI-C Compiler
 ; Version 2.9.0 #5416 (Mar 22 2009) (MINGW32)
-; This file was generated Mon Aug 27 19:18:18 2012
+; This file was generated Thu Sep 27 17:27:52 2012
 ;--------------------------------------------------------
 	.module Hello
 	.optsdcc -mmcs51 --model-small
@@ -1276,7 +1276,7 @@ __sdcc_program_startup:
 ;------------------------------------------------------------
 	G$putchar$0$0 ==.
 	C$putget.h$18$0$0 ==.
-;	C:\Users\SSP\Documents\Microprocessor Systems\Hello\/putget.h:18: void putchar(char c)
+;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 1\Hello\/putget.h:18: void putchar(char c)
 ;	-----------------------------------------
 ;	 function putchar
 ;	-----------------------------------------
@@ -1291,15 +1291,15 @@ _putchar:
 	ar1 = 0x01
 	mov	r2,dpl
 	C$putget.h$20$1$1 ==.
-;	C:\Users\SSP\Documents\Microprocessor Systems\Hello\/putget.h:20: while(!TI0); 
+;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 1\Hello\/putget.h:20: while(!TI0); 
 00101$:
 	C$putget.h$21$1$1 ==.
-;	C:\Users\SSP\Documents\Microprocessor Systems\Hello\/putget.h:21: TI0=0;
+;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 1\Hello\/putget.h:21: TI0=0;
 	jbc	_TI0,00108$
 	sjmp	00101$
 00108$:
 	C$putget.h$22$1$1 ==.
-;	C:\Users\SSP\Documents\Microprocessor Systems\Hello\/putget.h:22: SBUF0 = c;
+;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 1\Hello\/putget.h:22: SBUF0 = c;
 	mov	_SBUF0,r2
 	C$putget.h$23$1$1 ==.
 	XG$putchar$0$0 ==.
@@ -1311,24 +1311,24 @@ _putchar:
 ;------------------------------------------------------------
 	G$getchar$0$0 ==.
 	C$putget.h$28$1$1 ==.
-;	C:\Users\SSP\Documents\Microprocessor Systems\Hello\/putget.h:28: char getchar(void)
+;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 1\Hello\/putget.h:28: char getchar(void)
 ;	-----------------------------------------
 ;	 function getchar
 ;	-----------------------------------------
 _getchar:
 	C$putget.h$31$1$1 ==.
-;	C:\Users\SSP\Documents\Microprocessor Systems\Hello\/putget.h:31: while(!RI0);
+;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 1\Hello\/putget.h:31: while(!RI0);
 00101$:
 	C$putget.h$32$1$1 ==.
-;	C:\Users\SSP\Documents\Microprocessor Systems\Hello\/putget.h:32: RI0 =0;
+;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 1\Hello\/putget.h:32: RI0 =0;
 	jbc	_RI0,00108$
 	sjmp	00101$
 00108$:
 	C$putget.h$33$1$1 ==.
-;	C:\Users\SSP\Documents\Microprocessor Systems\Hello\/putget.h:33: c = SBUF0;
+;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 1\Hello\/putget.h:33: c = SBUF0;
 	mov	dpl,_SBUF0
 	C$putget.h$35$1$1 ==.
-;	C:\Users\SSP\Documents\Microprocessor Systems\Hello\/putget.h:35: return c;
+;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 1\Hello\/putget.h:35: return c;
 	C$putget.h$36$1$1 ==.
 	XG$getchar$0$0 ==.
 	ret
@@ -1339,31 +1339,31 @@ _getchar:
 ;------------------------------------------------------------
 	G$main$0$0 ==.
 	C$Hello.c$36$1$1 ==.
-;	C:\Users\SSP\Documents\Microprocessor Systems\Hello\Hello.c:36: void main(void)
+;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 1\Hello\Hello.c:36: void main(void)
 ;	-----------------------------------------
 ;	 function main
 ;	-----------------------------------------
 _main:
 	C$Hello.c$40$1$1 ==.
-;	C:\Users\SSP\Documents\Microprocessor Systems\Hello\Hello.c:40: WDTCN = 0xDE;						// Disable the watchdog timer
+;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 1\Hello\Hello.c:40: WDTCN = 0xDE;						// Disable the watchdog timer
 	mov	_WDTCN,#0xDE
 	C$Hello.c$41$1$1 ==.
-;	C:\Users\SSP\Documents\Microprocessor Systems\Hello\Hello.c:41: WDTCN = 0xAD;						// Note: = "DEAD"!
+;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 1\Hello\Hello.c:41: WDTCN = 0xAD;						// Note: = "DEAD"!
 	mov	_WDTCN,#0xAD
 	C$Hello.c$43$1$1 ==.
-;	C:\Users\SSP\Documents\Microprocessor Systems\Hello\Hello.c:43: SYSCLK_INIT();						// Initialize the oscillator
+;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 1\Hello\Hello.c:43: SYSCLK_INIT();						// Initialize the oscillator
 	lcall	_SYSCLK_INIT
 	C$Hello.c$44$1$1 ==.
-;	C:\Users\SSP\Documents\Microprocessor Systems\Hello\Hello.c:44: PORT_INIT();						// Initialize the Crossbar and GPIO
+;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 1\Hello\Hello.c:44: PORT_INIT();						// Initialize the Crossbar and GPIO
 	lcall	_PORT_INIT
 	C$Hello.c$45$1$1 ==.
-;	C:\Users\SSP\Documents\Microprocessor Systems\Hello\Hello.c:45: UART0_INIT();						// Initialize UART0
+;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 1\Hello\Hello.c:45: UART0_INIT();						// Initialize UART0
 	lcall	_UART0_INIT
 	C$Hello.c$47$1$1 ==.
-;	C:\Users\SSP\Documents\Microprocessor Systems\Hello\Hello.c:47: SFRPAGE = UART0_PAGE;				// Direct output to UART0
+;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 1\Hello\Hello.c:47: SFRPAGE = UART0_PAGE;				// Direct output to UART0
 	mov	_SFRPAGE,#0x00
 	C$Hello.c$49$1$1 ==.
-;	C:\Users\SSP\Documents\Microprocessor Systems\Hello\Hello.c:49: printf("\033[2J");					// Erase ANSI terminal & move cursor to home position
+;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 1\Hello\Hello.c:49: printf("\033[2J");					// Erase ANSI terminal & move cursor to home position
 	mov	a,#__str_0
 	push	acc
 	mov	a,#(__str_0 >> 8)
@@ -1375,7 +1375,7 @@ _main:
 	dec	sp
 	dec	sp
 	C$Hello.c$50$1$1 ==.
-;	C:\Users\SSP\Documents\Microprocessor Systems\Hello\Hello.c:50: printf("Test of the printf() function.\n\n\r");
+;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 1\Hello\Hello.c:50: printf("Test of the printf() function.\n\n\r");
 	mov	a,#__str_1
 	push	acc
 	mov	a,#(__str_1 >> 8)
@@ -1387,10 +1387,10 @@ _main:
 	dec	sp
 	dec	sp
 	C$Hello.c$52$1$1 ==.
-;	C:\Users\SSP\Documents\Microprocessor Systems\Hello\Hello.c:52: while(1)
+;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 1\Hello\Hello.c:52: while(1)
 00111$:
 	C$Hello.c$54$2$2 ==.
-;	C:\Users\SSP\Documents\Microprocessor Systems\Hello\Hello.c:54: printf("Hello World!\n\n\r");
+;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 1\Hello\Hello.c:54: printf("Hello World!\n\n\r");
 	mov	a,#__str_2
 	push	acc
 	mov	a,#(__str_2 >> 8)
@@ -1402,7 +1402,7 @@ _main:
 	dec	sp
 	dec	sp
 	C$Hello.c$55$2$2 ==.
-;	C:\Users\SSP\Documents\Microprocessor Systems\Hello\Hello.c:55: printf("( greetings from Russell P. Kraft )\n\n\n\r");
+;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 1\Hello\Hello.c:55: printf("( greetings from Russell P. Kraft )\n\n\n\r");
 	mov	a,#__str_3
 	push	acc
 	mov	a,#(__str_3 >> 8)
@@ -1414,7 +1414,7 @@ _main:
 	dec	sp
 	dec	sp
 	C$Hello.c$56$2$2 ==.
-;	C:\Users\SSP\Documents\Microprocessor Systems\Hello\Hello.c:56: printf("1=repeat, 2=clear, 0=quit.\n\n\r"); // Menu of choices
+;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 1\Hello\Hello.c:56: printf("1=repeat, 2=clear, 0=quit.\n\n\r"); // Menu of choices
 	mov	a,#__str_4
 	push	acc
 	mov	a,#(__str_4 >> 8)
@@ -1426,29 +1426,29 @@ _main:
 	dec	sp
 	dec	sp
 	C$Hello.c$58$2$2 ==.
-;	C:\Users\SSP\Documents\Microprocessor Systems\Hello\Hello.c:58: choice=getchar();
+;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 1\Hello\Hello.c:58: choice=getchar();
 	lcall	_getchar
 	C$Hello.c$59$2$2 ==.
-;	C:\Users\SSP\Documents\Microprocessor Systems\Hello\Hello.c:59: putchar(choice);
+;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 1\Hello\Hello.c:59: putchar(choice);
 	mov  r2,dpl
 	push	ar2
 	lcall	_putchar
 	pop	ar2
 	C$Hello.c$62$2$2 ==.
-;	C:\Users\SSP\Documents\Microprocessor Systems\Hello\Hello.c:62: P1 |= 0x40;				// Turn green LED on	
+;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 1\Hello\Hello.c:62: P1 |= 0x40;				// Turn green LED on	
 	orl	_P1,#0x40
 	C$Hello.c$63$2$2 ==.
-;	C:\Users\SSP\Documents\Microprocessor Systems\Hello\Hello.c:63: if (choice == '0')
+;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 1\Hello\Hello.c:63: if (choice == '0')
 	cjne	r2,#0x30,00108$
 	C$Hello.c$64$2$2 ==.
-;	C:\Users\SSP\Documents\Microprocessor Systems\Hello\Hello.c:64: return;
+;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 1\Hello\Hello.c:64: return;
 	ret
 00108$:
 	C$Hello.c$65$2$2 ==.
-;	C:\Users\SSP\Documents\Microprocessor Systems\Hello\Hello.c:65: else if(choice == '1')
+;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 1\Hello\Hello.c:65: else if(choice == '1')
 	cjne	r2,#0x31,00105$
 	C$Hello.c$66$2$2 ==.
-;	C:\Users\SSP\Documents\Microprocessor Systems\Hello\Hello.c:66: printf("\n\nHere we go again.\n\n\r");
+;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 1\Hello\Hello.c:66: printf("\n\nHere we go again.\n\n\r");
 	mov	a,#__str_5
 	push	acc
 	mov	a,#(__str_5 >> 8)
@@ -1462,10 +1462,10 @@ _main:
 	sjmp	00111$
 00105$:
 	C$Hello.c$67$2$2 ==.
-;	C:\Users\SSP\Documents\Microprocessor Systems\Hello\Hello.c:67: else if(choice == '2')	// clear the screen with <ESC>[2J
+;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 1\Hello\Hello.c:67: else if(choice == '2')	// clear the screen with <ESC>[2J
 	cjne	r2,#0x32,00102$
 	C$Hello.c$68$2$2 ==.
-;	C:\Users\SSP\Documents\Microprocessor Systems\Hello\Hello.c:68: printf("\033[2J");
+;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 1\Hello\Hello.c:68: printf("\033[2J");
 	mov	a,#__str_0
 	push	acc
 	mov	a,#(__str_0 >> 8)
@@ -1479,10 +1479,10 @@ _main:
 	ljmp	00111$
 00102$:
 	C$Hello.c$72$3$3 ==.
-;	C:\Users\SSP\Documents\Microprocessor Systems\Hello\Hello.c:72: P1 &= 0xBF;				// Turn green LED off	
+;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 1\Hello\Hello.c:72: P1 &= 0xBF;				// Turn green LED off	
 	anl	_P1,#0xBF
 	C$Hello.c$73$3$3 ==.
-;	C:\Users\SSP\Documents\Microprocessor Systems\Hello\Hello.c:73: printf("\n\rA \"");
+;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 1\Hello\Hello.c:73: printf("\n\rA \"");
 	push	ar2
 	mov	a,#__str_6
 	push	acc
@@ -1496,11 +1496,11 @@ _main:
 	dec	sp
 	pop	ar2
 	C$Hello.c$74$3$3 ==.
-;	C:\Users\SSP\Documents\Microprocessor Systems\Hello\Hello.c:74: putchar(choice);
+;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 1\Hello\Hello.c:74: putchar(choice);
 	mov	dpl,r2
 	lcall	_putchar
 	C$Hello.c$75$3$3 ==.
-;	C:\Users\SSP\Documents\Microprocessor Systems\Hello\Hello.c:75: printf("\" is not a valid choice.\n\n\r");
+;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 1\Hello\Hello.c:75: printf("\" is not a valid choice.\n\n\r");
 	mov	a,#__str_7
 	push	acc
 	mov	a,#(__str_7 >> 8)
@@ -1522,22 +1522,22 @@ _main:
 ;------------------------------------------------------------
 	G$SYSCLK_INIT$0$0 ==.
 	C$Hello.c$87$1$1 ==.
-;	C:\Users\SSP\Documents\Microprocessor Systems\Hello\Hello.c:87: void SYSCLK_INIT(void)
+;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 1\Hello\Hello.c:87: void SYSCLK_INIT(void)
 ;	-----------------------------------------
 ;	 function SYSCLK_INIT
 ;	-----------------------------------------
 _SYSCLK_INIT:
 	C$Hello.c$92$1$1 ==.
-;	C:\Users\SSP\Documents\Microprocessor Systems\Hello\Hello.c:92: SFRPAGE_SAVE = SFRPAGE;				// Save Current SFR page	SFRPAGE = CONFIG_PAGE;
+;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 1\Hello\Hello.c:92: SFRPAGE_SAVE = SFRPAGE;				// Save Current SFR page	SFRPAGE = CONFIG_PAGE;
 	mov	r2,_SFRPAGE
 	C$Hello.c$93$1$1 ==.
-;	C:\Users\SSP\Documents\Microprocessor Systems\Hello\Hello.c:93: SFRPAGE   = CONFIG_PAGE;
+;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 1\Hello\Hello.c:93: SFRPAGE   = CONFIG_PAGE;
 	mov	_SFRPAGE,#0x0F
 	C$Hello.c$95$1$1 ==.
-;	C:\Users\SSP\Documents\Microprocessor Systems\Hello\Hello.c:95: OSCXCN = 0x67;						// Start ext osc with 22.1184MHz crystal
+;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 1\Hello\Hello.c:95: OSCXCN = 0x67;						// Start ext osc with 22.1184MHz crystal
 	mov	_OSCXCN,#0x67
 	C$Hello.c$96$1$1 ==.
-;	C:\Users\SSP\Documents\Microprocessor Systems\Hello\Hello.c:96: for(i=0; i < 3000; i++);			// Wait for the oscillator to start up
+;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 1\Hello\Hello.c:96: for(i=0; i < 3000; i++);			// Wait for the oscillator to start up
 	mov	r3,#0xB8
 	mov	r4,#0x0B
 00106$:
@@ -1549,18 +1549,18 @@ _SYSCLK_INIT:
 	orl	a,r4
 	jnz	00106$
 	C$Hello.c$97$1$1 ==.
-;	C:\Users\SSP\Documents\Microprocessor Systems\Hello\Hello.c:97: while(!(OSCXCN & 0x80));
+;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 1\Hello\Hello.c:97: while(!(OSCXCN & 0x80));
 00101$:
 	mov	a,_OSCXCN
 	jnb	acc.7,00101$
 	C$Hello.c$98$1$1 ==.
-;	C:\Users\SSP\Documents\Microprocessor Systems\Hello\Hello.c:98: CLKSEL = 0x01;						// Switch to the external crystal oscillator
+;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 1\Hello\Hello.c:98: CLKSEL = 0x01;						// Switch to the external crystal oscillator
 	mov	_CLKSEL,#0x01
 	C$Hello.c$99$1$1 ==.
-;	C:\Users\SSP\Documents\Microprocessor Systems\Hello\Hello.c:99: OSCICN = 0x00;						// Disable the internal oscillator
+;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 1\Hello\Hello.c:99: OSCICN = 0x00;						// Disable the internal oscillator
 	mov	_OSCICN,#0x00
 	C$Hello.c$101$1$1 ==.
-;	C:\Users\SSP\Documents\Microprocessor Systems\Hello\Hello.c:101: SFRPAGE = SFRPAGE_SAVE;             // Restore SFR page
+;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 1\Hello\Hello.c:101: SFRPAGE = SFRPAGE_SAVE;             // Restore SFR page
 	mov	_SFRPAGE,r2
 	C$Hello.c$102$1$1 ==.
 	XG$SYSCLK_INIT$0$0 ==.
@@ -1572,34 +1572,34 @@ _SYSCLK_INIT:
 ;------------------------------------------------------------
 	G$PORT_INIT$0$0 ==.
 	C$Hello.c$110$1$1 ==.
-;	C:\Users\SSP\Documents\Microprocessor Systems\Hello\Hello.c:110: void PORT_INIT(void)
+;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 1\Hello\Hello.c:110: void PORT_INIT(void)
 ;	-----------------------------------------
 ;	 function PORT_INIT
 ;	-----------------------------------------
 _PORT_INIT:
 	C$Hello.c$114$1$1 ==.
-;	C:\Users\SSP\Documents\Microprocessor Systems\Hello\Hello.c:114: SFRPAGE_SAVE = SFRPAGE;				// Save Current SFR page
+;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 1\Hello\Hello.c:114: SFRPAGE_SAVE = SFRPAGE;				// Save Current SFR page
 	mov	r2,_SFRPAGE
 	C$Hello.c$115$1$1 ==.
-;	C:\Users\SSP\Documents\Microprocessor Systems\Hello\Hello.c:115: SFRPAGE = CONFIG_PAGE;
+;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 1\Hello\Hello.c:115: SFRPAGE = CONFIG_PAGE;
 	mov	_SFRPAGE,#0x0F
 	C$Hello.c$117$1$1 ==.
-;	C:\Users\SSP\Documents\Microprocessor Systems\Hello\Hello.c:117: XBR0	 = 0x04;					// Enable UART0
+;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 1\Hello\Hello.c:117: XBR0	 = 0x04;					// Enable UART0
 	mov	_XBR0,#0x04
 	C$Hello.c$118$1$1 ==.
-;	C:\Users\SSP\Documents\Microprocessor Systems\Hello\Hello.c:118: XBR1	 = 0x00;
+;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 1\Hello\Hello.c:118: XBR1	 = 0x00;
 	mov	_XBR1,#0x00
 	C$Hello.c$119$1$1 ==.
-;	C:\Users\SSP\Documents\Microprocessor Systems\Hello\Hello.c:119: XBR2	 = 0x40;					// Enable Crossbar and weak pull-up
+;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 1\Hello\Hello.c:119: XBR2	 = 0x40;					// Enable Crossbar and weak pull-up
 	mov	_XBR2,#0x40
 	C$Hello.c$120$1$1 ==.
-;	C:\Users\SSP\Documents\Microprocessor Systems\Hello\Hello.c:120: P0MDOUT |= 0x01;					// Set TX0 on P0.0 pin to push-pull
+;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 1\Hello\Hello.c:120: P0MDOUT |= 0x01;					// Set TX0 on P0.0 pin to push-pull
 	orl	_P0MDOUT,#0x01
 	C$Hello.c$121$1$1 ==.
-;	C:\Users\SSP\Documents\Microprocessor Systems\Hello\Hello.c:121: P1MDOUT	|= 0x40;					// Set green LED ooutput P1.6 to push-pull
+;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 1\Hello\Hello.c:121: P1MDOUT	|= 0x40;					// Set green LED ooutput P1.6 to push-pull
 	orl	_P1MDOUT,#0x40
 	C$Hello.c$123$1$1 ==.
-;	C:\Users\SSP\Documents\Microprocessor Systems\Hello\Hello.c:123: SFRPAGE = SFRPAGE_SAVE;             // Restore SFR page
+;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 1\Hello\Hello.c:123: SFRPAGE = SFRPAGE_SAVE;             // Restore SFR page
 	mov	_SFRPAGE,r2
 	C$Hello.c$124$1$1 ==.
 	XG$PORT_INIT$0$0 ==.
@@ -1611,49 +1611,49 @@ _PORT_INIT:
 ;------------------------------------------------------------
 	G$UART0_INIT$0$0 ==.
 	C$Hello.c$132$1$1 ==.
-;	C:\Users\SSP\Documents\Microprocessor Systems\Hello\Hello.c:132: void UART0_INIT(void)
+;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 1\Hello\Hello.c:132: void UART0_INIT(void)
 ;	-----------------------------------------
 ;	 function UART0_INIT
 ;	-----------------------------------------
 _UART0_INIT:
 	C$Hello.c$136$1$1 ==.
-;	C:\Users\SSP\Documents\Microprocessor Systems\Hello\Hello.c:136: SFRPAGE_SAVE = SFRPAGE;				// Save Current SFR page
+;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 1\Hello\Hello.c:136: SFRPAGE_SAVE = SFRPAGE;				// Save Current SFR page
 	mov	r2,_SFRPAGE
 	C$Hello.c$137$1$1 ==.
-;	C:\Users\SSP\Documents\Microprocessor Systems\Hello\Hello.c:137: SFRPAGE = TIMER01_PAGE;
+;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 1\Hello\Hello.c:137: SFRPAGE = TIMER01_PAGE;
 	mov	_SFRPAGE,#0x00
 	C$Hello.c$139$1$1 ==.
-;	C:\Users\SSP\Documents\Microprocessor Systems\Hello\Hello.c:139: TCON	 = 0x40;
+;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 1\Hello\Hello.c:139: TCON	 = 0x40;
 	mov	_TCON,#0x40
 	C$Hello.c$140$1$1 ==.
-;	C:\Users\SSP\Documents\Microprocessor Systems\Hello\Hello.c:140: TMOD	&= 0x0F;
+;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 1\Hello\Hello.c:140: TMOD	&= 0x0F;
 	anl	_TMOD,#0x0F
 	C$Hello.c$141$1$1 ==.
-;	C:\Users\SSP\Documents\Microprocessor Systems\Hello\Hello.c:141: TMOD	|= 0x20;					// Timer1, Mode 2, 8-bit reload
+;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 1\Hello\Hello.c:141: TMOD	|= 0x20;					// Timer1, Mode 2, 8-bit reload
 	orl	_TMOD,#0x20
 	C$Hello.c$142$1$1 ==.
-;	C:\Users\SSP\Documents\Microprocessor Systems\Hello\Hello.c:142: CKCON	|= 0x10;					// Timer1 uses SYSCLK as time base
+;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 1\Hello\Hello.c:142: CKCON	|= 0x10;					// Timer1 uses SYSCLK as time base
 	orl	_CKCON,#0x10
 	C$Hello.c$144$1$1 ==.
-;	C:\Users\SSP\Documents\Microprocessor Systems\Hello\Hello.c:144: TH1		 = 0xE8;					// 0xE8 = 232
+;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 1\Hello\Hello.c:144: TH1		 = 0xE8;					// 0xE8 = 232
 	mov	_TH1,#0xE8
 	C$Hello.c$145$1$1 ==.
-;	C:\Users\SSP\Documents\Microprocessor Systems\Hello\Hello.c:145: TR1		 = 1;						// Start Timer1
+;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 1\Hello\Hello.c:145: TR1		 = 1;						// Start Timer1
 	setb	_TR1
 	C$Hello.c$147$1$1 ==.
-;	C:\Users\SSP\Documents\Microprocessor Systems\Hello\Hello.c:147: SFRPAGE = UART0_PAGE;
+;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 1\Hello\Hello.c:147: SFRPAGE = UART0_PAGE;
 	mov	_SFRPAGE,#0x00
 	C$Hello.c$148$1$1 ==.
-;	C:\Users\SSP\Documents\Microprocessor Systems\Hello\Hello.c:148: SCON0	 = 0x50;					// Mode 1, 8-bit UART, enable RX
+;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 1\Hello\Hello.c:148: SCON0	 = 0x50;					// Mode 1, 8-bit UART, enable RX
 	mov	_SCON0,#0x50
 	C$Hello.c$149$1$1 ==.
-;	C:\Users\SSP\Documents\Microprocessor Systems\Hello\Hello.c:149: SSTA0	 = 0x00;					// SMOD0 = 0, in this mode
+;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 1\Hello\Hello.c:149: SSTA0	 = 0x00;					// SMOD0 = 0, in this mode
 	mov	_SSTA0,#0x00
 	C$Hello.c$152$1$1 ==.
-;	C:\Users\SSP\Documents\Microprocessor Systems\Hello\Hello.c:152: TI0 = 1;							// Indicate TX0 ready
+;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 1\Hello\Hello.c:152: TI0 = 1;							// Indicate TX0 ready
 	setb	_TI0
 	C$Hello.c$154$1$1 ==.
-;	C:\Users\SSP\Documents\Microprocessor Systems\Hello\Hello.c:154: SFRPAGE = SFRPAGE_SAVE;             // Restore SFR page
+;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 1\Hello\Hello.c:154: SFRPAGE = SFRPAGE_SAVE;             // Restore SFR page
 	mov	_SFRPAGE,r2
 	C$Hello.c$155$1$1 ==.
 	XG$UART0_INIT$0$0 ==.

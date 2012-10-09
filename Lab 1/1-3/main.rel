@@ -1,6 +1,6 @@
 ;!FILE main.asm
 XH
-H 1A areas 3B2 global symbols
+H 1A areas 3B4 global symbols
 M main
 O -mmcs51 --model-small
 S G$TF3$0$0 Def00CF
@@ -802,8 +802,8 @@ A GSINIT5 size 0 flags 20 addr 0
 A GSINIT size 0 flags 20 addr 0
 A GSFINAL size 3 flags 20 addr 0
 S A$main$1258 Def0000
-A CSEG size CB flags 20 addr 0
-S XG$PORT_INIT$0$0 Def00A6
+A CSEG size CE flags 20 addr 0
+S XG$PORT_INIT$0$0 Def00A9
 S _main Def0013
 S XG$getchar$0$0 Def0012
 S G$PORT_INIT$0$0 Def008A
@@ -818,8 +818,8 @@ S A$main$1303 Def0007
 S A$main$1403 Def0061
 S _putchar Def0000
 S A$main$1530 Def00B2
-S A$main$1521 Def00A9
-S A$main$1503 Def00A6
+S A$main$1521 Def00AA
+S A$main$1503 Def00A7
 S A$main$1440 Def0079
 S A$main$1404 Def0063
 S XG$SYSCLK_INIT$0$0 Def0089
@@ -835,10 +835,12 @@ S A$main$1361 Def001F
 S A$main$1352 Def0016
 S A$main$1334 Def0012
 S A$main$1325 Def000D
+S A$main$1560 Def00CD
 S A$main$1551 Def00C6
-S A$main$1542 Def00BD
+S A$main$1542 Def00BE
 S A$main$1533 Def00B5
 S A$main$1524 Def00AC
+S A$main$1506 Def00A9
 S A$main$1452 Def0084
 S A$main$1407 Def0065
 S A$main$1371 Def002D
@@ -854,11 +856,10 @@ S A$main$1373 Def0031
 S A$main$1364 Def0022
 S A$main$1355 Def0019
 S A$main$1292 Def0000
-S A$main$1554 Def00C8
+S A$main$1554 Def00C9
 S A$main$1545 Def00C0
 S A$main$1536 Def00B8
 S A$main$1527 Def00AF
-S A$main$1518 Def00A7
 S A$main$1491 Def009B
 S A$main$1482 Def0092
 S A$main$1473 Def008A
@@ -869,23 +870,22 @@ S A$main$1392 Def004A
 S A$main$1383 Def003C
 S A$main$1374 Def0034
 S A$main$1329 Def000F
-S C$main.c$110$1$1 Def00B2
-S C$main.c$101$1$1 Def00A7
+S C$main.c$110$1$1 Def00AA
 S A$main$1429 Def006C
 S A$main$1393 Def004C
 S A$main$1384 Def003E
 S A$main$1375 Def0036
-S C$main.c$111$1$1 Def00B5
-S _UART0_INIT Def00A7
+S C$main.c$111$1$1 Def00AC
+S _UART0_INIT Def00AA
 S A$main$1439 Def0078
 S A$main$1394 Def004E
 S A$main$1376 Def0038
 S A$main$1367 Def0025
 S A$main$1358 Def001C
 S A$main$1349 Def0013
-S C$main.c$121$1$1 Def00C6
+S C$main.c$121$1$1 Def00C0
 S G$SYSCLK_INIT$0$0 Def0067
-S A$main$1557 Def00CA
+S A$main$1557 Def00CB
 S A$main$1548 Def00C3
 S A$main$1539 Def00BB
 S A$main$1494 Def009E
@@ -895,18 +895,18 @@ S A$main$1458 Def0089
 S A$main$1449 Def0081
 S A$main$1395 Def0050
 S A$main$1368 Def0027
-S C$main.c$113$1$1 Def00B8
+S C$main.c$122$1$1 Def00C3
+S C$main.c$113$1$1 Def00AF
 S A$main$1396 Def0052
 S A$main$1387 Def0040
 S A$main$1369 Def0029
-S C$main.c$123$1$1 Def00C8
-S C$main.c$114$1$1 Def00BB
-S C$main.c$105$1$1 Def00A7
+S C$main.c$123$1$1 Def00C6
+S C$main.c$114$1$1 Def00B2
 S A$main$1397 Def0054
 S A$main$1388 Def0042
 S A$main$1298 Def0002
-S C$main.c$124$1$1 Def00CA
-S C$main.c$106$1$1 Def00A9
+S C$main.c$115$1$1 Def00B5
+S C$main.c$106$1$1 Def00AA
 S XG$putchar$0$0 Def0009
 S A$main$1497 Def00A1
 S A$main$1488 Def0098
@@ -914,61 +914,63 @@ S A$main$1479 Def008F
 S A$main$1398 Def0056
 S A$main$1389 Def0044
 S A$main$1299 Def0005
-S C$main.c$116$1$1 Def00BD
+S C$main.c$116$1$1 Def00B8
 S A$main$1399 Def0058
-S C$main.c$117$1$1 Def00C0
-S C$main.c$108$1$1 Def00AC
-S C$main.c$118$1$1 Def00C3
-S C$main.c$109$1$1 Def00AF
+S C$main.c$126$1$1 Def00C9
+S C$main.c$118$1$1 Def00BB
+S C$main.c$128$1$1 Def00CB
+S C$main.c$119$1$1 Def00BE
 S C$putget.h$20$1$1 Def0002
+S C$main.c$129$1$1 Def00CD
 S C$putget.h$21$1$1 Def0002
 S C$putget.h$31$1$1 Def000A
 S C$putget.h$22$1$1 Def0007
 S C$putget.h$32$1$1 Def000A
 S C$putget.h$23$1$1 Def0009
-S XG$UART0_INIT$0$0 Def00CA
+S XG$UART0_INIT$0$0 Def00CD
 S C$putget.h$33$1$1 Def000F
 S G$putchar$0$0 Def0000
 S C$putget.h$18$0$0 Def0000
 S C$putget.h$35$1$1 Def0012
 S C$putget.h$36$1$1 Def0012
-S C$main.c$30$1$1 Def0019
 S C$putget.h$28$1$1 Def000A
-S C$main.c$31$1$1 Def001C
-S C$main.c$32$1$1 Def001F
-S C$main.c$23$1$1 Def0013
-S G$UART0_INIT$0$0 Def00A7
-S C$main.c$61$1$1 Def006C
-S C$main.c$41$2$2 Def003A
-S C$main.c$34$1$1 Def0022
-S C$main.c$80$1$1 Def008A
-S C$main.c$62$1$1 Def006F
-S C$main.c$53$1$1 Def0067
-S C$main.c$42$2$2 Def0040
-S C$main.c$81$1$1 Def008C
-S C$main.c$63$1$1 Def007C
-S C$main.c$45$1$1 Def0065
-S C$main.c$36$1$1 Def0025
-S C$main.c$27$1$1 Def0013
-S C$main.c$64$1$1 Def0081
-S C$main.c$28$1$1 Def0016
-S C$main.c$92$1$1 Def00A4
-S C$main.c$83$1$1 Def008F
-S C$main.c$65$1$1 Def0084
-S C$main.c$38$1$1 Def003A
-S C$main.c$93$1$1 Def00A6
-S C$main.c$84$1$1 Def0092
+S C$main.c$40$1$1 Def0022
+S C$main.c$50$1$1 Def0065
+S C$main.c$42$1$1 Def0025
+S C$main.c$33$1$1 Def0013
+S G$UART0_INIT$0$0 Def00AA
+S C$main.c$70$1$1 Def0084
+S C$main.c$34$1$1 Def0016
+S C$main.c$44$1$1 Def003A
+S C$main.c$90$1$1 Def0095
+S C$main.c$81$1$1 Def008A
+S C$main.c$72$1$1 Def0087
+S C$main.c$63$1$1 Def0067
+S C$main.c$36$1$1 Def0019
+S C$main.c$91$1$1 Def0098
+S C$main.c$73$1$1 Def0089
+S C$main.c$64$1$1 Def0069
+S C$main.c$37$1$1 Def001C
+S C$main.c$92$1$1 Def009B
+S C$main.c$38$1$1 Def001F
+S C$main.c$29$1$1 Def0013
+S C$main.c$93$1$1 Def009E
+S C$main.c$66$1$1 Def006C
+S C$main.c$46$2$2 Def003A
 S _PORT_INIT Def008A
-S C$main.c$85$1$1 Def0095
-S C$main.c$76$1$1 Def008A
-S C$main.c$67$1$1 Def0087
+S C$main.c$94$1$1 Def00A1
+S C$main.c$85$1$1 Def008A
+S C$main.c$67$1$1 Def006F
 S C$main.c$58$1$1 Def0067
-S C$main.c$86$1$1 Def0098
-S C$main.c$68$1$1 Def0089
-S C$main.c$59$1$1 Def0069
-S C$main.c$87$1$1 Def009B
-S C$main.c$88$1$1 Def009E
-S C$main.c$89$1$1 Def00A1
+S C$main.c$47$2$2 Def0040
+S C$main.c$95$1$1 Def00A4
+S C$main.c$86$1$1 Def008C
+S C$main.c$68$1$1 Def007C
+S C$main.c$69$1$1 Def0081
+S C$main.c$97$1$1 Def00A7
+S C$main.c$88$1$1 Def008F
+S C$main.c$98$1$1 Def00A9
+S C$main.c$89$1$1 Def0092
 S _getchar Def000A
 A CONST size 28 flags 20 addr 0
 S Fmain$_str_0$0$0 Def0000
@@ -1017,7 +1019,7 @@ T 00 13
 R 00 00 00 16
 T 00 13 75 FF DE 75 FF AD 12 00 67 12 00 8A 12
 R 00 00 00 16 00 09 00 16 00 0C 00 16
-T 00 20 00 A7 75 84 00 74 00 00 00 C0 E0 74
+T 00 20 00 AA 75 84 00 74 00 00 00 C0 E0 74
 R 00 00 00 16 00 02 00 16 F1 01 08 00 17
 T 00 2A 00 00 00 C0 E0 74 80 C0 E0 12 00 00 15 81
 R 00 00 00 16 F1 81 02 00 17 02 0C 02 61
@@ -1053,17 +1055,17 @@ T 00 8A
 R 00 00 00 16
 T 00 8A AA 84 75 84 0F 75 E1 04 75 E2 00 75 E3 40
 R 00 00 00 16
-T 00 98 43 A4 01 53 A5 E0 43 90 1F 43 A6 0F 8A 84
+T 00 98 43 A4 01 75 80 FF 53 A5 E0 43 90 1F 43 A6
 R 00 00 00 16
-T 00 A6 22
+T 00 A6 1F 8A 84 22
 R 00 00 00 16
-T 00 A7
+T 00 AA
 R 00 00 00 16
-T 00 A7 AA 84 75 84 00 75 88 40 53 89 0F 43 89 20
+T 00 AA AA 84 75 84 00 75 88 40 53 89 0F 43 89 20
 R 00 00 00 16
-T 00 B5 43 8E 10 75 8D E8 D2 8E 75 84 00 75 98 50
+T 00 B8 43 8E 10 75 8D E8 D2 8E 75 84 00 75 98 50
 R 00 00 00 16
-T 00 C3 75 91 00 D2 99 8A 84 22
+T 00 C6 75 91 00 D2 99 8A 84 22
 R 00 00 00 16
 T 00 00
 R 00 00 00 17

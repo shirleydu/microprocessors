@@ -1,3 +1,9 @@
+// Lab1-3.c
+//------------------------------------------------------------------------------------
+// This program takes inputs from port 1 and outputs them to port 2
+//------------------------------------------------------------------------------------
+// Includes
+//------------------------------------------------------------------------------------
 #include <c8051f120.h>
 #include <stdio.h>
 #include "putget.h"
@@ -37,9 +43,8 @@ void main(void)
 
 	while(1)
 	{
-		
-		P2 = (P1 & 0x0F);		//mask bits 4-7
-		printf("P2: %x P1 : %x\n\r", P2, P1);
+		P2 = (P1 & 0x1E);		//set P2 outputs equal to P1 inputs; ignore pins 0, 5-7
+		printf("P2: %x P1 : %x\n\r", P2, P1);		//print current values for each port (in hex)
 
 	}
 }
@@ -84,10 +89,10 @@ void PORT_INIT(void)
 	XBR1	 = 0x00;
 	XBR2	 = 0x40;					// Enable Crossbar and weak pull-up
 	P0MDOUT |= 0x01;					// Set TX0 on P0.0 pin to push-pull
-	P1MDOUT &= 0xE0;					// Port 1 pins 0-3 to push-pull
-	P1 |= ~0xE0;
-	P2MDOUT |= 0x0F;					// Port 2 pins 0-5 to output
-	//P2 &= ~0x30;						// Port 2 pins 4,5 to LOW
+	P0=0xff;
+	P1MDOUT &= 0xE0;					// Port 1 pins 0-4 to open-drain; pin 0 does not work.
+	P1 |= ~0xE0;						// set pins 0-4 to high-impedence
+	P2MDOUT |= 0x1F;					// Port 2 pins 0-4 to output
 
 	SFRPAGE = SFRPAGE_SAVE;             // Restore SFR page
 }

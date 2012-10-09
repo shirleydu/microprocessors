@@ -1,7 +1,7 @@
                               1 ;--------------------------------------------------------
                               2 ; File Created by SDCC : free open source ANSI-C Compiler
                               3 ; Version 2.9.0 #5416 (Mar 22 2009) (MINGW32)
-                              4 ; This file was generated Thu Sep 06 18:55:26 2012
+                              4 ; This file was generated Mon Oct 01 19:57:55 2012
                               5 ;--------------------------------------------------------
                               6 	.module main
                               7 	.optsdcc -mmcs51 --model-small
@@ -1276,7 +1276,7 @@
                            1276 ;------------------------------------------------------------
                     0000   1277 	G$putchar$0$0 ==.
                     0000   1278 	C$putget.h$18$0$0 ==.
-                           1279 ;	C:\Users\SSP\Documents\Microprocessor Systems\Lab1-3\/putget.h:18: void putchar(char c)
+                           1279 ;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 1\1-3\/putget.h:18: void putchar(char c)
                            1280 ;	-----------------------------------------
                            1281 ;	 function putchar
                            1282 ;	-----------------------------------------
@@ -1291,15 +1291,15 @@
                     0001   1291 	ar1 = 0x01
    0064 AA 82              1292 	mov	r2,dpl
                     0002   1293 	C$putget.h$20$1$1 ==.
-                           1294 ;	C:\Users\SSP\Documents\Microprocessor Systems\Lab1-3\/putget.h:20: while(!TI0); 
+                           1294 ;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 1\1-3\/putget.h:20: while(!TI0); 
    0066                    1295 00101$:
                     0002   1296 	C$putget.h$21$1$1 ==.
-                           1297 ;	C:\Users\SSP\Documents\Microprocessor Systems\Lab1-3\/putget.h:21: TI0=0;
+                           1297 ;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 1\1-3\/putget.h:21: TI0=0;
    0066 10 99 02           1298 	jbc	_TI0,00108$
    0069 80 FB              1299 	sjmp	00101$
    006B                    1300 00108$:
                     0007   1301 	C$putget.h$22$1$1 ==.
-                           1302 ;	C:\Users\SSP\Documents\Microprocessor Systems\Lab1-3\/putget.h:22: SBUF0 = c;
+                           1302 ;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 1\1-3\/putget.h:22: SBUF0 = c;
    006B 8A 99              1303 	mov	_SBUF0,r2
                     0009   1304 	C$putget.h$23$1$1 ==.
                     0009   1305 	XG$putchar$0$0 ==.
@@ -1311,24 +1311,24 @@
                            1311 ;------------------------------------------------------------
                     000A   1312 	G$getchar$0$0 ==.
                     000A   1313 	C$putget.h$28$1$1 ==.
-                           1314 ;	C:\Users\SSP\Documents\Microprocessor Systems\Lab1-3\/putget.h:28: char getchar(void)
+                           1314 ;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 1\1-3\/putget.h:28: char getchar(void)
                            1315 ;	-----------------------------------------
                            1316 ;	 function getchar
                            1317 ;	-----------------------------------------
    006E                    1318 _getchar:
                     000A   1319 	C$putget.h$31$1$1 ==.
-                           1320 ;	C:\Users\SSP\Documents\Microprocessor Systems\Lab1-3\/putget.h:31: while(!RI0);
+                           1320 ;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 1\1-3\/putget.h:31: while(!RI0);
    006E                    1321 00101$:
                     000A   1322 	C$putget.h$32$1$1 ==.
-                           1323 ;	C:\Users\SSP\Documents\Microprocessor Systems\Lab1-3\/putget.h:32: RI0 =0;
+                           1323 ;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 1\1-3\/putget.h:32: RI0 =0;
    006E 10 98 02           1324 	jbc	_RI0,00108$
    0071 80 FB              1325 	sjmp	00101$
    0073                    1326 00108$:
                     000F   1327 	C$putget.h$33$1$1 ==.
-                           1328 ;	C:\Users\SSP\Documents\Microprocessor Systems\Lab1-3\/putget.h:33: c = SBUF0;
+                           1328 ;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 1\1-3\/putget.h:33: c = SBUF0;
    0073 85 99 82           1329 	mov	dpl,_SBUF0
                     0012   1330 	C$putget.h$35$1$1 ==.
-                           1331 ;	C:\Users\SSP\Documents\Microprocessor Systems\Lab1-3\/putget.h:35: return c;
+                           1331 ;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 1\1-3\/putget.h:35: return c;
                     0012   1332 	C$putget.h$36$1$1 ==.
                     0012   1333 	XG$getchar$0$0 ==.
    0076 22                 1334 	ret
@@ -1338,52 +1338,52 @@
                            1338 ;choice                    Allocated with name '_main_choice_1_1'
                            1339 ;------------------------------------------------------------
                     0013   1340 	G$main$0$0 ==.
-                    0013   1341 	C$main.c$23$1$1 ==.
-                           1342 ;	C:\Users\SSP\Documents\Microprocessor Systems\Lab1-3\main.c:23: void main(void)
+                    0013   1341 	C$main.c$29$1$1 ==.
+                           1342 ;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 1\1-3\main.c:29: void main(void)
                            1343 ;	-----------------------------------------
                            1344 ;	 function main
                            1345 ;	-----------------------------------------
    0077                    1346 _main:
-                    0013   1347 	C$main.c$27$1$1 ==.
-                           1348 ;	C:\Users\SSP\Documents\Microprocessor Systems\Lab1-3\main.c:27: WDTCN = 0xDE;						// Disable the watchdog timer
+                    0013   1347 	C$main.c$33$1$1 ==.
+                           1348 ;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 1\1-3\main.c:33: WDTCN = 0xDE;						// Disable the watchdog timer
    0077 75 FF DE           1349 	mov	_WDTCN,#0xDE
-                    0016   1350 	C$main.c$28$1$1 ==.
-                           1351 ;	C:\Users\SSP\Documents\Microprocessor Systems\Lab1-3\main.c:28: WDTCN = 0xAD;						// Note: = "DEAD"!
+                    0016   1350 	C$main.c$34$1$1 ==.
+                           1351 ;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 1\1-3\main.c:34: WDTCN = 0xAD;						// Note: = "DEAD"!
    007A 75 FF AD           1352 	mov	_WDTCN,#0xAD
-                    0019   1353 	C$main.c$30$1$1 ==.
-                           1354 ;	C:\Users\SSP\Documents\Microprocessor Systems\Lab1-3\main.c:30: SYSCLK_INIT();						// Initialize the oscillator
+                    0019   1353 	C$main.c$36$1$1 ==.
+                           1354 ;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 1\1-3\main.c:36: SYSCLK_INIT();						// Initialize the oscillator
    007D 12 00 CB           1355 	lcall	_SYSCLK_INIT
-                    001C   1356 	C$main.c$31$1$1 ==.
-                           1357 ;	C:\Users\SSP\Documents\Microprocessor Systems\Lab1-3\main.c:31: PORT_INIT();						// Initialize the Crossbar and GPIO
+                    001C   1356 	C$main.c$37$1$1 ==.
+                           1357 ;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 1\1-3\main.c:37: PORT_INIT();						// Initialize the Crossbar and GPIO
    0080 12 00 EE           1358 	lcall	_PORT_INIT
-                    001F   1359 	C$main.c$32$1$1 ==.
-                           1360 ;	C:\Users\SSP\Documents\Microprocessor Systems\Lab1-3\main.c:32: UART0_INIT();						// Initialize UART0
-   0083 12 01 0B           1361 	lcall	_UART0_INIT
-                    0022   1362 	C$main.c$34$1$1 ==.
-                           1363 ;	C:\Users\SSP\Documents\Microprocessor Systems\Lab1-3\main.c:34: SFRPAGE = UART0_PAGE;				// Direct output to UART0
+                    001F   1359 	C$main.c$38$1$1 ==.
+                           1360 ;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 1\1-3\main.c:38: UART0_INIT();						// Initialize UART0
+   0083 12 01 0E           1361 	lcall	_UART0_INIT
+                    0022   1362 	C$main.c$40$1$1 ==.
+                           1363 ;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 1\1-3\main.c:40: SFRPAGE = UART0_PAGE;				// Direct output to UART0
    0086 75 84 00           1364 	mov	_SFRPAGE,#0x00
-                    0025   1365 	C$main.c$36$1$1 ==.
-                           1366 ;	C:\Users\SSP\Documents\Microprocessor Systems\Lab1-3\main.c:36: printf("Reading inputs to P1\n\r");
-   0089 74 39              1367 	mov	a,#__str_0
+                    0025   1365 	C$main.c$42$1$1 ==.
+                           1366 ;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 1\1-3\main.c:42: printf("Reading inputs to P1\n\r");
+   0089 74 3C              1367 	mov	a,#__str_0
    008B C0 E0              1368 	push	acc
    008D 74 07              1369 	mov	a,#(__str_0 >> 8)
    008F C0 E0              1370 	push	acc
    0091 74 80              1371 	mov	a,#0x80
    0093 C0 E0              1372 	push	acc
-   0095 12 01 53           1373 	lcall	_printf
+   0095 12 01 56           1373 	lcall	_printf
    0098 15 81              1374 	dec	sp
    009A 15 81              1375 	dec	sp
    009C 15 81              1376 	dec	sp
-                    003A   1377 	C$main.c$38$1$1 ==.
-                           1378 ;	C:\Users\SSP\Documents\Microprocessor Systems\Lab1-3\main.c:38: while(1)
+                    003A   1377 	C$main.c$44$1$1 ==.
+                           1378 ;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 1\1-3\main.c:44: while(1)
    009E                    1379 00102$:
-                    003A   1380 	C$main.c$41$2$2 ==.
-                           1381 ;	C:\Users\SSP\Documents\Microprocessor Systems\Lab1-3\main.c:41: P2 = (P1 & 0x1E);		//mask bits 4-7
+                    003A   1380 	C$main.c$46$2$2 ==.
+                           1381 ;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 1\1-3\main.c:46: P2 = (P1 & 0x1E);		//set P2 outputs equal to P1 inputs; ignore pins 0, 5-7
    009E 74 1E              1382 	mov	a,#0x1E
    00A0 55 90              1383 	anl	a,_P1
    00A2 F5 A0              1384 	mov	_P2,a
-                    0040   1385 	C$main.c$42$2$2 ==.
-                           1386 ;	C:\Users\SSP\Documents\Microprocessor Systems\Lab1-3\main.c:42: printf("P2: %x P1 : %x\n\r", P2, P1);
+                    0040   1385 	C$main.c$47$2$2 ==.
+                           1386 ;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 1\1-3\main.c:47: printf("P2: %x P1 : %x\n\r", P2, P1);		//print current values for each port (in hex)
    00A4 AA 90              1387 	mov	r2,_P1
    00A6 7B 00              1388 	mov	r3,#0x00
    00A8 AC A0              1389 	mov	r4,_P2
@@ -1392,17 +1392,17 @@
    00AE C0 03              1392 	push	ar3
    00B0 C0 04              1393 	push	ar4
    00B2 C0 05              1394 	push	ar5
-   00B4 74 50              1395 	mov	a,#__str_1
+   00B4 74 53              1395 	mov	a,#__str_1
    00B6 C0 E0              1396 	push	acc
    00B8 74 07              1397 	mov	a,#(__str_1 >> 8)
    00BA C0 E0              1398 	push	acc
    00BC 74 80              1399 	mov	a,#0x80
    00BE C0 E0              1400 	push	acc
-   00C0 12 01 53           1401 	lcall	_printf
+   00C0 12 01 56           1401 	lcall	_printf
    00C3 E5 81              1402 	mov	a,sp
    00C5 24 F9              1403 	add	a,#0xf9
    00C7 F5 81              1404 	mov	sp,a
-                    0065   1405 	C$main.c$45$1$1 ==.
+                    0065   1405 	C$main.c$50$1$1 ==.
                     0065   1406 	XG$main$0$0 ==.
    00C9 80 D3              1407 	sjmp	00102$
                            1408 ;------------------------------------------------------------
@@ -1412,23 +1412,23 @@
                            1412 ;SFRPAGE_SAVE              Allocated to registers r2 
                            1413 ;------------------------------------------------------------
                     0067   1414 	G$SYSCLK_INIT$0$0 ==.
-                    0067   1415 	C$main.c$53$1$1 ==.
-                           1416 ;	C:\Users\SSP\Documents\Microprocessor Systems\Lab1-3\main.c:53: void SYSCLK_INIT(void)
+                    0067   1415 	C$main.c$58$1$1 ==.
+                           1416 ;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 1\1-3\main.c:58: void SYSCLK_INIT(void)
                            1417 ;	-----------------------------------------
                            1418 ;	 function SYSCLK_INIT
                            1419 ;	-----------------------------------------
    00CB                    1420 _SYSCLK_INIT:
-                    0067   1421 	C$main.c$58$1$1 ==.
-                           1422 ;	C:\Users\SSP\Documents\Microprocessor Systems\Lab1-3\main.c:58: SFRPAGE_SAVE = SFRPAGE;				// Save Current SFR page	SFRPAGE = CONFIG_PAGE;
+                    0067   1421 	C$main.c$63$1$1 ==.
+                           1422 ;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 1\1-3\main.c:63: SFRPAGE_SAVE = SFRPAGE;				// Save Current SFR page	SFRPAGE = CONFIG_PAGE;
    00CB AA 84              1423 	mov	r2,_SFRPAGE
-                    0069   1424 	C$main.c$59$1$1 ==.
-                           1425 ;	C:\Users\SSP\Documents\Microprocessor Systems\Lab1-3\main.c:59: SFRPAGE   = CONFIG_PAGE;
+                    0069   1424 	C$main.c$64$1$1 ==.
+                           1425 ;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 1\1-3\main.c:64: SFRPAGE   = CONFIG_PAGE;
    00CD 75 84 0F           1426 	mov	_SFRPAGE,#0x0F
-                    006C   1427 	C$main.c$61$1$1 ==.
-                           1428 ;	C:\Users\SSP\Documents\Microprocessor Systems\Lab1-3\main.c:61: OSCXCN = 0x67;						// Start ext osc with 22.1184MHz crystal
+                    006C   1427 	C$main.c$66$1$1 ==.
+                           1428 ;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 1\1-3\main.c:66: OSCXCN = 0x67;						// Start ext osc with 22.1184MHz crystal
    00D0 75 8C 67           1429 	mov	_OSCXCN,#0x67
-                    006F   1430 	C$main.c$62$1$1 ==.
-                           1431 ;	C:\Users\SSP\Documents\Microprocessor Systems\Lab1-3\main.c:62: for(i=0; i < 3000; i++);			// Wait for the oscillator to start up
+                    006F   1430 	C$main.c$67$1$1 ==.
+                           1431 ;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 1\1-3\main.c:67: for(i=0; i < 3000; i++);			// Wait for the oscillator to start up
    00D3 7B B8              1432 	mov	r3,#0xB8
    00D5 7C 0B              1433 	mov	r4,#0x0B
    00D7                    1434 00106$:
@@ -1439,21 +1439,21 @@
    00DC EB                 1439 	mov	a,r3
    00DD 4C                 1440 	orl	a,r4
    00DE 70 F7              1441 	jnz	00106$
-                    007C   1442 	C$main.c$63$1$1 ==.
-                           1443 ;	C:\Users\SSP\Documents\Microprocessor Systems\Lab1-3\main.c:63: while(!(OSCXCN & 0x80));
+                    007C   1442 	C$main.c$68$1$1 ==.
+                           1443 ;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 1\1-3\main.c:68: while(!(OSCXCN & 0x80));
    00E0                    1444 00101$:
    00E0 E5 8C              1445 	mov	a,_OSCXCN
    00E2 30 E7 FB           1446 	jnb	acc.7,00101$
-                    0081   1447 	C$main.c$64$1$1 ==.
-                           1448 ;	C:\Users\SSP\Documents\Microprocessor Systems\Lab1-3\main.c:64: CLKSEL = 0x01;						// Switch to the external crystal oscillator
+                    0081   1447 	C$main.c$69$1$1 ==.
+                           1448 ;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 1\1-3\main.c:69: CLKSEL = 0x01;						// Switch to the external crystal oscillator
    00E5 75 97 01           1449 	mov	_CLKSEL,#0x01
-                    0084   1450 	C$main.c$65$1$1 ==.
-                           1451 ;	C:\Users\SSP\Documents\Microprocessor Systems\Lab1-3\main.c:65: OSCICN = 0x00;						// Disable the internal oscillator
+                    0084   1450 	C$main.c$70$1$1 ==.
+                           1451 ;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 1\1-3\main.c:70: OSCICN = 0x00;						// Disable the internal oscillator
    00E8 75 8A 00           1452 	mov	_OSCICN,#0x00
-                    0087   1453 	C$main.c$67$1$1 ==.
-                           1454 ;	C:\Users\SSP\Documents\Microprocessor Systems\Lab1-3\main.c:67: SFRPAGE = SFRPAGE_SAVE;             // Restore SFR page
+                    0087   1453 	C$main.c$72$1$1 ==.
+                           1454 ;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 1\1-3\main.c:72: SFRPAGE = SFRPAGE_SAVE;             // Restore SFR page
    00EB 8A 84              1455 	mov	_SFRPAGE,r2
-                    0089   1456 	C$main.c$68$1$1 ==.
+                    0089   1456 	C$main.c$73$1$1 ==.
                     0089   1457 	XG$SYSCLK_INIT$0$0 ==.
    00ED 22                 1458 	ret
                            1459 ;------------------------------------------------------------
@@ -1462,117 +1462,120 @@
                            1462 ;SFRPAGE_SAVE              Allocated to registers r2 
                            1463 ;------------------------------------------------------------
                     008A   1464 	G$PORT_INIT$0$0 ==.
-                    008A   1465 	C$main.c$76$1$1 ==.
-                           1466 ;	C:\Users\SSP\Documents\Microprocessor Systems\Lab1-3\main.c:76: void PORT_INIT(void)
+                    008A   1465 	C$main.c$81$1$1 ==.
+                           1466 ;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 1\1-3\main.c:81: void PORT_INIT(void)
                            1467 ;	-----------------------------------------
                            1468 ;	 function PORT_INIT
                            1469 ;	-----------------------------------------
    00EE                    1470 _PORT_INIT:
-                    008A   1471 	C$main.c$80$1$1 ==.
-                           1472 ;	C:\Users\SSP\Documents\Microprocessor Systems\Lab1-3\main.c:80: SFRPAGE_SAVE = SFRPAGE;				// Save Current SFR page
+                    008A   1471 	C$main.c$85$1$1 ==.
+                           1472 ;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 1\1-3\main.c:85: SFRPAGE_SAVE = SFRPAGE;				// Save Current SFR page
    00EE AA 84              1473 	mov	r2,_SFRPAGE
-                    008C   1474 	C$main.c$81$1$1 ==.
-                           1475 ;	C:\Users\SSP\Documents\Microprocessor Systems\Lab1-3\main.c:81: SFRPAGE = CONFIG_PAGE;
+                    008C   1474 	C$main.c$86$1$1 ==.
+                           1475 ;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 1\1-3\main.c:86: SFRPAGE = CONFIG_PAGE;
    00F0 75 84 0F           1476 	mov	_SFRPAGE,#0x0F
-                    008F   1477 	C$main.c$83$1$1 ==.
-                           1478 ;	C:\Users\SSP\Documents\Microprocessor Systems\Lab1-3\main.c:83: XBR0	 = 0x04;					// Enable UART0
+                    008F   1477 	C$main.c$88$1$1 ==.
+                           1478 ;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 1\1-3\main.c:88: XBR0	 = 0x04;					// Enable UART0
    00F3 75 E1 04           1479 	mov	_XBR0,#0x04
-                    0092   1480 	C$main.c$84$1$1 ==.
-                           1481 ;	C:\Users\SSP\Documents\Microprocessor Systems\Lab1-3\main.c:84: XBR1	 = 0x00;
+                    0092   1480 	C$main.c$89$1$1 ==.
+                           1481 ;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 1\1-3\main.c:89: XBR1	 = 0x00;
    00F6 75 E2 00           1482 	mov	_XBR1,#0x00
-                    0095   1483 	C$main.c$85$1$1 ==.
-                           1484 ;	C:\Users\SSP\Documents\Microprocessor Systems\Lab1-3\main.c:85: XBR2	 = 0x40;					// Enable Crossbar and weak pull-up
+                    0095   1483 	C$main.c$90$1$1 ==.
+                           1484 ;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 1\1-3\main.c:90: XBR2	 = 0x40;					// Enable Crossbar and weak pull-up
    00F9 75 E3 40           1485 	mov	_XBR2,#0x40
-                    0098   1486 	C$main.c$86$1$1 ==.
-                           1487 ;	C:\Users\SSP\Documents\Microprocessor Systems\Lab1-3\main.c:86: P0MDOUT |= 0x01;					// Set TX0 on P0.0 pin to push-pull
+                    0098   1486 	C$main.c$91$1$1 ==.
+                           1487 ;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 1\1-3\main.c:91: P0MDOUT |= 0x01;					// Set TX0 on P0.0 pin to push-pull
    00FC 43 A4 01           1488 	orl	_P0MDOUT,#0x01
-                    009B   1489 	C$main.c$87$1$1 ==.
-                           1490 ;	C:\Users\SSP\Documents\Microprocessor Systems\Lab1-3\main.c:87: P1MDOUT &= 0xE0;					// Port 1 pins 0-3 to push-pull
-   00FF 53 A5 E0           1491 	anl	_P1MDOUT,#0xE0
-                    009E   1492 	C$main.c$88$1$1 ==.
-                           1493 ;	C:\Users\SSP\Documents\Microprocessor Systems\Lab1-3\main.c:88: P1 |= ~0xE0;
-   0102 43 90 1F           1494 	orl	_P1,#0x1F
-                    00A1   1495 	C$main.c$89$1$1 ==.
-                           1496 ;	C:\Users\SSP\Documents\Microprocessor Systems\Lab1-3\main.c:89: P2MDOUT |= 0x0F;					// Port 2 pins 0-5 to output
-   0105 43 A6 0F           1497 	orl	_P2MDOUT,#0x0F
-                    00A4   1498 	C$main.c$92$1$1 ==.
-                           1499 ;	C:\Users\SSP\Documents\Microprocessor Systems\Lab1-3\main.c:92: SFRPAGE = SFRPAGE_SAVE;             // Restore SFR page
-   0108 8A 84              1500 	mov	_SFRPAGE,r2
-                    00A6   1501 	C$main.c$93$1$1 ==.
-                    00A6   1502 	XG$PORT_INIT$0$0 ==.
-   010A 22                 1503 	ret
-                           1504 ;------------------------------------------------------------
-                           1505 ;Allocation info for local variables in function 'UART0_INIT'
-                           1506 ;------------------------------------------------------------
-                           1507 ;SFRPAGE_SAVE              Allocated to registers r2 
-                           1508 ;------------------------------------------------------------
-                    00A7   1509 	G$UART0_INIT$0$0 ==.
-                    00A7   1510 	C$main.c$101$1$1 ==.
-                           1511 ;	C:\Users\SSP\Documents\Microprocessor Systems\Lab1-3\main.c:101: void UART0_INIT(void)
-                           1512 ;	-----------------------------------------
-                           1513 ;	 function UART0_INIT
-                           1514 ;	-----------------------------------------
-   010B                    1515 _UART0_INIT:
-                    00A7   1516 	C$main.c$105$1$1 ==.
-                           1517 ;	C:\Users\SSP\Documents\Microprocessor Systems\Lab1-3\main.c:105: SFRPAGE_SAVE = SFRPAGE;				// Save Current SFR page
-   010B AA 84              1518 	mov	r2,_SFRPAGE
-                    00A9   1519 	C$main.c$106$1$1 ==.
-                           1520 ;	C:\Users\SSP\Documents\Microprocessor Systems\Lab1-3\main.c:106: SFRPAGE = TIMER01_PAGE;
-   010D 75 84 00           1521 	mov	_SFRPAGE,#0x00
-                    00AC   1522 	C$main.c$108$1$1 ==.
-                           1523 ;	C:\Users\SSP\Documents\Microprocessor Systems\Lab1-3\main.c:108: TCON	 = 0x40;
-   0110 75 88 40           1524 	mov	_TCON,#0x40
-                    00AF   1525 	C$main.c$109$1$1 ==.
-                           1526 ;	C:\Users\SSP\Documents\Microprocessor Systems\Lab1-3\main.c:109: TMOD	&= 0x0F;
-   0113 53 89 0F           1527 	anl	_TMOD,#0x0F
-                    00B2   1528 	C$main.c$110$1$1 ==.
-                           1529 ;	C:\Users\SSP\Documents\Microprocessor Systems\Lab1-3\main.c:110: TMOD	|= 0x20;					// Timer1, Mode 2, 8-bit reload
-   0116 43 89 20           1530 	orl	_TMOD,#0x20
-                    00B5   1531 	C$main.c$111$1$1 ==.
-                           1532 ;	C:\Users\SSP\Documents\Microprocessor Systems\Lab1-3\main.c:111: CKCON	|= 0x10;					// Timer1 uses SYSCLK as time base
-   0119 43 8E 10           1533 	orl	_CKCON,#0x10
-                    00B8   1534 	C$main.c$113$1$1 ==.
-                           1535 ;	C:\Users\SSP\Documents\Microprocessor Systems\Lab1-3\main.c:113: TH1		 = 0xE8;					// 0xE8 = 232
-   011C 75 8D E8           1536 	mov	_TH1,#0xE8
-                    00BB   1537 	C$main.c$114$1$1 ==.
-                           1538 ;	C:\Users\SSP\Documents\Microprocessor Systems\Lab1-3\main.c:114: TR1		 = 1;						// Start Timer1
-   011F D2 8E              1539 	setb	_TR1
-                    00BD   1540 	C$main.c$116$1$1 ==.
-                           1541 ;	C:\Users\SSP\Documents\Microprocessor Systems\Lab1-3\main.c:116: SFRPAGE = UART0_PAGE;
-   0121 75 84 00           1542 	mov	_SFRPAGE,#0x00
-                    00C0   1543 	C$main.c$117$1$1 ==.
-                           1544 ;	C:\Users\SSP\Documents\Microprocessor Systems\Lab1-3\main.c:117: SCON0	 = 0x50;					// Mode 1, 8-bit UART, enable RX
-   0124 75 98 50           1545 	mov	_SCON0,#0x50
-                    00C3   1546 	C$main.c$118$1$1 ==.
-                           1547 ;	C:\Users\SSP\Documents\Microprocessor Systems\Lab1-3\main.c:118: SSTA0	 = 0x00;					// SMOD0 = 0, in this mode
-   0127 75 91 00           1548 	mov	_SSTA0,#0x00
-                    00C6   1549 	C$main.c$121$1$1 ==.
-                           1550 ;	C:\Users\SSP\Documents\Microprocessor Systems\Lab1-3\main.c:121: TI0 = 1;							// Indicate TX0 ready
-   012A D2 99              1551 	setb	_TI0
-                    00C8   1552 	C$main.c$123$1$1 ==.
-                           1553 ;	C:\Users\SSP\Documents\Microprocessor Systems\Lab1-3\main.c:123: SFRPAGE = SFRPAGE_SAVE;             // Restore SFR page
-   012C 8A 84              1554 	mov	_SFRPAGE,r2
-                    00CA   1555 	C$main.c$124$1$1 ==.
-                    00CA   1556 	XG$UART0_INIT$0$0 ==.
-   012E 22                 1557 	ret
-                           1558 	.area CSEG    (CODE)
-                           1559 	.area CONST   (CODE)
-                    0000   1560 Fmain$_str_0$0$0 == .
-   0739                    1561 __str_0:
-   0739 52 65 61 64 69 6E  1562 	.ascii "Reading inputs to P1"
+                    009B   1489 	C$main.c$92$1$1 ==.
+                           1490 ;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 1\1-3\main.c:92: P0=0xff;
+   00FF 75 80 FF           1491 	mov	_P0,#0xFF
+                    009E   1492 	C$main.c$93$1$1 ==.
+                           1493 ;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 1\1-3\main.c:93: P1MDOUT &= 0xE0;					// Port 1 pins 0-4 to open-drain; pin 0 does not work.
+   0102 53 A5 E0           1494 	anl	_P1MDOUT,#0xE0
+                    00A1   1495 	C$main.c$94$1$1 ==.
+                           1496 ;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 1\1-3\main.c:94: P1 |= ~0xE0;						// set pins 0-4 to high-impedence
+   0105 43 90 1F           1497 	orl	_P1,#0x1F
+                    00A4   1498 	C$main.c$95$1$1 ==.
+                           1499 ;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 1\1-3\main.c:95: P2MDOUT |= 0x1F;					// Port 2 pins 0-4 to output
+   0108 43 A6 1F           1500 	orl	_P2MDOUT,#0x1F
+                    00A7   1501 	C$main.c$97$1$1 ==.
+                           1502 ;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 1\1-3\main.c:97: SFRPAGE = SFRPAGE_SAVE;             // Restore SFR page
+   010B 8A 84              1503 	mov	_SFRPAGE,r2
+                    00A9   1504 	C$main.c$98$1$1 ==.
+                    00A9   1505 	XG$PORT_INIT$0$0 ==.
+   010D 22                 1506 	ret
+                           1507 ;------------------------------------------------------------
+                           1508 ;Allocation info for local variables in function 'UART0_INIT'
+                           1509 ;------------------------------------------------------------
+                           1510 ;SFRPAGE_SAVE              Allocated to registers r2 
+                           1511 ;------------------------------------------------------------
+                    00AA   1512 	G$UART0_INIT$0$0 ==.
+                    00AA   1513 	C$main.c$106$1$1 ==.
+                           1514 ;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 1\1-3\main.c:106: void UART0_INIT(void)
+                           1515 ;	-----------------------------------------
+                           1516 ;	 function UART0_INIT
+                           1517 ;	-----------------------------------------
+   010E                    1518 _UART0_INIT:
+                    00AA   1519 	C$main.c$110$1$1 ==.
+                           1520 ;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 1\1-3\main.c:110: SFRPAGE_SAVE = SFRPAGE;				// Save Current SFR page
+   010E AA 84              1521 	mov	r2,_SFRPAGE
+                    00AC   1522 	C$main.c$111$1$1 ==.
+                           1523 ;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 1\1-3\main.c:111: SFRPAGE = TIMER01_PAGE;
+   0110 75 84 00           1524 	mov	_SFRPAGE,#0x00
+                    00AF   1525 	C$main.c$113$1$1 ==.
+                           1526 ;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 1\1-3\main.c:113: TCON	 = 0x40;
+   0113 75 88 40           1527 	mov	_TCON,#0x40
+                    00B2   1528 	C$main.c$114$1$1 ==.
+                           1529 ;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 1\1-3\main.c:114: TMOD	&= 0x0F;
+   0116 53 89 0F           1530 	anl	_TMOD,#0x0F
+                    00B5   1531 	C$main.c$115$1$1 ==.
+                           1532 ;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 1\1-3\main.c:115: TMOD	|= 0x20;					// Timer1, Mode 2, 8-bit reload
+   0119 43 89 20           1533 	orl	_TMOD,#0x20
+                    00B8   1534 	C$main.c$116$1$1 ==.
+                           1535 ;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 1\1-3\main.c:116: CKCON	|= 0x10;					// Timer1 uses SYSCLK as time base
+   011C 43 8E 10           1536 	orl	_CKCON,#0x10
+                    00BB   1537 	C$main.c$118$1$1 ==.
+                           1538 ;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 1\1-3\main.c:118: TH1		 = 0xE8;					// 0xE8 = 232
+   011F 75 8D E8           1539 	mov	_TH1,#0xE8
+                    00BE   1540 	C$main.c$119$1$1 ==.
+                           1541 ;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 1\1-3\main.c:119: TR1		 = 1;						// Start Timer1
+   0122 D2 8E              1542 	setb	_TR1
+                    00C0   1543 	C$main.c$121$1$1 ==.
+                           1544 ;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 1\1-3\main.c:121: SFRPAGE = UART0_PAGE;
+   0124 75 84 00           1545 	mov	_SFRPAGE,#0x00
+                    00C3   1546 	C$main.c$122$1$1 ==.
+                           1547 ;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 1\1-3\main.c:122: SCON0	 = 0x50;					// Mode 1, 8-bit UART, enable RX
+   0127 75 98 50           1548 	mov	_SCON0,#0x50
+                    00C6   1549 	C$main.c$123$1$1 ==.
+                           1550 ;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 1\1-3\main.c:123: SSTA0	 = 0x00;					// SMOD0 = 0, in this mode
+   012A 75 91 00           1551 	mov	_SSTA0,#0x00
+                    00C9   1552 	C$main.c$126$1$1 ==.
+                           1553 ;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 1\1-3\main.c:126: TI0 = 1;							// Indicate TX0 ready
+   012D D2 99              1554 	setb	_TI0
+                    00CB   1555 	C$main.c$128$1$1 ==.
+                           1556 ;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 1\1-3\main.c:128: SFRPAGE = SFRPAGE_SAVE;             // Restore SFR page
+   012F 8A 84              1557 	mov	_SFRPAGE,r2
+                    00CD   1558 	C$main.c$129$1$1 ==.
+                    00CD   1559 	XG$UART0_INIT$0$0 ==.
+   0131 22                 1560 	ret
+                           1561 	.area CSEG    (CODE)
+                           1562 	.area CONST   (CODE)
+                    0000   1563 Fmain$_str_0$0$0 == .
+   073C                    1564 __str_0:
+   073C 52 65 61 64 69 6E  1565 	.ascii "Reading inputs to P1"
         67 20 69 6E 70 75
         74 73 20 74 6F 20
         50 31
-   074D 0A                 1563 	.db 0x0A
-   074E 0D                 1564 	.db 0x0D
-   074F 00                 1565 	.db 0x00
-                    0017   1566 Fmain$_str_1$0$0 == .
-   0750                    1567 __str_1:
-   0750 50 32 3A 20 25 78  1568 	.ascii "P2: %x P1 : %x"
+   0750 0A                 1566 	.db 0x0A
+   0751 0D                 1567 	.db 0x0D
+   0752 00                 1568 	.db 0x00
+                    0017   1569 Fmain$_str_1$0$0 == .
+   0753                    1570 __str_1:
+   0753 50 32 3A 20 25 78  1571 	.ascii "P2: %x P1 : %x"
         20 50 31 20 3A 20
         25 78
-   075E 0A                 1569 	.db 0x0A
-   075F 0D                 1570 	.db 0x0D
-   0760 00                 1571 	.db 0x00
-                           1572 	.area XINIT   (CODE)
-                           1573 	.area CABS    (ABS,CODE)
+   0761 0A                 1572 	.db 0x0A
+   0762 0D                 1573 	.db 0x0D
+   0763 00                 1574 	.db 0x00
+                           1575 	.area XINIT   (CODE)
+                           1576 	.area CABS    (ABS,CODE)

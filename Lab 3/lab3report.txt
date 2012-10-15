@@ -1,0 +1,12 @@
+Introduction/Background Information:
+
+The objective of this lab is to explore the sending and receiving of data using the c8051 microcontroller. One method, as used in part 1 of the lab, is to make use of the Receive Interrupt flags, RI0 and RI1, to communicate between UARTs running on different baudrates. Another method of communicating between the UARTs is to use ISRs, as in part 2. To communicate between slave and master devices, as in part 3, SPI is used. 
+
+
+
+Results/Analysis:
+
+We were able to successfully have UART0 and UART1 communicate with each other-- any input received from either UARTs is mirrored on the other.
+
+A problem in part 2 of the lab was that, because UART0 interrupts have a higher priority (4) than UART1 interrupts (20), and because UART0 is always transmit-ready, UART0_ISR gets called constantly, preventing UART1_ISR from being called. To get around this, the priority of UART1 interrupts gets switched between 20 and 1-- higher than that of UART0 interrupts, so that both have a chance of being called.
+

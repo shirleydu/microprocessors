@@ -62,34 +62,27 @@ void main(void)
 
 	while(1)
 	{
-		/*
-		SFRPAGE = UART1_PAGE;
-		printf("RI1: %d TI1: %d ", RI1, TI1);
-
-		SFRPAGE = UART0_PAGE;
-		printf("RI0: %d TI0: %d ", RI0, TI0);*/
-
-		if (print1 == 1)
+		if (print1 == 1)				//if input coming from UART1, read from SBUF1 and output to both
 		{
 			SFRPAGE = UART1_PAGE;
 			input = SBUF1;
-			printf("%c", input);
+		//	printf("%c", input);
 			SFRPAGE = UART0_PAGE;
 			printf("%c", input);
 			print1 = 0;
 		}
 
-		if (print0 == 1)
+		if (print0 == 1)				//if input coming from UART0, read from SBUF0 and output to both
 		{
 			SFRPAGE = UART0_PAGE;
 			input = SBUF0;
 			printf("%c", input);
-			SFRPAGE = UART1_PAGE;
-			printf("%c", input);
+		//	SFRPAGE = UART1_PAGE;
+		//	printf("%c", input);
 			print0 = 0;
 		}
 
-		if (EIP2 == 0x40){
+		if (EIP2 == 0x40){				//flip priority of UART1 between 1 and 20 to allow both ISRs to get called.
 			EIP2 &=~0x40;
 		}
 		else{
@@ -200,7 +193,7 @@ void UART0_ISR(void) interrupt 4
 	SFRPAGE = UART0_PAGE;
 	if (RI0 == 1)
 	{
-		print0 = 1;
+		print0 = 1;					// input-received-from-UART0 flag
 	}
 
 	RI0 = 0;
@@ -211,7 +204,7 @@ void UART1_ISR(void) interrupt 20
 	SFRPAGE = UART1_PAGE;
 	if (RI1 == 1)
 	{
-		print1 = 1;
+		print1 = 1;					// input-received-from-UART1 flag
 	}
 
 	RI1 = 0;

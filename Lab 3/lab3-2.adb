@@ -10,12 +10,10 @@ F:G$UART0_ISR$0$0({2}DF,SV:S),Z,0,0,1,4,0
 F:G$UART1_ISR$0$0({2}DF,SV:S),Z,0,0,1,20,0
 F:G$UART1_ISR$0$0({2}DF,SV:S),Z,0,0,1,20,0
 F:G$UART1_ISR$0$0({2}DF,SV:S),Z,0,0,1,20,0
-F:G$UART1_ISR$0$0({2}DF,SV:S),Z,0,0,1,20,0
 S:G$input$0$0({1}SC:S),E,0,0
 S:Lmain$input$1$1({1}SC:S),R,0,0,[r2]
 S:G$print0$0$0({1}SB0$1:U),H,0,0
 S:G$print1$0$0({1}SB0$1:U),H,0,0
-S:G$UART0_off$0$0({1}SB0$1:U),H,0,0
 S:G$P0$0$0({1}SC:U),I,0,0
 S:G$SP$0$0({1}SC:U),I,0,0
 S:G$DPL$0$0({1}SC:U),I,0,0

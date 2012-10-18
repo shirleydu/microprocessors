@@ -53,10 +53,10 @@ void main(void)
 	SFRPAGE = UART0_PAGE;				// Direct output to UART0
 
 	printf("\033[2J");					//clear screen
-	printf("\033[2J");					//clear screen
+//	printf("\033[2J");					//clear screen
 	printf("\033[13;0H");				//print divider
-	printf("--------------------------------------------------------------------------------");
-	//printf("\033[1;12r");				//define scrollable area
+	printf("--------------------------------------------------------------------------------\n\r");
+	printf("\033[1;12r");				//define scrollable area
 	//printf("\033[14;25r");
 
 	while(1)
@@ -85,7 +85,7 @@ void main(void)
 			while (!SPIF);					//wait until not busy
 			SPIF = 0;						//busy
 			
-			SPI0DAT = input;					//write dummy character
+			SPI0DAT = input;				//write dummy character
 
 			while (!SPIF);					//wait until transfer is over
 
@@ -96,27 +96,26 @@ void main(void)
 			SFRPAGE = SFRPAGE_SAVE;
 		}
 	}
-
-	//UART receives back from BUFFALO what it sends;
-	//BUFFALO does not echo.
-
 }
 
 void writeTop (char c)
 {
 	char SFRPAGE_SAVE = SFRPAGE; 
 	SFRPAGE = UART0_PAGE;
-	if (rowTop < 12)
+	//identify the row to be printed on
+	if (rowTop < 12){
 		rowTop++;
+		printf("\033[%d;0H", rowTop);
+	}
 	else
 	{
+		//if past the area, define scroll area
 		printf("\033[1;12r");
-	//	printf("\033M");
 	}
-	
-	printf("\033[%d;0H", rowTop);		//print to bottommost row on top half
-	printf("%c", c);
-	//printf("%d", rowTop);
+	//go to the line and print
+	printf("\033[%d;0H", rowTop);
+	printf("%c\n\r", c);
+
 	SFRPAGE = SFRPAGE_SAVE;
 }
 
@@ -124,17 +123,18 @@ void writeBot (char c)
 {
 	char SFRPAGE_SAVE = SFRPAGE; 
 	SFRPAGE = UART0_PAGE;
+
+	//identify the row to be printed on
 	if (rowBot < 25)
 		rowBot++;
 	else
 	{
 		printf("\033[14;25r");
-	//	printf("\033M");
 	}
-
+	//go to proper line and print
 	printf("\033[%d;0H", rowBot);
-	printf("%c", c);
-	//printf("%d", rowBot);
+	printf("%c\n\r", c);
+
 	SFRPAGE = SFRPAGE;
 }
 

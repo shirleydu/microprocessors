@@ -1,6 +1,6 @@
 ;!FILE lab3-1.asm
 XH
-H 1A areas 446 global symbols
+H 1A areas 434 global symbols
 M lab3_1
 O -mmcs51 --model-small
 S G$TF3$0$0 Def00CF
@@ -777,9 +777,7 @@ S _CCF4 Def00DC
 A _CODE size 0 flags 0 addr 0
 A RSEG size 0 flags 0 addr 0
 A REG_BANK_0 size 8 flags 4 addr 0
-A DSEG size 2 flags 0 addr 0
-S _overflows Def0000
-S G$overflows$0$0 Def0000
+A DSEG size 0 flags 0 addr 0
 A OSEG size 0 flags 4 addr 0
 A SSEG size 1 flags 0 addr 0
 S __start__stack Def0000
@@ -790,65 +788,60 @@ A PSEG size 0 flags 50 addr 0
 A XSEG size 0 flags 40 addr 0
 A XABS size 0 flags 48 addr 0
 A XISEG size 0 flags 40 addr 0
-A HOME size 33 flags 20 addr 0
-S __sdcc_program_startup Def002E
-S A$lab3-1$1250 Def0000
-S A$lab3-1$1251 Def0003
-S A$lab3-1$1261 Def002B
-S A$lab3-1$1253 Def000B
-S A$lab3-1$1291 Def0031
-S A$lab3-1$1255 Def0013
-S A$lab3-1$1257 Def001B
-S A$lab3-1$1259 Def0023
-S A$lab3-1$1289 Def002E
+A HOME size 8 flags 20 addr 0
+S __sdcc_program_startup Def0003
+S A$lab3-1$1245 Def0000
+S A$lab3-1$1267 Def0003
+S A$lab3-1$1269 Def0006
 A GSINIT0 size 0 flags 20 addr 0
 A GSINIT1 size 0 flags 20 addr 0
 A GSINIT2 size 0 flags 20 addr 0
 A GSINIT3 size 0 flags 20 addr 0
 A GSINIT4 size 0 flags 20 addr 0
 A GSINIT5 size 0 flags 20 addr 0
-A GSINIT size 5 flags 20 addr 0
-S A$lab3-1$1280 Def0003
-S A$lab3-1$1278 Def0000
-S C$lab3_1.c$30$1$1 Def0000
-S A$lab3-1$1279 Def0001
+A GSINIT size 0 flags 20 addr 0
 A GSFINAL size 3 flags 20 addr 0
-S A$lab3-1$1282 Def0000
-A CSEG size 193 flags 20 addr 0
-S C$lab3_1.c$53$1$1 Def0052
-S C$lab3_1.c$44$1$1 Def001F
+S A$lab3-1$1260 Def0000
+A CSEG size 192 flags 20 addr 0
+S A$lab3-1$1499 Def00E2
+S C$lab3_1.c$60$2$2 Def0085
 S C$lab3_1.c$35$1$1 Def0013
-S C$lab3_1.c$45$1$1 Def0022
+S A$lab3-1$1698 Def0176
+S A$lab3-1$1689 Def016D
+S A$lab3-1$1599 Def0138
+S C$lab3_1.c$70$2$2 Def00C9
+S C$lab3_1.c$54$1$1 Def007F
+S C$lab3_1.c$45$1$1 Def0028
+S C$lab3_1.c$36$1$1 Def0016
 S G$UART_INIT$0$0 Def0150
-S C$lab3_1.c$62$2$2 Def0082
-S C$lab3_1.c$55$1$1 Def0055
+S C$lab3_1.c$46$1$1 Def003D
 S XG$PORT_INIT$0$0 Def014F
-S C$lab3_1.c$70$3$3 Def00C4
-S C$lab3_1.c$56$1$1 Def006A
-S C$lab3_1.c$47$1$1 Def0025
-S C$lab3_1.c$71$3$3 Def00C7
-S C$lab3_1.c$64$2$2 Def0085
-S C$lab3_1.c$39$1$1 Def0013
+S C$lab3_1.c$92$1$1 Def0113
+S C$lab3_1.c$73$1$2 Def00CC
+S C$lab3_1.c$56$1$1 Def0082
+S C$lab3_1.c$38$1$1 Def0019
+S C$lab3_1.c$84$1$1 Def0110
+S C$lab3_1.c$62$3$3 Def0088
+S C$lab3_1.c$39$1$1 Def001C
 S _main Def0013
-S C$lab3_1.c$80$3$4 Def00CF
-S C$lab3_1.c$74$2$2 Def00C9
-S C$lab3_1.c$58$1$1 Def007F
-S C$lab3_1.c$49$1$1 Def0028
-S C$lab3_1.c$81$3$4 Def00F3
-S C$lab3_1.c$96$1$1 Def0113
-S C$lab3_1.c$82$3$4 Def00F6
-S C$lab3_1.c$77$1$2 Def00CC
-S C$lab3_1.c$88$1$1 Def0110
-S C$lab3_1.c$83$3$4 Def010B
-S C$lab3_1.c$66$3$3 Def0088
-S C$lab3_1.c$84$3$4 Def010E
-S C$lab3_1.c$67$3$3 Def0088
+S C$lab3_1.c$80$3$4 Def010E
+S C$lab3_1.c$63$3$3 Def0088
+S C$lab3_1.c$49$1$1 Def0052
+S C$lab3_1.c$64$3$3 Def00AC
+S C$lab3_1.c$65$3$3 Def00AF
+S C$lab3_1.c$58$2$2 Def0082
+S C$lab3_1.c$97$1$1 Def0113
+S C$lab3_1.c$66$3$3 Def00C4
+S C$lab3_1.c$98$1$1 Def0115
+S C$lab3_1.c$75$3$4 Def00CF
+S C$lab3_1.c$67$3$3 Def00C7
 S XG$getchar$0$0 Def0012
-S C$lab3_1.c$68$3$3 Def00AC
+S C$lab3_1.c$76$3$4 Def00CF
 S G$PORT_INIT$0$0 Def0136
-S C$lab3_1.c$69$3$3 Def00AF
+S C$lab3_1.c$77$3$4 Def00F3
 S _SYSCLK_INIT Def0113
-S C$lab3_1.c$79$3$4 Def00CF
+S C$lab3_1.c$78$3$4 Def00F6
+S C$lab3_1.c$79$3$4 Def010B
 S XG$main$0$0 Def0110
 S G$getchar$0$0 Def000A
 S _Timer_Init Def0168
@@ -857,265 +850,254 @@ S XG$SYSCLK_INIT$0$0 Def0135
 S G$main$0$0 Def0013
 S XG$Timer_Init$0$0 Def0191
 S G$SYSCLK_INIT$0$0 Def0113
-S _Timer2_ISR Def0192
 S XG$putchar$0$0 Def0009
 S C$putget.h$20$1$1 Def0002
 S G$Timer_Init$0$0 Def0168
 S C$putget.h$21$1$1 Def0002
 S C$putget.h$31$1$1 Def000A
 S C$putget.h$22$1$1 Def0007
+S C$lab3_1.c$100$1$1 Def0118
 S C$putget.h$32$1$1 Def000A
 S C$putget.h$23$1$1 Def0009
-S C$lab3_1.c$110$1$1 Def0133
-S C$lab3_1.c$101$1$1 Def0113
+S C$lab3_1.c$101$1$1 Def011B
 S C$putget.h$33$1$1 Def000F
 S G$putchar$0$0 Def0000
-S XG$Timer2_ISR$0$0 Def0192
-S C$lab3_1.c$111$1$1 Def0135
-S C$lab3_1.c$102$1$1 Def0115
+S C$lab3_1.c$102$1$1 Def0128
 S C$putget.h$18$0$0 Def0000
-S C$lab3_1.c$130$1$1 Def0144
-S C$lab3_1.c$121$1$1 Def0136
+S C$lab3_1.c$121$1$1 Def013B
+S C$lab3_1.c$103$1$1 Def012D
 S C$putget.h$35$1$1 Def0012
-S C$lab3_1.c$104$1$1 Def0118
+S A$lab3-1$1300 Def0002
+S C$lab3_1.c$140$1$1 Def0150
+S C$lab3_1.c$131$1$1 Def014D
+S C$lab3_1.c$122$1$1 Def013D
+S C$lab3_1.c$104$1$1 Def0130
 S C$putget.h$36$1$1 Def0012
-S A$lab3-1$1400 Def0034
-S C$lab3_1.c$150$1$1 Def0158
-S C$lab3_1.c$132$1$1 Def0147
-S C$lab3_1.c$123$1$1 Def0138
-S C$lab3_1.c$105$1$1 Def011B
+S A$lab3-1$1400 Def0057
+S A$lab3-1$1301 Def0005
+S C$lab3_1.c$150$1$1 Def0160
+S C$lab3_1.c$132$1$1 Def014F
+S C$lab3_1.c$123$1$1 Def013F
 S C$putget.h$28$1$1 Def000A
 S _UART_INIT Def0150
-S A$lab3-1$1410 Def0045
-S A$lab3-1$1401 Def0037
-S C$lab3_1.c$160$1$1 Def0168
-S C$lab3_1.c$151$1$1 Def015B
-S C$lab3_1.c$133$1$1 Def014A
-S C$lab3_1.c$106$1$1 Def0128
-S A$lab3-1$1600 Def0133
-S A$lab3-1$1510 Def00CF
-S A$lab3-1$1411 Def0047
-S A$lab3-1$1402 Def0039
-S A$lab3-1$1330 Def0009
-S C$lab3_1.c$170$1$1 Def017C
-S C$lab3_1.c$125$1$1 Def013B
-S C$lab3_1.c$107$1$1 Def012D
-S A$lab3-1$1520 Def00E0
-S A$lab3-1$1511 Def00D1
-S A$lab3-1$1502 Def00C9
-S A$lab3-1$1430 Def0068
-S A$lab3-1$1421 Def0055
-S A$lab3-1$1412 Def0049
-S A$lab3-1$1403 Def003B
-S A$lab3-1$1322 Def0002
-S C$lab3_1.c$180$1$1 Def0191
-S C$lab3_1.c$162$1$1 Def0168
-S C$lab3_1.c$153$1$1 Def015D
-S C$lab3_1.c$144$1$1 Def0150
-S C$lab3_1.c$135$1$1 Def014D
-S C$lab3_1.c$126$1$1 Def013D
-S C$lab3_1.c$108$1$1 Def0130
-S A$lab3-1$1521 Def00E2
-S A$lab3-1$1512 Def00D2
-S A$lab3-1$1440 Def0079
-S A$lab3-1$1422 Def0057
-S A$lab3-1$1413 Def004C
-S A$lab3-1$1323 Def0005
-S C$lab3_1.c$172$1$1 Def017E
-S C$lab3_1.c$154$1$1 Def0160
-S C$lab3_1.c$136$1$1 Def014F
-S C$lab3_1.c$127$1$1 Def013F
-S A$lab3-1$1720 Def0176
-S A$lab3-1$1711 Def016D
-S A$lab3-1$1630 Def013F
-S A$lab3-1$1621 Def0138
-S A$lab3-1$1603 Def0135
-S A$lab3-1$1540 Def0102
-S A$lab3-1$1531 Def00F3
-S A$lab3-1$1522 Def00E4
-S A$lab3-1$1513 Def00D3
-S A$lab3-1$1441 Def007B
-S A$lab3-1$1423 Def0059
-S A$lab3-1$1414 Def004E
-S C$lab3_1.c$182$1$1 Def0192
-S C$lab3_1.c$173$1$1 Def0181
-S C$lab3_1.c$164$1$1 Def016A
-S C$lab3_1.c$155$1$1 Def0163
-S C$lab3_1.c$146$1$1 Def0150
-S C$lab3_1.c$119$1$1 Def0136
-S G$Timer2_ISR$0$0 Def0192
-S A$lab3-1$1541 Def0105
-S A$lab3-1$1523 Def00E6
-S A$lab3-1$1514 Def00D5
-S A$lab3-1$1505 Def00CC
-S A$lab3-1$1460 Def008A
-S A$lab3-1$1451 Def0082
-S A$lab3-1$1442 Def007D
-S A$lab3-1$1433 Def006A
-S A$lab3-1$1424 Def005B
-S A$lab3-1$1415 Def0050
-S A$lab3-1$1406 Def003D
-S A$lab3-1$1316 Def0000
-S C$lab3_1.c$174$1$1 Def0184
-S C$lab3_1.c$165$1$1 Def016D
-S C$lab3_1.c$129$1$1 Def0141
-S A$lab3-1$1542 Def0107
-S A$lab3-1$1524 Def00E8
-S A$lab3-1$1515 Def00D6
-S A$lab3-1$1470 Def009B
-S A$lab3-1$1461 Def008B
-S A$lab3-1$1434 Def006C
-S A$lab3-1$1425 Def005D
-S A$lab3-1$1407 Def003F
-S A$lab3-1$1353 Def000F
-S C$lab3_1.c$175$1$1 Def0187
-S C$lab3_1.c$166$1$1 Def0170
-S C$lab3_1.c$157$1$1 Def0165
-S C$lab3_1.c$148$1$1 Def0152
-S A$lab3-1$1750 Def0191
-S A$lab3-1$1741 Def018A
-S A$lab3-1$1732 Def0181
-S A$lab3-1$1723 Def0179
-S A$lab3-1$1714 Def0170
-S A$lab3-1$1705 Def0168
-S A$lab3-1$1642 Def014A
-S A$lab3-1$1633 Def0141
-S A$lab3-1$1624 Def013B
-S A$lab3-1$1552 Def0110
-S A$lab3-1$1543 Def0109
-S A$lab3-1$1534 Def00F6
-S A$lab3-1$1525 Def00EA
-S A$lab3-1$1516 Def00D8
-S A$lab3-1$1480 Def00AC
-S A$lab3-1$1471 Def009D
-S A$lab3-1$1462 Def008C
-S A$lab3-1$1435 Def006E
-S A$lab3-1$1426 Def005F
-S A$lab3-1$1408 Def0041
-S A$lab3-1$1327 Def0007
-S C$lab3_1.c$176$1$1 Def018A
-S C$lab3_1.c$167$1$1 Def0173
-S C$lab3_1.c$158$1$1 Def0167
-S C$lab3_1.c$149$1$1 Def0155
-S A$lab3-1$1580 Def011F
-S A$lab3-1$1571 Def0115
-S A$lab3-1$1535 Def00F8
-S A$lab3-1$1526 Def00ED
-S A$lab3-1$1517 Def00DA
-S A$lab3-1$1490 Def00BE
-S A$lab3-1$1472 Def009F
-S A$lab3-1$1463 Def008E
-S A$lab3-1$1454 Def0085
-S A$lab3-1$1445 Def007F
-S A$lab3-1$1436 Def0070
-S A$lab3-1$1427 Def0061
-S A$lab3-1$1418 Def0052
-S A$lab3-1$1409 Def0043
-S A$lab3-1$1391 Def0025
-S A$lab3-1$1382 Def001C
-S A$lab3-1$1373 Def0013
-S C$lab3_1.c$177$1$1 Def018D
-S C$lab3_1.c$168$1$1 Def0176
+S A$lab3-1$1500 Def00E4
+S A$lab3-1$1401 Def0059
+S C$lab3_1.c$160$1$1 Def016A
+S C$lab3_1.c$151$1$1 Def0163
+S C$lab3_1.c$142$1$1 Def0150
+S C$lab3_1.c$115$1$1 Def0136
+S C$lab3_1.c$106$1$1 Def0133
+S A$lab3-1$1501 Def00E6
+S A$lab3-1$1420 Def007D
+S A$lab3-1$1411 Def006A
+S A$lab3-1$1402 Def005B
+S C$lab3_1.c$170$1$1 Def0184
+S C$lab3_1.c$161$1$1 Def016D
+S C$lab3_1.c$125$1$1 Def0141
+S C$lab3_1.c$107$1$1 Def0135
+S A$lab3-1$1520 Def0107
+S A$lab3-1$1502 Def00E8
+S A$lab3-1$1412 Def006C
+S A$lab3-1$1403 Def005D
+S A$lab3-1$1331 Def000F
+S C$lab3_1.c$171$1$1 Def0187
+S C$lab3_1.c$162$1$1 Def0170
+S C$lab3_1.c$153$1$1 Def0165
+S C$lab3_1.c$144$1$1 Def0152
+S C$lab3_1.c$126$1$1 Def0144
+S C$lab3_1.c$117$1$1 Def0136
+S A$lab3-1$1710 Def0181
+S A$lab3-1$1701 Def0179
+S A$lab3-1$1620 Def014A
+S A$lab3-1$1611 Def0141
+S A$lab3-1$1602 Def013B
+S A$lab3-1$1530 Def0110
+S A$lab3-1$1521 Def0109
+S A$lab3-1$1512 Def00F6
+S A$lab3-1$1503 Def00EA
+S A$lab3-1$1440 Def008C
+S A$lab3-1$1413 Def006E
+S A$lab3-1$1404 Def005F
+S A$lab3-1$1305 Def0007
+S C$lab3_1.c$172$1$1 Def018A
+S C$lab3_1.c$163$1$1 Def0173
+S C$lab3_1.c$154$1$1 Def0167
+S C$lab3_1.c$145$1$1 Def0155
+S A$lab3-1$1513 Def00F8
+S A$lab3-1$1504 Def00ED
+S A$lab3-1$1450 Def009F
+S A$lab3-1$1441 Def008E
+S A$lab3-1$1432 Def0085
+S A$lab3-1$1423 Def007F
+S A$lab3-1$1414 Def0070
+S A$lab3-1$1405 Def0061
+S A$lab3-1$1360 Def001C
+S A$lab3-1$1351 Def0013
+S C$lab3_1.c$173$1$1 Def018D
+S C$lab3_1.c$164$1$1 Def0176
+S C$lab3_1.c$146$1$1 Def0158
+S C$lab3_1.c$128$1$1 Def0147
+S C$lab3_1.c$119$1$1 Def0138
+S A$lab3-1$1514 Def00FA
+S A$lab3-1$1505 Def00EF
+S A$lab3-1$1451 Def00A1
+S A$lab3-1$1442 Def008F
+S A$lab3-1$1415 Def0072
+S A$lab3-1$1406 Def0064
+S C$lab3_1.c$165$1$1 Def0179
+S C$lab3_1.c$156$1$1 Def0168
+S C$lab3_1.c$147$1$1 Def015B
+S C$lab3_1.c$129$1$1 Def014A
+S A$lab3-1$1722 Def018D
+S A$lab3-1$1713 Def0184
+S A$lab3-1$1704 Def017C
+S A$lab3-1$1650 Def0158
+S A$lab3-1$1641 Def0150
+S A$lab3-1$1623 Def014D
+S A$lab3-1$1614 Def0144
+S A$lab3-1$1605 Def013D
+S A$lab3-1$1560 Def0123
+S A$lab3-1$1524 Def010B
+S A$lab3-1$1515 Def00FC
+S A$lab3-1$1506 Def00F1
+S A$lab3-1$1470 Def00C2
+S A$lab3-1$1461 Def00AF
+S A$lab3-1$1452 Def00A3
+S A$lab3-1$1443 Def0091
+S A$lab3-1$1416 Def0074
+S A$lab3-1$1407 Def0066
+S A$lab3-1$1380 Def0039
+S A$lab3-1$1326 Def000A
+S A$lab3-1$1308 Def0009
+S C$lab3_1.c$175$1$1 Def018F
+S C$lab3_1.c$166$1$1 Def017C
+S A$lab3-1$1552 Def0118
+S A$lab3-1$1516 Def00FE
+S A$lab3-1$1480 Def00C9
+S A$lab3-1$1462 Def00B1
+S A$lab3-1$1453 Def00A6
+S A$lab3-1$1444 Def0093
+S A$lab3-1$1417 Def0076
+S A$lab3-1$1408 Def0068
+S A$lab3-1$1390 Def0049
+S A$lab3-1$1381 Def003B
+S A$lab3-1$1372 Def0028
+S A$lab3-1$1363 Def001F
+S A$lab3-1$1354 Def0016
+S A$lab3-1$1336 Def0012
+S A$lab3-1$1327 Def000D
+S C$lab3_1.c$176$1$1 Def0191
+S C$lab3_1.c$158$1$1 Def0168
+S C$lab3_1.c$149$1$1 Def015D
+S A$lab3-1$1562 Def0124
+S A$lab3-1$1517 Def0100
+S A$lab3-1$1490 Def00D2
+S A$lab3-1$1463 Def00B3
+S A$lab3-1$1454 Def00A8
+S A$lab3-1$1445 Def0095
+S A$lab3-1$1418 Def0079
+S A$lab3-1$1391 Def004C
+S A$lab3-1$1373 Def002A
+S C$lab3_1.c$168$1$1 Def017E
 S _PORT_INIT Def0136
-S A$lab3-1$1590 Def0128
-S A$lab3-1$1581 Def0120
-S A$lab3-1$1536 Def00FA
-S A$lab3-1$1527 Def00EF
-S A$lab3-1$1518 Def00DC
-S A$lab3-1$1491 Def00C0
-S A$lab3-1$1473 Def00A1
-S A$lab3-1$1464 Def008F
-S A$lab3-1$1437 Def0072
-S A$lab3-1$1428 Def0064
-S C$lab3_1.c$187$1$1 Def0192
-S C$lab3_1.c$169$1$1 Def0179
-S A$lab3-1$1744 Def018D
-S A$lab3-1$1735 Def0184
-S A$lab3-1$1726 Def017C
-S A$lab3-1$1717 Def0173
-S A$lab3-1$1708 Def016A
-S A$lab3-1$1690 Def0167
-S A$lab3-1$1681 Def0160
-S A$lab3-1$1672 Def0158
-S A$lab3-1$1663 Def0150
-S A$lab3-1$1645 Def014D
-S A$lab3-1$1636 Def0144
-S A$lab3-1$1627 Def013D
-S A$lab3-1$1618 Def0136
-S A$lab3-1$1591 Def012A
-S A$lab3-1$1582 Def0123
-S A$lab3-1$1546 Def010B
-S A$lab3-1$1537 Def00FC
-S A$lab3-1$1528 Def00F1
-S A$lab3-1$1519 Def00DE
-S A$lab3-1$1492 Def00C2
-S A$lab3-1$1483 Def00AF
-S A$lab3-1$1474 Def00A3
-S A$lab3-1$1465 Def0091
-S A$lab3-1$1438 Def0074
-S A$lab3-1$1429 Def0066
-S A$lab3-1$1348 Def000A
-S C$lab3_1.c$179$1$1 Def018F
-S A$lab3-1$1574 Def0118
-S A$lab3-1$1538 Def00FE
-S A$lab3-1$1484 Def00B1
-S A$lab3-1$1475 Def00A6
-S A$lab3-1$1466 Def0093
-S A$lab3-1$1439 Def0076
-S A$lab3-1$1394 Def0028
-S A$lab3-1$1385 Def001F
-S A$lab3-1$1376 Def0016
-S A$lab3-1$1358 Def0012
-S A$lab3-1$1349 Def000D
+S A$lab3-1$1725 Def018F
+S A$lab3-1$1716 Def0187
+S A$lab3-1$1707 Def017E
+S A$lab3-1$1662 Def0163
+S A$lab3-1$1653 Def015B
+S A$lab3-1$1644 Def0152
+S A$lab3-1$1626 Def014F
+S A$lab3-1$1617 Def0147
+S A$lab3-1$1608 Def013F
+S A$lab3-1$1581 Def0135
+S A$lab3-1$1572 Def012D
+S A$lab3-1$1563 Def0125
+S A$lab3-1$1527 Def010E
+S A$lab3-1$1518 Def0102
+S A$lab3-1$1509 Def00F3
+S A$lab3-1$1491 Def00D3
+S A$lab3-1$1473 Def00C4
+S A$lab3-1$1464 Def00B5
+S A$lab3-1$1455 Def00AA
+S A$lab3-1$1446 Def0097
+S A$lab3-1$1437 Def0088
+S A$lab3-1$1419 Def007B
+S A$lab3-1$1392 Def004E
+S A$lab3-1$1374 Def002C
+S C$lab3_1.c$169$1$1 Def0181
+S A$lab3-1$1564 Def0126
+S A$lab3-1$1555 Def011B
+S A$lab3-1$1546 Def0113
+S A$lab3-1$1519 Def0105
+S A$lab3-1$1492 Def00D5
+S A$lab3-1$1483 Def00CC
+S A$lab3-1$1465 Def00B7
+S A$lab3-1$1447 Def0099
+S A$lab3-1$1438 Def008A
+S A$lab3-1$1429 Def0082
+S A$lab3-1$1393 Def0050
+S A$lab3-1$1384 Def003D
+S A$lab3-1$1375 Def002E
+S A$lab3-1$1366 Def0022
+S A$lab3-1$1357 Def0019
+S A$lab3-1$1294 Def0000
+S A$lab3-1$1556 Def011D
+S A$lab3-1$1493 Def00D6
+S A$lab3-1$1466 Def00B9
+S A$lab3-1$1448 Def009B
+S A$lab3-1$1439 Def008B
+S A$lab3-1$1385 Def003F
+S A$lab3-1$1376 Def0030
 S XG$UART_INIT$0$0 Def0167
-S A$lab3-1$1584 Def0124
-S A$lab3-1$1539 Def0100
-S A$lab3-1$1485 Def00B3
-S A$lab3-1$1476 Def00A8
-S A$lab3-1$1467 Def0095
-S A$lab3-1$1395 Def002A
-S A$lab3-1$1747 Def018F
-S A$lab3-1$1738 Def0187
-S A$lab3-1$1729 Def017E
-S A$lab3-1$1684 Def0163
-S A$lab3-1$1675 Def015B
-S A$lab3-1$1666 Def0152
-S A$lab3-1$1648 Def014F
-S A$lab3-1$1639 Def0147
-S A$lab3-1$1594 Def012D
-S A$lab3-1$1585 Def0125
-S A$lab3-1$1549 Def010E
-S A$lab3-1$1495 Def00C4
-S A$lab3-1$1486 Def00B5
-S A$lab3-1$1477 Def00AA
-S A$lab3-1$1468 Def0097
-S A$lab3-1$1459 Def0088
-S A$lab3-1$1396 Def002C
-S C$lab3_1.c$40$1$1 Def0016
-S A$lab3-1$1766 Def0192
-S A$lab3-1$1586 Def0126
-S A$lab3-1$1577 Def011B
-S A$lab3-1$1568 Def0113
-S A$lab3-1$1487 Def00B7
-S A$lab3-1$1469 Def0099
-S A$lab3-1$1397 Def002E
-S A$lab3-1$1388 Def0022
-S A$lab3-1$1379 Def0019
-S C$lab3_1.c$50$1$1 Def003D
+S A$lab3-1$1728 Def0191
+S A$lab3-1$1719 Def018A
+S A$lab3-1$1692 Def0170
+S A$lab3-1$1683 Def0168
+S A$lab3-1$1665 Def0165
+S A$lab3-1$1656 Def015D
+S A$lab3-1$1647 Def0155
+S A$lab3-1$1575 Def0130
+S A$lab3-1$1494 Def00D8
+S A$lab3-1$1476 Def00C7
+S A$lab3-1$1467 Def00BB
+S A$lab3-1$1458 Def00AC
+S A$lab3-1$1449 Def009D
+S A$lab3-1$1386 Def0041
+S A$lab3-1$1377 Def0032
+S A$lab3-1$1558 Def011F
+S A$lab3-1$1549 Def0115
+S A$lab3-1$1495 Def00DA
+S A$lab3-1$1468 Def00BE
+S A$lab3-1$1396 Def0052
+S A$lab3-1$1387 Def0043
+S A$lab3-1$1378 Def0034
+S A$lab3-1$1369 Def0025
+S C$lab3_1.c$40$1$1 Def001F
+S C$lab3_1.c$31$1$1 Def0013
+S A$lab3-1$1568 Def0128
+S A$lab3-1$1559 Def0120
+S A$lab3-1$1496 Def00DC
+S A$lab3-1$1469 Def00C0
+S A$lab3-1$1388 Def0045
+S A$lab3-1$1379 Def0037
+S C$lab3_1.c$41$1$1 Def0022
 S _getchar Def000A
-S A$lab3-1$1578 Def011D
-S A$lab3-1$1488 Def00B9
-S A$lab3-1$1398 Def0030
-S C$lab3_1.c$60$1$1 Def0082
-S C$lab3_1.c$42$1$1 Def0019
-S A$lab3-1$1687 Def0165
-S A$lab3-1$1678 Def015D
-S A$lab3-1$1669 Def0155
-S A$lab3-1$1597 Def0130
-S A$lab3-1$1498 Def00C7
-S A$lab3-1$1489 Def00BB
-S A$lab3-1$1399 Def0032
-S C$lab3_1.c$43$1$1 Def001C
+S A$lab3-1$1695 Def0173
+S A$lab3-1$1686 Def016A
+S A$lab3-1$1668 Def0167
+S A$lab3-1$1659 Def0160
+S A$lab3-1$1596 Def0136
+S A$lab3-1$1578 Def0133
+S A$lab3-1$1569 Def012A
+S A$lab3-1$1497 Def00DE
+S A$lab3-1$1488 Def00CF
+S A$lab3-1$1389 Def0047
+S C$lab3_1.c$51$1$1 Def0055
+S A$lab3-1$1498 Def00E0
+S A$lab3-1$1489 Def00D1
+S A$lab3-1$1399 Def0055
+S C$lab3_1.c$52$1$1 Def006A
+S C$lab3_1.c$43$1$1 Def0025
 A CONST size 28 flags 20 addr 0
 S Flab3_1$_str_0$0$0 Def0000
 S Flab3_1$_str_1$0$0 Def0005
@@ -1126,44 +1108,18 @@ A CABS size 0 flags 28 addr 0
 T 00 00
 R 00 00 00 02
 T 00 00
-R 00 00 00 03
-T 00 00
-R 00 00 00 03
-T 00 00
 R 00 00 00 05
 T 00 00
 R 00 00 00 05
 T 00 00
 R 00 00 00 0D
-T 00 00 02 00 00 32
+T 00 00 02 00 00
 R 00 00 00 0D 02 03 02 CC
-T 00 04
-R 00 00 00 0D
-T 00 0B 32
-R 00 00 00 0D
-T 00 0C
-R 00 00 00 0D
-T 00 13 32
-R 00 00 00 0D
-T 00 14
-R 00 00 00 0D
-T 00 1B 32
-R 00 00 00 0D
-T 00 1C
-R 00 00 00 0D
-T 00 23 32
-R 00 00 00 0D
-T 00 24
-R 00 00 00 0D
-T 00 2B 02 01 92
-R 00 00 00 0D 00 03 00 16
-T 00 00 E4 F5 00 00 00 F5 00 00 01
-R 00 00 00 14 F1 21 04 00 03 F1 21 08 00 03
-T 00 00 02 00 2E
+T 00 00 02 00 03
 R 00 00 00 15 00 03 00 0D
-T 00 2E
+T 00 03
 R 00 00 00 0D
-T 00 2E 12 00 13 80 FE
+T 00 03 12 00 13 80 FE
 R 00 00 00 0D 00 03 00 16
 T 00 00
 R 00 00 00 16
@@ -1272,10 +1228,6 @@ R 00 00 00 16
 T 01 76 43 8E 10 75 8D A0 D2 8E 75 84 00 75 C8 04
 R 00 00 00 16
 T 01 84 75 C9 08 75 CA 70 75 CB FF D2 CA 8A 84 22
-R 00 00 00 16
-T 01 92
-R 00 00 00 16
-T 01 92 32
 R 00 00 00 16
 T 00 00
 R 00 00 00 17

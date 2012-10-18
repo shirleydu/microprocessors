@@ -30,7 +30,6 @@ void UART1_ISR(void) interrupt 20;
 char input;
 bit print0 = 0;
 bit print1 = 0;
-bit UART0_off = 0;
 
 //------------------------------------------------------------------------------------
 // MAIN Routine

@@ -65,7 +65,7 @@ void main(void)
 		{
 			SFRPAGE = UART1_PAGE;
 			input = SBUF1;
-		//	printf("%c", input);
+			printf("%c", input);
 			SFRPAGE = UART0_PAGE;
 			printf("%c", input);
 			print1 = 0;
@@ -76,8 +76,8 @@ void main(void)
 			SFRPAGE = UART0_PAGE;
 			input = SBUF0;
 			printf("%c", input);
-		//	SFRPAGE = UART1_PAGE;
-		//	printf("%c", input);
+			SFRPAGE = UART1_PAGE;
+			printf("%c", input);
 			print0 = 0;
 		}
 

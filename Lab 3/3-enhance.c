@@ -7,6 +7,7 @@
 //------------------------------------------------------------------------------------
 #include <c8051f120.h>
 #include <stdio.h>
+#include <string.h>
 #include "putget.h"
 
 //------------------------------------------------------------------------------------
@@ -29,9 +30,10 @@ void Timer_Init(void);
 void SPI_Init(void);
 void Timer2_ISR(void) interrupt 5;
 
-int rowTop = 0;
-int rowBot = 13;
 int overflows = 0;
+int rowTop =0;
+int rowBot=13;
+
 
 //------------------------------------------------------------------------------------
 // MAIN Routine
@@ -53,47 +55,107 @@ void main(void)
 	SFRPAGE = UART0_PAGE;				// Direct output to UART0
 
 	printf("\033[2J");					//clear screen
-
+	printf("\033[2J");					//clear screen
 	printf("\033[13;0H");				//print divider
-	printf("--------------------------------------------------------------------------------\n\r");
+	printf("--------------------------------------------------------------------------------");
+	//printf("\033[1;12r");				//define scrollable area
+	//printf("\033[14;25r");
 
 	while(1)
 	{
 		if (RI0 == 1)
-		{
+		{	
+			RI0 = 0;
 			input = SBUF0;					// If input from UART0, read SBUF0
-			SFRPAGE_SAVE = SFRPAGE;
-			SFRPAGE = SPI0_PAGE;
-			NSSMD0 = 0;						//slave select
 
-			SPIF = 0;						//clear SPIF
+			if (input == 0x7F){
+				sendChars();
+			}
+			else{
+				if (input == 'a')			//228
+				{
+					printf("i am a\n\r");
+					SPI0CKR += 5;
+					printf("clock: %d\n\r", SPI0CKR);
+				}
+				else if (input == 'z')
+				{
+					SPI0CKR -= 5;
+					printf("clock: %d\n\r", SPI0CKR);
+				}
 
-			SPI0DAT = input;				//send input
-			while (!SPIF);					//wait until sent
+				//SFRPAGE_SAVE = SFRPAGE;
+				//SFRPAGE = SPI0_PAGE;
+				NSSMD0 = 0;						//slave select
 
-			NSSMD0 = 1;						//release slave
+				SPIF = 0;						//clear SPIF
 
-			writeTop(input);				//write to UART0
-			RI0 = 0;						//Clear input flag
+				SPI0DAT = input;				//send input
+				while (!SPIF);					//wait until sent
 
-			overflows = 0;					//wait
-			while(overflows < 30000);
+				NSSMD0 = 1;						//release slave
 
-			NSSMD0 = 0;						//slave select
-			while (!SPIF);					//wait until not busy
-			SPIF = 0;						//busy
+				writeTop(input);				//write to UART0
+				RI0 = 0;						//Clear input flag
+
+				overflows = 0;					//wait
+				while(overflows < 30000);
+
+				NSSMD0 = 0;						//slave select
+				while (!SPIF);					//wait until not busy
+				SPIF = 0;						//busy
 			
-			SPI0DAT = input;				//write dummy character
+				SPI0DAT = input;				//write dummy character
 
-			while (!SPIF);					//wait until transfer is over
+				while (!SPIF);					//wait until transfer is over
 
-			NSSMD0 = 1;						//release slave
+				NSSMD0 = 1;						//release slave
 
-			input = SPI0DAT;				//read SPI0DAT
-			writeBot(input);				//write to UART0
-			SFRPAGE = SFRPAGE_SAVE;
+				input = SPI0DAT;				//read SPI0DAT
+
+				writeBot(input);
+			
+				//SFRPAGE = SFRPAGE_SAVE;
+			}
 		}
 	}
+}
+
+void sendChars(void)
+{
+	char input; 
+
+	NSSMD0 = 0;
+	while(!SPIF);
+	SPIF = 0;
+
+	SPI0DAT = 0x7F;
+	while(!SPIF);
+	SPIF=0;
+	NSSMD0 = 1;
+	input = SPI0DAT;
+
+	while(input != 0xFF)
+	{		
+		overflows = 0;					//wait
+		while(overflows < 30000);
+		NSSMD0 = 0;
+		//while (!SPIF);					//wait until not busy
+		SPIF = 0;						//busy
+			
+		SPI0DAT = 'n';				//write dummy character
+
+		while (!SPIF);					//wait until transfer is over
+
+		NSSMD0 = 1;						//release slave
+
+		input = SPI0DAT;				//read SPI0DAT
+
+		writeBot(input);
+		if(input == 0xFFFF)
+			break;
+	}
+	//printf("done");
 }
 
 void writeTop (char c)
@@ -227,7 +289,7 @@ void SPI_Init(void)
 
 	SPI0CFG = 0x40;					//master mode
 	SPI0CN = 0x09;					//enable SPI0, 4-wire single master mode
-	SPI0CKR = 0x15;					//SCK ~1MHz
+	SPI0CKR = 0x15;					//frequency of SCK = SYSCLK/(2*(SPI0CKR+1))
 
 	SFRPAGE = SFRPAGE_SAVE;         // Restore SFR page
 }

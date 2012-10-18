@@ -53,10 +53,10 @@ void main(void)
 	SFRPAGE = UART0_PAGE;				// Direct output to UART0
 
 	printf("\033[2J");					//clear screen
-	printf("\033[2J");					//clear screen
+//	printf("\033[2J");					//clear screen
 	printf("\033[13;0H");				//print divider
-	printf("--------------------------------------------------------------------------------");
-	//printf("\033[1;12r");				//define scrollable area
+	printf("--------------------------------------------------------------------------------\n\r");
+	printf("\033[1;12r");				//define scrollable area
 	//printf("\033[14;25r");
 
 	while(1)
@@ -67,7 +67,6 @@ void main(void)
 			SFRPAGE_SAVE = SFRPAGE;
 			SFRPAGE = SPI0_PAGE;
 			NSSMD0 = 0;						//slave select
-		//	while (!SPIF);					//
 
 			SPIF = 0;						//clear SPIF
 
@@ -79,8 +78,6 @@ void main(void)
 			writeTop(input);				//write to UART0
 			RI0 = 0;						//Clear input flag
 
-			//input = SPI0DAT;				//read SPI0DAT
-
 			overflows = 0;					//wait
 			while(overflows < 30000);
 
@@ -88,38 +85,35 @@ void main(void)
 			while (!SPIF);					//wait until not busy
 			SPIF = 0;						//busy
 			
-			SPI0DAT = input;					//write dummy character
+			SPI0DAT = input;				//write dummy character
 
 			while (!SPIF);					//wait until transfer is over
 
-			//NSSMD0 = 1;						//release slave
+			NSSMD0 = 1;						//release slave
 
 			input = SPI0DAT;				//read SPI0DAT
 			writeBot(input);				//write to UART0
 			SFRPAGE = SFRPAGE_SAVE;
 		}
 	}
-
-	//UART receives back from BUFFALO what it sends;
-	//BUFFALO does not echo.
-
 }
 
 void writeTop (char c)
 {
 	char SFRPAGE_SAVE = SFRPAGE; 
 	SFRPAGE = UART0_PAGE;
-	if (rowTop < 12)
+	//printf("\033[1;12r");
+	if (rowTop < 12){
 		rowTop++;
+		printf("\033[%d;0H", rowTop);
+	}
 	else
 	{
-		printf("\033[1;12r");
 	//	printf("\033M");
+		printf("\033[1;12r");
 	}
-	
-	printf("\033[%d;0H", rowTop);		//print to bottommost row on top half
-	printf("%c", c);
-	//printf("%d", rowTop);
+	printf("\033[%d;0H", rowTop);
+	printf("%c\n\r", c);
 	SFRPAGE = SFRPAGE_SAVE;
 }
 
@@ -131,12 +125,12 @@ void writeBot (char c)
 		rowBot++;
 	else
 	{
+		//printf("\033M");
 		printf("\033[14;25r");
-	//	printf("\033M");
 	}
 
 	printf("\033[%d;0H", rowBot);
-	printf("%c", c);
+	printf("%c\n\r", c);
 	//printf("%d", rowBot);
 	SFRPAGE = SFRPAGE;
 }

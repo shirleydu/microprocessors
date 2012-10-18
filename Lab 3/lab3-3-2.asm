@@ -1,14 +1,15 @@
 ;--------------------------------------------------------
 ; File Created by SDCC : free open source ANSI-C Compiler
 ; Version 2.9.0 #5416 (Mar 22 2009) (MINGW32)
-; This file was generated Mon Oct 15 20:00:41 2012
+; This file was generated Mon Oct 15 20:09:24 2012
 ;--------------------------------------------------------
-	.module lab3_2
+	.module lab3_3_2
 	.optsdcc -mmcs51 --model-small
 	
 ;--------------------------------------------------------
 ; Public variables in this module
 ;--------------------------------------------------------
+	.globl _sendChars
 	.globl _P7_7
 	.globl _P7_6
 	.globl _P7_5
@@ -392,18 +393,20 @@
 	.globl _DPL
 	.globl _SP
 	.globl _P0
-	.globl _print1
-	.globl _print0
-	.globl _input
+	.globl _rowBot
+	.globl _rowTop
+	.globl _overflows
 	.globl _putchar
 	.globl _getchar
 	.globl _main
+	.globl _writeTop
+	.globl _writeBot
 	.globl _SYSCLK_INIT
 	.globl _PORT_INIT
 	.globl _UART_INIT
 	.globl _Timer_Init
-	.globl _UART0_ISR
-	.globl _UART1_ISR
+	.globl _SPI_Init
+	.globl _Timer2_ISR
 ;--------------------------------------------------------
 ; special function registers
 ;--------------------------------------------------------
@@ -1187,12 +1190,19 @@ _P7_7	=	0x00ff
 ; internal ram data
 ;--------------------------------------------------------
 	.area DSEG    (DATA)
-G$input$0$0==.
-_input::
-	.ds 1
+G$overflows$0$0==.
+_overflows::
+	.ds 2
+G$rowTop$0$0==.
+_rowTop::
+	.ds 2
+G$rowBot$0$0==.
+_rowBot::
+	.ds 2
 ;--------------------------------------------------------
 ; overlayable items in internal ram 
 ;--------------------------------------------------------
+	.area	OSEG    (OVR,DATA)
 	.area	OSEG    (OVR,DATA)
 	.area	OSEG    (OVR,DATA)
 	.area	OSEG    (OVR,DATA)
@@ -1219,12 +1229,6 @@ __start__stack:
 ; bit data
 ;--------------------------------------------------------
 	.area BSEG    (BIT)
-G$print0$0$0==.
-_print0::
-	.ds 1
-G$print1$0$0==.
-_print1::
-	.ds 1
 ;--------------------------------------------------------
 ; paged external ram data
 ;--------------------------------------------------------
@@ -1265,39 +1269,9 @@ __interrupt_vect:
 	.ds	7
 	reti
 	.ds	7
-	ljmp	_UART0_ISR
-	.ds	5
 	reti
 	.ds	7
-	reti
-	.ds	7
-	reti
-	.ds	7
-	reti
-	.ds	7
-	reti
-	.ds	7
-	reti
-	.ds	7
-	reti
-	.ds	7
-	reti
-	.ds	7
-	reti
-	.ds	7
-	reti
-	.ds	7
-	reti
-	.ds	7
-	reti
-	.ds	7
-	reti
-	.ds	7
-	reti
-	.ds	7
-	reti
-	.ds	7
-	ljmp	_UART1_ISR
+	ljmp	_Timer2_ISR
 ;--------------------------------------------------------
 ; global & static initialisations
 ;--------------------------------------------------------
@@ -1311,14 +1285,24 @@ __interrupt_vect:
 	.globl __mcs51_genXINIT
 	.globl __mcs51_genXRAMCLEAR
 	.globl __mcs51_genRAMCLEAR
-	G$UART1_ISR$0$0 ==.
-	C$lab3_2.c$31$1$1 ==.
-;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 3\lab3-2.c:31: bit print0 = 0;
-	clr	_print0
-	G$UART1_ISR$0$0 ==.
-	C$lab3_2.c$32$1$1 ==.
-;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 3\lab3-2.c:32: bit print1 = 0;
-	clr	_print1
+	G$Timer2_ISR$0$0 ==.
+	C$lab3_3_2.c$33$1$1 ==.
+;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 3\lab3-3-2.c:33: int overflows = 0;
+	clr	a
+	mov	_overflows,a
+	mov	(_overflows + 1),a
+	G$Timer2_ISR$0$0 ==.
+	C$lab3_3_2.c$34$1$1 ==.
+;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 3\lab3-3-2.c:34: int rowTop =0;
+	clr	a
+	mov	_rowTop,a
+	mov	(_rowTop + 1),a
+	G$Timer2_ISR$0$0 ==.
+	C$lab3_3_2.c$35$1$1 ==.
+;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 3\lab3-3-2.c:35: int rowBot=13;
+	mov	_rowBot,#0x0D
+	clr	a
+	mov	(_rowBot + 1),a
 	.area GSFINAL (CODE)
 	ljmp	__sdcc_program_startup
 ;--------------------------------------------------------
@@ -1401,37 +1385,44 @@ _getchar:
 ;Allocation info for local variables in function 'main'
 ;------------------------------------------------------------
 ;input                     Allocated to registers r2 
+;SFRPAGE_SAVE              Allocated to registers 
 ;------------------------------------------------------------
 	G$main$0$0 ==.
-	C$lab3_2.c$37$1$1 ==.
-;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 3\lab3-2.c:37: void main(void)
+	C$lab3_3_2.c$41$1$1 ==.
+;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 3\lab3-3-2.c:41: void main(void)
 ;	-----------------------------------------
 ;	 function main
 ;	-----------------------------------------
 _main:
-	C$lab3_2.c$41$1$1 ==.
-;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 3\lab3-2.c:41: WDTCN = 0xDE;						// Disable the watchdog timer
+	C$lab3_3_2.c$44$1$1 ==.
+;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 3\lab3-3-2.c:44: char SFRPAGE_SAVE = SFRPAGE; 
+	mov	a,_SFRPAGE
+	C$lab3_3_2.c$46$1$1 ==.
+;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 3\lab3-3-2.c:46: WDTCN = 0xDE;						// Disable the watchdog timer
 	mov	_WDTCN,#0xDE
-	C$lab3_2.c$42$1$1 ==.
-;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 3\lab3-2.c:42: WDTCN = 0xAD;						// Note: = "DEAD"!
+	C$lab3_3_2.c$47$1$1 ==.
+;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 3\lab3-3-2.c:47: WDTCN = 0xAD;						// Note: = "DEAD"!
 	mov	_WDTCN,#0xAD
-	C$lab3_2.c$44$1$1 ==.
-;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 3\lab3-2.c:44: SYSCLK_INIT();						// Initialize the oscillator
+	C$lab3_3_2.c$49$1$1 ==.
+;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 3\lab3-3-2.c:49: SYSCLK_INIT();						// Initialize the oscillator
 	lcall	_SYSCLK_INIT
-	C$lab3_2.c$45$1$1 ==.
-;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 3\lab3-2.c:45: Timer_Init();						// Initialize timer
+	C$lab3_3_2.c$50$1$1 ==.
+;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 3\lab3-3-2.c:50: Timer_Init();						// Initialize timer
 	lcall	_Timer_Init
-	C$lab3_2.c$46$1$1 ==.
-;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 3\lab3-2.c:46: UART_INIT();						// Initialize UARTs
+	C$lab3_3_2.c$51$1$1 ==.
+;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 3\lab3-3-2.c:51: UART_INIT();						// Initialize UARTs
 	lcall	_UART_INIT
-	C$lab3_2.c$47$1$1 ==.
-;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 3\lab3-2.c:47: PORT_INIT();						// Initialize the Crossbar and GPIO
+	C$lab3_3_2.c$52$1$1 ==.
+;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 3\lab3-3-2.c:52: PORT_INIT();						// Initialize the Crossbar and GPIO
 	lcall	_PORT_INIT
-	C$lab3_2.c$49$1$1 ==.
-;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 3\lab3-2.c:49: SFRPAGE = UART0_PAGE;				// Direct output to UART0
+	C$lab3_3_2.c$53$1$1 ==.
+;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 3\lab3-3-2.c:53: SPI_Init();
+	lcall	_SPI_Init
+	C$lab3_3_2.c$55$1$1 ==.
+;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 3\lab3-3-2.c:55: SFRPAGE = UART0_PAGE;				// Direct output to UART0
 	mov	_SFRPAGE,#0x00
-	C$lab3_2.c$51$1$1 ==.
-;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 3\lab3-2.c:51: printf("\033[2J");
+	C$lab3_3_2.c$57$1$1 ==.
+;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 3\lab3-3-2.c:57: printf("\033[2J");					//clear screen
 	mov	a,#__str_0
 	push	acc
 	mov	a,#(__str_0 >> 8)
@@ -1442,8 +1433,20 @@ _main:
 	dec	sp
 	dec	sp
 	dec	sp
-	C$lab3_2.c$52$1$1 ==.
-;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 3\lab3-2.c:52: printf("I am UART0 =[\n\n\r");
+	C$lab3_3_2.c$58$1$1 ==.
+;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 3\lab3-3-2.c:58: printf("\033[2J");					//clear screen
+	mov	a,#__str_0
+	push	acc
+	mov	a,#(__str_0 >> 8)
+	push	acc
+	mov	a,#0x80
+	push	acc
+	lcall	_printf
+	dec	sp
+	dec	sp
+	dec	sp
+	C$lab3_3_2.c$59$1$1 ==.
+;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 3\lab3-3-2.c:59: printf("\033[13;0H");				//print divider
 	mov	a,#__str_1
 	push	acc
 	mov	a,#(__str_1 >> 8)
@@ -1454,23 +1457,8 @@ _main:
 	dec	sp
 	dec	sp
 	dec	sp
-	C$lab3_2.c$55$1$1 ==.
-;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 3\lab3-2.c:55: SFRPAGE = UART1_PAGE;				// Direct output to UART1
-	mov	_SFRPAGE,#0x01
-	C$lab3_2.c$57$1$1 ==.
-;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 3\lab3-2.c:57: printf("\033[2J");
-	mov	a,#__str_0
-	push	acc
-	mov	a,#(__str_0 >> 8)
-	push	acc
-	mov	a,#0x80
-	push	acc
-	lcall	_printf
-	dec	sp
-	dec	sp
-	dec	sp
-	C$lab3_2.c$58$1$1 ==.
-;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 3\lab3-2.c:58: printf("I am UART1.\n\n\r");
+	C$lab3_3_2.c$60$1$1 ==.
+;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 3\lab3-3-2.c:60: printf("--------------------------------------------------------------------------------");
 	mov	a,#__str_2
 	push	acc
 	mov	a,#(__str_2 >> 8)
@@ -1481,34 +1469,297 @@ _main:
 	dec	sp
 	dec	sp
 	dec	sp
-	C$lab3_2.c$60$1$1 ==.
-;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 3\lab3-2.c:60: SFRPAGE = UART0_PAGE;
-	mov	_SFRPAGE,#0x00
-	C$lab3_2.c$62$1$1 ==.
-;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 3\lab3-2.c:62: while(1)
-00109$:
-	C$lab3_2.c$64$2$2 ==.
-;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 3\lab3-2.c:64: if (print1 == 1)				//if input coming from UART1, read from SBUF1 and output to both
-	jnb	_print1,00102$
-	C$lab3_2.c$66$3$3 ==.
-;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 3\lab3-2.c:66: SFRPAGE = UART1_PAGE;
-	mov	_SFRPAGE,#0x01
-	C$lab3_2.c$67$3$3 ==.
-;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 3\lab3-2.c:67: input = SBUF1;
-	C$lab3_2.c$68$3$3 ==.
-;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 3\lab3-2.c:68: printf("%c", input);
-	mov	a,_SBUF1
+	C$lab3_3_2.c$64$1$1 ==.
+;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 3\lab3-3-2.c:64: while(1)
+00119$:
+	C$lab3_3_2.c$66$1$2 ==.
+;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 3\lab3-3-2.c:66: if (RI0 == 1)
+	C$lab3_3_2.c$68$3$3 ==.
+;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 3\lab3-3-2.c:68: RI0 = 0;
+	jbc	_RI0,00134$
+	sjmp	00119$
+00134$:
+	C$lab3_3_2.c$69$3$3 ==.
+;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 3\lab3-3-2.c:69: input = SBUF0;					// If input from UART0, read SBUF0
+	mov	r2,_SBUF0
+	C$lab3_3_2.c$71$3$3 ==.
+;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 3\lab3-3-2.c:71: if (input == 0x7F){
+	cjne	r2,#0x7F,00114$
+	C$lab3_3_2.c$72$4$4 ==.
+;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 3\lab3-3-2.c:72: sendChars();
+	lcall	_sendChars
+	sjmp	00119$
+00114$:
+	C$lab3_3_2.c$78$4$5 ==.
+;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 3\lab3-3-2.c:78: NSSMD0 = 0;						//slave select
+	clr	_NSSMD0
+	C$lab3_3_2.c$80$4$5 ==.
+;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 3\lab3-3-2.c:80: SPIF = 0;						//clear SPIF
+	clr	_SPIF
+	C$lab3_3_2.c$82$4$5 ==.
+;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 3\lab3-3-2.c:82: SPI0DAT = input;				//send input
+	mov	_SPI0DAT,r2
+	C$lab3_3_2.c$83$4$5 ==.
+;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 3\lab3-3-2.c:83: while (!SPIF);					//wait until sent
+00101$:
+	jnb	_SPIF,00101$
+	C$lab3_3_2.c$85$4$5 ==.
+;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 3\lab3-3-2.c:85: NSSMD0 = 1;						//release slave
+	setb	_NSSMD0
+	C$lab3_3_2.c$87$4$5 ==.
+;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 3\lab3-3-2.c:87: writeTop(input);				//write to UART0
+	mov	dpl,r2
+	push	ar2
+	lcall	_writeTop
+	pop	ar2
+	C$lab3_3_2.c$88$4$5 ==.
+;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 3\lab3-3-2.c:88: RI0 = 0;						//Clear input flag
+	clr	_RI0
+	C$lab3_3_2.c$90$4$5 ==.
+;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 3\lab3-3-2.c:90: overflows = 0;					//wait
+	clr	a
+	mov	_overflows,a
+	mov	(_overflows + 1),a
+	C$lab3_3_2.c$91$4$5 ==.
+;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 3\lab3-3-2.c:91: while(overflows < 30000);
+00104$:
+	clr	c
+	mov	a,_overflows
+	subb	a,#0x30
+	mov	a,(_overflows + 1)
+	xrl	a,#0x80
+	subb	a,#0xf5
+	jc	00104$
+	C$lab3_3_2.c$93$4$5 ==.
+;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 3\lab3-3-2.c:93: NSSMD0 = 0;						//slave select
+	clr	_NSSMD0
+	C$lab3_3_2.c$94$4$5 ==.
+;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 3\lab3-3-2.c:94: while (!SPIF);					//wait until not busy
+00107$:
+	C$lab3_3_2.c$95$4$5 ==.
+;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 3\lab3-3-2.c:95: SPIF = 0;						//busy
+	jbc	_SPIF,00139$
+	sjmp	00107$
+00139$:
+	C$lab3_3_2.c$97$4$5 ==.
+;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 3\lab3-3-2.c:97: SPI0DAT = input;				//write dummy character
+	mov	_SPI0DAT,r2
+	C$lab3_3_2.c$99$4$5 ==.
+;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 3\lab3-3-2.c:99: while (!SPIF);					//wait until transfer is over
+00110$:
+	jnb	_SPIF,00110$
+	C$lab3_3_2.c$101$4$5 ==.
+;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 3\lab3-3-2.c:101: NSSMD0 = 1;						//release slave
+	setb	_NSSMD0
+	C$lab3_3_2.c$103$4$5 ==.
+;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 3\lab3-3-2.c:103: input = SPI0DAT;				//read SPI0DAT
+	mov	r2,_SPI0DAT
+	C$lab3_3_2.c$105$4$5 ==.
+;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 3\lab3-3-2.c:105: writeBot(input);
+	mov	dpl,r2
+	lcall	_writeBot
+	C$lab3_3_2.c$111$1$1 ==.
+	XG$main$0$0 ==.
+	sjmp	00119$
+;------------------------------------------------------------
+;Allocation info for local variables in function 'sendChars'
+;------------------------------------------------------------
+;input                     Allocated to registers r2 
+;------------------------------------------------------------
+	G$sendChars$0$0 ==.
+	C$lab3_3_2.c$113$1$1 ==.
+;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 3\lab3-3-2.c:113: void sendChars(void)
+;	-----------------------------------------
+;	 function sendChars
+;	-----------------------------------------
+_sendChars:
+	C$lab3_3_2.c$117$1$1 ==.
+;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 3\lab3-3-2.c:117: NSSMD0 = 0;
+	clr	_NSSMD0
+	C$lab3_3_2.c$118$1$1 ==.
+;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 3\lab3-3-2.c:118: while(!SPIF);
+00101$:
+	C$lab3_3_2.c$119$1$1 ==.
+;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 3\lab3-3-2.c:119: SPIF = 0;
+	jbc	_SPIF,00129$
+	sjmp	00101$
+00129$:
+	C$lab3_3_2.c$121$1$1 ==.
+;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 3\lab3-3-2.c:121: SPI0DAT = 0x7F;
+	mov	_SPI0DAT,#0x7F
+	C$lab3_3_2.c$122$1$1 ==.
+;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 3\lab3-3-2.c:122: while(!SPIF);
+00104$:
+	C$lab3_3_2.c$123$1$1 ==.
+;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 3\lab3-3-2.c:123: SPIF=0;
+	jbc	_SPIF,00130$
+	sjmp	00104$
+00130$:
+	C$lab3_3_2.c$124$1$1 ==.
+;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 3\lab3-3-2.c:124: NSSMD0 = 1;
+	setb	_NSSMD0
+	C$lab3_3_2.c$125$1$1 ==.
+;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 3\lab3-3-2.c:125: input = SPI0DAT;
+	mov	a,_SPI0DAT
+	C$lab3_3_2.c$127$1$1 ==.
+;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 3\lab3-3-2.c:127: while(input != 0xFF)
+00116$:
+	C$lab3_3_2.c$129$2$2 ==.
+;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 3\lab3-3-2.c:129: overflows = 0;					//wait
+	clr	a
+	mov	_overflows,a
+	mov	(_overflows + 1),a
+	C$lab3_3_2.c$130$2$2 ==.
+;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 3\lab3-3-2.c:130: while(overflows < 30000);
+00107$:
+	clr	c
+	mov	a,_overflows
+	subb	a,#0x30
+	mov	a,(_overflows + 1)
+	xrl	a,#0x80
+	subb	a,#0xf5
+	jc	00107$
+	C$lab3_3_2.c$131$2$2 ==.
+;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 3\lab3-3-2.c:131: NSSMD0 = 0;
+	clr	_NSSMD0
+	C$lab3_3_2.c$133$2$2 ==.
+;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 3\lab3-3-2.c:133: SPIF = 0;						//busy
+	clr	_SPIF
+	C$lab3_3_2.c$135$2$2 ==.
+;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 3\lab3-3-2.c:135: SPI0DAT = 'n';				//write dummy character
+	mov	_SPI0DAT,#0x6E
+	C$lab3_3_2.c$137$2$2 ==.
+;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 3\lab3-3-2.c:137: while (!SPIF);					//wait until transfer is over
+00110$:
+	jnb	_SPIF,00110$
+	C$lab3_3_2.c$139$2$2 ==.
+;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 3\lab3-3-2.c:139: NSSMD0 = 1;						//release slave
+	setb	_NSSMD0
+	C$lab3_3_2.c$141$2$2 ==.
+;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 3\lab3-3-2.c:141: input = SPI0DAT;				//read SPI0DAT
+	mov	r2,_SPI0DAT
+	C$lab3_3_2.c$143$2$2 ==.
+;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 3\lab3-3-2.c:143: writeBot(input);
+	mov	dpl,r2
+	push	ar2
+	lcall	_writeBot
+	pop	ar2
+	C$lab3_3_2.c$144$2$2 ==.
+;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 3\lab3-3-2.c:144: if(input == 0xFFFF)
+	mov	a,r2
+	rlc	a
+	subb	a,acc
 	mov	r3,a
+	cjne	r2,#0xFF,00116$
+	cjne	r3,#0xFF,00116$
+	C$lab3_3_2.c$145$1$1 ==.
+;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 3\lab3-3-2.c:145: break;
+	C$lab3_3_2.c$148$1$1 ==.
+	XG$sendChars$0$0 ==.
+	ret
+;------------------------------------------------------------
+;Allocation info for local variables in function 'writeTop'
+;------------------------------------------------------------
+;c                         Allocated to registers r2 
+;SFRPAGE_SAVE              Allocated to registers r3 
+;------------------------------------------------------------
+	G$writeTop$0$0 ==.
+	C$lab3_3_2.c$150$1$1 ==.
+;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 3\lab3-3-2.c:150: void writeTop (char c)
+;	-----------------------------------------
+;	 function writeTop
+;	-----------------------------------------
+_writeTop:
+	mov	r2,dpl
+	C$lab3_3_2.c$152$1$1 ==.
+;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 3\lab3-3-2.c:152: char SFRPAGE_SAVE = SFRPAGE; 
+	mov	r3,_SFRPAGE
+	C$lab3_3_2.c$153$1$1 ==.
+;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 3\lab3-3-2.c:153: SFRPAGE = UART0_PAGE;
+	mov	_SFRPAGE,#0x00
+	C$lab3_3_2.c$156$1$1 ==.
+;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 3\lab3-3-2.c:156: if (rowTop < 12){
+	clr	c
+	mov	a,_rowTop
+	subb	a,#0x0C
+	mov	a,(_rowTop + 1)
+	xrl	a,#0x80
+	subb	a,#0x80
+	jnc	00102$
+	C$lab3_3_2.c$157$2$2 ==.
+;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 3\lab3-3-2.c:157: rowTop++;
+	inc	_rowTop
+	clr	a
+	cjne	a,_rowTop,00108$
+	inc	(_rowTop + 1)
+00108$:
+	C$lab3_3_2.c$158$2$2 ==.
+;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 3\lab3-3-2.c:158: printf("\033[%d;0H", rowTop);
+	push	ar2
+	push	ar3
+	push	_rowTop
+	push	(_rowTop + 1)
+	mov	a,#__str_3
+	push	acc
+	mov	a,#(__str_3 >> 8)
+	push	acc
+	mov	a,#0x80
+	push	acc
+	lcall	_printf
+	mov	a,sp
+	add	a,#0xfb
+	mov	sp,a
+	pop	ar3
+	pop	ar2
+	sjmp	00103$
+00102$:
+	C$lab3_3_2.c$163$2$3 ==.
+;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 3\lab3-3-2.c:163: printf("\033[1;12r");
+	push	ar2
+	push	ar3
+	mov	a,#__str_4
+	push	acc
+	mov	a,#(__str_4 >> 8)
+	push	acc
+	mov	a,#0x80
+	push	acc
+	lcall	_printf
+	dec	sp
+	dec	sp
+	dec	sp
+	pop	ar3
+	pop	ar2
+00103$:
+	C$lab3_3_2.c$166$1$1 ==.
+;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 3\lab3-3-2.c:166: printf("\033[%d;0H", rowTop);
+	push	ar2
+	push	ar3
+	push	_rowTop
+	push	(_rowTop + 1)
+	mov	a,#__str_3
+	push	acc
+	mov	a,#(__str_3 >> 8)
+	push	acc
+	mov	a,#0x80
+	push	acc
+	lcall	_printf
+	mov	a,sp
+	add	a,#0xfb
+	mov	sp,a
+	pop	ar3
+	pop	ar2
+	C$lab3_3_2.c$167$1$1 ==.
+;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 3\lab3-3-2.c:167: printf("%c\n\r", c);
+	mov	a,r2
 	rlc	a
 	subb	a,acc
 	mov	r4,a
 	push	ar3
+	push	ar2
 	push	ar4
-	push	ar3
-	push	ar4
-	mov	a,#__str_3
+	mov	a,#__str_5
 	push	acc
-	mov	a,#(__str_3 >> 8)
+	mov	a,#(__str_5 >> 8)
 	push	acc
 	mov	a,#0x80
 	push	acc
@@ -1516,47 +1767,92 @@ _main:
 	mov	a,sp
 	add	a,#0xfb
 	mov	sp,a
-	C$lab3_2.c$69$3$3 ==.
-;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 3\lab3-2.c:69: SFRPAGE = UART0_PAGE;
+	pop	ar3
+	C$lab3_3_2.c$169$1$1 ==.
+;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 3\lab3-3-2.c:169: SFRPAGE = SFRPAGE_SAVE;
+	mov	_SFRPAGE,r3
+	C$lab3_3_2.c$170$1$1 ==.
+	XG$writeTop$0$0 ==.
+	ret
+;------------------------------------------------------------
+;Allocation info for local variables in function 'writeBot'
+;------------------------------------------------------------
+;c                         Allocated to registers r2 
+;SFRPAGE_SAVE              Allocated to registers 
+;------------------------------------------------------------
+	G$writeBot$0$0 ==.
+	C$lab3_3_2.c$172$1$1 ==.
+;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 3\lab3-3-2.c:172: void writeBot (char c)
+;	-----------------------------------------
+;	 function writeBot
+;	-----------------------------------------
+_writeBot:
+	mov	r2,dpl
+	C$lab3_3_2.c$174$1$1 ==.
+;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 3\lab3-3-2.c:174: char SFRPAGE_SAVE = SFRPAGE; 
+	mov	a,_SFRPAGE
+	C$lab3_3_2.c$175$1$1 ==.
+;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 3\lab3-3-2.c:175: SFRPAGE = UART0_PAGE;
 	mov	_SFRPAGE,#0x00
-	C$lab3_2.c$70$3$3 ==.
-;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 3\lab3-2.c:70: printf("%c", input);
-	mov	a,#__str_3
-	push	acc
-	mov	a,#(__str_3 >> 8)
-	push	acc
-	mov	a,#0x80
-	push	acc
-	lcall	_printf
-	mov	a,sp
-	add	a,#0xfb
-	mov	sp,a
-	C$lab3_2.c$71$3$3 ==.
-;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 3\lab3-2.c:71: print1 = 0;
-	clr	_print1
+	C$lab3_3_2.c$178$1$1 ==.
+;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 3\lab3-3-2.c:178: if (rowBot < 25)
+	clr	c
+	mov	a,_rowBot
+	subb	a,#0x19
+	mov	a,(_rowBot + 1)
+	xrl	a,#0x80
+	subb	a,#0x80
+	jnc	00102$
+	C$lab3_3_2.c$179$1$1 ==.
+;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 3\lab3-3-2.c:179: rowBot++;
+	inc	_rowBot
+	clr	a
+	cjne	a,_rowBot,00103$
+	inc	(_rowBot + 1)
+	sjmp	00103$
 00102$:
-	C$lab3_2.c$74$2$2 ==.
-;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 3\lab3-2.c:74: if (print0 == 1)				//if input coming from UART0, read from SBUF0 and output to both
-	jnb	_print0,00104$
-	C$lab3_2.c$76$3$4 ==.
-;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 3\lab3-2.c:76: SFRPAGE = UART0_PAGE;
-	mov	_SFRPAGE,#0x00
-	C$lab3_2.c$77$3$4 ==.
-;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 3\lab3-2.c:77: input = SBUF0;
-	C$lab3_2.c$78$3$4 ==.
-;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 3\lab3-2.c:78: printf("%c", input);
-	mov	a,_SBUF0
-	mov	r2,a
+	C$lab3_3_2.c$182$2$2 ==.
+;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 3\lab3-3-2.c:182: printf("\033[14;25r");
+	push	ar2
+	mov	a,#__str_6
+	push	acc
+	mov	a,#(__str_6 >> 8)
+	push	acc
+	mov	a,#0x80
+	push	acc
+	lcall	_printf
+	dec	sp
+	dec	sp
+	dec	sp
+	pop	ar2
+00103$:
+	C$lab3_3_2.c$185$1$1 ==.
+;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 3\lab3-3-2.c:185: printf("\033[%d;0H", rowBot);
+	push	ar2
+	push	_rowBot
+	push	(_rowBot + 1)
+	mov	a,#__str_3
+	push	acc
+	mov	a,#(__str_3 >> 8)
+	push	acc
+	mov	a,#0x80
+	push	acc
+	lcall	_printf
+	mov	a,sp
+	add	a,#0xfb
+	mov	sp,a
+	pop	ar2
+	C$lab3_3_2.c$186$1$1 ==.
+;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 3\lab3-3-2.c:186: printf("%c\n\r", c);
+	mov	a,r2
 	rlc	a
 	subb	a,acc
 	mov	r3,a
 	push	ar2
 	push	ar3
-	push	ar2
-	push	ar3
-	mov	a,#__str_3
+	mov	a,#__str_5
 	push	acc
-	mov	a,#(__str_3 >> 8)
+	mov	a,#(__str_5 >> 8)
 	push	acc
 	mov	a,#0x80
 	push	acc
@@ -1564,40 +1860,12 @@ _main:
 	mov	a,sp
 	add	a,#0xfb
 	mov	sp,a
-	C$lab3_2.c$79$3$4 ==.
-;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 3\lab3-2.c:79: SFRPAGE = UART1_PAGE;
-	mov	_SFRPAGE,#0x01
-	C$lab3_2.c$80$3$4 ==.
-;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 3\lab3-2.c:80: printf("%c", input);
-	mov	a,#__str_3
-	push	acc
-	mov	a,#(__str_3 >> 8)
-	push	acc
-	mov	a,#0x80
-	push	acc
-	lcall	_printf
-	mov	a,sp
-	add	a,#0xfb
-	mov	sp,a
-	C$lab3_2.c$81$3$4 ==.
-;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 3\lab3-2.c:81: print0 = 0;
-	clr	_print0
-00104$:
-	C$lab3_2.c$84$2$2 ==.
-;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 3\lab3-2.c:84: if (EIP2 == 0x40){				//flip priority of UART1 between 1 and 20 to allow both ISRs to get called.
-	mov	a,#0x40
-	cjne	a,_EIP2,00106$
-	C$lab3_2.c$85$3$5 ==.
-;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 3\lab3-2.c:85: EIP2 &=~0x40;
-	anl	_EIP2,#0xBF
-	ljmp	00109$
-00106$:
-	C$lab3_2.c$88$3$6 ==.
-;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 3\lab3-2.c:88: EIP2 |= 0x40;
-	orl	_EIP2,#0x40
-	C$lab3_2.c$93$1$1 ==.
-	XG$main$0$0 ==.
-	ljmp	00109$
+	C$lab3_3_2.c$188$1$1 ==.
+;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 3\lab3-3-2.c:188: SFRPAGE = SFRPAGE;
+	mov	_SFRPAGE,_SFRPAGE
+	C$lab3_3_2.c$189$1$1 ==.
+	XG$writeBot$0$0 ==.
+	ret
 ;------------------------------------------------------------
 ;Allocation info for local variables in function 'SYSCLK_INIT'
 ;------------------------------------------------------------
@@ -1605,23 +1873,23 @@ _main:
 ;SFRPAGE_SAVE              Allocated to registers r2 
 ;------------------------------------------------------------
 	G$SYSCLK_INIT$0$0 ==.
-	C$lab3_2.c$101$1$1 ==.
-;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 3\lab3-2.c:101: void SYSCLK_INIT(void)
+	C$lab3_3_2.c$197$1$1 ==.
+;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 3\lab3-3-2.c:197: void SYSCLK_INIT(void)
 ;	-----------------------------------------
 ;	 function SYSCLK_INIT
 ;	-----------------------------------------
 _SYSCLK_INIT:
-	C$lab3_2.c$106$1$1 ==.
-;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 3\lab3-2.c:106: SFRPAGE_SAVE = SFRPAGE;				// Save Current SFR page	SFRPAGE = CONFIG_PAGE;
+	C$lab3_3_2.c$202$1$1 ==.
+;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 3\lab3-3-2.c:202: SFRPAGE_SAVE = SFRPAGE;				// Save Current SFR page	SFRPAGE = CONFIG_PAGE;
 	mov	r2,_SFRPAGE
-	C$lab3_2.c$107$1$1 ==.
-;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 3\lab3-2.c:107: SFRPAGE   = CONFIG_PAGE;
+	C$lab3_3_2.c$203$1$1 ==.
+;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 3\lab3-3-2.c:203: SFRPAGE   = CONFIG_PAGE;
 	mov	_SFRPAGE,#0x0F
-	C$lab3_2.c$109$1$1 ==.
-;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 3\lab3-2.c:109: OSCXCN = 0x67;						// Start ext osc with 22.1184MHz crystal
+	C$lab3_3_2.c$205$1$1 ==.
+;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 3\lab3-3-2.c:205: OSCXCN = 0x67;						// Start ext osc with 22.1184MHz crystal
 	mov	_OSCXCN,#0x67
-	C$lab3_2.c$110$1$1 ==.
-;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 3\lab3-2.c:110: for(i=0; i < 3000; i++);			// Wait for the oscillator to start up
+	C$lab3_3_2.c$206$1$1 ==.
+;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 3\lab3-3-2.c:206: for(i=0; i < 3000; i++);			// Wait for the oscillator to start up
 	mov	r3,#0xB8
 	mov	r4,#0x0B
 00106$:
@@ -1632,21 +1900,21 @@ _SYSCLK_INIT:
 	mov	a,r3
 	orl	a,r4
 	jnz	00106$
-	C$lab3_2.c$111$1$1 ==.
-;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 3\lab3-2.c:111: while(!(OSCXCN & 0x80));
+	C$lab3_3_2.c$207$1$1 ==.
+;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 3\lab3-3-2.c:207: while(!(OSCXCN & 0x80));
 00101$:
 	mov	a,_OSCXCN
 	jnb	acc.7,00101$
-	C$lab3_2.c$112$1$1 ==.
-;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 3\lab3-2.c:112: CLKSEL = 0x01;						// Switch to the external crystal oscillator
+	C$lab3_3_2.c$208$1$1 ==.
+;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 3\lab3-3-2.c:208: CLKSEL = 0x01;						// Switch to the external crystal oscillator
 	mov	_CLKSEL,#0x01
-	C$lab3_2.c$113$1$1 ==.
-;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 3\lab3-2.c:113: OSCICN = 0x00;						// Disable the internal oscillator
+	C$lab3_3_2.c$209$1$1 ==.
+;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 3\lab3-3-2.c:209: OSCICN = 0x00;						// Disable the internal oscillator
 	mov	_OSCICN,#0x00
-	C$lab3_2.c$115$1$1 ==.
-;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 3\lab3-2.c:115: SFRPAGE = SFRPAGE_SAVE;             // Restore SFR page
+	C$lab3_3_2.c$211$1$1 ==.
+;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 3\lab3-3-2.c:211: SFRPAGE = SFRPAGE_SAVE;             // Restore SFR page
 	mov	_SFRPAGE,r2
-	C$lab3_2.c$116$1$1 ==.
+	C$lab3_3_2.c$212$1$1 ==.
 	XG$SYSCLK_INIT$0$0 ==.
 	ret
 ;------------------------------------------------------------
@@ -1655,43 +1923,43 @@ _SYSCLK_INIT:
 ;SFRPAGE_SAVE              Allocated to registers r2 
 ;------------------------------------------------------------
 	G$PORT_INIT$0$0 ==.
-	C$lab3_2.c$124$1$1 ==.
-;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 3\lab3-2.c:124: void PORT_INIT(void)
+	C$lab3_3_2.c$220$1$1 ==.
+;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 3\lab3-3-2.c:220: void PORT_INIT(void)
 ;	-----------------------------------------
 ;	 function PORT_INIT
 ;	-----------------------------------------
 _PORT_INIT:
-	C$lab3_2.c$126$1$1 ==.
-;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 3\lab3-2.c:126: char SFRPAGE_SAVE = SFRPAGE;    // Save Current SFR page.
+	C$lab3_3_2.c$222$1$1 ==.
+;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 3\lab3-3-2.c:222: char SFRPAGE_SAVE = SFRPAGE;    // Save Current SFR page.
 	mov	r2,_SFRPAGE
-	C$lab3_2.c$128$1$1 ==.
-;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 3\lab3-2.c:128: SFRPAGE = CONFIG_PAGE;
+	C$lab3_3_2.c$224$1$1 ==.
+;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 3\lab3-3-2.c:224: SFRPAGE = CONFIG_PAGE;
 	mov	_SFRPAGE,#0x0F
-	C$lab3_2.c$130$1$1 ==.
-;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 3\lab3-2.c:130: EA = 1;			// enable interrupts
+	C$lab3_3_2.c$226$1$1 ==.
+;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 3\lab3-3-2.c:226: EA = 1;			// enable interrupts
 	setb	_EA
-	C$lab3_2.c$131$1$1 ==.
-;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 3\lab3-2.c:131: ET2 = 1;		// enable timer 2
+	C$lab3_3_2.c$227$1$1 ==.
+;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 3\lab3-3-2.c:227: ET2 = 1;		// enable timer 2 overflow interrupt
 	setb	_ET2
-	C$lab3_2.c$132$1$1 ==.
-;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 3\lab3-2.c:132: ET1 = 1;		// enable timer 1
-	setb	_ET1
-	C$lab3_2.c$134$1$1 ==.
-;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 3\lab3-2.c:134: P0MDOUT = 0x05;			//0.0 and 0.2 are pp
-	mov	_P0MDOUT,#0x05
-	C$lab3_2.c$135$1$1 ==.
-;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 3\lab3-2.c:135: P0 &= 0x05;				//0.0, 0.2 high imped
-	anl	_P0,#0x05
-	C$lab3_2.c$137$1$1 ==.
-;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 3\lab3-2.c:137: XBR0	= 0x04;			// Enable UART0.
-	mov	_XBR0,#0x04
-	C$lab3_2.c$138$1$1 ==.
-;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 3\lab3-2.c:138: XBR2	= 0x44;			// Enable Crossbar and weak pull-ups and uart1.
-	mov	_XBR2,#0x44
-	C$lab3_2.c$140$1$1 ==.
-;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 3\lab3-2.c:140: SFRPAGE = SFRPAGE_SAVE;	// Restore SFR page.
+	C$lab3_3_2.c$229$1$1 ==.
+;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 3\lab3-3-2.c:229: P0MDOUT |= 0x35;
+	orl	_P0MDOUT,#0x35
+	C$lab3_3_2.c$230$1$1 ==.
+;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 3\lab3-3-2.c:230: P0MDOUT &= ~0x0A;
+	anl	_P0MDOUT,#0xF5
+	C$lab3_3_2.c$232$1$1 ==.
+;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 3\lab3-3-2.c:232: P0 |= ~0x35;
+	orl	_P0,#0xCA
+	C$lab3_3_2.c$235$1$1 ==.
+;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 3\lab3-3-2.c:235: XBR0	= 0x06;			// Enable UART0.
+	mov	_XBR0,#0x06
+	C$lab3_3_2.c$236$1$1 ==.
+;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 3\lab3-3-2.c:236: XBR2	= 0x40;			// Enable Crossbar and weak pull-ups and uart1.
+	mov	_XBR2,#0x40
+	C$lab3_3_2.c$238$1$1 ==.
+;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 3\lab3-3-2.c:238: SFRPAGE = SFRPAGE_SAVE;	// Restore SFR page.
 	mov	_SFRPAGE,r2
-	C$lab3_2.c$141$1$1 ==.
+	C$lab3_3_2.c$239$1$1 ==.
 	XG$PORT_INIT$0$0 ==.
 	ret
 ;------------------------------------------------------------
@@ -1700,46 +1968,31 @@ _PORT_INIT:
 ;SFRPAGE_SAVE              Allocated to registers r2 
 ;------------------------------------------------------------
 	G$UART_INIT$0$0 ==.
-	C$lab3_2.c$149$1$1 ==.
-;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 3\lab3-2.c:149: void UART_INIT(void)
+	C$lab3_3_2.c$247$1$1 ==.
+;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 3\lab3-3-2.c:247: void UART_INIT(void)
 ;	-----------------------------------------
 ;	 function UART_INIT
 ;	-----------------------------------------
 _UART_INIT:
-	C$lab3_2.c$151$1$1 ==.
-;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 3\lab3-2.c:151: char SFRPAGE_SAVE = SFRPAGE;	
+	C$lab3_3_2.c$249$1$1 ==.
+;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 3\lab3-3-2.c:249: char SFRPAGE_SAVE = SFRPAGE;
 	mov	r2,_SFRPAGE
-	C$lab3_2.c$153$1$1 ==.
-;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 3\lab3-2.c:153: SFRPAGE = UART0_PAGE;
+	C$lab3_3_2.c$251$1$1 ==.
+;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 3\lab3-3-2.c:251: SFRPAGE = UART0_PAGE;
 	mov	_SFRPAGE,#0x00
-	C$lab3_2.c$154$1$1 ==.
-;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 3\lab3-2.c:154: SCON0 = 0x50;						//8bit UART, UART0 reception enabled
+	C$lab3_3_2.c$252$1$1 ==.
+;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 3\lab3-3-2.c:252: SCON0 = 0x50;						//8bit UART, UART0 reception enabled
 	mov	_SCON0,#0x50
-	C$lab3_2.c$155$1$1 ==.
-;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 3\lab3-2.c:155: SSTA0 = 0x05;						//UART0 use timer2 for baudrate
+	C$lab3_3_2.c$253$1$1 ==.
+;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 3\lab3-3-2.c:253: SSTA0 = 0x05;						//UART0 use timer2 for baudrate
 	mov	_SSTA0,#0x05
-	C$lab3_2.c$156$1$1 ==.
-;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 3\lab3-2.c:156: TI0 = 1;							//clears transmit flag
+	C$lab3_3_2.c$254$1$1 ==.
+;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 3\lab3-3-2.c:254: TI0 = 1;							//clears transmit flag
 	setb	_TI0
-	C$lab3_2.c$157$1$1 ==.
-;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 3\lab3-2.c:157: ES0 = 1;							// enable UART0 interrupts
-	setb	_ES0
-	C$lab3_2.c$159$1$1 ==.
-;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 3\lab3-2.c:159: SFRPAGE = UART1_PAGE;
-	mov	_SFRPAGE,#0x01
-	C$lab3_2.c$160$1$1 ==.
-;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 3\lab3-2.c:160: SCON1 = 0x10;						//8bit UART, UART1 reception enabled
-	mov	_SCON1,#0x10
-	C$lab3_2.c$161$1$1 ==.
-;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 3\lab3-2.c:161: TI1 = 1;							//clears transmit flag
-	setb	_TI1
-	C$lab3_2.c$162$1$1 ==.
-;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 3\lab3-2.c:162: EIE2 |= 0x40;						// enable UART1 interrupts
-	orl	_EIE2,#0x40
-	C$lab3_2.c$164$1$1 ==.
-;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 3\lab3-2.c:164: SFRPAGE = SFRPAGE_SAVE;             // Restore SFR page
+	C$lab3_3_2.c$256$1$1 ==.
+;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 3\lab3-3-2.c:256: SFRPAGE = SFRPAGE_SAVE;             // Restore SFR page
 	mov	_SFRPAGE,r2
-	C$lab3_2.c$165$1$1 ==.
+	C$lab3_3_2.c$257$1$1 ==.
 	XG$UART_INIT$0$0 ==.
 	ret
 ;------------------------------------------------------------
@@ -1748,148 +2001,141 @@ _UART_INIT:
 ;SFRPAGE_SAVE              Allocated to registers r2 
 ;------------------------------------------------------------
 	G$Timer_Init$0$0 ==.
-	C$lab3_2.c$167$1$1 ==.
-;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 3\lab3-2.c:167: void Timer_Init(void)
+	C$lab3_3_2.c$259$1$1 ==.
+;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 3\lab3-3-2.c:259: void Timer_Init(void)
 ;	-----------------------------------------
 ;	 function Timer_Init
 ;	-----------------------------------------
 _Timer_Init:
-	C$lab3_2.c$169$1$1 ==.
-;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 3\lab3-2.c:169: char SFRPAGE_SAVE = SFRPAGE;
+	C$lab3_3_2.c$261$1$1 ==.
+;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 3\lab3-3-2.c:261: char SFRPAGE_SAVE = SFRPAGE;
 	mov	r2,_SFRPAGE
-	C$lab3_2.c$171$1$1 ==.
-;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 3\lab3-2.c:171: SFRPAGE = TIMER01_PAGE;
+	C$lab3_3_2.c$263$1$1 ==.
+;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 3\lab3-3-2.c:263: SFRPAGE = TMR2_PAGE;
 	mov	_SFRPAGE,#0x00
-	C$lab3_2.c$172$1$1 ==.
-;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 3\lab3-2.c:172: TCON	 = 0x40;				// enable timer1
-	mov	_TCON,#0x40
-	C$lab3_2.c$173$1$1 ==.
-;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 3\lab3-2.c:173: TMOD	&= 0x0F;				
-	anl	_TMOD,#0x0F
-	C$lab3_2.c$174$1$1 ==.
-;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 3\lab3-2.c:174: TMOD	|= 0x20;				// Timer1, Mode 2: 8-bit counter/timer with auto-reload.
-	orl	_TMOD,#0x20
-	C$lab3_2.c$175$1$1 ==.
-;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 3\lab3-2.c:175: CKCON |= 0x10;					// Timer1 uses SYSCLK as time base
-	orl	_CKCON,#0x10
-	C$lab3_2.c$176$1$1 ==.
-;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 3\lab3-2.c:176: TH1 = 0xA0;						// set baudrate 115200
-	mov	_TH1,#0xA0
-	C$lab3_2.c$177$1$1 ==.
-;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 3\lab3-2.c:177: TR1 = 1;						// start timer1 
-	setb	_TR1
-	C$lab3_2.c$179$1$1 ==.
-;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 3\lab3-2.c:179: SFRPAGE = TMR2_PAGE;
-	mov	_SFRPAGE,#0x00
-	C$lab3_2.c$180$1$1 ==.
-;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 3\lab3-2.c:180: TMR2CN = 0x04;					// enable timer2
+	C$lab3_3_2.c$264$1$1 ==.
+;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 3\lab3-3-2.c:264: TMR2CN = 0x04;					// enable timer2
 	mov	_TMR2CN,#0x04
-	C$lab3_2.c$181$1$1 ==.
-;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 3\lab3-2.c:181: TMR2CF = 0x08;					// use sysclk
+	C$lab3_3_2.c$265$1$1 ==.
+;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 3\lab3-3-2.c:265: TMR2CF = 0x08;					// use sysclk
 	mov	_TMR2CF,#0x08
-	C$lab3_2.c$182$1$1 ==.
-;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 3\lab3-2.c:182: RCAP2L = 0x70;					// set baudrate 9600
+	C$lab3_3_2.c$266$1$1 ==.
+;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 3\lab3-3-2.c:266: RCAP2L = 0x70;					// set baudrate 9600
 	mov	_RCAP2L,#0x70
-	C$lab3_2.c$183$1$1 ==.
-;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 3\lab3-2.c:183: RCAP2H = 0xFF;
+	C$lab3_3_2.c$267$1$1 ==.
+;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 3\lab3-3-2.c:267: RCAP2H = 0xFF;
 	mov	_RCAP2H,#0xFF
-	C$lab3_2.c$184$1$1 ==.
-;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 3\lab3-2.c:184: TR2 = 1;						// start timer2
+	C$lab3_3_2.c$268$1$1 ==.
+;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 3\lab3-3-2.c:268: TR2 = 1;						// start timer2
 	setb	_TR2
-	C$lab3_2.c$186$1$1 ==.
-;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 3\lab3-2.c:186: SFRPAGE = SFRPAGE_SAVE;         // Restore SFR page
+	C$lab3_3_2.c$270$1$1 ==.
+;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 3\lab3-3-2.c:270: SFRPAGE = SFRPAGE_SAVE;         // Restore SFR page
 	mov	_SFRPAGE,r2
-	C$lab3_2.c$187$1$1 ==.
+	C$lab3_3_2.c$271$1$1 ==.
 	XG$Timer_Init$0$0 ==.
 	ret
 ;------------------------------------------------------------
-;Allocation info for local variables in function 'UART0_ISR'
+;Allocation info for local variables in function 'SPI_Init'
 ;------------------------------------------------------------
+;SFRPAGE_SAVE              Allocated to registers r2 
 ;------------------------------------------------------------
-	G$UART0_ISR$0$0 ==.
-	C$lab3_2.c$190$1$1 ==.
-;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 3\lab3-2.c:190: void UART0_ISR(void) interrupt 4
+	G$SPI_Init$0$0 ==.
+	C$lab3_3_2.c$273$1$1 ==.
+;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 3\lab3-3-2.c:273: void SPI_Init(void)
 ;	-----------------------------------------
-;	 function UART0_ISR
+;	 function SPI_Init
 ;	-----------------------------------------
-_UART0_ISR:
-	C$lab3_2.c$192$1$1 ==.
-;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 3\lab3-2.c:192: SFRPAGE = UART0_PAGE;
+_SPI_Init:
+	C$lab3_3_2.c$275$1$1 ==.
+;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 3\lab3-3-2.c:275: char SFRPAGE_SAVE = SFRPAGE;
+	mov	r2,_SFRPAGE
+	C$lab3_3_2.c$277$1$1 ==.
+;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 3\lab3-3-2.c:277: SFRPAGE = SPI0_PAGE;
 	mov	_SFRPAGE,#0x00
-	C$lab3_2.c$193$1$1 ==.
-;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 3\lab3-2.c:193: if (RI0 == 1)
-	jnb	_RI0,00102$
-	C$lab3_2.c$195$2$2 ==.
-;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 3\lab3-2.c:195: print0 = 1;					// input-received-from-UART0 flag
-	setb	_print0
-00102$:
-	C$lab3_2.c$198$1$1 ==.
-;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 3\lab3-2.c:198: RI0 = 0;
-	clr	_RI0
-	C$lab3_2.c$199$1$1 ==.
-	XG$UART0_ISR$0$0 ==.
+	C$lab3_3_2.c$279$1$1 ==.
+;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 3\lab3-3-2.c:279: SPI0CFG = 0x40;					//master mode
+	mov	_SPI0CFG,#0x40
+	C$lab3_3_2.c$280$1$1 ==.
+;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 3\lab3-3-2.c:280: SPI0CN = 0x09;					//enable SPI0, 4-wire single master mode
+	mov	_SPI0CN,#0x09
+	C$lab3_3_2.c$281$1$1 ==.
+;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 3\lab3-3-2.c:281: SPI0CKR = 0x15;					//frequency of SCK = SYSCLK/(2*(SPI0CKR+1))
+	mov	_SPI0CKR,#0x15
+	C$lab3_3_2.c$283$1$1 ==.
+;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 3\lab3-3-2.c:283: SFRPAGE = SFRPAGE_SAVE;         // Restore SFR page
+	mov	_SFRPAGE,r2
+	C$lab3_3_2.c$284$1$1 ==.
+	XG$SPI_Init$0$0 ==.
+	ret
+;------------------------------------------------------------
+;Allocation info for local variables in function 'Timer2_ISR'
+;------------------------------------------------------------
+;------------------------------------------------------------
+	G$Timer2_ISR$0$0 ==.
+	C$lab3_3_2.c$286$1$1 ==.
+;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 3\lab3-3-2.c:286: void Timer2_ISR(void) interrupt 5
+;	-----------------------------------------
+;	 function Timer2_ISR
+;	-----------------------------------------
+_Timer2_ISR:
+	push	acc
+	push	psw
+	mov	psw,#0x00
+	C$lab3_3_2.c$288$1$1 ==.
+;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 3\lab3-3-2.c:288: TF2=0;
+	clr	_TF2
+	C$lab3_3_2.c$289$1$1 ==.
+;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 3\lab3-3-2.c:289: overflows++;
+	inc	_overflows
+	clr	a
+	cjne	a,_overflows,00103$
+	inc	(_overflows + 1)
+00103$:
+	pop	psw
+	pop	acc
+	C$lab3_3_2.c$290$1$1 ==.
+	XG$Timer2_ISR$0$0 ==.
 	reti
-;	eliminated unneeded push/pop psw
 ;	eliminated unneeded push/pop dpl
 ;	eliminated unneeded push/pop dph
 ;	eliminated unneeded push/pop b
-;	eliminated unneeded push/pop acc
-;------------------------------------------------------------
-;Allocation info for local variables in function 'UART1_ISR'
-;------------------------------------------------------------
-;------------------------------------------------------------
-	G$UART1_ISR$0$0 ==.
-	C$lab3_2.c$201$1$1 ==.
-;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 3\lab3-2.c:201: void UART1_ISR(void) interrupt 20
-;	-----------------------------------------
-;	 function UART1_ISR
-;	-----------------------------------------
-_UART1_ISR:
-	C$lab3_2.c$203$1$1 ==.
-;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 3\lab3-2.c:203: SFRPAGE = UART1_PAGE;
-	mov	_SFRPAGE,#0x01
-	C$lab3_2.c$204$1$1 ==.
-;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 3\lab3-2.c:204: if (RI1 == 1)
-	jnb	_RI1,00102$
-	C$lab3_2.c$206$2$2 ==.
-;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 3\lab3-2.c:206: print1 = 1;					// input-received-from-UART1 flag
-	setb	_print1
-00102$:
-	C$lab3_2.c$209$1$1 ==.
-;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 3\lab3-2.c:209: RI1 = 0;
-	clr	_RI1
-	C$lab3_2.c$210$1$1 ==.
-	XG$UART1_ISR$0$0 ==.
-	reti
-;	eliminated unneeded push/pop psw
-;	eliminated unneeded push/pop dpl
-;	eliminated unneeded push/pop dph
-;	eliminated unneeded push/pop b
-;	eliminated unneeded push/pop acc
 	.area CSEG    (CODE)
 	.area CONST   (CODE)
-Flab3_2$_str_0$0$0 == .
+Flab3_3_2$_str_0$0$0 == .
 __str_0:
 	.db 0x1B
 	.ascii "[2J"
 	.db 0x00
-Flab3_2$_str_1$0$0 == .
+Flab3_3_2$_str_1$0$0 == .
 __str_1:
-	.ascii "I am UART0 =["
-	.db 0x0A
-	.db 0x0A
-	.db 0x0D
+	.db 0x1B
+	.ascii "[13;0H"
 	.db 0x00
-Flab3_2$_str_2$0$0 == .
+Flab3_3_2$_str_2$0$0 == .
 __str_2:
-	.ascii "I am UART1."
-	.db 0x0A
+	.ascii "------------------------------------------------------------"
+	.ascii "--------------------"
+	.db 0x00
+Flab3_3_2$_str_3$0$0 == .
+__str_3:
+	.db 0x1B
+	.ascii "[%d;0H"
+	.db 0x00
+Flab3_3_2$_str_4$0$0 == .
+__str_4:
+	.db 0x1B
+	.ascii "[1;12r"
+	.db 0x00
+Flab3_3_2$_str_5$0$0 == .
+__str_5:
+	.ascii "%c"
 	.db 0x0A
 	.db 0x0D
 	.db 0x00
-Flab3_2$_str_3$0$0 == .
-__str_3:
-	.ascii "%c"
+Flab3_3_2$_str_6$0$0 == .
+__str_6:
+	.db 0x1B
+	.ascii "[14;25r"
 	.db 0x00
 	.area XINIT   (CODE)
 	.area CABS    (ABS,CODE)

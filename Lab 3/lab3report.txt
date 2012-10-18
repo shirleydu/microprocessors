@@ -8,5 +8,8 @@ Results/Analysis:
 
 We were able to successfully have UART0 and UART1 communicate with each other-- any input received from either UARTs is mirrored on the other.
 
-A problem in part 2 of the lab was that, because UART0 interrupts have a higher priority (4) than UART1 interrupts (20), and because UART0 is always transmit-ready, UART0_ISR gets called constantly, preventing UART1_ISR from being called. To get around this, the priority of UART1 interrupts gets switched between 20 and 1-- higher than that of UART0 interrupts, so that both have a chance of being called.
+A problem in part 2 of the lab was that, because UART0 interrupts have a higher priority (4) than UART1 interrupts (20), and because UART0 is always transmit-ready, UART0_ISR gets called constantly, preventing UART1_ISR from being called. To get around this, the priority of UART1 interrupts gets switched between 20 and 1-- higher than that of UART0 interrupts, so that both have a chance of being called. However, characters may get lost if they are typed while the 'wrong' UART interrupt has higher priority.
 
+
+
+In testing the limit of SPI0CKR for which communication is reliable, we got 48kHz (SPI0CKR = 0xE4) to be the minimum reliable frequency with baudrate of 9600. For any lower value of SPI0CKR, characters are sent and received as they should.

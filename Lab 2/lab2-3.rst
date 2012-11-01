@@ -1,7 +1,7 @@
                               1 ;--------------------------------------------------------
                               2 ; File Created by SDCC : free open source ANSI-C Compiler
                               3 ; Version 2.9.0 #5416 (Mar 22 2009) (MINGW32)
-                              4 ; This file was generated Thu Sep 20 16:38:23 2012
+                              4 ; This file was generated Mon Oct 22 17:18:14 2012
                               5 ;--------------------------------------------------------
                               6 	.module lab2_3
                               7 	.optsdcc -mmcs51 --model-small
@@ -1579,7 +1579,7 @@
    016F 8B 83              1579 	mov	dph,r3
    0171 12 05 64           1580 	lcall	_srand
                     00C2   1581 	C$lab2_3.c$114$1$1 ==.
-                           1582 ;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 2\lab2-3.c:114: waitTime = rand()%100;					//wait 0-1000 millisecs
+                           1582 ;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 2\lab2-3.c:114: waitTime = rand()%100;					// wait 0-100 millisecs
    0174 12 05 28           1583 	lcall	_rand
    0177 75 16 64           1584 	mov	__modsint_PARM_2,#0x64
    017A E4                 1585 	clr	a

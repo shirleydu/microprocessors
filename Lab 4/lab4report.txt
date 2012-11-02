@@ -1,0 +1,13 @@
+Intro:
+
+The objective of this lab is to 
+
+Results:
+
+For part 1, we found that the reference voltage was ~2.43V rather than 2.4V; our calculations had to be adjusted to account for this (ie. multiplying the ADC result by 2.43/4095 to get the voltage). Values also had to be printed with %u (for unsigned ints) to print correctly, otherwise they would display as negative. Port 1.0 was broken so 1.1 was used for the pushbutton.
+
+For the first part of part 3, we realized that printing out the current DAC value in the main loop was slowing down the sawtooth wave so that it didn't display as a sawtooth, but as a horizontal line moving up and down. 
+
+In doing the second part of part 3, we found that channel 1 of our oscilloscope was malfunctioning, and displayed the results 5x the actual value.
+
+DIES AT ABOUT 5000Hz

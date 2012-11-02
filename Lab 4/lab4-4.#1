@@ -26,16 +26,16 @@ void ADC_Init(void);
 void DAC_Init(void);
 void MAC_Init(void);
 
-unsigned int do_ADC(void);
+int do_ADC(void);
 void do_DAC(void);
-unsigned int do_MAC(void);
+int do_MAC(void);
 
 
-unsigned int oldOut = 0;
-unsigned int oldIn = 0;
-unsigned int olderIn = 0;
-unsigned int output = 0;
-unsigned int input = 0;
+int oldOut = 0;
+int oldIn = 0;
+int olderIn = 0;
+int output = 0;
+int input = 0;
 
 
 //------------------------------------------------------------------------------------
@@ -75,6 +75,7 @@ void main(void)
 
 	while(1)
 	{
+		//printf("Still running. \n\r");
 		olderIn = oldIn;
 		oldIn = input;
 		input = do_ADC();
@@ -83,13 +84,21 @@ void main(void)
 		output = do_MAC();
 
 		do_DAC();
+
+	//	printf("I: %d  I1: %d  I2: %d  O: %d  O2: %d \n\r", input, oldIn, olderIn, output, oldOut); 
 	}
 
 }
 
-unsigned int do_ADC(void)
+int do_ADC(void)
 {
-	unsigned int ADC_val;
+	int ADC_val = 0;
+	int high, low;
+	float v;
+	char SFRPAGE_SAVE;
+
+	SFRPAGE_SAVE = SFRPAGE;				// Save Current SFR page
+	SFRPAGE = DAC0_PAGE;
 
 	//clear AD0INT
 	AD0INT = 0;
@@ -103,32 +112,50 @@ unsigned int do_ADC(void)
 
 	//read A/D conversion value from ADC0H/L
 
-	ADC_val = ADC0H<<8;
-	ADC_val += ADC0L;
+	high = ADC0H;
+	low = ADC0L;
+
+	ADC_val = high<<8;
+	ADC_val += low;
 	
-	ADC_val -= 1.5*4095/3;
+//	ADC_val -= 2047;
 
-	printf("%u H: %x L: %x\n\r", ADC_val, ADC0H, ADC0L);
-
+	SFRPAGE = SFRPAGE_SAVE;             // Restore SFR page	
+	
 	return ADC_val;
 }
 
 void do_DAC(void)
 {
+	char SFRPAGE_SAVE;
+
+	SFRPAGE_SAVE = SFRPAGE;				// Save Current SFR page
+	SFRPAGE = DAC0_PAGE;
+	
+//	printf("%x\n\r", output);
+
 	DAC0L = output;
 	DAC0H = output>>8;
+
+	//printf("L: %x H: %x\n\r", DAC0L, DAC0H);
+	SFRPAGE = SFRPAGE_SAVE;             // Restore SFR page	
 }
 
-unsigned int do_MAC()
+int do_MAC()
 {
-	int voltage;
-	unsigned int result;
+	int voltage, i;
+	char a, b, c, d;
+	int result;
+	char SFRPAGE_SAVE;
+
+	SFRPAGE_SAVE = SFRPAGE;				// Save Current SFR page
+	SFRPAGE = MAC0_PAGE;
 
 	MAC0CF |= 0x08;					//clear accumulator
-
+	//all decimals are shifted over by 10
 	//0.31250000
-	MAC0AH = 0x02;
-	MAC0AL = 0x80;
+	MAC0AH = 0x01;
+	MAC0AL = 0x40;
 
 	//write current input
 	MAC0BH = input>>8;
@@ -136,30 +163,46 @@ unsigned int do_MAC()
 
 	//write older input
 	MAC0BH = olderIn>>8;
-	MAC0BL = oldIn;
+	MAC0BL = olderIn;
 
 	//0.24038462
-	MAC0AH = 0x01;
-	MAC0AL = 0xEC;
+	MAC0AH = 0x00;
+	MAC0AL = 0xF6;
 
 	//write old input
 	MAC0BH = oldIn>>8;
 	MAC0BL = oldIn;
 
 	//0.29687500
-	MAC0AH = 0x02;
-	MAC0AL = 0x60;
+	MAC0AH = 0x01;
+	MAC0AL = 0x30;
 
-	//write old input
-	MAC0BH = oldIn>>8;
-	MAC0BL = oldIn;
+	//write old output
+	MAC0BH = oldOut>>8;
+	MAC0BL = oldOut;
 
 	//check completion flag
+	for(i=0; i<10; i++){}
 
+	SFRPAGE = MAC0_PAGE;
+	//shift over 10 bits
+	for(i=0; i<10; i++){
+		MAC0CF |= 0x20;
+		while(MAC0CF & 0x20 == 0x20);
+	}
 
-	result = MAC0ACC3<<8;
-	result += MAC0ACC2;
-	result += 1.5/4095;			//add 1.5v offset
+	result = MAC0ACC1;
+	result = result<<8;
+	result += MAC0ACC0;
+//	result += 2047;			//add 1.5v offset
+
+	a = MAC0ACC0;
+	b = MAC0ACC1;
+
+	SFRPAGE = UART0_PAGE;
+//	printf("0: %x, 1:%x, result:%x\n\r", a,b,result);
+		
+	SFRPAGE = SFRPAGE_SAVE;             // Restore SFR page	
 
 	return result;
 }
@@ -276,7 +319,7 @@ void MAC_Init(void)
 	SFRPAGE_SAVE = SFRPAGE;				// Save Current SFR page
 	SFRPAGE = MAC0_PAGE;
 
-	MAC0CF |= 0x0A;						// clear accumulator, fractional multiplication mode
+	MAC0CF |= 0x18;						// clear accumulator
 	MAC0CF &= ~0x01;					// perform MAC
 
 	

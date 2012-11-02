@@ -1,14 +1,20 @@
 ;--------------------------------------------------------
 ; File Created by SDCC : free open source ANSI-C Compiler
 ; Version 2.9.0 #5416 (Mar 22 2009) (MINGW32)
-; This file was generated Thu Nov 01 20:25:31 2012
+; This file was generated Thu Nov 01 18:12:04 2012
 ;--------------------------------------------------------
-	.module lab4_4
+	.module tessstMac
 	.optsdcc -mmcs51 --model-small
 	
 ;--------------------------------------------------------
 ; Public variables in this module
 ;--------------------------------------------------------
+	.globl _main
+	.globl _SYSCLK_INIT
+	.globl _Init_Device
+	.globl _UART_Init
+	.globl _Timer_Init
+	.globl _Port_IO_Init
 	.globl _P7_7
 	.globl _P7_6
 	.globl _P7_5
@@ -392,23 +398,26 @@
 	.globl _DPL
 	.globl _SP
 	.globl _P0
-	.globl _input
-	.globl _output
-	.globl _olderIn
-	.globl _oldIn
-	.globl _oldOut
+	.globl _ans
+	.globl _cc
+	.globl _dd
+	.globl _bb
+	.globl _aa
+	.globl _i
+	.globl _b3
+	.globl _b2
+	.globl _b1
+	.globl _b0
+	.globl _d
+	.globl _a3
+	.globl _a2
+	.globl _a1
+	.globl _a0
+	.globl _c
+	.globl _b
+	.globl _a
 	.globl _putchar
 	.globl _getchar
-	.globl _main
-	.globl _do_ADC
-	.globl _do_DAC
-	.globl _do_MAC
-	.globl _SYSCLK_INIT
-	.globl _PORT_INIT
-	.globl _UART0_INIT
-	.globl _ADC_Init
-	.globl _DAC_Init
-	.globl _MAC_Init
 ;--------------------------------------------------------
 ; special function registers
 ;--------------------------------------------------------
@@ -1192,32 +1201,69 @@ _P7_7	=	0x00ff
 ; internal ram data
 ;--------------------------------------------------------
 	.area DSEG    (DATA)
-G$oldOut$0$0==.
-_oldOut::
+G$a$0$0==.
+_a::
 	.ds 2
-G$oldIn$0$0==.
-_oldIn::
+G$b$0$0==.
+_b::
 	.ds 2
-G$olderIn$0$0==.
-_olderIn::
+G$c$0$0==.
+_c::
+	.ds 4
+G$a0$0$0==.
+_a0::
+	.ds 1
+G$a1$0$0==.
+_a1::
+	.ds 1
+G$a2$0$0==.
+_a2::
+	.ds 1
+G$a3$0$0==.
+_a3::
+	.ds 1
+G$d$0$0==.
+_d::
+	.ds 1
+G$b0$0$0==.
+_b0::
+	.ds 1
+G$b1$0$0==.
+_b1::
+	.ds 1
+G$b2$0$0==.
+_b2::
+	.ds 1
+G$b3$0$0==.
+_b3::
+	.ds 1
+G$i$0$0==.
+_i::
 	.ds 2
-G$output$0$0==.
-_output::
+G$aa$0$0==.
+_aa::
+	.ds 3
+G$bb$0$0==.
+_bb::
+	.ds 3
+G$dd$0$0==.
+_dd::
+	.ds 3
+G$cc$0$0==.
+_cc::
+	.ds 3
+G$ans$0$0==.
+_ans::
+	.ds 4
+Lmain$sloc0$1$0==.
+_main_sloc0_1_0:
 	.ds 2
-G$input$0$0==.
-_input::
+Lmain$sloc1$1$0==.
+_main_sloc1_1_0:
 	.ds 2
 ;--------------------------------------------------------
 ; overlayable items in internal ram 
 ;--------------------------------------------------------
-	.area	OSEG    (OVR,DATA)
-	.area	OSEG    (OVR,DATA)
-	.area	OSEG    (OVR,DATA)
-	.area	OSEG    (OVR,DATA)
-	.area	OSEG    (OVR,DATA)
-	.area	OSEG    (OVR,DATA)
-	.area	OSEG    (OVR,DATA)
-	.area	OSEG    (OVR,DATA)
 	.area	OSEG    (OVR,DATA)
 	.area	OSEG    (OVR,DATA)
 	.area	OSEG    (OVR,DATA)
@@ -1286,36 +1332,6 @@ __interrupt_vect:
 	.globl __mcs51_genXINIT
 	.globl __mcs51_genXRAMCLEAR
 	.globl __mcs51_genRAMCLEAR
-	G$MAC_Init$0$0 ==.
-	C$lab4_4.c$34$1$1 ==.
-;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 4\lab4-4.c:34: int oldOut = 0;
-	clr	a
-	mov	_oldOut,a
-	mov	(_oldOut + 1),a
-	G$MAC_Init$0$0 ==.
-	C$lab4_4.c$35$1$1 ==.
-;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 4\lab4-4.c:35: int oldIn = 0;
-	clr	a
-	mov	_oldIn,a
-	mov	(_oldIn + 1),a
-	G$MAC_Init$0$0 ==.
-	C$lab4_4.c$36$1$1 ==.
-;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 4\lab4-4.c:36: int olderIn = 0;
-	clr	a
-	mov	_olderIn,a
-	mov	(_olderIn + 1),a
-	G$MAC_Init$0$0 ==.
-	C$lab4_4.c$37$1$1 ==.
-;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 4\lab4-4.c:37: int output = 0;
-	clr	a
-	mov	_output,a
-	mov	(_output + 1),a
-	G$MAC_Init$0$0 ==.
-	C$lab4_4.c$38$1$1 ==.
-;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 4\lab4-4.c:38: int input = 0;
-	clr	a
-	mov	_input,a
-	mov	(_input + 1),a
 	.area GSFINAL (CODE)
 	ljmp	__sdcc_program_startup
 ;--------------------------------------------------------
@@ -1395,356 +1411,117 @@ _getchar:
 	XG$getchar$0$0 ==.
 	ret
 ;------------------------------------------------------------
-;Allocation info for local variables in function 'main'
+;Allocation info for local variables in function 'Port_IO_Init'
 ;------------------------------------------------------------
-;high                      Allocated to registers 
-;low                       Allocated to registers 
 ;------------------------------------------------------------
-	G$main$0$0 ==.
-	C$lab4_4.c$44$1$1 ==.
-;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 4\lab4-4.c:44: void main(void)
+	G$Port_IO_Init$0$0 ==.
+	C$tessstMac.c$26$1$1 ==.
+;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 4\tessstMac.c:26: void Port_IO_Init()
 ;	-----------------------------------------
-;	 function main
+;	 function Port_IO_Init
 ;	-----------------------------------------
-_main:
-	C$lab4_4.c$48$1$1 ==.
-;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 4\lab4-4.c:48: WDTCN = 0xDE;						// Disable the watchdog timer
-	mov	_WDTCN,#0xDE
-	C$lab4_4.c$49$1$1 ==.
-;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 4\lab4-4.c:49: WDTCN = 0xAD;						// Note: = "DEAD"!
-	mov	_WDTCN,#0xAD
-	C$lab4_4.c$51$1$1 ==.
-;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 4\lab4-4.c:51: SYSCLK_INIT();						// Initialize the oscillator
-	lcall	_SYSCLK_INIT
-	C$lab4_4.c$52$1$1 ==.
-;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 4\lab4-4.c:52: PORT_INIT();						// Initialize the Crossbar and GPIO
-	lcall	_PORT_INIT
-	C$lab4_4.c$53$1$1 ==.
-;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 4\lab4-4.c:53: UART0_INIT();						// Initialize UART0
-	lcall	_UART0_INIT
-	C$lab4_4.c$54$1$1 ==.
-;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 4\lab4-4.c:54: ADC_Init();							// Initialize ADC0
-	lcall	_ADC_Init
-	C$lab4_4.c$55$1$1 ==.
-;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 4\lab4-4.c:55: DAC_Init();							// Initialize DAC0
-	lcall	_DAC_Init
-	C$lab4_4.c$56$1$1 ==.
-;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 4\lab4-4.c:56: MAC_Init();							// Initialize MAC0
-	lcall	_MAC_Init
-	C$lab4_4.c$58$1$1 ==.
-;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 4\lab4-4.c:58: SFRPAGE = UART0_PAGE;				// Direct output to UART0
-	mov	_SFRPAGE,#0x00
-	C$lab4_4.c$63$1$1 ==.
-;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 4\lab4-4.c:63: ADC0CN &= ~0x0C;
-	anl	_ADC0CN,#0xF3
-	C$lab4_4.c$65$1$1 ==.
-;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 4\lab4-4.c:65: AD0INT = 0;
-	clr	_AD0INT
-	C$lab4_4.c$67$1$1 ==.
-;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 4\lab4-4.c:67: AD0BUSY = 1;
-	setb	_AD0BUSY
-	C$lab4_4.c$70$1$1 ==.
-;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 4\lab4-4.c:70: while(AD0INT != 0);
-00101$:
-	jb	_AD0INT,00101$
-	C$lab4_4.c$73$1$1 ==.
-;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 4\lab4-4.c:73: printf("\033[2J");					//clear screen
-	mov	a,#__str_0
-	push	acc
-	mov	a,#(__str_0 >> 8)
-	push	acc
-	mov	a,#0x80
-	push	acc
-	lcall	_printf
-	dec	sp
-	dec	sp
-	dec	sp
-	C$lab4_4.c$74$1$1 ==.
-;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 4\lab4-4.c:74: printf("We will not sow. \n\r");		//running
-	mov	a,#__str_1
-	push	acc
-	mov	a,#(__str_1 >> 8)
-	push	acc
-	mov	a,#0x80
-	push	acc
-	lcall	_printf
-	dec	sp
-	dec	sp
-	dec	sp
-	C$lab4_4.c$76$1$1 ==.
-;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 4\lab4-4.c:76: while(1)
-00105$:
-	C$lab4_4.c$79$2$2 ==.
-;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 4\lab4-4.c:79: olderIn = oldIn;
-	mov	_olderIn,_oldIn
-	mov	(_olderIn + 1),(_oldIn + 1)
-	C$lab4_4.c$80$2$2 ==.
-;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 4\lab4-4.c:80: oldIn = input;
-	mov	_oldIn,_input
-	mov	(_oldIn + 1),(_input + 1)
-	C$lab4_4.c$81$2$2 ==.
-;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 4\lab4-4.c:81: input = do_ADC();
-	lcall	_do_ADC
-	mov	_input,dpl
-	mov	(_input + 1),dph
-	C$lab4_4.c$83$2$2 ==.
-;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 4\lab4-4.c:83: oldOut = output;
-	mov	_oldOut,_output
-	mov	(_oldOut + 1),(_output + 1)
-	C$lab4_4.c$84$2$2 ==.
-;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 4\lab4-4.c:84: output = do_MAC();
-	lcall	_do_MAC
-	mov	_output,dpl
-	mov	(_output + 1),dph
-	C$lab4_4.c$86$2$2 ==.
-;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 4\lab4-4.c:86: do_DAC();
-	lcall	_do_DAC
-	C$lab4_4.c$91$1$1 ==.
-	XG$main$0$0 ==.
-	sjmp	00105$
-;------------------------------------------------------------
-;Allocation info for local variables in function 'do_ADC'
-;------------------------------------------------------------
-;ADC_val                   Allocated to registers r3 r4 
-;high                      Allocated to registers r3 r4 
-;low                       Allocated to registers r5 r6 
-;v                         Allocated with name '_do_ADC_v_1_1'
-;SFRPAGE_SAVE              Allocated to registers r2 
-;------------------------------------------------------------
-	G$do_ADC$0$0 ==.
-	C$lab4_4.c$93$1$1 ==.
-;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 4\lab4-4.c:93: int do_ADC(void)
-;	-----------------------------------------
-;	 function do_ADC
-;	-----------------------------------------
-_do_ADC:
-	C$lab4_4.c$100$1$1 ==.
-;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 4\lab4-4.c:100: SFRPAGE_SAVE = SFRPAGE;				// Save Current SFR page
-	mov	r2,_SFRPAGE
-	C$lab4_4.c$101$1$1 ==.
-;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 4\lab4-4.c:101: SFRPAGE = DAC0_PAGE;
-	mov	_SFRPAGE,#0x00
-	C$lab4_4.c$104$1$1 ==.
-;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 4\lab4-4.c:104: AD0INT = 0;
-	clr	_AD0INT
-	C$lab4_4.c$107$1$1 ==.
-;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 4\lab4-4.c:107: AD0BUSY = 1;
-	setb	_AD0BUSY
-	C$lab4_4.c$110$1$1 ==.
-;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 4\lab4-4.c:110: while(AD0INT == 0);
-00101$:
-	jnb	_AD0INT,00101$
-	C$lab4_4.c$111$1$1 ==.
-;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 4\lab4-4.c:111: AD0BUSY = 0;
-	clr	_AD0BUSY
-	C$lab4_4.c$115$1$1 ==.
-;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 4\lab4-4.c:115: high = ADC0H;
-	mov	r3,_ADC0H
-	C$lab4_4.c$116$1$1 ==.
-;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 4\lab4-4.c:116: low = ADC0L;
-	mov	r5,_ADC0L
-	mov	r6,#0x00
-	C$lab4_4.c$118$1$1 ==.
-;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 4\lab4-4.c:118: ADC_val = high<<8;
-	mov	ar4,r3
-	mov	r3,#0x00
-	C$lab4_4.c$119$1$1 ==.
-;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 4\lab4-4.c:119: ADC_val += low;
-	mov	a,r5
-	add	a,r3
-	mov	r3,a
-	mov	a,r6
-	addc	a,r4
-	mov	r4,a
-	C$lab4_4.c$123$1$1 ==.
-;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 4\lab4-4.c:123: SFRPAGE = SFRPAGE_SAVE;             // Restore SFR page	
-	mov	_SFRPAGE,r2
-	C$lab4_4.c$125$1$1 ==.
-;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 4\lab4-4.c:125: return ADC_val;
-	mov	dpl,r3
-	mov	dph,r4
-	C$lab4_4.c$126$1$1 ==.
-	XG$do_ADC$0$0 ==.
+_Port_IO_Init:
+	C$tessstMac.c$28$1$1 ==.
+;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 4\tessstMac.c:28: SFRPAGE = CONFIG_PAGE;
+	mov	_SFRPAGE,#0x0F
+	C$tessstMac.c$29$1$1 ==.
+;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 4\tessstMac.c:29: P1MDIN = 0x01;
+	mov	_P1MDIN,#0x01
+	C$tessstMac.c$30$1$1 ==.
+;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 4\tessstMac.c:30: P0MDOUT = 0x75;
+	mov	_P0MDOUT,#0x75
+	C$tessstMac.c$31$1$1 ==.
+;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 4\tessstMac.c:31: P1MDOUT = 0xFF;
+	mov	_P1MDOUT,#0xFF
+	C$tessstMac.c$32$1$1 ==.
+;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 4\tessstMac.c:32: XBR0 = 0x04;
+	mov	_XBR0,#0x04
+	C$tessstMac.c$33$1$1 ==.
+;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 4\tessstMac.c:33: XBR2 = 0x40;
+	mov	_XBR2,#0x40
+	C$tessstMac.c$34$1$1 ==.
+	XG$Port_IO_Init$0$0 ==.
 	ret
 ;------------------------------------------------------------
-;Allocation info for local variables in function 'do_DAC'
+;Allocation info for local variables in function 'Timer_Init'
 ;------------------------------------------------------------
-;SFRPAGE_SAVE              Allocated to registers r2 
 ;------------------------------------------------------------
-	G$do_DAC$0$0 ==.
-	C$lab4_4.c$128$1$1 ==.
-;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 4\lab4-4.c:128: void do_DAC(void)
+	G$Timer_Init$0$0 ==.
+	C$tessstMac.c$36$1$1 ==.
+;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 4\tessstMac.c:36: void Timer_Init()
 ;	-----------------------------------------
-;	 function do_DAC
+;	 function Timer_Init
 ;	-----------------------------------------
-_do_DAC:
-	C$lab4_4.c$132$1$1 ==.
-;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 4\lab4-4.c:132: SFRPAGE_SAVE = SFRPAGE;				// Save Current SFR page
-	mov	r2,_SFRPAGE
-	C$lab4_4.c$133$1$1 ==.
-;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 4\lab4-4.c:133: SFRPAGE = DAC0_PAGE;
+_Timer_Init:
+	C$tessstMac.c$38$1$1 ==.
+;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 4\tessstMac.c:38: SFRPAGE = TMR2_PAGE;
 	mov	_SFRPAGE,#0x00
-	C$lab4_4.c$137$1$1 ==.
-;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 4\lab4-4.c:137: DAC0L = output;
-	mov	_DAC0L,_output
-	C$lab4_4.c$138$1$1 ==.
-;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 4\lab4-4.c:138: DAC0H = output>>8;
-	mov	_DAC0H,(_output + 1)
-	C$lab4_4.c$141$1$1 ==.
-;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 4\lab4-4.c:141: SFRPAGE = SFRPAGE_SAVE;             // Restore SFR page	
-	mov	_SFRPAGE,r2
-	C$lab4_4.c$142$1$1 ==.
-	XG$do_DAC$0$0 ==.
+	C$tessstMac.c$39$1$1 ==.
+;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 4\tessstMac.c:39: TMR2CN = 0x04;
+	mov	_TMR2CN,#0x04
+	C$tessstMac.c$40$1$1 ==.
+;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 4\tessstMac.c:40: TMR2CF = 0x08;
+	mov	_TMR2CF,#0x08
+	C$tessstMac.c$41$1$1 ==.
+;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 4\tessstMac.c:41: RCAP2L = 0xF4;
+	mov	_RCAP2L,#0xF4
+	C$tessstMac.c$42$1$1 ==.
+;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 4\tessstMac.c:42: RCAP2H = 0xFF;		//115200 BAUD on UART0
+	mov	_RCAP2H,#0xFF
+	C$tessstMac.c$43$1$1 ==.
+;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 4\tessstMac.c:43: TR2 = 1;
+	setb	_TR2
+	C$tessstMac.c$44$1$1 ==.
+	XG$Timer_Init$0$0 ==.
 	ret
 ;------------------------------------------------------------
-;Allocation info for local variables in function 'do_MAC'
+;Allocation info for local variables in function 'UART_Init'
 ;------------------------------------------------------------
-;voltage                   Allocated with name '_do_MAC_voltage_1_1'
-;i                         Allocated to registers r3 r4 
-;a                         Allocated to registers 
-;b                         Allocated to registers 
-;c                         Allocated with name '_do_MAC_c_1_1'
-;d                         Allocated with name '_do_MAC_d_1_1'
-;result                    Allocated to registers r3 r4 
-;SFRPAGE_SAVE              Allocated to registers r2 
 ;------------------------------------------------------------
-	G$do_MAC$0$0 ==.
-	C$lab4_4.c$144$1$1 ==.
-;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 4\lab4-4.c:144: int do_MAC()
+	G$UART_Init$0$0 ==.
+	C$tessstMac.c$46$1$1 ==.
+;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 4\tessstMac.c:46: void UART_Init()
 ;	-----------------------------------------
-;	 function do_MAC
+;	 function UART_Init
 ;	-----------------------------------------
-_do_MAC:
-	C$lab4_4.c$151$1$1 ==.
-;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 4\lab4-4.c:151: SFRPAGE_SAVE = SFRPAGE;				// Save Current SFR page
-	mov	r2,_SFRPAGE
-	C$lab4_4.c$152$1$1 ==.
-;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 4\lab4-4.c:152: SFRPAGE = MAC0_PAGE;
-	mov	_SFRPAGE,#0x03
-	C$lab4_4.c$154$1$1 ==.
-;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 4\lab4-4.c:154: MAC0CF |= 0x08;					//clear accumulator
-	orl	_MAC0CF,#0x08
-	C$lab4_4.c$157$1$1 ==.
-;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 4\lab4-4.c:157: MAC0AH = 0x01;
-	mov	_MAC0AH,#0x01
-	C$lab4_4.c$158$1$1 ==.
-;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 4\lab4-4.c:158: MAC0AL = 0x40;
-	mov	_MAC0AL,#0x40
-	C$lab4_4.c$161$1$1 ==.
-;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 4\lab4-4.c:161: MAC0BH = input>>8;
-	mov	_MAC0BH,(_input + 1)
-	C$lab4_4.c$162$1$1 ==.
-;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 4\lab4-4.c:162: MAC0BL = input;
-	mov	_MAC0BL,_input
-	C$lab4_4.c$165$1$1 ==.
-;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 4\lab4-4.c:165: MAC0BH = olderIn>>8;
-	mov	_MAC0BH,(_olderIn + 1)
-	C$lab4_4.c$166$1$1 ==.
-;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 4\lab4-4.c:166: MAC0BL = olderIn;
-	mov	_MAC0BL,_olderIn
-	C$lab4_4.c$169$1$1 ==.
-;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 4\lab4-4.c:169: MAC0AH = 0x00;
-	mov	_MAC0AH,#0x00
-	C$lab4_4.c$170$1$1 ==.
-;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 4\lab4-4.c:170: MAC0AL = 0xF6;
-	mov	_MAC0AL,#0xF6
-	C$lab4_4.c$173$1$1 ==.
-;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 4\lab4-4.c:173: MAC0BH = oldIn>>8;
-	mov	_MAC0BH,(_oldIn + 1)
-	C$lab4_4.c$174$1$1 ==.
-;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 4\lab4-4.c:174: MAC0BL = oldIn;
-	mov	_MAC0BL,_oldIn
-	C$lab4_4.c$177$1$1 ==.
-;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 4\lab4-4.c:177: MAC0AH = 0x01;
-	mov	_MAC0AH,#0x01
-	C$lab4_4.c$178$1$1 ==.
-;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 4\lab4-4.c:178: MAC0AL = 0x30;
-	mov	_MAC0AL,#0x30
-	C$lab4_4.c$181$1$1 ==.
-;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 4\lab4-4.c:181: MAC0BH = oldOut>>8;
-	mov	_MAC0BH,(_oldOut + 1)
-	C$lab4_4.c$182$1$1 ==.
-;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 4\lab4-4.c:182: MAC0BL = oldOut;
-	mov	_MAC0BL,_oldOut
-	C$lab4_4.c$185$1$1 ==.
-;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 4\lab4-4.c:185: for(i=0; i<10; i++){}
-	mov	r3,#0x0A
-	mov	r4,#0x00
-	mov	ar5,r3
-	mov	ar6,r4
-00106$:
-	dec	r5
-	cjne	r5,#0xff,00121$
-	dec	r6
-00121$:
-	mov	a,r5
-	orl	a,r6
-	C$lab4_4.c$187$1$1 ==.
-;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 4\lab4-4.c:187: SFRPAGE = MAC0_PAGE;
-	C$lab4_4.c$189$1$1 ==.
-;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 4\lab4-4.c:189: for(i=0; i<10; i++){
-	jnz	00106$
-	mov	_SFRPAGE,#0x03
-	mov	r3,a
-	mov	r4,a
-00107$:
-	clr	c
-	mov	a,r3
-	subb	a,#0x0A
-	mov	a,r4
-	xrl	a,#0x80
-	subb	a,#0x80
-	jnc	00110$
-	C$lab4_4.c$190$2$3 ==.
-;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 4\lab4-4.c:190: MAC0CF |= 0x20;
-	orl	_MAC0CF,#0x20
-	C$lab4_4.c$191$2$3 ==.
-;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 4\lab4-4.c:191: while(MAC0CF & 0x20 == 0x20);
-00101$:
-	mov	a,_MAC0CF
-	jb	acc.0,00101$
-	C$lab4_4.c$189$1$1 ==.
-;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 4\lab4-4.c:189: for(i=0; i<10; i++){
-	inc	r3
-	cjne	r3,#0x00,00107$
-	inc	r4
-	sjmp	00107$
-00110$:
-	C$lab4_4.c$194$1$1 ==.
-;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 4\lab4-4.c:194: result = MAC0ACC1;
-	C$lab4_4.c$195$1$1 ==.
-;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 4\lab4-4.c:195: result = result<<8;
-	mov	r4,_MAC0ACC1
-	mov	r3,#0x00
-	C$lab4_4.c$196$1$1 ==.
-;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 4\lab4-4.c:196: result += MAC0ACC0;
-	mov	r5,_MAC0ACC0
-	mov	r6,#0x00
-	mov	a,r5
-	add	a,r3
-	mov	r3,a
-	mov	a,r6
-	addc	a,r4
-	mov	r4,a
-	C$lab4_4.c$199$1$1 ==.
-;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 4\lab4-4.c:199: a = MAC0ACC0;
-	mov	a,_MAC0ACC0
-	C$lab4_4.c$200$1$1 ==.
-;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 4\lab4-4.c:200: b = MAC0ACC1;
-	mov	a,_MAC0ACC1
-	C$lab4_4.c$202$1$1 ==.
-;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 4\lab4-4.c:202: SFRPAGE = UART0_PAGE;
+_UART_Init:
+	C$tessstMac.c$48$1$1 ==.
+;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 4\tessstMac.c:48: SFRPAGE = UART0_PAGE;
 	mov	_SFRPAGE,#0x00
-	C$lab4_4.c$205$1$1 ==.
-;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 4\lab4-4.c:205: SFRPAGE = SFRPAGE_SAVE;             // Restore SFR page	
-	mov	_SFRPAGE,r2
-	C$lab4_4.c$207$1$1 ==.
-;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 4\lab4-4.c:207: return result;
-	mov	dpl,r3
-	mov	dph,r4
-	C$lab4_4.c$208$1$1 ==.
-	XG$do_MAC$0$0 ==.
+	C$tessstMac.c$49$1$1 ==.
+;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 4\tessstMac.c:49: SCON0 = 0x50;
+	mov	_SCON0,#0x50
+	C$tessstMac.c$50$1$1 ==.
+;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 4\tessstMac.c:50: SSTA0 = 0x05;
+	mov	_SSTA0,#0x05
+	C$tessstMac.c$51$1$1 ==.
+;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 4\tessstMac.c:51: TI0 = 1;
+	setb	_TI0
+	C$tessstMac.c$52$1$1 ==.
+	XG$UART_Init$0$0 ==.
 	ret
+;------------------------------------------------------------
+;Allocation info for local variables in function 'Init_Device'
+;------------------------------------------------------------
+;------------------------------------------------------------
+	G$Init_Device$0$0 ==.
+	C$tessstMac.c$54$1$1 ==.
+;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 4\tessstMac.c:54: void Init_Device(void)
+;	-----------------------------------------
+;	 function Init_Device
+;	-----------------------------------------
+_Init_Device:
+	C$tessstMac.c$56$1$1 ==.
+;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 4\tessstMac.c:56: Timer_Init();
+	lcall	_Timer_Init
+	C$tessstMac.c$57$1$1 ==.
+;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 4\tessstMac.c:57: UART_Init();
+	lcall	_UART_Init
+	C$tessstMac.c$58$1$1 ==.
+;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 4\tessstMac.c:58: Port_IO_Init();
+	C$tessstMac.c$59$1$1 ==.
+	XG$Init_Device$0$0 ==.
+	ljmp	_Port_IO_Init
 ;------------------------------------------------------------
 ;Allocation info for local variables in function 'SYSCLK_INIT'
 ;------------------------------------------------------------
@@ -1752,23 +1529,23 @@ _do_MAC:
 ;SFRPAGE_SAVE              Allocated to registers r2 
 ;------------------------------------------------------------
 	G$SYSCLK_INIT$0$0 ==.
-	C$lab4_4.c$216$1$1 ==.
-;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 4\lab4-4.c:216: void SYSCLK_INIT(void)
+	C$tessstMac.c$61$1$1 ==.
+;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 4\tessstMac.c:61: void SYSCLK_INIT(void)
 ;	-----------------------------------------
 ;	 function SYSCLK_INIT
 ;	-----------------------------------------
 _SYSCLK_INIT:
-	C$lab4_4.c$221$1$1 ==.
-;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 4\lab4-4.c:221: SFRPAGE_SAVE = SFRPAGE;				// Save Current SFR page	SFRPAGE = CONFIG_PAGE;
+	C$tessstMac.c$65$1$1 ==.
+;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 4\tessstMac.c:65: SFRPAGE_SAVE = SFRPAGE;
 	mov	r2,_SFRPAGE
-	C$lab4_4.c$222$1$1 ==.
-;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 4\lab4-4.c:222: SFRPAGE   = CONFIG_PAGE;
+	C$tessstMac.c$66$1$1 ==.
+;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 4\tessstMac.c:66: SFRPAGE = CONFIG_PAGE;
 	mov	_SFRPAGE,#0x0F
-	C$lab4_4.c$224$1$1 ==.
-;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 4\lab4-4.c:224: OSCXCN = 0x67;						// Start ext osc with 22.1184MHz crystal
+	C$tessstMac.c$67$1$1 ==.
+;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 4\tessstMac.c:67: OSCXCN = 0X67;
 	mov	_OSCXCN,#0x67
-	C$lab4_4.c$225$1$1 ==.
-;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 4\lab4-4.c:225: for(i=0; i < 3000; i++);			// Wait for the oscillator to start up
+	C$tessstMac.c$68$1$1 ==.
+;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 4\tessstMac.c:68: for(i=0; i<3000; i++);
 	mov	r3,#0xB8
 	mov	r4,#0x0B
 00106$:
@@ -1779,230 +1556,826 @@ _SYSCLK_INIT:
 	mov	a,r3
 	orl	a,r4
 	jnz	00106$
-	C$lab4_4.c$226$1$1 ==.
-;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 4\lab4-4.c:226: while(!(OSCXCN & 0x80));
+	C$tessstMac.c$69$1$1 ==.
+;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 4\tessstMac.c:69: while(!(OSCXCN&0X80));
 00101$:
 	mov	a,_OSCXCN
 	jnb	acc.7,00101$
-	C$lab4_4.c$227$1$1 ==.
-;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 4\lab4-4.c:227: CLKSEL = 0x01;						// Switch to the external crystal oscillator
+	C$tessstMac.c$70$1$1 ==.
+;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 4\tessstMac.c:70: CLKSEL = 0X01;
 	mov	_CLKSEL,#0x01
-	C$lab4_4.c$228$1$1 ==.
-;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 4\lab4-4.c:228: OSCICN = 0x00;						// Disable the internal oscillator
+	C$tessstMac.c$71$1$1 ==.
+;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 4\tessstMac.c:71: OSCICN = 0X00;
 	mov	_OSCICN,#0x00
-	C$lab4_4.c$230$1$1 ==.
-;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 4\lab4-4.c:230: SFRPAGE = SFRPAGE_SAVE;             // Restore SFR page
+	C$tessstMac.c$72$1$1 ==.
+;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 4\tessstMac.c:72: SFRPAGE = SFRPAGE_SAVE;
 	mov	_SFRPAGE,r2
-	C$lab4_4.c$231$1$1 ==.
+	C$tessstMac.c$73$1$1 ==.
 	XG$SYSCLK_INIT$0$0 ==.
 	ret
 ;------------------------------------------------------------
-;Allocation info for local variables in function 'PORT_INIT'
+;Allocation info for local variables in function 'main'
 ;------------------------------------------------------------
-;SFRPAGE_SAVE              Allocated to registers r2 
+;sloc0                     Allocated with name '_main_sloc0_1_0'
+;sloc1                     Allocated with name '_main_sloc1_1_0'
 ;------------------------------------------------------------
-	G$PORT_INIT$0$0 ==.
-	C$lab4_4.c$233$1$1 ==.
-;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 4\lab4-4.c:233: void PORT_INIT(void)
+	G$main$0$0 ==.
+	C$tessstMac.c$75$1$1 ==.
+;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 4\tessstMac.c:75: void main(void)
 ;	-----------------------------------------
-;	 function PORT_INIT
+;	 function main
 ;	-----------------------------------------
-_PORT_INIT:
-	C$lab4_4.c$237$1$1 ==.
-;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 4\lab4-4.c:237: SFRPAGE_SAVE = SFRPAGE;				// Save Current SFR page
-	mov	r2,_SFRPAGE
-	C$lab4_4.c$238$1$1 ==.
-;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 4\lab4-4.c:238: SFRPAGE = CONFIG_PAGE;
-	mov	_SFRPAGE,#0x0F
-	C$lab4_4.c$240$1$1 ==.
-;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 4\lab4-4.c:240: XBR0	 = 0x04;					// Enable UART0
-	mov	_XBR0,#0x04
-	C$lab4_4.c$241$1$1 ==.
-;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 4\lab4-4.c:241: XBR1	 = 0x00;
-	mov	_XBR1,#0x00
-	C$lab4_4.c$242$1$1 ==.
-;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 4\lab4-4.c:242: XBR2	 = 0x40;					// Enable Crossbar and weak pull-up
-	mov	_XBR2,#0x40
-	C$lab4_4.c$244$1$1 ==.
-;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 4\lab4-4.c:244: P0MDOUT &= ~0x01;					// Set P0.0 to open-drain
-	anl	_P0MDOUT,#0xFE
-	C$lab4_4.c$245$1$1 ==.
-;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 4\lab4-4.c:245: P0 |= 0x01;							// P0.0 high-impedence
-	orl	_P0,#0x01
-	C$lab4_4.c$246$1$1 ==.
-;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 4\lab4-4.c:246: P1MDOUT	&= ~0x03;					// Set P1.0 to open-drain
-	anl	_P1MDOUT,#0xFC
-	C$lab4_4.c$247$1$1 ==.
-;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 4\lab4-4.c:247: P1 |= 0x03;							// P1.0 to high-impedence
-	orl	_P1,#0x03
-	C$lab4_4.c$250$1$1 ==.
-;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 4\lab4-4.c:250: SFRPAGE = SFRPAGE_SAVE;             // Restore SFR page
-	mov	_SFRPAGE,r2
-	C$lab4_4.c$251$1$1 ==.
-	XG$PORT_INIT$0$0 ==.
-	ret
-;------------------------------------------------------------
-;Allocation info for local variables in function 'UART0_INIT'
-;------------------------------------------------------------
-;SFRPAGE_SAVE              Allocated to registers r2 
-;------------------------------------------------------------
-	G$UART0_INIT$0$0 ==.
-	C$lab4_4.c$259$1$1 ==.
-;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 4\lab4-4.c:259: void UART0_INIT(void)
-;	-----------------------------------------
-;	 function UART0_INIT
-;	-----------------------------------------
-_UART0_INIT:
-	C$lab4_4.c$263$1$1 ==.
-;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 4\lab4-4.c:263: SFRPAGE_SAVE = SFRPAGE;				// Save Current SFR page
-	mov	r2,_SFRPAGE
-	C$lab4_4.c$264$1$1 ==.
-;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 4\lab4-4.c:264: SFRPAGE = TIMER01_PAGE;
+_main:
+	C$tessstMac.c$78$1$1 ==.
+;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 4\tessstMac.c:78: WDTCN = 0XDE;		//Kill the Watchdog 
+	mov	_WDTCN,#0xDE
+	C$tessstMac.c$79$1$1 ==.
+;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 4\tessstMac.c:79: WDTCN = 0XAD;
+	mov	_WDTCN,#0xAD
+	C$tessstMac.c$81$1$1 ==.
+;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 4\tessstMac.c:81: SYSCLK_INIT();		//Initialize the SYSCLK to 22.1184MHz
+	lcall	_SYSCLK_INIT
+	C$tessstMac.c$82$1$1 ==.
+;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 4\tessstMac.c:82: Init_Device();
+	lcall	_Init_Device
+	C$tessstMac.c$84$1$1 ==.
+;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 4\tessstMac.c:84: SFRPAGE = UART0_PAGE;
 	mov	_SFRPAGE,#0x00
-	C$lab4_4.c$266$1$1 ==.
-;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 4\lab4-4.c:266: TCON	 = 0x40;
-	mov	_TCON,#0x40
-	C$lab4_4.c$267$1$1 ==.
-;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 4\lab4-4.c:267: TMOD	&= 0x0F;
-	anl	_TMOD,#0x0F
-	C$lab4_4.c$268$1$1 ==.
-;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 4\lab4-4.c:268: TMOD	|= 0x20;					// Timer1, Mode 2, 8-bit reload
-	orl	_TMOD,#0x20
-	C$lab4_4.c$269$1$1 ==.
-;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 4\lab4-4.c:269: CKCON	|= 0x10;					// Timer1 uses SYSCLK as time base
-	orl	_CKCON,#0x10
-	C$lab4_4.c$271$1$1 ==.
-;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 4\lab4-4.c:271: TH1		 = 0xE8;					// 0xE8 = 232
-	mov	_TH1,#0xE8
-	C$lab4_4.c$272$1$1 ==.
-;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 4\lab4-4.c:272: TR1		 = 1;						// Start Timer1
-	setb	_TR1
-	C$lab4_4.c$274$1$1 ==.
-;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 4\lab4-4.c:274: SFRPAGE = UART0_PAGE;
+	C$tessstMac.c$85$1$1 ==.
+;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 4\tessstMac.c:85: printf("\033[2J");	//Clear ANSI terminal
+	mov	a,#__str_0
+	push	acc
+	mov	a,#(__str_0 >> 8)
+	push	acc
+	mov	a,#0x80
+	push	acc
+	lcall	_printf
+	dec	sp
+	dec	sp
+	dec	sp
+	C$tessstMac.c$87$1$1 ==.
+;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 4\tessstMac.c:87: aa = (short int *)a;//Set *aa & *bb to be the combined hi & low bytes of
+	mov	_aa,#_a
+	mov	(_aa + 1),#0x00
+	mov	(_aa + 2),#0x40
+	C$tessstMac.c$88$1$1 ==.
+;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 4\tessstMac.c:88: bb = (short int *)b;//a[1], a[0] & b[1], b[0]
+	mov	_bb,#_b
+	mov	(_bb + 1),#0x00
+	mov	(_bb + 2),#0x40
+	C$tessstMac.c$89$1$1 ==.
+;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 4\tessstMac.c:89: cc = (long int *)c;	//*cc is c[3], c[2], c[1], c[0]
+	mov	_cc,#_c
+	mov	(_cc + 1),#0x00
+	mov	(_cc + 2),#0x40
+	C$tessstMac.c$90$1$1 ==.
+;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 4\tessstMac.c:90: dd = (short int *)c;//*dd is the low 16 bits of *cc (low short int)
+	mov	_dd,#_c
+	mov	(_dd + 1),#0x00
+	mov	(_dd + 2),#0x40
+	C$tessstMac.c$92$1$1 ==.
+;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 4\tessstMac.c:92: while (1)
+00150$:
+	C$tessstMac.c$95$2$2 ==.
+;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 4\tessstMac.c:95: SFRPAGE = UART0_PAGE;
 	mov	_SFRPAGE,#0x00
-	C$lab4_4.c$275$1$1 ==.
-;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 4\lab4-4.c:275: SCON0	 = 0x50;					// Mode 1, 8-bit UART, enable RX
-	mov	_SCON0,#0x50
-	C$lab4_4.c$276$1$1 ==.
-;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 4\lab4-4.c:276: SSTA0	 = 0x00;					// SMOD0 = 0, in this mode
-	mov	_SSTA0,#0x00
-	C$lab4_4.c$279$1$1 ==.
-;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 4\lab4-4.c:279: TI0 = 1;							// Indicate TX0 ready
-	setb	_TI0
-	C$lab4_4.c$281$1$1 ==.
-;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 4\lab4-4.c:281: SFRPAGE = SFRPAGE_SAVE;             // Restore SFR page
-	mov	_SFRPAGE,r2
-	C$lab4_4.c$282$1$1 ==.
-	XG$UART0_INIT$0$0 ==.
-	ret
-;------------------------------------------------------------
-;Allocation info for local variables in function 'ADC_Init'
-;------------------------------------------------------------
-;SFRPAGE_SAVE              Allocated to registers r2 
-;------------------------------------------------------------
-	G$ADC_Init$0$0 ==.
-	C$lab4_4.c$284$1$1 ==.
-;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 4\lab4-4.c:284: void ADC_Init(void)
-;	-----------------------------------------
-;	 function ADC_Init
-;	-----------------------------------------
-_ADC_Init:
-	C$lab4_4.c$288$1$1 ==.
-;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 4\lab4-4.c:288: SFRPAGE_SAVE = SFRPAGE;				// Save Current SFR page
-	mov	r2,_SFRPAGE
-	C$lab4_4.c$289$1$1 ==.
-;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 4\lab4-4.c:289: SFRPAGE = ADC0_PAGE;
-	mov	_SFRPAGE,#0x00
-	C$lab4_4.c$291$1$1 ==.
-;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 4\lab4-4.c:291: ADC0CN = 0x80;						//enable ADC0
-	mov	_ADC0CN,#0x80
-	C$lab4_4.c$292$1$1 ==.
-;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 4\lab4-4.c:292: REF0CN = 0x02;						//Use VREF0, internal bias generator, reference buffer off
-	mov	_REF0CN,#0x02
-	C$lab4_4.c$293$1$1 ==.
-;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 4\lab4-4.c:293: AMX0SL = 0x00;						//use 0.0 as  'independent single-ended input'
-	mov	_AMX0SL,#0x00
-	C$lab4_4.c$294$1$1 ==.
-;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 4\lab4-4.c:294: AMX0CF = 0x00;
-	mov	_AMX0CF,#0x00
-	C$lab4_4.c$296$1$1 ==.
-;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 4\lab4-4.c:296: SFRPAGE = SFRPAGE_SAVE;             // Restore SFR page
-	mov	_SFRPAGE,r2
-	C$lab4_4.c$297$1$1 ==.
-	XG$ADC_Init$0$0 ==.
-	ret
-;------------------------------------------------------------
-;Allocation info for local variables in function 'DAC_Init'
-;------------------------------------------------------------
-;SFRPAGE_SAVE              Allocated to registers r2 
-;------------------------------------------------------------
-	G$DAC_Init$0$0 ==.
-	C$lab4_4.c$300$1$1 ==.
-;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 4\lab4-4.c:300: void DAC_Init(void)
-;	-----------------------------------------
-;	 function DAC_Init
-;	-----------------------------------------
-_DAC_Init:
-	C$lab4_4.c$304$1$1 ==.
-;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 4\lab4-4.c:304: SFRPAGE_SAVE = SFRPAGE;				// Save Current SFR page
-	mov	r2,_SFRPAGE
-	C$lab4_4.c$305$1$1 ==.
-;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 4\lab4-4.c:305: SFRPAGE = DAC0_PAGE;
-	mov	_SFRPAGE,#0x00
-	C$lab4_4.c$309$1$1 ==.
-;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 4\lab4-4.c:309: DAC0CN |= 0x80;		//enable DAC0
-	orl	_DAC0CN,#0x80
-	C$lab4_4.c$310$1$1 ==.
-;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 4\lab4-4.c:310: DAC0CN &= 0xE0;		//gain = 1, manual conversion mode	
-	anl	_DAC0CN,#0xE0
-	C$lab4_4.c$312$1$1 ==.
-;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 4\lab4-4.c:312: SFRPAGE = SFRPAGE_SAVE;             // Restore SFR page
-	mov	_SFRPAGE,r2
-	C$lab4_4.c$313$1$1 ==.
-	XG$DAC_Init$0$0 ==.
-	ret
-;------------------------------------------------------------
-;Allocation info for local variables in function 'MAC_Init'
-;------------------------------------------------------------
-;SFRPAGE_SAVE              Allocated to registers r2 
-;------------------------------------------------------------
-	G$MAC_Init$0$0 ==.
-	C$lab4_4.c$315$1$1 ==.
-;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 4\lab4-4.c:315: void MAC_Init(void)
-;	-----------------------------------------
-;	 function MAC_Init
-;	-----------------------------------------
-_MAC_Init:
-	C$lab4_4.c$319$1$1 ==.
-;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 4\lab4-4.c:319: SFRPAGE_SAVE = SFRPAGE;				// Save Current SFR page
-	mov	r2,_SFRPAGE
-	C$lab4_4.c$320$1$1 ==.
-;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 4\lab4-4.c:320: SFRPAGE = MAC0_PAGE;
+	C$tessstMac.c$96$2$2 ==.
+;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 4\tessstMac.c:96: printf("\n\rEnter inputs A & B (4 hex digits each):");
+	mov	a,#__str_1
+	push	acc
+	mov	a,#(__str_1 >> 8)
+	push	acc
+	mov	a,#0x80
+	push	acc
+	lcall	_printf
+	dec	sp
+	dec	sp
+	dec	sp
+	C$tessstMac.c$100$2$2 ==.
+;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 4\tessstMac.c:100: d = getchar(); putchar(d); 
+	lcall	_getchar
+	mov  _d,dpl
+	lcall	_putchar
+	C$tessstMac.c$101$2$2 ==.
+;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 4\tessstMac.c:101: if(d>'`')a3 = d-0x57;
+	mov	a,_d
+	add	a,#0xff - 0x60
+	jnc	00105$
+	mov	a,_d
+	add	a,#0xa9
+	mov	_a3,a
+	sjmp	00106$
+00105$:
+	C$tessstMac.c$102$2$2 ==.
+;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 4\tessstMac.c:102: else if(d>'@')a3 = d-0x37;
+	mov	a,_d
+	add	a,#0xff - 0x40
+	jnc	00102$
+	mov	a,_d
+	add	a,#0xc9
+	mov	_a3,a
+	sjmp	00106$
+00102$:
+	C$tessstMac.c$103$2$2 ==.
+;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 4\tessstMac.c:103: else  a3 = d-0x30;
+	mov	a,_d
+	add	a,#0xd0
+	mov	_a3,a
+00106$:
+	C$tessstMac.c$104$2$2 ==.
+;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 4\tessstMac.c:104: d = getchar(); putchar(d); 
+	lcall	_getchar
+	mov  _d,dpl
+	lcall	_putchar
+	C$tessstMac.c$105$2$2 ==.
+;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 4\tessstMac.c:105: if(d>'`')a2 = d-0x57;
+	mov	a,_d
+	add	a,#0xff - 0x60
+	jnc	00111$
+	mov	a,_d
+	add	a,#0xa9
+	mov	_a2,a
+	sjmp	00112$
+00111$:
+	C$tessstMac.c$106$2$2 ==.
+;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 4\tessstMac.c:106: else if(d>'@')a2 = d-0x37;
+	mov	a,_d
+	add	a,#0xff - 0x40
+	jnc	00108$
+	mov	a,_d
+	add	a,#0xc9
+	mov	_a2,a
+	sjmp	00112$
+00108$:
+	C$tessstMac.c$107$2$2 ==.
+;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 4\tessstMac.c:107: else  a2 = d-0x30;
+	mov	a,_d
+	add	a,#0xd0
+	mov	_a2,a
+00112$:
+	C$tessstMac.c$108$2$2 ==.
+;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 4\tessstMac.c:108: d = getchar(); putchar(d);
+	lcall	_getchar
+	mov  _d,dpl
+	lcall	_putchar
+	C$tessstMac.c$109$2$2 ==.
+;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 4\tessstMac.c:109: if(d>'`')a1 = d-0x57;
+	mov	a,_d
+	add	a,#0xff - 0x60
+	jnc	00117$
+	mov	a,_d
+	add	a,#0xa9
+	mov	_a1,a
+	sjmp	00118$
+00117$:
+	C$tessstMac.c$110$2$2 ==.
+;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 4\tessstMac.c:110: else if(d>'@')a1 = d-0x37;
+	mov	a,_d
+	add	a,#0xff - 0x40
+	jnc	00114$
+	mov	a,_d
+	add	a,#0xc9
+	mov	_a1,a
+	sjmp	00118$
+00114$:
+	C$tessstMac.c$111$2$2 ==.
+;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 4\tessstMac.c:111: else  a1 = d-0x30;
+	mov	a,_d
+	add	a,#0xd0
+	mov	_a1,a
+00118$:
+	C$tessstMac.c$112$2$2 ==.
+;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 4\tessstMac.c:112: d = getchar(); putchar(d);
+	lcall	_getchar
+	mov  _d,dpl
+	lcall	_putchar
+	C$tessstMac.c$113$2$2 ==.
+;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 4\tessstMac.c:113: if(d>'`')a0 = d-0x57;
+	mov	a,_d
+	add	a,#0xff - 0x60
+	jnc	00123$
+	mov	a,_d
+	add	a,#0xa9
+	mov	_a0,a
+	sjmp	00124$
+00123$:
+	C$tessstMac.c$114$2$2 ==.
+;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 4\tessstMac.c:114: else if(d>'@')a0 = d-0x37;
+	mov	a,_d
+	add	a,#0xff - 0x40
+	jnc	00120$
+	mov	a,_d
+	add	a,#0xc9
+	mov	_a0,a
+	sjmp	00124$
+00120$:
+	C$tessstMac.c$115$2$2 ==.
+;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 4\tessstMac.c:115: else  a0 = d-0x30;
+	mov	a,_d
+	add	a,#0xd0
+	mov	_a0,a
+00124$:
+	C$tessstMac.c$116$2$2 ==.
+;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 4\tessstMac.c:116: putchar(' '); putchar(' ');
+	mov	dpl,#0x20
+	lcall	_putchar
+	mov	dpl,#0x20
+	lcall	_putchar
+	C$tessstMac.c$118$2$2 ==.
+;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 4\tessstMac.c:118: d = getchar(); putchar(d); 
+	lcall	_getchar
+	mov  _d,dpl
+	lcall	_putchar
+	C$tessstMac.c$119$2$2 ==.
+;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 4\tessstMac.c:119: if(d>'`')b3 = d-0x57;
+	mov	a,_d
+	add	a,#0xff - 0x60
+	jnc	00129$
+	mov	a,_d
+	add	a,#0xa9
+	mov	_b3,a
+	sjmp	00130$
+00129$:
+	C$tessstMac.c$120$2$2 ==.
+;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 4\tessstMac.c:120: else if(d>'@')b3 = d-0x37;
+	mov	a,_d
+	add	a,#0xff - 0x40
+	jnc	00126$
+	mov	a,_d
+	add	a,#0xc9
+	mov	_b3,a
+	sjmp	00130$
+00126$:
+	C$tessstMac.c$121$2$2 ==.
+;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 4\tessstMac.c:121: else  b3 = d-0x30;
+	mov	a,_d
+	add	a,#0xd0
+	mov	_b3,a
+00130$:
+	C$tessstMac.c$122$2$2 ==.
+;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 4\tessstMac.c:122: d = getchar(); putchar(d); 
+	lcall	_getchar
+	mov  _d,dpl
+	lcall	_putchar
+	C$tessstMac.c$123$2$2 ==.
+;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 4\tessstMac.c:123: if(d>'`')b2 = d-0x57;
+	mov	a,_d
+	add	a,#0xff - 0x60
+	jnc	00135$
+	mov	a,_d
+	add	a,#0xa9
+	mov	_b2,a
+	sjmp	00136$
+00135$:
+	C$tessstMac.c$124$2$2 ==.
+;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 4\tessstMac.c:124: else if(d>'@')b2 = d-0x37;
+	mov	a,_d
+	add	a,#0xff - 0x40
+	jnc	00132$
+	mov	a,_d
+	add	a,#0xc9
+	mov	_b2,a
+	sjmp	00136$
+00132$:
+	C$tessstMac.c$125$2$2 ==.
+;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 4\tessstMac.c:125: else  b2 = d-0x30;
+	mov	a,_d
+	add	a,#0xd0
+	mov	_b2,a
+00136$:
+	C$tessstMac.c$126$2$2 ==.
+;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 4\tessstMac.c:126: d = getchar(); putchar(d);
+	lcall	_getchar
+	mov  _d,dpl
+	lcall	_putchar
+	C$tessstMac.c$127$2$2 ==.
+;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 4\tessstMac.c:127: if(d>'`')b1 = d-0x57;
+	mov	a,_d
+	add	a,#0xff - 0x60
+	jnc	00141$
+	mov	a,_d
+	add	a,#0xa9
+	mov	_b1,a
+	sjmp	00142$
+00141$:
+	C$tessstMac.c$128$2$2 ==.
+;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 4\tessstMac.c:128: else if(d>'@')b1 = d-0x37;
+	mov	a,_d
+	add	a,#0xff - 0x40
+	jnc	00138$
+	mov	a,_d
+	add	a,#0xc9
+	mov	_b1,a
+	sjmp	00142$
+00138$:
+	C$tessstMac.c$129$2$2 ==.
+;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 4\tessstMac.c:129: else  b1 = d-0x30;
+	mov	a,_d
+	add	a,#0xd0
+	mov	_b1,a
+00142$:
+	C$tessstMac.c$130$2$2 ==.
+;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 4\tessstMac.c:130: d = getchar(); putchar(d);
+	lcall	_getchar
+	mov  _d,dpl
+	lcall	_putchar
+	C$tessstMac.c$131$2$2 ==.
+;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 4\tessstMac.c:131: if(d>'`')b0 = d-0x57;
+	mov	a,_d
+	add	a,#0xff - 0x60
+	jnc	00147$
+	mov	a,_d
+	add	a,#0xa9
+	mov	_b0,a
+	sjmp	00148$
+00147$:
+	C$tessstMac.c$132$2$2 ==.
+;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 4\tessstMac.c:132: else if(d>'@')b0 = d-0x37;
+	mov	a,_d
+	add	a,#0xff - 0x40
+	jnc	00144$
+	mov	a,_d
+	add	a,#0xc9
+	mov	_b0,a
+	sjmp	00148$
+00144$:
+	C$tessstMac.c$133$2$2 ==.
+;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 4\tessstMac.c:133: else  b0 = d-0x30;
+	mov	a,_d
+	add	a,#0xd0
+	mov	_b0,a
+00148$:
+	C$tessstMac.c$136$2$2 ==.
+;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 4\tessstMac.c:136: printf("\r\nA: (HEX DIGITS) %01X, %01X, %01X, %01X", a3, a2, a1, a0);
+	mov	r2,_a0
+	mov	r3,#0x00
+	mov	r4,_a1
+	mov	r5,#0x00
+	mov	_main_sloc0_1_0,_a2
+	mov	(_main_sloc0_1_0 + 1),#0x00
+	mov	r6,_a3
+	mov	r7,#0x00
+	push	ar2
+	push	ar3
+	push	ar4
+	push	ar5
+	push	_main_sloc0_1_0
+	push	(_main_sloc0_1_0 + 1)
+	push	ar6
+	push	ar7
+	mov	a,#__str_2
+	push	acc
+	mov	a,#(__str_2 >> 8)
+	push	acc
+	mov	a,#0x80
+	push	acc
+	lcall	_printf
+	mov	a,sp
+	add	a,#0xf5
+	mov	sp,a
+	C$tessstMac.c$137$2$2 ==.
+;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 4\tessstMac.c:137: printf("\r\nB: (HEX DIGITS) %01X, %01X, %01X, %01X", b3, b2, b1, b0);
+	mov	r2,_b0
+	mov	r3,#0x00
+	mov	r4,_b1
+	mov	r5,#0x00
+	mov	_main_sloc0_1_0,_b2
+	mov	(_main_sloc0_1_0 + 1),#0x00
+	mov	r6,_b3
+	mov	r7,#0x00
+	push	ar2
+	push	ar3
+	push	ar4
+	push	ar5
+	push	_main_sloc0_1_0
+	push	(_main_sloc0_1_0 + 1)
+	push	ar6
+	push	ar7
+	mov	a,#__str_3
+	push	acc
+	mov	a,#(__str_3 >> 8)
+	push	acc
+	mov	a,#0x80
+	push	acc
+	lcall	_printf
+	mov	a,sp
+	add	a,#0xf5
+	mov	sp,a
+	C$tessstMac.c$141$2$2 ==.
+;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 4\tessstMac.c:141: *aa = a0+(a1<<4)+((short int)a2<<8)+((short int)a3<<12);
+	mov	r2,_aa
+	mov	r3,(_aa + 1)
+	mov	r4,(_aa + 2)
+	mov	_main_sloc0_1_0,_a0
+	mov	(_main_sloc0_1_0 + 1),#0x00
+	mov	r7,_a1
+	clr	a
+	swap	a
+	anl	a,#0xf0
+	xch	a,r7
+	swap	a
+	xch	a,r7
+	xrl	a,r7
+	xch	a,r7
+	anl	a,#0xf0
+	xch	a,r7
+	xrl	a,r7
+	mov	r5,a
+	mov	a,r7
+	add	a,_main_sloc0_1_0
+	mov	_main_sloc0_1_0,a
+	mov	a,r5
+	addc	a,(_main_sloc0_1_0 + 1)
+	mov	(_main_sloc0_1_0 + 1),a
+	mov	r5,_a2
+	mov	r6,#0x00
+	mov	a,r6
+	add	a,_main_sloc0_1_0
+	mov	_main_sloc0_1_0,a
+	mov	a,r5
+	addc	a,(_main_sloc0_1_0 + 1)
+	mov	(_main_sloc0_1_0 + 1),a
+	mov	r7,_a3
+	mov	a,r7
+	swap	a
+	anl	a,#0xf0
+	mov	r5,a
+	mov	r7,#0x00
+	mov	a,r7
+	add	a,_main_sloc0_1_0
+	mov	r7,a
+	mov	a,r5
+	addc	a,(_main_sloc0_1_0 + 1)
+	mov	r5,a
+	mov	dpl,r2
+	mov	dph,r3
+	mov	b,r4
+	mov	a,r7
+	lcall	__gptrput
+	inc	dptr
+	mov	a,r5
+	lcall	__gptrput
+	C$tessstMac.c$142$2$2 ==.
+;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 4\tessstMac.c:142: *bb = b0+(b1<<4)+((short int)b2<<8)+((short int)b3<<12);
+	mov	r2,_bb
+	mov	r3,(_bb + 1)
+	mov	r4,(_bb + 2)
+	mov	_main_sloc0_1_0,_b0
+	mov	(_main_sloc0_1_0 + 1),#0x00
+	mov	r7,_b1
+	clr	a
+	swap	a
+	anl	a,#0xf0
+	xch	a,r7
+	swap	a
+	xch	a,r7
+	xrl	a,r7
+	xch	a,r7
+	anl	a,#0xf0
+	xch	a,r7
+	xrl	a,r7
+	mov	r5,a
+	mov	a,r7
+	add	a,_main_sloc0_1_0
+	mov	_main_sloc0_1_0,a
+	mov	a,r5
+	addc	a,(_main_sloc0_1_0 + 1)
+	mov	(_main_sloc0_1_0 + 1),a
+	mov	r5,_b2
+	mov	r6,#0x00
+	mov	a,r6
+	add	a,_main_sloc0_1_0
+	mov	_main_sloc0_1_0,a
+	mov	a,r5
+	addc	a,(_main_sloc0_1_0 + 1)
+	mov	(_main_sloc0_1_0 + 1),a
+	mov	r7,_b3
+	mov	a,r7
+	swap	a
+	anl	a,#0xf0
+	mov	r5,a
+	mov	r7,#0x00
+	mov	a,r7
+	add	a,_main_sloc0_1_0
+	mov	r7,a
+	mov	a,r5
+	addc	a,(_main_sloc0_1_0 + 1)
+	mov	r5,a
+	mov	dpl,r2
+	mov	dph,r3
+	mov	b,r4
+	mov	a,r7
+	lcall	__gptrput
+	inc	dptr
+	mov	a,r5
+	lcall	__gptrput
+	C$tessstMac.c$146$2$2 ==.
+;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 4\tessstMac.c:146: SFRPAGE = MAC0_PAGE;
 	mov	_SFRPAGE,#0x03
-	C$lab4_4.c$322$1$1 ==.
-;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 4\lab4-4.c:322: MAC0CF |= 0x18;						// clear accumulator
-	orl	_MAC0CF,#0x18
-	C$lab4_4.c$323$1$1 ==.
-;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 4\lab4-4.c:323: MAC0CF &= ~0x01;					// perform MAC
-	anl	_MAC0CF,#0xFE
-	C$lab4_4.c$326$1$1 ==.
-;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 4\lab4-4.c:326: SFRPAGE = SFRPAGE_SAVE;             // Restore SFR page	
-	mov	_SFRPAGE,r2
-	C$lab4_4.c$327$1$1 ==.
-	XG$MAC_Init$0$0 ==.
-	ret
+	C$tessstMac.c$147$2$2 ==.
+;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 4\tessstMac.c:147: MAC0CF = 0x09;	//Clear MAC and set to multiply only
+	mov	_MAC0CF,#0x09
+	C$tessstMac.c$149$2$2 ==.
+;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 4\tessstMac.c:149: MAC0AH = a[1];	//Load the hi byte of *aa
+	mov	_MAC0AH,(_a + 0x0001)
+	C$tessstMac.c$150$2$2 ==.
+;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 4\tessstMac.c:150: MAC0AL = a[0];	//Load the lo byte of *aa
+	mov	_MAC0AL,_a
+	C$tessstMac.c$151$2$2 ==.
+;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 4\tessstMac.c:151: MAC0BH = b[1];	//Load the hi byte of *bb
+	mov	_MAC0BH,(_b + 0x0001)
+	C$tessstMac.c$152$2$2 ==.
+;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 4\tessstMac.c:152: MAC0BL = b[0];	//Load the lo byte of *bb & start multiplier
+	mov	_MAC0BL,_b
+	C$tessstMac.c$155$2$2 ==.
+;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 4\tessstMac.c:155: SFRPAGE = MAC0_PAGE;//Any dummy statement will work
+	mov	_SFRPAGE,#0x03
+	C$tessstMac.c$156$2$2 ==.
+;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 4\tessstMac.c:156: c[0] = MAC0ACC0;	//Get the lo 0th byte of product
+	mov	_c,_MAC0ACC0
+	C$tessstMac.c$157$2$2 ==.
+;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 4\tessstMac.c:157: c[1] = MAC0ACC1;	//Get the mid 1st byte of product
+	mov	(_c + 0x0001),_MAC0ACC1
+	C$tessstMac.c$158$2$2 ==.
+;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 4\tessstMac.c:158: c[2] = MAC0ACC2;	//Get the mid 2nd byte of product
+	mov	(_c + 0x0002),_MAC0ACC2
+	C$tessstMac.c$159$2$2 ==.
+;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 4\tessstMac.c:159: c[3] = MAC0ACC3;	//Get the hi 3rd byte of product
+	mov	(_c + 0x0003),_MAC0ACC3
+	C$tessstMac.c$160$2$2 ==.
+;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 4\tessstMac.c:160: ans = *cc;			//*cc is the complete product
+	mov	r2,_cc
+	mov	r3,(_cc + 1)
+	mov	r4,(_cc + 2)
+	mov	dpl,r2
+	mov	dph,r3
+	mov	b,r4
+	lcall	__gptrget
+	mov	_ans,a
+	inc	dptr
+	lcall	__gptrget
+	mov	(_ans + 1),a
+	inc	dptr
+	lcall	__gptrget
+	mov	(_ans + 2),a
+	inc	dptr
+	lcall	__gptrget
+	mov	(_ans + 3),a
+	C$tessstMac.c$164$2$2 ==.
+;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 4\tessstMac.c:164: SFRPAGE = UART0_PAGE;
+	mov	_SFRPAGE,#0x00
+	C$tessstMac.c$165$2$2 ==.
+;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 4\tessstMac.c:165: printf("\r\nA: (HEX) %04X, %d,  B: (HEX) %04X, %d", *aa, *aa, *bb, *bb);
+	mov	r2,_bb
+	mov	r3,(_bb + 1)
+	mov	r4,(_bb + 2)
+	mov	dpl,r2
+	mov	dph,r3
+	mov	b,r4
+	lcall	__gptrget
+	mov	r2,a
+	inc	dptr
+	lcall	__gptrget
+	mov	r3,a
+	mov	r4,_bb
+	mov	r5,(_bb + 1)
+	mov	r6,(_bb + 2)
+	mov	dpl,r4
+	mov	dph,r5
+	mov	b,r6
+	lcall	__gptrget
+	mov	_main_sloc0_1_0,a
+	inc	dptr
+	lcall	__gptrget
+	mov	(_main_sloc0_1_0 + 1),a
+	mov	r6,_aa
+	mov	r7,(_aa + 1)
+	mov	r4,(_aa + 2)
+	mov	dpl,r6
+	mov	dph,r7
+	mov	b,r4
+	lcall	__gptrget
+	mov	_main_sloc1_1_0,a
+	inc	dptr
+	lcall	__gptrget
+	mov	(_main_sloc1_1_0 + 1),a
+	mov	r4,_aa
+	mov	r5,(_aa + 1)
+	mov	r6,(_aa + 2)
+	mov	dpl,r4
+	mov	dph,r5
+	mov	b,r6
+	lcall	__gptrget
+	mov	r4,a
+	inc	dptr
+	lcall	__gptrget
+	mov	r5,a
+	push	ar2
+	push	ar3
+	push	_main_sloc0_1_0
+	push	(_main_sloc0_1_0 + 1)
+	push	_main_sloc1_1_0
+	push	(_main_sloc1_1_0 + 1)
+	push	ar4
+	push	ar5
+	mov	a,#__str_4
+	push	acc
+	mov	a,#(__str_4 >> 8)
+	push	acc
+	mov	a,#0x80
+	push	acc
+	lcall	_printf
+	mov	a,sp
+	add	a,#0xf5
+	mov	sp,a
+	C$tessstMac.c$166$2$2 ==.
+;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 4\tessstMac.c:166: printf("\r\nA x B Product: (HEX BYTES) %02X%02X%02X%02X", c[3],c[2],c[1],c[0]);	
+	mov	r2,_c
+	mov	r3,#0x00
+	mov	r4,(_c + 0x0001)
+	mov	r5,#0x00
+	mov	_main_sloc1_1_0,(_c + 0x0002)
+	mov	(_main_sloc1_1_0 + 1),#0x00
+	mov	r6,(_c + 0x0003)
+	mov	r7,#0x00
+	push	ar2
+	push	ar3
+	push	ar4
+	push	ar5
+	push	_main_sloc1_1_0
+	push	(_main_sloc1_1_0 + 1)
+	push	ar6
+	push	ar7
+	mov	a,#__str_5
+	push	acc
+	mov	a,#(__str_5 >> 8)
+	push	acc
+	mov	a,#0x80
+	push	acc
+	lcall	_printf
+	mov	a,sp
+	add	a,#0xf5
+	mov	sp,a
+	C$tessstMac.c$167$2$2 ==.
+;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 4\tessstMac.c:167: printf("\r\nA x B Product: (HEX LONG INT) %08lX, %ld", ans, ans);
+	push	_ans
+	push	(_ans + 1)
+	push	(_ans + 2)
+	push	(_ans + 3)
+	push	_ans
+	push	(_ans + 1)
+	push	(_ans + 2)
+	push	(_ans + 3)
+	mov	a,#__str_6
+	push	acc
+	mov	a,#(__str_6 >> 8)
+	push	acc
+	mov	a,#0x80
+	push	acc
+	lcall	_printf
+	mov	a,sp
+	add	a,#0xf5
+	mov	sp,a
+	C$tessstMac.c$169$2$2 ==.
+;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 4\tessstMac.c:169: SFRPAGE = MAC0_PAGE;
+	mov	_SFRPAGE,#0x03
+	C$tessstMac.c$170$2$2 ==.
+;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 4\tessstMac.c:170: for(i=0; i<4; i++)	//Use the accumulator shift operation to 
+	clr	a
+	mov	_i,a
+	mov	(_i + 1),a
+00152$:
+	clr	c
+	mov	a,_i
+	subb	a,#0x04
+	mov	a,(_i + 1)
+	xrl	a,#0x80
+	subb	a,#0x80
+	jnc	00155$
+	C$tessstMac.c$174$3$3 ==.
+;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 4\tessstMac.c:174: MAC0CF = 0x20;	//Set shift direction left and do 1 bit shift
+	mov	_MAC0CF,#0x20
+	C$tessstMac.c$170$2$2 ==.
+;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 4\tessstMac.c:170: for(i=0; i<4; i++)	//Use the accumulator shift operation to 
+	inc	_i
+	clr	a
+	cjne	a,_i,00152$
+	inc	(_i + 1)
+	sjmp	00152$
+00155$:
+	C$tessstMac.c$177$2$2 ==.
+;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 4\tessstMac.c:177: c[0] = MAC0ACC0;	//Get the lo 0th byte of product
+	mov	_c,_MAC0ACC0
+	C$tessstMac.c$178$2$2 ==.
+;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 4\tessstMac.c:178: c[1] = MAC0ACC1;	//Get the mid 1st byte of product
+	mov	(_c + 0x0001),_MAC0ACC1
+	C$tessstMac.c$179$2$2 ==.
+;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 4\tessstMac.c:179: c[2] = MAC0ACC2;	//Get the mid 2nd byte of product
+	mov	(_c + 0x0002),_MAC0ACC2
+	C$tessstMac.c$180$2$2 ==.
+;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 4\tessstMac.c:180: c[3] = MAC0ACC3;	//Get the hi 3rd byte of product
+	mov	(_c + 0x0003),_MAC0ACC3
+	C$tessstMac.c$182$2$2 ==.
+;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 4\tessstMac.c:182: SFRPAGE = UART0_PAGE;
+	mov	_SFRPAGE,#0x00
+	C$tessstMac.c$184$2$2 ==.
+;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 4\tessstMac.c:184: printf("\r\nProduct<<4: (HEX LONG INT) %08lX, (DEC LO 16 BITS) %d\n", *cc, *dd);
+	mov	r2,_dd
+	mov	r3,(_dd + 1)
+	mov	r4,(_dd + 2)
+	mov	dpl,r2
+	mov	dph,r3
+	mov	b,r4
+	lcall	__gptrget
+	mov	r2,a
+	inc	dptr
+	lcall	__gptrget
+	mov	r3,a
+	mov	r4,_cc
+	mov	r5,(_cc + 1)
+	mov	r6,(_cc + 2)
+	mov	dpl,r4
+	mov	dph,r5
+	mov	b,r6
+	lcall	__gptrget
+	mov	r4,a
+	inc	dptr
+	lcall	__gptrget
+	mov	r5,a
+	inc	dptr
+	lcall	__gptrget
+	mov	r6,a
+	inc	dptr
+	lcall	__gptrget
+	mov	r7,a
+	push	ar2
+	push	ar3
+	push	ar4
+	push	ar5
+	push	ar6
+	push	ar7
+	mov	a,#__str_7
+	push	acc
+	mov	a,#(__str_7 >> 8)
+	push	acc
+	mov	a,#0x80
+	push	acc
+	lcall	_printf
+	mov	a,sp
+	add	a,#0xf7
+	mov	sp,a
+	C$tessstMac.c$188$1$1 ==.
+	XG$main$0$0 ==.
+	ljmp	00150$
 	.area CSEG    (CODE)
 	.area CONST   (CODE)
-Flab4_4$_str_0$0$0 == .
+FtessstMac$_str_0$0$0 == .
 __str_0:
 	.db 0x1B
 	.ascii "[2J"
 	.db 0x00
-Flab4_4$_str_1$0$0 == .
+FtessstMac$_str_1$0$0 == .
 __str_1:
-	.ascii "We will not sow. "
 	.db 0x0A
 	.db 0x0D
+	.ascii "Enter inputs A & B (4 hex digits each):"
+	.db 0x00
+FtessstMac$_str_2$0$0 == .
+__str_2:
+	.db 0x0D
+	.db 0x0A
+	.ascii "A: (HEX DIGITS) %01X, %01X, %01X, %01X"
+	.db 0x00
+FtessstMac$_str_3$0$0 == .
+__str_3:
+	.db 0x0D
+	.db 0x0A
+	.ascii "B: (HEX DIGITS) %01X, %01X, %01X, %01X"
+	.db 0x00
+FtessstMac$_str_4$0$0 == .
+__str_4:
+	.db 0x0D
+	.db 0x0A
+	.ascii "A: (HEX) %04X, %d,  B: (HEX) %04X, %d"
+	.db 0x00
+FtessstMac$_str_5$0$0 == .
+__str_5:
+	.db 0x0D
+	.db 0x0A
+	.ascii "A x B Product: (HEX BYTES) %02X%02X%02X%02X"
+	.db 0x00
+FtessstMac$_str_6$0$0 == .
+__str_6:
+	.db 0x0D
+	.db 0x0A
+	.ascii "A x B Product: (HEX LONG INT) %08lX, %ld"
+	.db 0x00
+FtessstMac$_str_7$0$0 == .
+__str_7:
+	.db 0x0D
+	.db 0x0A
+	.ascii "Product<<4: (HEX LONG INT) %08lX, (DEC LO 16 BITS) %d"
+	.db 0x0A
 	.db 0x00
 	.area XINIT   (CODE)
 	.area CABS    (ABS,CODE)

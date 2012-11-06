@@ -1,7 +1,7 @@
                               1 ;--------------------------------------------------------
                               2 ; File Created by SDCC : free open source ANSI-C Compiler
                               3 ; Version 2.9.0 #5416 (Mar 22 2009) (MINGW32)
-                              4 ; This file was generated Thu Nov 01 20:25:31 2012
+                              4 ; This file was generated Mon Nov 05 18:38:41 2012
                               5 ;--------------------------------------------------------
                               6 	.module lab4_4
                               7 	.optsdcc -mmcs51 --model-small
@@ -1415,22 +1415,22 @@
    0093 75 FF AD           1415 	mov	_WDTCN,#0xAD
                     0019   1416 	C$lab4_4.c$51$1$1 ==.
                            1417 ;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 4\lab4-4.c:51: SYSCLK_INIT();						// Initialize the oscillator
-   0096 12 01 B9           1418 	lcall	_SYSCLK_INIT
+   0096 12 01 AA           1418 	lcall	_SYSCLK_INIT
                     001C   1419 	C$lab4_4.c$52$1$1 ==.
                            1420 ;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 4\lab4-4.c:52: PORT_INIT();						// Initialize the Crossbar and GPIO
-   0099 12 01 DC           1421 	lcall	_PORT_INIT
+   0099 12 01 CD           1421 	lcall	_PORT_INIT
                     001F   1422 	C$lab4_4.c$53$1$1 ==.
                            1423 ;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 4\lab4-4.c:53: UART0_INIT();						// Initialize UART0
-   009C 12 01 F9           1424 	lcall	_UART0_INIT
+   009C 12 01 EA           1424 	lcall	_UART0_INIT
                     0022   1425 	C$lab4_4.c$54$1$1 ==.
                            1426 ;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 4\lab4-4.c:54: ADC_Init();							// Initialize ADC0
-   009F 12 02 1D           1427 	lcall	_ADC_Init
+   009F 12 02 0E           1427 	lcall	_ADC_Init
                     0025   1428 	C$lab4_4.c$55$1$1 ==.
                            1429 ;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 4\lab4-4.c:55: DAC_Init();							// Initialize DAC0
-   00A2 12 02 31           1430 	lcall	_DAC_Init
+   00A2 12 02 22           1430 	lcall	_DAC_Init
                     0028   1431 	C$lab4_4.c$56$1$1 ==.
                            1432 ;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 4\lab4-4.c:56: MAC_Init();							// Initialize MAC0
-   00A5 12 02 3F           1433 	lcall	_MAC_Init
+   00A5 12 02 30           1433 	lcall	_MAC_Init
                     002B   1434 	C$lab4_4.c$58$1$1 ==.
                            1435 ;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 4\lab4-4.c:58: SFRPAGE = UART0_PAGE;				// Direct output to UART0
    00A8 75 84 00           1436 	mov	_SFRPAGE,#0x00
@@ -1449,25 +1449,25 @@
    00B2 20 ED FD           1449 	jb	_AD0INT,00101$
                     0038   1450 	C$lab4_4.c$73$1$1 ==.
                            1451 ;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 4\lab4-4.c:73: printf("\033[2J");					//clear screen
-   00B5 74 57              1452 	mov	a,#__str_0
+   00B5 74 48              1452 	mov	a,#__str_0
    00B7 C0 E0              1453 	push	acc
    00B9 74 08              1454 	mov	a,#(__str_0 >> 8)
    00BB C0 E0              1455 	push	acc
    00BD 74 80              1456 	mov	a,#0x80
    00BF C0 E0              1457 	push	acc
-   00C1 12 02 71           1458 	lcall	_printf
+   00C1 12 02 62           1458 	lcall	_printf
    00C4 15 81              1459 	dec	sp
    00C6 15 81              1460 	dec	sp
    00C8 15 81              1461 	dec	sp
                     004D   1462 	C$lab4_4.c$74$1$1 ==.
                            1463 ;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 4\lab4-4.c:74: printf("We will not sow. \n\r");		//running
-   00CA 74 5C              1464 	mov	a,#__str_1
+   00CA 74 4D              1464 	mov	a,#__str_1
    00CC C0 E0              1465 	push	acc
    00CE 74 08              1466 	mov	a,#(__str_1 >> 8)
    00D0 C0 E0              1467 	push	acc
    00D2 74 80              1468 	mov	a,#0x80
    00D4 C0 E0              1469 	push	acc
-   00D6 12 02 71           1470 	lcall	_printf
+   00D6 12 02 62           1470 	lcall	_printf
    00D9 15 81              1471 	dec	sp
    00DB 15 81              1472 	dec	sp
    00DD 15 81              1473 	dec	sp
@@ -1666,345 +1666,331 @@
                     00ED   1666 	C$lab4_4.c$182$1$1 ==.
                            1667 ;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 4\lab4-4.c:182: MAC0BL = oldOut;
    016A 85 08 91           1668 	mov	_MAC0BL,_oldOut
-                    00F0   1669 	C$lab4_4.c$185$1$1 ==.
-                           1670 ;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 4\lab4-4.c:185: for(i=0; i<10; i++){}
-   016D 7B 0A              1671 	mov	r3,#0x0A
-   016F 7C 00              1672 	mov	r4,#0x00
-   0171 8B 05              1673 	mov	ar5,r3
-   0173 8C 06              1674 	mov	ar6,r4
-   0175                    1675 00106$:
-   0175 1D                 1676 	dec	r5
-   0176 BD FF 01           1677 	cjne	r5,#0xff,00121$
-   0179 1E                 1678 	dec	r6
-   017A                    1679 00121$:
-   017A ED                 1680 	mov	a,r5
-   017B 4E                 1681 	orl	a,r6
-                    00FF   1682 	C$lab4_4.c$187$1$1 ==.
-                           1683 ;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 4\lab4-4.c:187: SFRPAGE = MAC0_PAGE;
-                    00FF   1684 	C$lab4_4.c$189$1$1 ==.
-                           1685 ;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 4\lab4-4.c:189: for(i=0; i<10; i++){
-   017C 70 F7              1686 	jnz	00106$
-   017E 75 84 03           1687 	mov	_SFRPAGE,#0x03
-   0181 FB                 1688 	mov	r3,a
-   0182 FC                 1689 	mov	r4,a
-   0183                    1690 00107$:
-   0183 C3                 1691 	clr	c
-   0184 EB                 1692 	mov	a,r3
-   0185 94 0A              1693 	subb	a,#0x0A
-   0187 EC                 1694 	mov	a,r4
-   0188 64 80              1695 	xrl	a,#0x80
-   018A 94 80              1696 	subb	a,#0x80
-   018C 50 0F              1697 	jnc	00110$
-                    0111   1698 	C$lab4_4.c$190$2$3 ==.
-                           1699 ;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 4\lab4-4.c:190: MAC0CF |= 0x20;
-   018E 43 C3 20           1700 	orl	_MAC0CF,#0x20
-                    0114   1701 	C$lab4_4.c$191$2$3 ==.
-                           1702 ;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 4\lab4-4.c:191: while(MAC0CF & 0x20 == 0x20);
-   0191                    1703 00101$:
-   0191 E5 C3              1704 	mov	a,_MAC0CF
-   0193 20 E0 FB           1705 	jb	acc.0,00101$
-                    0119   1706 	C$lab4_4.c$189$1$1 ==.
-                           1707 ;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 4\lab4-4.c:189: for(i=0; i<10; i++){
-   0196 0B                 1708 	inc	r3
-   0197 BB 00 E9           1709 	cjne	r3,#0x00,00107$
-   019A 0C                 1710 	inc	r4
-   019B 80 E6              1711 	sjmp	00107$
-   019D                    1712 00110$:
-                    0120   1713 	C$lab4_4.c$194$1$1 ==.
-                           1714 ;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 4\lab4-4.c:194: result = MAC0ACC1;
-                    0120   1715 	C$lab4_4.c$195$1$1 ==.
-                           1716 ;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 4\lab4-4.c:195: result = result<<8;
-   019D AC 94              1717 	mov	r4,_MAC0ACC1
-   019F 7B 00              1718 	mov	r3,#0x00
-                    0124   1719 	C$lab4_4.c$196$1$1 ==.
-                           1720 ;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 4\lab4-4.c:196: result += MAC0ACC0;
-   01A1 AD 93              1721 	mov	r5,_MAC0ACC0
-   01A3 7E 00              1722 	mov	r6,#0x00
-   01A5 ED                 1723 	mov	a,r5
-   01A6 2B                 1724 	add	a,r3
-   01A7 FB                 1725 	mov	r3,a
-   01A8 EE                 1726 	mov	a,r6
-   01A9 3C                 1727 	addc	a,r4
-   01AA FC                 1728 	mov	r4,a
-                    012E   1729 	C$lab4_4.c$199$1$1 ==.
-                           1730 ;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 4\lab4-4.c:199: a = MAC0ACC0;
-   01AB E5 93              1731 	mov	a,_MAC0ACC0
-                    0130   1732 	C$lab4_4.c$200$1$1 ==.
-                           1733 ;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 4\lab4-4.c:200: b = MAC0ACC1;
-   01AD E5 94              1734 	mov	a,_MAC0ACC1
-                    0132   1735 	C$lab4_4.c$202$1$1 ==.
-                           1736 ;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 4\lab4-4.c:202: SFRPAGE = UART0_PAGE;
-   01AF 75 84 00           1737 	mov	_SFRPAGE,#0x00
-                    0135   1738 	C$lab4_4.c$205$1$1 ==.
-                           1739 ;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 4\lab4-4.c:205: SFRPAGE = SFRPAGE_SAVE;             // Restore SFR page	
-   01B2 8A 84              1740 	mov	_SFRPAGE,r2
-                    0137   1741 	C$lab4_4.c$207$1$1 ==.
-                           1742 ;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 4\lab4-4.c:207: return result;
-   01B4 8B 82              1743 	mov	dpl,r3
-   01B6 8C 83              1744 	mov	dph,r4
-                    013B   1745 	C$lab4_4.c$208$1$1 ==.
-                    013B   1746 	XG$do_MAC$0$0 ==.
-   01B8 22                 1747 	ret
-                           1748 ;------------------------------------------------------------
-                           1749 ;Allocation info for local variables in function 'SYSCLK_INIT'
-                           1750 ;------------------------------------------------------------
-                           1751 ;i                         Allocated to registers r3 r4 
-                           1752 ;SFRPAGE_SAVE              Allocated to registers r2 
-                           1753 ;------------------------------------------------------------
-                    013C   1754 	G$SYSCLK_INIT$0$0 ==.
-                    013C   1755 	C$lab4_4.c$216$1$1 ==.
-                           1756 ;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 4\lab4-4.c:216: void SYSCLK_INIT(void)
-                           1757 ;	-----------------------------------------
-                           1758 ;	 function SYSCLK_INIT
-                           1759 ;	-----------------------------------------
-   01B9                    1760 _SYSCLK_INIT:
-                    013C   1761 	C$lab4_4.c$221$1$1 ==.
-                           1762 ;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 4\lab4-4.c:221: SFRPAGE_SAVE = SFRPAGE;				// Save Current SFR page	SFRPAGE = CONFIG_PAGE;
-   01B9 AA 84              1763 	mov	r2,_SFRPAGE
-                    013E   1764 	C$lab4_4.c$222$1$1 ==.
-                           1765 ;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 4\lab4-4.c:222: SFRPAGE   = CONFIG_PAGE;
-   01BB 75 84 0F           1766 	mov	_SFRPAGE,#0x0F
-                    0141   1767 	C$lab4_4.c$224$1$1 ==.
-                           1768 ;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 4\lab4-4.c:224: OSCXCN = 0x67;						// Start ext osc with 22.1184MHz crystal
-   01BE 75 8C 67           1769 	mov	_OSCXCN,#0x67
-                    0144   1770 	C$lab4_4.c$225$1$1 ==.
-                           1771 ;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 4\lab4-4.c:225: for(i=0; i < 3000; i++);			// Wait for the oscillator to start up
-   01C1 7B B8              1772 	mov	r3,#0xB8
-   01C3 7C 0B              1773 	mov	r4,#0x0B
-   01C5                    1774 00106$:
-   01C5 1B                 1775 	dec	r3
-   01C6 BB FF 01           1776 	cjne	r3,#0xff,00114$
-   01C9 1C                 1777 	dec	r4
-   01CA                    1778 00114$:
-   01CA EB                 1779 	mov	a,r3
-   01CB 4C                 1780 	orl	a,r4
-   01CC 70 F7              1781 	jnz	00106$
-                    0151   1782 	C$lab4_4.c$226$1$1 ==.
-                           1783 ;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 4\lab4-4.c:226: while(!(OSCXCN & 0x80));
-   01CE                    1784 00101$:
-   01CE E5 8C              1785 	mov	a,_OSCXCN
-   01D0 30 E7 FB           1786 	jnb	acc.7,00101$
-                    0156   1787 	C$lab4_4.c$227$1$1 ==.
-                           1788 ;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 4\lab4-4.c:227: CLKSEL = 0x01;						// Switch to the external crystal oscillator
-   01D3 75 97 01           1789 	mov	_CLKSEL,#0x01
-                    0159   1790 	C$lab4_4.c$228$1$1 ==.
-                           1791 ;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 4\lab4-4.c:228: OSCICN = 0x00;						// Disable the internal oscillator
-   01D6 75 8A 00           1792 	mov	_OSCICN,#0x00
-                    015C   1793 	C$lab4_4.c$230$1$1 ==.
-                           1794 ;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 4\lab4-4.c:230: SFRPAGE = SFRPAGE_SAVE;             // Restore SFR page
-   01D9 8A 84              1795 	mov	_SFRPAGE,r2
-                    015E   1796 	C$lab4_4.c$231$1$1 ==.
-                    015E   1797 	XG$SYSCLK_INIT$0$0 ==.
-   01DB 22                 1798 	ret
-                           1799 ;------------------------------------------------------------
-                           1800 ;Allocation info for local variables in function 'PORT_INIT'
-                           1801 ;------------------------------------------------------------
-                           1802 ;SFRPAGE_SAVE              Allocated to registers r2 
-                           1803 ;------------------------------------------------------------
-                    015F   1804 	G$PORT_INIT$0$0 ==.
-                    015F   1805 	C$lab4_4.c$233$1$1 ==.
-                           1806 ;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 4\lab4-4.c:233: void PORT_INIT(void)
-                           1807 ;	-----------------------------------------
-                           1808 ;	 function PORT_INIT
-                           1809 ;	-----------------------------------------
-   01DC                    1810 _PORT_INIT:
-                    015F   1811 	C$lab4_4.c$237$1$1 ==.
-                           1812 ;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 4\lab4-4.c:237: SFRPAGE_SAVE = SFRPAGE;				// Save Current SFR page
-   01DC AA 84              1813 	mov	r2,_SFRPAGE
-                    0161   1814 	C$lab4_4.c$238$1$1 ==.
-                           1815 ;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 4\lab4-4.c:238: SFRPAGE = CONFIG_PAGE;
-   01DE 75 84 0F           1816 	mov	_SFRPAGE,#0x0F
-                    0164   1817 	C$lab4_4.c$240$1$1 ==.
-                           1818 ;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 4\lab4-4.c:240: XBR0	 = 0x04;					// Enable UART0
-   01E1 75 E1 04           1819 	mov	_XBR0,#0x04
-                    0167   1820 	C$lab4_4.c$241$1$1 ==.
-                           1821 ;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 4\lab4-4.c:241: XBR1	 = 0x00;
-   01E4 75 E2 00           1822 	mov	_XBR1,#0x00
-                    016A   1823 	C$lab4_4.c$242$1$1 ==.
-                           1824 ;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 4\lab4-4.c:242: XBR2	 = 0x40;					// Enable Crossbar and weak pull-up
-   01E7 75 E3 40           1825 	mov	_XBR2,#0x40
-                    016D   1826 	C$lab4_4.c$244$1$1 ==.
-                           1827 ;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 4\lab4-4.c:244: P0MDOUT &= ~0x01;					// Set P0.0 to open-drain
-   01EA 53 A4 FE           1828 	anl	_P0MDOUT,#0xFE
-                    0170   1829 	C$lab4_4.c$245$1$1 ==.
-                           1830 ;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 4\lab4-4.c:245: P0 |= 0x01;							// P0.0 high-impedence
-   01ED 43 80 01           1831 	orl	_P0,#0x01
-                    0173   1832 	C$lab4_4.c$246$1$1 ==.
-                           1833 ;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 4\lab4-4.c:246: P1MDOUT	&= ~0x03;					// Set P1.0 to open-drain
-   01F0 53 A5 FC           1834 	anl	_P1MDOUT,#0xFC
-                    0176   1835 	C$lab4_4.c$247$1$1 ==.
-                           1836 ;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 4\lab4-4.c:247: P1 |= 0x03;							// P1.0 to high-impedence
-   01F3 43 90 03           1837 	orl	_P1,#0x03
-                    0179   1838 	C$lab4_4.c$250$1$1 ==.
-                           1839 ;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 4\lab4-4.c:250: SFRPAGE = SFRPAGE_SAVE;             // Restore SFR page
-   01F6 8A 84              1840 	mov	_SFRPAGE,r2
-                    017B   1841 	C$lab4_4.c$251$1$1 ==.
-                    017B   1842 	XG$PORT_INIT$0$0 ==.
-   01F8 22                 1843 	ret
-                           1844 ;------------------------------------------------------------
-                           1845 ;Allocation info for local variables in function 'UART0_INIT'
-                           1846 ;------------------------------------------------------------
-                           1847 ;SFRPAGE_SAVE              Allocated to registers r2 
-                           1848 ;------------------------------------------------------------
-                    017C   1849 	G$UART0_INIT$0$0 ==.
-                    017C   1850 	C$lab4_4.c$259$1$1 ==.
-                           1851 ;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 4\lab4-4.c:259: void UART0_INIT(void)
-                           1852 ;	-----------------------------------------
-                           1853 ;	 function UART0_INIT
-                           1854 ;	-----------------------------------------
-   01F9                    1855 _UART0_INIT:
-                    017C   1856 	C$lab4_4.c$263$1$1 ==.
-                           1857 ;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 4\lab4-4.c:263: SFRPAGE_SAVE = SFRPAGE;				// Save Current SFR page
-   01F9 AA 84              1858 	mov	r2,_SFRPAGE
-                    017E   1859 	C$lab4_4.c$264$1$1 ==.
-                           1860 ;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 4\lab4-4.c:264: SFRPAGE = TIMER01_PAGE;
-   01FB 75 84 00           1861 	mov	_SFRPAGE,#0x00
-                    0181   1862 	C$lab4_4.c$266$1$1 ==.
-                           1863 ;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 4\lab4-4.c:266: TCON	 = 0x40;
-   01FE 75 88 40           1864 	mov	_TCON,#0x40
-                    0184   1865 	C$lab4_4.c$267$1$1 ==.
-                           1866 ;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 4\lab4-4.c:267: TMOD	&= 0x0F;
-   0201 53 89 0F           1867 	anl	_TMOD,#0x0F
-                    0187   1868 	C$lab4_4.c$268$1$1 ==.
-                           1869 ;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 4\lab4-4.c:268: TMOD	|= 0x20;					// Timer1, Mode 2, 8-bit reload
-   0204 43 89 20           1870 	orl	_TMOD,#0x20
-                    018A   1871 	C$lab4_4.c$269$1$1 ==.
-                           1872 ;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 4\lab4-4.c:269: CKCON	|= 0x10;					// Timer1 uses SYSCLK as time base
-   0207 43 8E 10           1873 	orl	_CKCON,#0x10
-                    018D   1874 	C$lab4_4.c$271$1$1 ==.
-                           1875 ;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 4\lab4-4.c:271: TH1		 = 0xE8;					// 0xE8 = 232
-   020A 75 8D E8           1876 	mov	_TH1,#0xE8
-                    0190   1877 	C$lab4_4.c$272$1$1 ==.
-                           1878 ;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 4\lab4-4.c:272: TR1		 = 1;						// Start Timer1
-   020D D2 8E              1879 	setb	_TR1
-                    0192   1880 	C$lab4_4.c$274$1$1 ==.
-                           1881 ;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 4\lab4-4.c:274: SFRPAGE = UART0_PAGE;
-   020F 75 84 00           1882 	mov	_SFRPAGE,#0x00
-                    0195   1883 	C$lab4_4.c$275$1$1 ==.
-                           1884 ;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 4\lab4-4.c:275: SCON0	 = 0x50;					// Mode 1, 8-bit UART, enable RX
-   0212 75 98 50           1885 	mov	_SCON0,#0x50
-                    0198   1886 	C$lab4_4.c$276$1$1 ==.
-                           1887 ;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 4\lab4-4.c:276: SSTA0	 = 0x00;					// SMOD0 = 0, in this mode
-   0215 75 91 00           1888 	mov	_SSTA0,#0x00
-                    019B   1889 	C$lab4_4.c$279$1$1 ==.
-                           1890 ;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 4\lab4-4.c:279: TI0 = 1;							// Indicate TX0 ready
-   0218 D2 99              1891 	setb	_TI0
-                    019D   1892 	C$lab4_4.c$281$1$1 ==.
-                           1893 ;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 4\lab4-4.c:281: SFRPAGE = SFRPAGE_SAVE;             // Restore SFR page
-   021A 8A 84              1894 	mov	_SFRPAGE,r2
-                    019F   1895 	C$lab4_4.c$282$1$1 ==.
-                    019F   1896 	XG$UART0_INIT$0$0 ==.
-   021C 22                 1897 	ret
-                           1898 ;------------------------------------------------------------
-                           1899 ;Allocation info for local variables in function 'ADC_Init'
-                           1900 ;------------------------------------------------------------
-                           1901 ;SFRPAGE_SAVE              Allocated to registers r2 
-                           1902 ;------------------------------------------------------------
-                    01A0   1903 	G$ADC_Init$0$0 ==.
-                    01A0   1904 	C$lab4_4.c$284$1$1 ==.
-                           1905 ;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 4\lab4-4.c:284: void ADC_Init(void)
-                           1906 ;	-----------------------------------------
-                           1907 ;	 function ADC_Init
-                           1908 ;	-----------------------------------------
-   021D                    1909 _ADC_Init:
-                    01A0   1910 	C$lab4_4.c$288$1$1 ==.
-                           1911 ;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 4\lab4-4.c:288: SFRPAGE_SAVE = SFRPAGE;				// Save Current SFR page
-   021D AA 84              1912 	mov	r2,_SFRPAGE
-                    01A2   1913 	C$lab4_4.c$289$1$1 ==.
-                           1914 ;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 4\lab4-4.c:289: SFRPAGE = ADC0_PAGE;
-   021F 75 84 00           1915 	mov	_SFRPAGE,#0x00
-                    01A5   1916 	C$lab4_4.c$291$1$1 ==.
-                           1917 ;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 4\lab4-4.c:291: ADC0CN = 0x80;						//enable ADC0
-   0222 75 E8 80           1918 	mov	_ADC0CN,#0x80
-                    01A8   1919 	C$lab4_4.c$292$1$1 ==.
-                           1920 ;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 4\lab4-4.c:292: REF0CN = 0x02;						//Use VREF0, internal bias generator, reference buffer off
-   0225 75 D1 02           1921 	mov	_REF0CN,#0x02
-                    01AB   1922 	C$lab4_4.c$293$1$1 ==.
-                           1923 ;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 4\lab4-4.c:293: AMX0SL = 0x00;						//use 0.0 as  'independent single-ended input'
-   0228 75 BB 00           1924 	mov	_AMX0SL,#0x00
-                    01AE   1925 	C$lab4_4.c$294$1$1 ==.
-                           1926 ;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 4\lab4-4.c:294: AMX0CF = 0x00;
-   022B 75 BA 00           1927 	mov	_AMX0CF,#0x00
-                    01B1   1928 	C$lab4_4.c$296$1$1 ==.
-                           1929 ;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 4\lab4-4.c:296: SFRPAGE = SFRPAGE_SAVE;             // Restore SFR page
-   022E 8A 84              1930 	mov	_SFRPAGE,r2
-                    01B3   1931 	C$lab4_4.c$297$1$1 ==.
-                    01B3   1932 	XG$ADC_Init$0$0 ==.
-   0230 22                 1933 	ret
-                           1934 ;------------------------------------------------------------
-                           1935 ;Allocation info for local variables in function 'DAC_Init'
-                           1936 ;------------------------------------------------------------
-                           1937 ;SFRPAGE_SAVE              Allocated to registers r2 
-                           1938 ;------------------------------------------------------------
-                    01B4   1939 	G$DAC_Init$0$0 ==.
-                    01B4   1940 	C$lab4_4.c$300$1$1 ==.
-                           1941 ;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 4\lab4-4.c:300: void DAC_Init(void)
-                           1942 ;	-----------------------------------------
-                           1943 ;	 function DAC_Init
-                           1944 ;	-----------------------------------------
-   0231                    1945 _DAC_Init:
-                    01B4   1946 	C$lab4_4.c$304$1$1 ==.
-                           1947 ;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 4\lab4-4.c:304: SFRPAGE_SAVE = SFRPAGE;				// Save Current SFR page
-   0231 AA 84              1948 	mov	r2,_SFRPAGE
-                    01B6   1949 	C$lab4_4.c$305$1$1 ==.
-                           1950 ;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 4\lab4-4.c:305: SFRPAGE = DAC0_PAGE;
-   0233 75 84 00           1951 	mov	_SFRPAGE,#0x00
-                    01B9   1952 	C$lab4_4.c$309$1$1 ==.
-                           1953 ;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 4\lab4-4.c:309: DAC0CN |= 0x80;		//enable DAC0
-   0236 43 D4 80           1954 	orl	_DAC0CN,#0x80
-                    01BC   1955 	C$lab4_4.c$310$1$1 ==.
-                           1956 ;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 4\lab4-4.c:310: DAC0CN &= 0xE0;		//gain = 1, manual conversion mode	
-   0239 53 D4 E0           1957 	anl	_DAC0CN,#0xE0
-                    01BF   1958 	C$lab4_4.c$312$1$1 ==.
-                           1959 ;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 4\lab4-4.c:312: SFRPAGE = SFRPAGE_SAVE;             // Restore SFR page
-   023C 8A 84              1960 	mov	_SFRPAGE,r2
-                    01C1   1961 	C$lab4_4.c$313$1$1 ==.
-                    01C1   1962 	XG$DAC_Init$0$0 ==.
-   023E 22                 1963 	ret
-                           1964 ;------------------------------------------------------------
-                           1965 ;Allocation info for local variables in function 'MAC_Init'
-                           1966 ;------------------------------------------------------------
-                           1967 ;SFRPAGE_SAVE              Allocated to registers r2 
-                           1968 ;------------------------------------------------------------
-                    01C2   1969 	G$MAC_Init$0$0 ==.
-                    01C2   1970 	C$lab4_4.c$315$1$1 ==.
-                           1971 ;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 4\lab4-4.c:315: void MAC_Init(void)
-                           1972 ;	-----------------------------------------
-                           1973 ;	 function MAC_Init
-                           1974 ;	-----------------------------------------
-   023F                    1975 _MAC_Init:
-                    01C2   1976 	C$lab4_4.c$319$1$1 ==.
-                           1977 ;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 4\lab4-4.c:319: SFRPAGE_SAVE = SFRPAGE;				// Save Current SFR page
-   023F AA 84              1978 	mov	r2,_SFRPAGE
-                    01C4   1979 	C$lab4_4.c$320$1$1 ==.
-                           1980 ;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 4\lab4-4.c:320: SFRPAGE = MAC0_PAGE;
-   0241 75 84 03           1981 	mov	_SFRPAGE,#0x03
-                    01C7   1982 	C$lab4_4.c$322$1$1 ==.
-                           1983 ;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 4\lab4-4.c:322: MAC0CF |= 0x18;						// clear accumulator
-   0244 43 C3 18           1984 	orl	_MAC0CF,#0x18
-                    01CA   1985 	C$lab4_4.c$323$1$1 ==.
-                           1986 ;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 4\lab4-4.c:323: MAC0CF &= ~0x01;					// perform MAC
-   0247 53 C3 FE           1987 	anl	_MAC0CF,#0xFE
-                    01CD   1988 	C$lab4_4.c$326$1$1 ==.
-                           1989 ;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 4\lab4-4.c:326: SFRPAGE = SFRPAGE_SAVE;             // Restore SFR page	
-   024A 8A 84              1990 	mov	_SFRPAGE,r2
-                    01CF   1991 	C$lab4_4.c$327$1$1 ==.
-                    01CF   1992 	XG$MAC_Init$0$0 ==.
-   024C 22                 1993 	ret
-                           1994 	.area CSEG    (CODE)
-                           1995 	.area CONST   (CODE)
-                    0000   1996 Flab4_4$_str_0$0$0 == .
-   0857                    1997 __str_0:
-   0857 1B                 1998 	.db 0x1B
-   0858 5B 32 4A           1999 	.ascii "[2J"
-   085B 00                 2000 	.db 0x00
-                    0005   2001 Flab4_4$_str_1$0$0 == .
-   085C                    2002 __str_1:
-   085C 57 65 20 77 69 6C  2003 	.ascii "We will not sow. "
+                    00F0   1669 	C$lab4_4.c$187$1$1 ==.
+                           1670 ;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 4\lab4-4.c:187: SFRPAGE = MAC0_PAGE;
+   016D 75 84 03           1671 	mov	_SFRPAGE,#0x03
+                    00F3   1672 	C$lab4_4.c$189$1$1 ==.
+                           1673 ;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 4\lab4-4.c:189: for(i=0; i<10; i++){
+   0170 7B 00              1674 	mov	r3,#0x00
+   0172 7C 00              1675 	mov	r4,#0x00
+   0174                    1676 00104$:
+   0174 C3                 1677 	clr	c
+   0175 EB                 1678 	mov	a,r3
+   0176 94 0A              1679 	subb	a,#0x0A
+   0178 EC                 1680 	mov	a,r4
+   0179 64 80              1681 	xrl	a,#0x80
+   017B 94 80              1682 	subb	a,#0x80
+   017D 50 0F              1683 	jnc	00107$
+                    0102   1684 	C$lab4_4.c$190$2$2 ==.
+                           1685 ;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 4\lab4-4.c:190: MAC0CF |= 0x20;
+   017F 43 C3 20           1686 	orl	_MAC0CF,#0x20
+                    0105   1687 	C$lab4_4.c$191$2$2 ==.
+                           1688 ;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 4\lab4-4.c:191: while(MAC0CF & 0x20 == 0x20);
+   0182                    1689 00101$:
+   0182 E5 C3              1690 	mov	a,_MAC0CF
+   0184 20 E0 FB           1691 	jb	acc.0,00101$
+                    010A   1692 	C$lab4_4.c$189$1$1 ==.
+                           1693 ;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 4\lab4-4.c:189: for(i=0; i<10; i++){
+   0187 0B                 1694 	inc	r3
+   0188 BB 00 E9           1695 	cjne	r3,#0x00,00104$
+   018B 0C                 1696 	inc	r4
+   018C 80 E6              1697 	sjmp	00104$
+   018E                    1698 00107$:
+                    0111   1699 	C$lab4_4.c$194$1$1 ==.
+                           1700 ;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 4\lab4-4.c:194: result = MAC0ACC1;
+                    0111   1701 	C$lab4_4.c$195$1$1 ==.
+                           1702 ;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 4\lab4-4.c:195: result = result<<8;
+   018E AC 94              1703 	mov	r4,_MAC0ACC1
+   0190 7B 00              1704 	mov	r3,#0x00
+                    0115   1705 	C$lab4_4.c$196$1$1 ==.
+                           1706 ;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 4\lab4-4.c:196: result += MAC0ACC0;
+   0192 AD 93              1707 	mov	r5,_MAC0ACC0
+   0194 7E 00              1708 	mov	r6,#0x00
+   0196 ED                 1709 	mov	a,r5
+   0197 2B                 1710 	add	a,r3
+   0198 FB                 1711 	mov	r3,a
+   0199 EE                 1712 	mov	a,r6
+   019A 3C                 1713 	addc	a,r4
+   019B FC                 1714 	mov	r4,a
+                    011F   1715 	C$lab4_4.c$199$1$1 ==.
+                           1716 ;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 4\lab4-4.c:199: a = MAC0ACC0;
+   019C E5 93              1717 	mov	a,_MAC0ACC0
+                    0121   1718 	C$lab4_4.c$200$1$1 ==.
+                           1719 ;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 4\lab4-4.c:200: b = MAC0ACC1;
+   019E E5 94              1720 	mov	a,_MAC0ACC1
+                    0123   1721 	C$lab4_4.c$202$1$1 ==.
+                           1722 ;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 4\lab4-4.c:202: SFRPAGE = UART0_PAGE;
+   01A0 75 84 00           1723 	mov	_SFRPAGE,#0x00
+                    0126   1724 	C$lab4_4.c$205$1$1 ==.
+                           1725 ;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 4\lab4-4.c:205: SFRPAGE = SFRPAGE_SAVE;             // Restore SFR page	
+   01A3 8A 84              1726 	mov	_SFRPAGE,r2
+                    0128   1727 	C$lab4_4.c$207$1$1 ==.
+                           1728 ;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 4\lab4-4.c:207: return result;
+   01A5 8B 82              1729 	mov	dpl,r3
+   01A7 8C 83              1730 	mov	dph,r4
+                    012C   1731 	C$lab4_4.c$208$1$1 ==.
+                    012C   1732 	XG$do_MAC$0$0 ==.
+   01A9 22                 1733 	ret
+                           1734 ;------------------------------------------------------------
+                           1735 ;Allocation info for local variables in function 'SYSCLK_INIT'
+                           1736 ;------------------------------------------------------------
+                           1737 ;i                         Allocated to registers r3 r4 
+                           1738 ;SFRPAGE_SAVE              Allocated to registers r2 
+                           1739 ;------------------------------------------------------------
+                    012D   1740 	G$SYSCLK_INIT$0$0 ==.
+                    012D   1741 	C$lab4_4.c$216$1$1 ==.
+                           1742 ;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 4\lab4-4.c:216: void SYSCLK_INIT(void)
+                           1743 ;	-----------------------------------------
+                           1744 ;	 function SYSCLK_INIT
+                           1745 ;	-----------------------------------------
+   01AA                    1746 _SYSCLK_INIT:
+                    012D   1747 	C$lab4_4.c$221$1$1 ==.
+                           1748 ;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 4\lab4-4.c:221: SFRPAGE_SAVE = SFRPAGE;				// Save Current SFR page	SFRPAGE = CONFIG_PAGE;
+   01AA AA 84              1749 	mov	r2,_SFRPAGE
+                    012F   1750 	C$lab4_4.c$222$1$1 ==.
+                           1751 ;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 4\lab4-4.c:222: SFRPAGE   = CONFIG_PAGE;
+   01AC 75 84 0F           1752 	mov	_SFRPAGE,#0x0F
+                    0132   1753 	C$lab4_4.c$224$1$1 ==.
+                           1754 ;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 4\lab4-4.c:224: OSCXCN = 0x67;						// Start ext osc with 22.1184MHz crystal
+   01AF 75 8C 67           1755 	mov	_OSCXCN,#0x67
+                    0135   1756 	C$lab4_4.c$225$1$1 ==.
+                           1757 ;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 4\lab4-4.c:225: for(i=0; i < 3000; i++);			// Wait for the oscillator to start up
+   01B2 7B B8              1758 	mov	r3,#0xB8
+   01B4 7C 0B              1759 	mov	r4,#0x0B
+   01B6                    1760 00106$:
+   01B6 1B                 1761 	dec	r3
+   01B7 BB FF 01           1762 	cjne	r3,#0xff,00114$
+   01BA 1C                 1763 	dec	r4
+   01BB                    1764 00114$:
+   01BB EB                 1765 	mov	a,r3
+   01BC 4C                 1766 	orl	a,r4
+   01BD 70 F7              1767 	jnz	00106$
+                    0142   1768 	C$lab4_4.c$226$1$1 ==.
+                           1769 ;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 4\lab4-4.c:226: while(!(OSCXCN & 0x80));
+   01BF                    1770 00101$:
+   01BF E5 8C              1771 	mov	a,_OSCXCN
+   01C1 30 E7 FB           1772 	jnb	acc.7,00101$
+                    0147   1773 	C$lab4_4.c$227$1$1 ==.
+                           1774 ;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 4\lab4-4.c:227: CLKSEL = 0x01;						// Switch to the external crystal oscillator
+   01C4 75 97 01           1775 	mov	_CLKSEL,#0x01
+                    014A   1776 	C$lab4_4.c$228$1$1 ==.
+                           1777 ;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 4\lab4-4.c:228: OSCICN = 0x00;						// Disable the internal oscillator
+   01C7 75 8A 00           1778 	mov	_OSCICN,#0x00
+                    014D   1779 	C$lab4_4.c$230$1$1 ==.
+                           1780 ;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 4\lab4-4.c:230: SFRPAGE = SFRPAGE_SAVE;             // Restore SFR page
+   01CA 8A 84              1781 	mov	_SFRPAGE,r2
+                    014F   1782 	C$lab4_4.c$231$1$1 ==.
+                    014F   1783 	XG$SYSCLK_INIT$0$0 ==.
+   01CC 22                 1784 	ret
+                           1785 ;------------------------------------------------------------
+                           1786 ;Allocation info for local variables in function 'PORT_INIT'
+                           1787 ;------------------------------------------------------------
+                           1788 ;SFRPAGE_SAVE              Allocated to registers r2 
+                           1789 ;------------------------------------------------------------
+                    0150   1790 	G$PORT_INIT$0$0 ==.
+                    0150   1791 	C$lab4_4.c$233$1$1 ==.
+                           1792 ;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 4\lab4-4.c:233: void PORT_INIT(void)
+                           1793 ;	-----------------------------------------
+                           1794 ;	 function PORT_INIT
+                           1795 ;	-----------------------------------------
+   01CD                    1796 _PORT_INIT:
+                    0150   1797 	C$lab4_4.c$237$1$1 ==.
+                           1798 ;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 4\lab4-4.c:237: SFRPAGE_SAVE = SFRPAGE;				// Save Current SFR page
+   01CD AA 84              1799 	mov	r2,_SFRPAGE
+                    0152   1800 	C$lab4_4.c$238$1$1 ==.
+                           1801 ;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 4\lab4-4.c:238: SFRPAGE = CONFIG_PAGE;
+   01CF 75 84 0F           1802 	mov	_SFRPAGE,#0x0F
+                    0155   1803 	C$lab4_4.c$240$1$1 ==.
+                           1804 ;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 4\lab4-4.c:240: XBR0	 = 0x04;					// Enable UART0
+   01D2 75 E1 04           1805 	mov	_XBR0,#0x04
+                    0158   1806 	C$lab4_4.c$241$1$1 ==.
+                           1807 ;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 4\lab4-4.c:241: XBR1	 = 0x00;
+   01D5 75 E2 00           1808 	mov	_XBR1,#0x00
+                    015B   1809 	C$lab4_4.c$242$1$1 ==.
+                           1810 ;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 4\lab4-4.c:242: XBR2	 = 0x40;					// Enable Crossbar and weak pull-up
+   01D8 75 E3 40           1811 	mov	_XBR2,#0x40
+                    015E   1812 	C$lab4_4.c$244$1$1 ==.
+                           1813 ;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 4\lab4-4.c:244: P0MDOUT &= ~0x01;					// Set P0.0 to open-drain
+   01DB 53 A4 FE           1814 	anl	_P0MDOUT,#0xFE
+                    0161   1815 	C$lab4_4.c$245$1$1 ==.
+                           1816 ;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 4\lab4-4.c:245: P0 |= 0x01;							// P0.0 high-impedence
+   01DE 43 80 01           1817 	orl	_P0,#0x01
+                    0164   1818 	C$lab4_4.c$246$1$1 ==.
+                           1819 ;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 4\lab4-4.c:246: P1MDOUT	&= ~0x03;					// Set P1.0 to open-drain
+   01E1 53 A5 FC           1820 	anl	_P1MDOUT,#0xFC
+                    0167   1821 	C$lab4_4.c$247$1$1 ==.
+                           1822 ;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 4\lab4-4.c:247: P1 |= 0x03;							// P1.0 to high-impedence
+   01E4 43 90 03           1823 	orl	_P1,#0x03
+                    016A   1824 	C$lab4_4.c$250$1$1 ==.
+                           1825 ;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 4\lab4-4.c:250: SFRPAGE = SFRPAGE_SAVE;             // Restore SFR page
+   01E7 8A 84              1826 	mov	_SFRPAGE,r2
+                    016C   1827 	C$lab4_4.c$251$1$1 ==.
+                    016C   1828 	XG$PORT_INIT$0$0 ==.
+   01E9 22                 1829 	ret
+                           1830 ;------------------------------------------------------------
+                           1831 ;Allocation info for local variables in function 'UART0_INIT'
+                           1832 ;------------------------------------------------------------
+                           1833 ;SFRPAGE_SAVE              Allocated to registers r2 
+                           1834 ;------------------------------------------------------------
+                    016D   1835 	G$UART0_INIT$0$0 ==.
+                    016D   1836 	C$lab4_4.c$259$1$1 ==.
+                           1837 ;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 4\lab4-4.c:259: void UART0_INIT(void)
+                           1838 ;	-----------------------------------------
+                           1839 ;	 function UART0_INIT
+                           1840 ;	-----------------------------------------
+   01EA                    1841 _UART0_INIT:
+                    016D   1842 	C$lab4_4.c$263$1$1 ==.
+                           1843 ;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 4\lab4-4.c:263: SFRPAGE_SAVE = SFRPAGE;				// Save Current SFR page
+   01EA AA 84              1844 	mov	r2,_SFRPAGE
+                    016F   1845 	C$lab4_4.c$264$1$1 ==.
+                           1846 ;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 4\lab4-4.c:264: SFRPAGE = TIMER01_PAGE;
+   01EC 75 84 00           1847 	mov	_SFRPAGE,#0x00
+                    0172   1848 	C$lab4_4.c$266$1$1 ==.
+                           1849 ;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 4\lab4-4.c:266: TCON	 = 0x40;
+   01EF 75 88 40           1850 	mov	_TCON,#0x40
+                    0175   1851 	C$lab4_4.c$267$1$1 ==.
+                           1852 ;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 4\lab4-4.c:267: TMOD	&= 0x0F;
+   01F2 53 89 0F           1853 	anl	_TMOD,#0x0F
+                    0178   1854 	C$lab4_4.c$268$1$1 ==.
+                           1855 ;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 4\lab4-4.c:268: TMOD	|= 0x20;					// Timer1, Mode 2, 8-bit reload
+   01F5 43 89 20           1856 	orl	_TMOD,#0x20
+                    017B   1857 	C$lab4_4.c$269$1$1 ==.
+                           1858 ;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 4\lab4-4.c:269: CKCON	|= 0x10;					// Timer1 uses SYSCLK as time base
+   01F8 43 8E 10           1859 	orl	_CKCON,#0x10
+                    017E   1860 	C$lab4_4.c$271$1$1 ==.
+                           1861 ;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 4\lab4-4.c:271: TH1		 = 0xE8;					// 0xE8 = 232
+   01FB 75 8D E8           1862 	mov	_TH1,#0xE8
+                    0181   1863 	C$lab4_4.c$272$1$1 ==.
+                           1864 ;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 4\lab4-4.c:272: TR1		 = 1;						// Start Timer1
+   01FE D2 8E              1865 	setb	_TR1
+                    0183   1866 	C$lab4_4.c$274$1$1 ==.
+                           1867 ;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 4\lab4-4.c:274: SFRPAGE = UART0_PAGE;
+   0200 75 84 00           1868 	mov	_SFRPAGE,#0x00
+                    0186   1869 	C$lab4_4.c$275$1$1 ==.
+                           1870 ;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 4\lab4-4.c:275: SCON0	 = 0x50;					// Mode 1, 8-bit UART, enable RX
+   0203 75 98 50           1871 	mov	_SCON0,#0x50
+                    0189   1872 	C$lab4_4.c$276$1$1 ==.
+                           1873 ;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 4\lab4-4.c:276: SSTA0	 = 0x00;					// SMOD0 = 0, in this mode
+   0206 75 91 00           1874 	mov	_SSTA0,#0x00
+                    018C   1875 	C$lab4_4.c$279$1$1 ==.
+                           1876 ;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 4\lab4-4.c:279: TI0 = 1;							// Indicate TX0 ready
+   0209 D2 99              1877 	setb	_TI0
+                    018E   1878 	C$lab4_4.c$281$1$1 ==.
+                           1879 ;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 4\lab4-4.c:281: SFRPAGE = SFRPAGE_SAVE;             // Restore SFR page
+   020B 8A 84              1880 	mov	_SFRPAGE,r2
+                    0190   1881 	C$lab4_4.c$282$1$1 ==.
+                    0190   1882 	XG$UART0_INIT$0$0 ==.
+   020D 22                 1883 	ret
+                           1884 ;------------------------------------------------------------
+                           1885 ;Allocation info for local variables in function 'ADC_Init'
+                           1886 ;------------------------------------------------------------
+                           1887 ;SFRPAGE_SAVE              Allocated to registers r2 
+                           1888 ;------------------------------------------------------------
+                    0191   1889 	G$ADC_Init$0$0 ==.
+                    0191   1890 	C$lab4_4.c$284$1$1 ==.
+                           1891 ;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 4\lab4-4.c:284: void ADC_Init(void)
+                           1892 ;	-----------------------------------------
+                           1893 ;	 function ADC_Init
+                           1894 ;	-----------------------------------------
+   020E                    1895 _ADC_Init:
+                    0191   1896 	C$lab4_4.c$288$1$1 ==.
+                           1897 ;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 4\lab4-4.c:288: SFRPAGE_SAVE = SFRPAGE;				// Save Current SFR page
+   020E AA 84              1898 	mov	r2,_SFRPAGE
+                    0193   1899 	C$lab4_4.c$289$1$1 ==.
+                           1900 ;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 4\lab4-4.c:289: SFRPAGE = ADC0_PAGE;
+   0210 75 84 00           1901 	mov	_SFRPAGE,#0x00
+                    0196   1902 	C$lab4_4.c$291$1$1 ==.
+                           1903 ;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 4\lab4-4.c:291: ADC0CN = 0x80;						//enable ADC0
+   0213 75 E8 80           1904 	mov	_ADC0CN,#0x80
+                    0199   1905 	C$lab4_4.c$292$1$1 ==.
+                           1906 ;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 4\lab4-4.c:292: REF0CN = 0x02;						//Use VREF0, internal bias generator, reference buffer off
+   0216 75 D1 02           1907 	mov	_REF0CN,#0x02
+                    019C   1908 	C$lab4_4.c$293$1$1 ==.
+                           1909 ;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 4\lab4-4.c:293: AMX0SL = 0x00;						//use 0.0 as  'independent single-ended input'
+   0219 75 BB 00           1910 	mov	_AMX0SL,#0x00
+                    019F   1911 	C$lab4_4.c$294$1$1 ==.
+                           1912 ;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 4\lab4-4.c:294: AMX0CF = 0x00;
+   021C 75 BA 00           1913 	mov	_AMX0CF,#0x00
+                    01A2   1914 	C$lab4_4.c$296$1$1 ==.
+                           1915 ;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 4\lab4-4.c:296: SFRPAGE = SFRPAGE_SAVE;             // Restore SFR page
+   021F 8A 84              1916 	mov	_SFRPAGE,r2
+                    01A4   1917 	C$lab4_4.c$297$1$1 ==.
+                    01A4   1918 	XG$ADC_Init$0$0 ==.
+   0221 22                 1919 	ret
+                           1920 ;------------------------------------------------------------
+                           1921 ;Allocation info for local variables in function 'DAC_Init'
+                           1922 ;------------------------------------------------------------
+                           1923 ;SFRPAGE_SAVE              Allocated to registers r2 
+                           1924 ;------------------------------------------------------------
+                    01A5   1925 	G$DAC_Init$0$0 ==.
+                    01A5   1926 	C$lab4_4.c$300$1$1 ==.
+                           1927 ;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 4\lab4-4.c:300: void DAC_Init(void)
+                           1928 ;	-----------------------------------------
+                           1929 ;	 function DAC_Init
+                           1930 ;	-----------------------------------------
+   0222                    1931 _DAC_Init:
+                    01A5   1932 	C$lab4_4.c$304$1$1 ==.
+                           1933 ;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 4\lab4-4.c:304: SFRPAGE_SAVE = SFRPAGE;				// Save Current SFR page
+   0222 AA 84              1934 	mov	r2,_SFRPAGE
+                    01A7   1935 	C$lab4_4.c$305$1$1 ==.
+                           1936 ;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 4\lab4-4.c:305: SFRPAGE = DAC0_PAGE;
+   0224 75 84 00           1937 	mov	_SFRPAGE,#0x00
+                    01AA   1938 	C$lab4_4.c$309$1$1 ==.
+                           1939 ;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 4\lab4-4.c:309: DAC0CN |= 0x80;		//enable DAC0
+   0227 43 D4 80           1940 	orl	_DAC0CN,#0x80
+                    01AD   1941 	C$lab4_4.c$310$1$1 ==.
+                           1942 ;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 4\lab4-4.c:310: DAC0CN &= 0xE0;		//gain = 1, manual conversion mode	
+   022A 53 D4 E0           1943 	anl	_DAC0CN,#0xE0
+                    01B0   1944 	C$lab4_4.c$312$1$1 ==.
+                           1945 ;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 4\lab4-4.c:312: SFRPAGE = SFRPAGE_SAVE;             // Restore SFR page
+   022D 8A 84              1946 	mov	_SFRPAGE,r2
+                    01B2   1947 	C$lab4_4.c$313$1$1 ==.
+                    01B2   1948 	XG$DAC_Init$0$0 ==.
+   022F 22                 1949 	ret
+                           1950 ;------------------------------------------------------------
+                           1951 ;Allocation info for local variables in function 'MAC_Init'
+                           1952 ;------------------------------------------------------------
+                           1953 ;SFRPAGE_SAVE              Allocated to registers r2 
+                           1954 ;------------------------------------------------------------
+                    01B3   1955 	G$MAC_Init$0$0 ==.
+                    01B3   1956 	C$lab4_4.c$315$1$1 ==.
+                           1957 ;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 4\lab4-4.c:315: void MAC_Init(void)
+                           1958 ;	-----------------------------------------
+                           1959 ;	 function MAC_Init
+                           1960 ;	-----------------------------------------
+   0230                    1961 _MAC_Init:
+                    01B3   1962 	C$lab4_4.c$319$1$1 ==.
+                           1963 ;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 4\lab4-4.c:319: SFRPAGE_SAVE = SFRPAGE;				// Save Current SFR page
+   0230 AA 84              1964 	mov	r2,_SFRPAGE
+                    01B5   1965 	C$lab4_4.c$320$1$1 ==.
+                           1966 ;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 4\lab4-4.c:320: SFRPAGE = MAC0_PAGE;
+   0232 75 84 03           1967 	mov	_SFRPAGE,#0x03
+                    01B8   1968 	C$lab4_4.c$322$1$1 ==.
+                           1969 ;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 4\lab4-4.c:322: MAC0CF |= 0x18;						// clear accumulator
+   0235 43 C3 18           1970 	orl	_MAC0CF,#0x18
+                    01BB   1971 	C$lab4_4.c$323$1$1 ==.
+                           1972 ;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 4\lab4-4.c:323: MAC0CF &= ~0x01;					// perform MAC
+   0238 53 C3 FE           1973 	anl	_MAC0CF,#0xFE
+                    01BE   1974 	C$lab4_4.c$326$1$1 ==.
+                           1975 ;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 4\lab4-4.c:326: SFRPAGE = SFRPAGE_SAVE;             // Restore SFR page	
+   023B 8A 84              1976 	mov	_SFRPAGE,r2
+                    01C0   1977 	C$lab4_4.c$327$1$1 ==.
+                    01C0   1978 	XG$MAC_Init$0$0 ==.
+   023D 22                 1979 	ret
+                           1980 	.area CSEG    (CODE)
+                           1981 	.area CONST   (CODE)
+                    0000   1982 Flab4_4$_str_0$0$0 == .
+   0848                    1983 __str_0:
+   0848 1B                 1984 	.db 0x1B
+   0849 5B 32 4A           1985 	.ascii "[2J"
+   084C 00                 1986 	.db 0x00
+                    0005   1987 Flab4_4$_str_1$0$0 == .
+   084D                    1988 __str_1:
+   084D 57 65 20 77 69 6C  1989 	.ascii "We will not sow. "
         6C 20 6E 6F 74 20
         73 6F 77 2E 20
-   086D 0A                 2004 	.db 0x0A
-   086E 0D                 2005 	.db 0x0D
-   086F 00                 2006 	.db 0x00
-                           2007 	.area XINIT   (CODE)
-                           2008 	.area CABS    (ABS,CODE)
+   085E 0A                 1990 	.db 0x0A
+   085F 0D                 1991 	.db 0x0D
+   0860 00                 1992 	.db 0x00
+                           1993 	.area XINIT   (CODE)
+                           1994 	.area CABS    (ABS,CODE)

@@ -182,7 +182,7 @@ int do_MAC()
 	MAC0BL = oldOut;
 
 	//check completion flag
-	for(i=0; i<10; i++){}
+//	for(i=0; i<10; i++){}
 
 	SFRPAGE = MAC0_PAGE;
 	//shift over 10 bits

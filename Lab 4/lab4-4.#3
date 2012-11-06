@@ -37,7 +37,7 @@ int olderIn = 0;
 int output = 0;
 int input = 0;
 
-
+//FIRST DIES AT 5000 Hz
 //------------------------------------------------------------------------------------
 // MAIN Routine
 //------------------------------------------------------------------------------------
@@ -118,7 +118,7 @@ int do_ADC(void)
 	ADC_val = high<<8;
 	ADC_val += low;
 	
-//	ADC_val -= 2047;
+	ADC_val -= 2047;
 
 	SFRPAGE = SFRPAGE_SAVE;             // Restore SFR page	
 	
@@ -182,7 +182,7 @@ int do_MAC()
 	MAC0BL = oldOut;
 
 	//check completion flag
-	for(i=0; i<1000; i++){}
+	for(i=0; i<10; i++){}
 
 	SFRPAGE = MAC0_PAGE;
 	//shift over 10 bits
@@ -194,7 +194,7 @@ int do_MAC()
 	result = MAC0ACC1;
 	result = result<<8;
 	result += MAC0ACC0;
-//	result += 2047;			//add 1.5v offset
+	result += 2047;			//add 1.5v offset
 
 	a = MAC0ACC0;
 	b = MAC0ACC1;

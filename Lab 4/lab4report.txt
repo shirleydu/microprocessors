@@ -1,6 +1,8 @@
 Intro:
 
-The objective of this lab is to 
+The objective of the first three parts of this lab is to explore the use of Analog-to-Digital and Digital-to-Analog Conversion (ADC and DAC respectively). ADC can be used to read in voltages as continuous values rather than discrete HIGH/LOWs; similarly, DAC can be used to output continuous voltage values instead of HIGH/LOW. For this particular lab, the values are represented as a 12-bit number, held in two 8-bit registers (one containing the lower 8 bits, and the other containing the upper 4). Voltage values are scaled such that the reference voltage is equal to 2^12-1 (all bits equal to 1) and 0 volts is equal to all bits 0. As such, the c8051 cannot read/output negative voltages. 
+
+The objective of the last part of this lab is to make use of the MAC (Multiply-And-Accumulate). The MAC is used to perform quick arithmetic of two numbers, using two 8-bit registers for each number. In this case, the MAC is used to operate on signals continously being read by the ADC to create a filter.
 
 Results:
 
@@ -8,6 +10,9 @@ For part 1, we found that the reference voltage was ~2.43V rather than 2.4V; our
 
 For the first part of part 3, we realized that printing out the current DAC value in the main loop was slowing down the sawtooth wave so that it didn't display as a sawtooth, but as a horizontal line moving up and down. 
 
-In doing the second part of part 3, we found that channel 1 of our oscilloscope was malfunctioning, and displayed the results 5x the actual value.
+In doing the second part of part 3, we found that because of the lag between doing ADC and outputting the result to DAC, for higher-frequency inputs, the output wave becomes jagged-- like a step function following a sine shape.
 
-DIES AT ABOUT 5000Hz
+In part 4, the filter that is created is a notch filter, for which the output drops to zero as the input approaches a certain frequency, then goes back up as it leaves that frequency. 
+
+Our results gave a cutoff frequency of ~5kHZ; with a sampling frequency of 14.925kHz, the calculated cutoff frequency is 4.668kHz.
+

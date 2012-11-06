@@ -1,7 +1,7 @@
 ;--------------------------------------------------------
 ; File Created by SDCC : free open source ANSI-C Compiler
 ; Version 2.9.0 #5416 (Mar 22 2009) (MINGW32)
-; This file was generated Thu Nov 01 20:25:31 2012
+; This file was generated Mon Nov 05 18:38:41 2012
 ;--------------------------------------------------------
 	.module lab4_4
 	.optsdcc -mmcs51 --model-small
@@ -1666,39 +1666,25 @@ _do_MAC:
 	C$lab4_4.c$182$1$1 ==.
 ;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 4\lab4-4.c:182: MAC0BL = oldOut;
 	mov	_MAC0BL,_oldOut
-	C$lab4_4.c$185$1$1 ==.
-;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 4\lab4-4.c:185: for(i=0; i<10; i++){}
-	mov	r3,#0x0A
-	mov	r4,#0x00
-	mov	ar5,r3
-	mov	ar6,r4
-00106$:
-	dec	r5
-	cjne	r5,#0xff,00121$
-	dec	r6
-00121$:
-	mov	a,r5
-	orl	a,r6
 	C$lab4_4.c$187$1$1 ==.
 ;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 4\lab4-4.c:187: SFRPAGE = MAC0_PAGE;
+	mov	_SFRPAGE,#0x03
 	C$lab4_4.c$189$1$1 ==.
 ;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 4\lab4-4.c:189: for(i=0; i<10; i++){
-	jnz	00106$
-	mov	_SFRPAGE,#0x03
-	mov	r3,a
-	mov	r4,a
-00107$:
+	mov	r3,#0x00
+	mov	r4,#0x00
+00104$:
 	clr	c
 	mov	a,r3
 	subb	a,#0x0A
 	mov	a,r4
 	xrl	a,#0x80
 	subb	a,#0x80
-	jnc	00110$
-	C$lab4_4.c$190$2$3 ==.
+	jnc	00107$
+	C$lab4_4.c$190$2$2 ==.
 ;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 4\lab4-4.c:190: MAC0CF |= 0x20;
 	orl	_MAC0CF,#0x20
-	C$lab4_4.c$191$2$3 ==.
+	C$lab4_4.c$191$2$2 ==.
 ;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 4\lab4-4.c:191: while(MAC0CF & 0x20 == 0x20);
 00101$:
 	mov	a,_MAC0CF
@@ -1706,10 +1692,10 @@ _do_MAC:
 	C$lab4_4.c$189$1$1 ==.
 ;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 4\lab4-4.c:189: for(i=0; i<10; i++){
 	inc	r3
-	cjne	r3,#0x00,00107$
+	cjne	r3,#0x00,00104$
 	inc	r4
-	sjmp	00107$
-00110$:
+	sjmp	00104$
+00107$:
 	C$lab4_4.c$194$1$1 ==.
 ;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 4\lab4-4.c:194: result = MAC0ACC1;
 	C$lab4_4.c$195$1$1 ==.

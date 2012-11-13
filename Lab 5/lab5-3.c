@@ -1,5 +1,7 @@
 //------------------------------------------------------------------------------------
-// memory.c
+// lab5-3.c
+// Shirley Du
+// Victor Huang
 //------------------------------------------------------------------------------------
 // This software writes a character to a specific address in external memory
 //  	NOTES:
@@ -69,6 +71,7 @@ void main(void)
     *p = 'a';
     while(1)
     {
+		//go from 0x2600 to 0x3100
 		for(i=0x0600; i<0x1100;i++)
 		{
 			p = (__xdata unsigned char*)(mem);

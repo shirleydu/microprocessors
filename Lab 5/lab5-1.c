@@ -1,5 +1,7 @@
 //------------------------------------------------------------------------------------
-// memory.c
+// lab5-1.c
+// Shirley Du
+// Victor Huang
 //------------------------------------------------------------------------------------
 // This software writes a character to a specific address in external memory
 //  	NOTES:
@@ -71,9 +73,9 @@ void main(void)
     {
 		for(i=0; i<0x900;i++)
 		{
-			p[i] = 0xAA;
+			p[i] = 0xAA;	//write "AA" to the slot
 			printf("\r\nCharacter stored in memory %x: %x\r\n", mem, p[i]);
-			mem++;
+			mem++;			//update what memory address is being read
 		}
 		mem=0x2000;
     }

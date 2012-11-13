@@ -1,5 +1,7 @@
 //------------------------------------------------------------------------------------
-// memory.c
+// lab5-2.c
+// Shirley Du
+// Victor Huang
 //------------------------------------------------------------------------------------
 // This software writes a character to a specific address in external memory
 //  	NOTES:
@@ -74,6 +76,7 @@ void main(void)
     {
 		for(i=0; i<0x800;i++)
 		{
+			//write the value to the address
 			p[i] = 0x55;
 			//printf("\r\nCharacter stored in memory %x: %x\r\n", mem, p[i]);
 			mem++;
@@ -82,7 +85,7 @@ void main(void)
 				//printf("error\n\r");
 				count[buf] = i;
 				buf++;
-
+				//buffer is full, dump
 				if (buf == 255)
 				{
 					printf("dumping buffer:\n\r");
@@ -93,6 +96,7 @@ void main(void)
 			}
 		}
 		mem=0x2000;
+		//When the addresses are visited, print out errors
 		if(buf > 0)
 		{
 			for(j=0; j<buf; j++)

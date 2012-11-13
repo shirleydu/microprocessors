@@ -51,8 +51,15 @@ unsigned char _sdcc_external_startup(void)
 //------------------------------------------------------------------------------------
 void main(void)
 {
-    volatile xdata at 0x2002 unsigned char p;
-	int i = 0;
+    xdata unsigned char *p;
+	int mem = 0x2000;
+	int i;
+
+	unsigned static char __xdata count[256];
+	int buf = 0;
+	int j;
+	p = (__xdata unsigned char*)(0x2000);
+	
 
     SYSCLK_INIT();          // Initialize the oscillator
     PORT_INIT();            // Initialize the Crossbar and GPIO
@@ -61,16 +68,36 @@ void main(void)
     SFRPAGE = UART0_PAGE;   // Direct output to UART0
 
     printf("\033[2J");     // Erase ANSI terminal & move cursor to home position
-	printf("herpaderpa\n\r");
-    printf("Memory test\n\n\r");
-    p = 'a';
+    printf("crystal fair\n\n\r");
+    *p = 'a';
     while(1)
     {
-        printf("Enter a character to write to memory address 0x2002:", p);
-        p=getchar();
-		for(i=0; i<3000; i++);
-        printf("\r\nCharacter stored in memory: %x\r\n", p);
-		for(i=0; i<3000; i++);	
+		for(i=0; i<0x900;i++)
+		{
+			p[i] = 0xAA;
+			printf("\r\nCharacter stored in memory %x: %x\r\n", mem, p[i]);
+			mem++;
+		/*	if (p[i] != 0x55)
+			{
+				count[buf] = i;
+				buf++;
+
+				if (buf == 255)
+				{
+					printf("dumping buffer:\n\r");
+					for(j=0; j<255; j++)
+						printf("%d\n\r", count[j]);
+					buf = 0;
+				}
+			}*/
+		}
+		mem=0x2000;
+		/*if(buf > 0)
+		{
+			for(j=0; j<buf; j++)
+				printf("%d\n\r", count[j]);
+		}
+		*/
     }
 }
 
@@ -91,7 +118,7 @@ void SYSCLK_INIT(void)
     OSCXCN = 0x67;              // Start ext osc with 22.1184MHz crystal
     for(i=0; i < 3000; i++);    // Wait for the oscillator to start up
     while(!(OSCXCN & 0x80));
-    CLKSEL = 0x21;              // Switch to the external crystal oscillator
+    CLKSEL = 0x01;              // Switch to the external crystal oscillator
     OSCICN = 0x00	;              // Disable the internal oscillator
 
     SFRPAGE = SFRPAGE_SAVE;     // Restore SFR page

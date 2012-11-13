@@ -1,4 +1,4 @@
-M:lab5_1
+M:lab5_2
 F:G$putchar$0$0({2}DF,SV:S),Z,0,0,0,0,0
 F:G$getchar$0$0({2}DF,SC:S),Z,0,0,0,0,0
 F:G$_sdcc_external_startup$0$0({2}DF,SC:U),Z,0,0,0,0,0
@@ -8,7 +8,12 @@ F:G$PORT_INIT$0$0({2}DF,SV:S),Z,0,0,0,0,0
 F:G$UART0_INIT$0$0({2}DF,SV:S),Z,0,0,0,0,0
 S:Lmain$p$1$1({2}DX,SC:U),E,0,0
 S:Lmain$mem$1$1({2}SI:S),R,0,0,[r2,r3]
-S:Lmain$i$1$1({2}SI:S),R,0,0,[r6,r7]
+S:Lmain$i$1$1({2}SI:S),E,0,0
+S:Lmain$buf$1$1({2}SI:S),R,0,0,[r4,r5]
+S:Lmain$j$1$1({2}SI:S),E,0,0
+S:Lmain$sloc0$1$0({2}SI:S),E,0,0
+S:Lmain$sloc1$1$0({2}SI:S),E,0,0
+S:Lmain$count$1$1({256}DA256,SC:U),F,0,0
 S:G$P0$0$0({1}SC:U),I,0,0
 S:G$SP$0$0({1}SC:U),I,0,0
 S:G$DPL$0$0({1}SC:U),I,0,0
@@ -403,6 +408,9 @@ S:G$gets$0$0({2}DF,DG,SC:S),C,0,0
 S:G$printf_fast$0$0({2}DF,SV:S),C,0,0
 S:G$printf_fast_f$0$0({2}DF,SV:S),C,0,0
 S:G$printf_tiny$0$0({2}DF,SV:S),C,0,0
-S:Flab5_1$_str_0$0$0({5}DA5,SC:S),D,0,0
-S:Flab5_1$_str_1$0$0({16}DA16,SC:S),D,0,0
-S:Flab5_1$_str_2$0$0({38}DA38,SC:S),D,0,0
+S:Flab5_2$_str_0$0$0({5}DA5,SC:S),D,0,0
+S:Flab5_2$_str_1$0$0({16}DA16,SC:S),D,0,0
+S:Flab5_2$_str_2$0$0({18}DA18,SC:S),D,0,0
+S:Flab5_2$_str_3$0$0({5}DA5,SC:S),D,0,0
+S:Flab5_2$_str_4$0$0({5}DA5,SC:S),D,0,0
+S:Flab5_2$_str_5$0$0({18}DA18,SC:S),D,0,0

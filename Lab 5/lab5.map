@@ -21,7 +21,6 @@ CABS                               0000   0000 =      0. bytes (ABS,CON,CODE)
   0C:0000    l_XABS
   0C:0000    l_XINIT
   0C:0000    l_XISEG
-  0C:0000    l_XSEG
   0C:0000    l__CODE
   0C:0000    s_BSEG
   0C:0000    s_CABS
@@ -32,7 +31,6 @@ CABS                               0000   0000 =      0. bytes (ABS,CON,CODE)
   0C:0000    s_PSEG
   0C:0000    s_REG_BANK_0
   0C:0000    s_XABS
-  0C:0000    s_XISEG
   0C:0000    s_XSEG
   0C:0002    l_BSEG_BYTES
   0C:0002    l_OSEG
@@ -45,10 +43,10 @@ CABS                               0000   0000 =      0. bytes (ABS,CON,CODE)
   0C:0008    s_REG_BANK_1
   0C:000A    l_BSEG
   0C:000A    l_GSINIT2
-  0C:000A    s_OSEG
   0C:000B    s_GSINIT1
   0C:000B    s_GSINIT2
   0C:0010    s_REG_BANK_2
+  0C:0014    s_OSEG
   0C:0015    s_GSINIT3
   0C:0018    s_BIT_BANK
   0C:0018    s_REG_BANK_3
@@ -59,17 +57,19 @@ CABS                               0000   0000 =      0. bytes (ABS,CON,CODE)
   0C:0037    s_GSINIT4
   0C:003B    s_RSEG
   0C:003B    s_SSEG
+  0C:004E    l_CONST
   0C:0061    s_GSFINAL
   0C:0061    s_GSINIT
   0C:0061    s_GSINIT5
   0C:0064    s_CSEG
-  0C:0072    l_DSEG
-  0C:0088    l_CONST
+  0C:007C    l_DSEG
   0C:00C5    l_SSEG
   0C:0100    l_IRAM
-  0C:0743    l_CSEG
-  0C:07A7    s_CONST
-  0C:082F    s_XINIT
+  0C:0100    l_XSEG
+  0C:0100    s_XISEG
+  0C:0855    l_CSEG
+  0C:08B9    s_CONST
+  0C:0907    s_XINIT
 
 
 
@@ -806,7 +806,6 @@ Area                               Addr   Size   Decimal Bytes (Attributes)
      00FF    _P7_7
      00FF    _SPIF
      00FF    _WDTCN
-     2002    Lmain$p$1$1
      8C8A    G$TMR0$0$0
      8C8A    _TMR0
      8D8B    G$TMR1$0$0
@@ -864,12 +863,17 @@ Hexadecimal
 
 Area                               Addr   Size   Decimal Bytes (Attributes)
 --------------------------------   ----   ----   ------- ----- ------------
-DSEG                               0000   0072 =    114. bytes (REL,CON)
+DSEG                               0000   007C =    124. bytes (REL,CON)
 
       Value  Global
    --------  --------------------------------
-     0008    _vprintf_PARM_2
-     0009    _bp
+     0008    Lmain$p$1$1
+     000A    Lmain$i$1$1
+     000C    Lmain$j$1$1
+     000E    Lmain$sloc0$1$0
+     0010    Lmain$sloc1$1$0
+     0012    _vprintf_PARM_2
+     0013    _bp
      002E    __print_format_PARM_2
      0031    __print_format_PARM_3
      0034    __print_format_PARM_4
@@ -878,12 +882,12 @@ Hexadecimal
 
 Area                               Addr   Size   Decimal Bytes (Attributes)
 --------------------------------   ----   ----   ------- ----- ------------
-OSEG                               000A   0002 =      2. bytes (REL,OVR)
+OSEG                               0014   0002 =      2. bytes (REL,OVR)
 
       Value  Global
    --------  --------------------------------
-     000A    _calculate_digit_radix_1_1
-     000B    _calculate_digit_i_1_1
+     0014    _calculate_digit_radix_1_1
+     0015    _calculate_digit_i_1_1
 
 
 Hexadecimal
@@ -898,6 +902,15 @@ SSEG                               003B   00C5 =    197. bytes (REL,OVR)
 
 
 
+Hexadecimal
+
+Area                               Addr   Size   Decimal Bytes (Attributes)
+--------------------------------   ----   ----   ------- ----- ------------
+XSEG                               0000   0100 =    256. bytes (REL,CON,XDATA)
+
+      Value  Global
+   --------  --------------------------------
+  0D:0000    Lmain$count$1$1
 
 
 Hexadecimal
@@ -908,10 +921,10 @@ HOME                               0000   0008 =      8. bytes (REL,CON,CODE)
 
       Value  Global
    --------  --------------------------------
-  0C:0000    A$lab5-1$1246
-  0C:0003    A$lab5-1$1268
+  0C:0000    A$lab5-2$1262
+  0C:0003    A$lab5-2$1284
   0C:0003    __sdcc_program_startup
-  0C:0006    A$lab5-1$1270
+  0C:0006    A$lab5-2$1286
 
 Hexadecimal
 
@@ -956,278 +969,437 @@ GSFINAL                            0061   0003 =      3. bytes (REL,CON,CODE)
 
       Value  Global
    --------  --------------------------------
-  0C:0061    A$lab5-1$1261
+  0C:0061    A$lab5-2$1277
 
 Hexadecimal
 
 Area                               Addr   Size   Decimal Bytes (Attributes)
 --------------------------------   ----   ----   ------- ----- ------------
-CSEG                               0064   0743 =   1859. bytes (REL,CON,CODE)
+CSEG                               0064   0855 =   2133. bytes (REL,CON,CODE)
 
       Value  Global
    --------  --------------------------------
-  0C:0064    A$lab5-1$1295
+  0C:0064    A$lab5-2$1311
   0C:0064    C$putget.h$18$0$0
   0C:0064    G$putchar$0$0
   0C:0064    _putchar
-  0C:0066    A$lab5-1$1301
+  0C:0066    A$lab5-2$1317
   0C:0066    C$putget.h$20$1$1
   0C:0066    C$putget.h$21$1$1
-  0C:0069    A$lab5-1$1302
-  0C:006B    A$lab5-1$1306
+  0C:0069    A$lab5-2$1318
+  0C:006B    A$lab5-2$1322
   0C:006B    C$putget.h$22$1$1
-  0C:006D    A$lab5-1$1309
+  0C:006D    A$lab5-2$1325
   0C:006D    C$putget.h$23$1$1
   0C:006D    XG$putchar$0$0
-  0C:006E    A$lab5-1$1327
+  0C:006E    A$lab5-2$1343
   0C:006E    C$putget.h$28$1$1
   0C:006E    C$putget.h$31$1$1
   0C:006E    C$putget.h$32$1$1
   0C:006E    G$getchar$0$0
   0C:006E    _getchar
-  0C:0071    A$lab5-1$1328
-  0C:0073    A$lab5-1$1332
+  0C:0071    A$lab5-2$1344
+  0C:0073    A$lab5-2$1348
   0C:0073    C$putget.h$33$1$1
-  0C:0076    A$lab5-1$1337
+  0C:0076    A$lab5-2$1353
   0C:0076    C$putget.h$35$1$1
   0C:0076    C$putget.h$36$1$1
   0C:0076    XG$getchar$0$0
-  0C:0077    A$lab5-1$1351
-  0C:0077    C$lab5_1.c$42$1$1
-  0C:0077    C$lab5_1.c$44$1$1
+  0C:0077    A$lab5-2$1367
+  0C:0077    C$lab5_2.c$42$1$1
+  0C:0077    C$lab5_2.c$44$1$1
   0C:0077    G$_sdcc_external_startup$0$0
   0C:0077    __sdcc_external_startup
-  0C:007A    A$lab5-1$1354
-  0C:007A    C$lab5_1.c$45$1$1
-  0C:007D    A$lab5-1$1357
-  0C:007D    C$lab5_1.c$47$1$1
-  0C:0080    A$lab5-1$1360
-  0C:0080    C$lab5_1.c$48$1$1
+  0C:007A    A$lab5-2$1370
+  0C:007A    C$lab5_2.c$45$1$1
+  0C:007D    A$lab5-2$1373
+  0C:007D    C$lab5_2.c$47$1$1
+  0C:0080    A$lab5-2$1376
+  0C:0080    C$lab5_2.c$48$1$1
   0C:0080    XG$_sdcc_external_startup$0$0
-  0C:0081    A$lab5-1$1376
-  0C:0081    C$lab5_1.c$52$1$1
-  0C:0081    C$lab5_1.c$57$1$1
+  0C:0081    A$lab5-2$1398
+  0C:0081    C$lab5_2.c$52$1$1
+  0C:0081    C$lab5_2.c$55$1$1
   0C:0081    G$main$0$0
   0C:0081    _main
-  0C:0084    A$lab5-1$1379
-  0C:0084    C$lab5_1.c$58$1$1
-  0C:0087    A$lab5-1$1382
-  0C:0087    C$lab5_1.c$59$1$1
-  0C:008A    A$lab5-1$1385
-  0C:008A    C$lab5_1.c$61$1$1
-  0C:008D    A$lab5-1$1388
-  0C:008D    C$lab5_1.c$63$1$1
-  0C:008F    A$lab5-1$1389
-  0C:0091    A$lab5-1$1390
-  0C:0093    A$lab5-1$1391
-  0C:0095    A$lab5-1$1392
-  0C:0097    A$lab5-1$1393
-  0C:0099    A$lab5-1$1394
-  0C:009C    A$lab5-1$1395
-  0C:009E    A$lab5-1$1396
-  0C:00A0    A$lab5-1$1397
-  0C:00A2    A$lab5-1$1400
-  0C:00A2    C$lab5_1.c$64$1$1
-  0C:00A4    A$lab5-1$1401
-  0C:00A6    A$lab5-1$1402
-  0C:00A8    A$lab5-1$1403
-  0C:00AA    A$lab5-1$1404
-  0C:00AC    A$lab5-1$1405
-  0C:00AE    A$lab5-1$1406
-  0C:00B1    A$lab5-1$1407
-  0C:00B3    A$lab5-1$1408
-  0C:00B5    A$lab5-1$1409
-  0C:00B7    A$lab5-1$1412
-  0C:00B7    C$lab5_1.c$65$1$1
-  0C:00B9    A$lab5-1$1413
-  0C:00BB    A$lab5-1$1414
-  0C:00BD    A$lab5-1$1415
-  0C:00BF    A$lab5-1$1416
-  0C:00C1    A$lab5-1$1417
-  0C:00C3    A$lab5-1$1418
-  0C:00C6    A$lab5-1$1419
-  0C:00C8    A$lab5-1$1420
-  0C:00CA    A$lab5-1$1421
-  0C:00CC    A$lab5-1$1424
-  0C:00CC    C$lab5_1.c$66$1$1
-  0C:00CF    A$lab5-1$1425
-  0C:00D1    A$lab5-1$1426
-  0C:00D2    A$lab5-1$1432
-  0C:00D2    C$lab5_1.c$67$1$1
-  0C:00D2    C$lab5_1.c$69$2$2
-  0C:00D5    A$lab5-1$1433
-  0C:00D6    A$lab5-1$1434
-  0C:00D7    A$lab5-1$1435
-  0C:00D9    A$lab5-1$1436
-  0C:00DB    A$lab5-1$1437
-  0C:00DD    A$lab5-1$1438
-  0C:00DF    A$lab5-1$1439
-  0C:00E1    A$lab5-1$1440
-  0C:00E3    A$lab5-1$1441
-  0C:00E5    A$lab5-1$1442
-  0C:00E7    A$lab5-1$1443
-  0C:00E9    A$lab5-1$1444
-  0C:00EC    A$lab5-1$1445
-  0C:00EE    A$lab5-1$1446
-  0C:00F0    A$lab5-1$1447
-  0C:00F2    A$lab5-1$1450
-  0C:00F2    C$lab5_1.c$70$2$2
-  0C:00F5    A$lab5-1$1451
-  0C:00F7    A$lab5-1$1452
-  0C:00FA    A$lab5-1$1453
-  0C:00FB    A$lab5-1$1456
-  0C:00FB    C$lab5_1.c$71$2$2
-  0C:00FE    A$lab5-1$1457
-  0C:00FF    A$lab5-1$1458
-  0C:0100    A$lab5-1$1459
-  0C:0102    A$lab5-1$1460
-  0C:0105    A$lab5-1$1461
-  0C:0106    A$lab5-1$1462
-  0C:0107    A$lab5-1$1463
-  0C:0109    A$lab5-1$1464
-  0C:010B    A$lab5-1$1465
-  0C:010D    A$lab5-1$1466
-  0C:010F    A$lab5-1$1467
-  0C:0111    A$lab5-1$1468
-  0C:0113    A$lab5-1$1469
-  0C:0115    A$lab5-1$1470
-  0C:0117    A$lab5-1$1471
-  0C:0119    A$lab5-1$1472
-  0C:011B    A$lab5-1$1473
-  0C:011D    A$lab5-1$1474
-  0C:0120    A$lab5-1$1475
-  0C:0122    A$lab5-1$1476
-  0C:0124    A$lab5-1$1477
-  0C:0126    A$lab5-1$1480
-  0C:0126    C$lab5_1.c$73$1$1
-  0C:0126    XG$main$0$0
-  0C:0128    A$lab5-1$1496
-  0C:0128    C$lab5_1.c$81$1$1
-  0C:0128    C$lab5_1.c$86$1$1
-  0C:0128    G$SYSCLK_INIT$0$0
-  0C:0128    _SYSCLK_INIT
-  0C:012A    A$lab5-1$1499
-  0C:012A    C$lab5_1.c$87$1$1
-  0C:012D    A$lab5-1$1502
-  0C:012D    C$lab5_1.c$89$1$1
-  0C:0130    A$lab5-1$1505
-  0C:0130    C$lab5_1.c$90$1$1
-  0C:0132    A$lab5-1$1506
-  0C:0134    A$lab5-1$1508
-  0C:0135    A$lab5-1$1509
-  0C:0138    A$lab5-1$1510
-  0C:0139    A$lab5-1$1512
-  0C:013A    A$lab5-1$1513
-  0C:013B    A$lab5-1$1514
-  0C:013D    A$lab5-1$1518
-  0C:013D    C$lab5_1.c$91$1$1
-  0C:013F    A$lab5-1$1519
-  0C:0142    A$lab5-1$1522
-  0C:0142    C$lab5_1.c$92$1$1
-  0C:0145    A$lab5-1$1525
-  0C:0145    C$lab5_1.c$93$1$1
-  0C:0148    A$lab5-1$1528
-  0C:0148    C$lab5_1.c$95$1$1
-  0C:014A    A$lab5-1$1531
-  0C:014A    C$lab5_1.c$96$1$1
-  0C:014A    XG$SYSCLK_INIT$0$0
-  0C:014B    A$lab5-1$1546
-  0C:014B    C$lab5_1.c$104$1$1
-  0C:014B    C$lab5_1.c$106$1$1
-  0C:014B    G$PORT_INIT$0$0
-  0C:014B    _PORT_INIT
-  0C:014D    A$lab5-1$1549
-  0C:014D    C$lab5_1.c$107$1$1
-  0C:0150    A$lab5-1$1552
-  0C:0150    C$lab5_1.c$109$1$1
-  0C:0153    A$lab5-1$1555
-  0C:0153    C$lab5_1.c$110$1$1
-  0C:0156    A$lab5-1$1558
-  0C:0156    C$lab5_1.c$111$1$1
-  0C:0159    A$lab5-1$1561
-  0C:0159    C$lab5_1.c$113$1$1
-  0C:015C    A$lab5-1$1564
-  0C:015C    C$lab5_1.c$114$1$1
-  0C:015F    A$lab5-1$1567
-  0C:015F    C$lab5_1.c$115$1$1
-  0C:0162    A$lab5-1$1570
-  0C:0162    C$lab5_1.c$116$1$1
-  0C:0165    A$lab5-1$1573
-  0C:0165    C$lab5_1.c$117$1$1
-  0C:0168    A$lab5-1$1576
-  0C:0168    C$lab5_1.c$119$1$1
-  0C:016B    A$lab5-1$1579
-  0C:016B    C$lab5_1.c$120$1$1
-  0C:016E    A$lab5-1$1582
-  0C:016E    C$lab5_1.c$121$1$1
-  0C:0171    A$lab5-1$1585
-  0C:0171    C$lab5_1.c$125$1$1
-  0C:0174    A$lab5-1$1588
-  0C:0174    C$lab5_1.c$126$1$1
-  0C:0177    A$lab5-1$1591
-  0C:0177    C$lab5_1.c$127$1$1
-  0C:017A    A$lab5-1$1594
-  0C:017A    C$lab5_1.c$129$1$1
-  0C:017C    A$lab5-1$1597
-  0C:017C    C$lab5_1.c$130$1$1
-  0C:017C    XG$PORT_INIT$0$0
-  0C:017D    A$lab5-1$1612
-  0C:017D    C$lab5_1.c$138$1$1
-  0C:017D    C$lab5_1.c$142$1$1
-  0C:017D    G$UART0_INIT$0$0
-  0C:017D    _UART0_INIT
-  0C:017F    A$lab5-1$1615
-  0C:017F    C$lab5_1.c$143$1$1
-  0C:0182    A$lab5-1$1618
-  0C:0182    C$lab5_1.c$145$1$1
-  0C:0185    A$lab5-1$1621
-  0C:0185    C$lab5_1.c$146$1$1
-  0C:0188    A$lab5-1$1624
-  0C:0188    C$lab5_1.c$147$1$1
-  0C:018B    A$lab5-1$1627
-  0C:018B    C$lab5_1.c$148$1$1
-  0C:018E    A$lab5-1$1630
-  0C:018E    C$lab5_1.c$150$1$1
-  0C:0191    A$lab5-1$1633
-  0C:0191    C$lab5_1.c$151$1$1
-  0C:0193    A$lab5-1$1636
-  0C:0193    C$lab5_1.c$153$1$1
-  0C:0196    A$lab5-1$1639
-  0C:0196    C$lab5_1.c$154$1$1
-  0C:0199    A$lab5-1$1642
-  0C:0199    C$lab5_1.c$155$1$1
-  0C:019C    A$lab5-1$1645
-  0C:019C    C$lab5_1.c$158$1$1
-  0C:019E    A$lab5-1$1648
-  0C:019E    C$lab5_1.c$160$1$1
-  0C:01A0    A$lab5-1$1651
-  0C:01A0    C$lab5_1.c$161$1$1
-  0C:01A0    XG$UART0_INIT$0$0
-  0C:01AC    _vprintf
-  0C:01C5    _printf
-  0C:0285    __print_format
-  0C:0773    _strlen
-  0C:078B    __gptrget
+  0C:0083    A$lab5-2$1399
+  0C:0085    A$lab5-2$1402
+  0C:0085    C$lab5_2.c$59$1$1
+  0C:0087    A$lab5-2$1403
+  0C:0089    A$lab5-2$1406
+  0C:0089    C$lab5_2.c$61$1$1
+  0C:008C    A$lab5-2$1407
+  0C:008F    A$lab5-2$1410
+  0C:008F    C$lab5_2.c$64$1$1
+  0C:0091    A$lab5-2$1411
+  0C:0093    A$lab5-2$1412
+  0C:0095    A$lab5-2$1413
+  0C:0097    A$lab5-2$1414
+  0C:009A    A$lab5-2$1417
+  0C:009A    C$lab5_2.c$65$1$1
+  0C:009D    A$lab5-2$1420
+  0C:009D    C$lab5_2.c$66$1$1
+  0C:00A0    A$lab5-2$1423
+  0C:00A0    C$lab5_2.c$68$1$1
+  0C:00A3    A$lab5-2$1426
+  0C:00A3    C$lab5_2.c$70$1$1
+  0C:00A5    A$lab5-2$1427
+  0C:00A7    A$lab5-2$1428
+  0C:00A9    A$lab5-2$1429
+  0C:00AB    A$lab5-2$1430
+  0C:00AD    A$lab5-2$1431
+  0C:00AF    A$lab5-2$1432
+  0C:00B2    A$lab5-2$1433
+  0C:00B4    A$lab5-2$1434
+  0C:00B6    A$lab5-2$1435
+  0C:00B8    A$lab5-2$1438
+  0C:00B8    C$lab5_2.c$71$1$1
+  0C:00BA    A$lab5-2$1439
+  0C:00BC    A$lab5-2$1440
+  0C:00BE    A$lab5-2$1441
+  0C:00C0    A$lab5-2$1442
+  0C:00C2    A$lab5-2$1443
+  0C:00C4    A$lab5-2$1444
+  0C:00C7    A$lab5-2$1445
+  0C:00C9    A$lab5-2$1446
+  0C:00CB    A$lab5-2$1447
+  0C:00CD    A$lab5-2$1448
+  0C:00CF    A$lab5-2$1449
+  0C:00D1    A$lab5-2$1450
+  0C:00D3    A$lab5-2$1451
+  0C:00D5    A$lab5-2$1454
+  0C:00D5    C$lab5_2.c$72$1$1
+  0C:00D8    A$lab5-2$1455
+  0C:00DA    A$lab5-2$1456
+  0C:00DB    A$lab5-2$1462
+  0C:00DB    C$lab5_2.c$73$1$1
+  0C:00DC    A$lab5-2$1463
+  0C:00DE    A$lab5-2$1464
+  0C:00E0    A$lab5-2$1465
+  0C:00E2    A$lab5-2$1466
+  0C:00E4    A$lab5-2$1467
+  0C:00E7    A$lab5-2$1468
+  0C:00EA    A$lab5-2$1470
+  0C:00EB    A$lab5-2$1471
+  0C:00ED    A$lab5-2$1472
+  0C:00EF    A$lab5-2$1473
+  0C:00F1    A$lab5-2$1474
+  0C:00F3    A$lab5-2$1475
+  0C:00F6    A$lab5-2$1479
+  0C:00F6    C$lab5_2.c$77$3$3
+  0C:00F8    A$lab5-2$1480
+  0C:00FA    A$lab5-2$1481
+  0C:00FB    A$lab5-2$1482
+  0C:00FD    A$lab5-2$1483
+  0C:00FF    A$lab5-2$1484
+  0C:0100    A$lab5-2$1485
+  0C:0102    A$lab5-2$1486
+  0C:0104    A$lab5-2$1487
+  0C:0106    A$lab5-2$1488
+  0C:0107    A$lab5-2$1491
+  0C:0107    C$lab5_2.c$79$3$3
+  0C:0109    A$lab5-2$1492
+  0C:010A    A$lab5-2$1493
+  0C:010D    A$lab5-2$1494
+  0C:010F    A$lab5-2$1498
+  0C:010F    C$lab5_2.c$80$3$3
+  0C:0111    A$lab5-2$1499
+  0C:0113    A$lab5-2$1500
+  0C:0114    A$lab5-2$1501
+  0C:0115    A$lab5-2$1502
+  0C:0118    A$lab5-2$1503
+  0C:011B    A$lab5-2$1507
+  0C:011B    C$lab5_2.c$83$4$4
+  0C:011C    A$lab5-2$1508
+  0C:011E    A$lab5-2$1509
+  0C:0120    A$lab5-2$1510
+  0C:0121    A$lab5-2$1511
+  0C:0123    A$lab5-2$1512
+  0C:0125    A$lab5-2$1513
+  0C:0127    A$lab5-2$1514
+  0C:0128    A$lab5-2$1515
+  0C:0129    A$lab5-2$1518
+  0C:0129    C$lab5_2.c$84$4$4
+  0C:012A    A$lab5-2$1519
+  0C:012D    A$lab5-2$1520
+  0C:012E    A$lab5-2$1524
+  0C:012E    C$lab5_2.c$86$4$4
+  0C:0131    A$lab5-2$1525
+  0C:0134    A$lab5-2$1528
+  0C:0134    C$lab5_2.c$88$5$5
+  0C:0136    A$lab5-2$1529
+  0C:0138    A$lab5-2$1530
+  0C:013A    A$lab5-2$1531
+  0C:013C    A$lab5-2$1532
+  0C:013E    A$lab5-2$1533
+  0C:0140    A$lab5-2$1534
+  0C:0143    A$lab5-2$1535
+  0C:0145    A$lab5-2$1536
+  0C:0147    A$lab5-2$1537
+  0C:0149    A$lab5-2$1540
+  0C:014B    A$lab5-2$1541
+  0C:014D    A$lab5-2$1542
+  0C:014F    A$lab5-2$1543
+  0C:0151    A$lab5-2$1545
+  0C:0152    A$lab5-2$1546
+  0C:0154    A$lab5-2$1547
+  0C:0156    A$lab5-2$1548
+  0C:0158    A$lab5-2$1549
+  0C:015A    A$lab5-2$1550
+  0C:015C    A$lab5-2$1551
+  0C:015E    A$lab5-2$1554
+  0C:015E    C$lab5_2.c$90$5$5
+  0C:0160    A$lab5-2$1555
+  0C:0162    A$lab5-2$1556
+  0C:0164    A$lab5-2$1557
+  0C:0166    A$lab5-2$1558
+  0C:0168    A$lab5-2$1559
+  0C:016A    A$lab5-2$1560
+  0C:016B    A$lab5-2$1561
+  0C:016C    A$lab5-2$1562
+  0C:016E    A$lab5-2$1563
+  0C:0170    A$lab5-2$1564
+  0C:0171    A$lab5-2$1565
+  0C:0172    A$lab5-2$1566
+  0C:0174    A$lab5-2$1567
+  0C:0176    A$lab5-2$1568
+  0C:0178    A$lab5-2$1569
+  0C:017A    A$lab5-2$1570
+  0C:017C    A$lab5-2$1571
+  0C:017E    A$lab5-2$1572
+  0C:0180    A$lab5-2$1573
+  0C:0182    A$lab5-2$1574
+  0C:0185    A$lab5-2$1575
+  0C:0187    A$lab5-2$1576
+  0C:0189    A$lab5-2$1577
+  0C:018B    A$lab5-2$1580
+  0C:018B    C$lab5_2.c$89$5$5
+  0C:018D    A$lab5-2$1581
+  0C:018E    A$lab5-2$1582
+  0C:0191    A$lab5-2$1583
+  0C:0193    A$lab5-2$1584
+  0C:0195    A$lab5-2$1588
+  0C:0195    C$lab5_2.c$91$5$5
+  0C:0197    A$lab5-2$1589
+  0C:0199    A$lab5-2$1593
+  0C:0199    C$lab5_2.c$75$2$2
+  0C:019B    A$lab5-2$1594
+  0C:019C    A$lab5-2$1595
+  0C:019F    A$lab5-2$1596
+  0C:01A1    A$lab5-2$1598
+  0C:01A4    A$lab5-2$1602
+  0C:01A4    C$lab5_2.c$95$2$2
+  0C:01A6    A$lab5-2$1603
+  0C:01A8    A$lab5-2$1606
+  0C:01A8    C$lab5_2.c$96$2$2
+  0C:01A9    A$lab5-2$1607
+  0C:01AA    A$lab5-2$1608
+  0C:01AB    A$lab5-2$1609
+  0C:01AD    A$lab5-2$1610
+  0C:01AF    A$lab5-2$1611
+  0C:01B2    A$lab5-2$1612
+  0C:01B4    A$lab5-2$1613
+  0C:01B6    A$lab5-2$1616
+  0C:01B8    A$lab5-2$1617
+  0C:01BA    A$lab5-2$1619
+  0C:01BB    A$lab5-2$1620
+  0C:01BC    A$lab5-2$1621
+  0C:01BD    A$lab5-2$1622
+  0C:01BE    A$lab5-2$1623
+  0C:01C0    A$lab5-2$1624
+  0C:01C2    A$lab5-2$1625
+  0C:01C5    A$lab5-2$1626
+  0C:01C7    A$lab5-2$1627
+  0C:01C9    A$lab5-2$1628
+  0C:01CC    A$lab5-2$1632
+  0C:01CC    C$lab5_2.c$99$3$6
+  0C:01CD    A$lab5-2$1633
+  0C:01CF    A$lab5-2$1634
+  0C:01D1    A$lab5-2$1635
+  0C:01D2    A$lab5-2$1636
+  0C:01D4    A$lab5-2$1637
+  0C:01D6    A$lab5-2$1638
+  0C:01D7    A$lab5-2$1639
+  0C:01D8    A$lab5-2$1640
+  0C:01DA    A$lab5-2$1641
+  0C:01DC    A$lab5-2$1642
+  0C:01DE    A$lab5-2$1643
+  0C:01E0    A$lab5-2$1644
+  0C:01E2    A$lab5-2$1645
+  0C:01E4    A$lab5-2$1646
+  0C:01E6    A$lab5-2$1647
+  0C:01E8    A$lab5-2$1648
+  0C:01EA    A$lab5-2$1649
+  0C:01EC    A$lab5-2$1650
+  0C:01EE    A$lab5-2$1651
+  0C:01F0    A$lab5-2$1652
+  0C:01F2    A$lab5-2$1653
+  0C:01F4    A$lab5-2$1654
+  0C:01F6    A$lab5-2$1655
+  0C:01F9    A$lab5-2$1656
+  0C:01FB    A$lab5-2$1657
+  0C:01FD    A$lab5-2$1658
+  0C:01FF    A$lab5-2$1659
+  0C:0201    A$lab5-2$1660
+  0C:0203    A$lab5-2$1661
+  0C:0205    A$lab5-2$1662
+  0C:0207    A$lab5-2$1663
+  0C:0209    A$lab5-2$1664
+  0C:020B    A$lab5-2$1667
+  0C:020B    C$lab5_2.c$98$3$6
+  0C:020C    A$lab5-2$1668
+  0C:020F    A$lab5-2$1669
+  0C:0210    A$lab5-2$1670
+  0C:0212    A$lab5-2$1674
+  0C:0212    C$lab5_2.c$103$3$7
+  0C:0214    A$lab5-2$1675
+  0C:0216    A$lab5-2$1676
+  0C:0218    A$lab5-2$1677
+  0C:021A    A$lab5-2$1678
+  0C:021C    A$lab5-2$1679
+  0C:021E    A$lab5-2$1680
+  0C:0220    A$lab5-2$1681
+  0C:0222    A$lab5-2$1682
+  0C:0224    A$lab5-2$1683
+  0C:0226    A$lab5-2$1684
+  0C:0229    A$lab5-2$1685
+  0C:022B    A$lab5-2$1686
+  0C:022D    A$lab5-2$1687
+  0C:022F    A$lab5-2$1688
+  0C:0231    A$lab5-2$1689
+  0C:0233    A$lab5-2$1690
+  0C:0235    A$lab5-2$1691
+  0C:0237    A$lab5-2$1694
+  0C:0237    C$lab5_2.c$106$1$1
+  0C:0237    XG$main$0$0
+  0C:023A    A$lab5-2$1710
+  0C:023A    C$lab5_2.c$114$1$1
+  0C:023A    C$lab5_2.c$119$1$1
+  0C:023A    G$SYSCLK_INIT$0$0
+  0C:023A    _SYSCLK_INIT
+  0C:023C    A$lab5-2$1713
+  0C:023C    C$lab5_2.c$120$1$1
+  0C:023F    A$lab5-2$1716
+  0C:023F    C$lab5_2.c$122$1$1
+  0C:0242    A$lab5-2$1719
+  0C:0242    C$lab5_2.c$123$1$1
+  0C:0244    A$lab5-2$1720
+  0C:0246    A$lab5-2$1722
+  0C:0247    A$lab5-2$1723
+  0C:024A    A$lab5-2$1724
+  0C:024B    A$lab5-2$1726
+  0C:024C    A$lab5-2$1727
+  0C:024D    A$lab5-2$1728
+  0C:024F    A$lab5-2$1732
+  0C:024F    C$lab5_2.c$124$1$1
+  0C:0251    A$lab5-2$1733
+  0C:0254    A$lab5-2$1736
+  0C:0254    C$lab5_2.c$125$1$1
+  0C:0257    A$lab5-2$1739
+  0C:0257    C$lab5_2.c$126$1$1
+  0C:025A    A$lab5-2$1742
+  0C:025A    C$lab5_2.c$128$1$1
+  0C:025C    A$lab5-2$1745
+  0C:025C    C$lab5_2.c$129$1$1
+  0C:025C    XG$SYSCLK_INIT$0$0
+  0C:025D    A$lab5-2$1760
+  0C:025D    C$lab5_2.c$137$1$1
+  0C:025D    C$lab5_2.c$139$1$1
+  0C:025D    G$PORT_INIT$0$0
+  0C:025D    _PORT_INIT
+  0C:025F    A$lab5-2$1763
+  0C:025F    C$lab5_2.c$140$1$1
+  0C:0262    A$lab5-2$1766
+  0C:0262    C$lab5_2.c$142$1$1
+  0C:0265    A$lab5-2$1769
+  0C:0265    C$lab5_2.c$143$1$1
+  0C:0268    A$lab5-2$1772
+  0C:0268    C$lab5_2.c$144$1$1
+  0C:026B    A$lab5-2$1775
+  0C:026B    C$lab5_2.c$146$1$1
+  0C:026E    A$lab5-2$1778
+  0C:026E    C$lab5_2.c$147$1$1
+  0C:0271    A$lab5-2$1781
+  0C:0271    C$lab5_2.c$148$1$1
+  0C:0274    A$lab5-2$1784
+  0C:0274    C$lab5_2.c$149$1$1
+  0C:0277    A$lab5-2$1787
+  0C:0277    C$lab5_2.c$150$1$1
+  0C:027A    A$lab5-2$1790
+  0C:027A    C$lab5_2.c$152$1$1
+  0C:027D    A$lab5-2$1793
+  0C:027D    C$lab5_2.c$153$1$1
+  0C:0280    A$lab5-2$1796
+  0C:0280    C$lab5_2.c$154$1$1
+  0C:0283    A$lab5-2$1799
+  0C:0283    C$lab5_2.c$158$1$1
+  0C:0286    A$lab5-2$1802
+  0C:0286    C$lab5_2.c$159$1$1
+  0C:0289    A$lab5-2$1805
+  0C:0289    C$lab5_2.c$160$1$1
+  0C:028C    A$lab5-2$1808
+  0C:028C    C$lab5_2.c$162$1$1
+  0C:028E    A$lab5-2$1811
+  0C:028E    C$lab5_2.c$163$1$1
+  0C:028E    XG$PORT_INIT$0$0
+  0C:028F    A$lab5-2$1826
+  0C:028F    C$lab5_2.c$171$1$1
+  0C:028F    C$lab5_2.c$175$1$1
+  0C:028F    G$UART0_INIT$0$0
+  0C:028F    _UART0_INIT
+  0C:0291    A$lab5-2$1829
+  0C:0291    C$lab5_2.c$176$1$1
+  0C:0294    A$lab5-2$1832
+  0C:0294    C$lab5_2.c$178$1$1
+  0C:0297    A$lab5-2$1835
+  0C:0297    C$lab5_2.c$179$1$1
+  0C:029A    A$lab5-2$1838
+  0C:029A    C$lab5_2.c$180$1$1
+  0C:029D    A$lab5-2$1841
+  0C:029D    C$lab5_2.c$181$1$1
+  0C:02A0    A$lab5-2$1844
+  0C:02A0    C$lab5_2.c$183$1$1
+  0C:02A3    A$lab5-2$1847
+  0C:02A3    C$lab5_2.c$184$1$1
+  0C:02A5    A$lab5-2$1850
+  0C:02A5    C$lab5_2.c$186$1$1
+  0C:02A8    A$lab5-2$1853
+  0C:02A8    C$lab5_2.c$187$1$1
+  0C:02AB    A$lab5-2$1856
+  0C:02AB    C$lab5_2.c$188$1$1
+  0C:02AE    A$lab5-2$1859
+  0C:02AE    C$lab5_2.c$191$1$1
+  0C:02B0    A$lab5-2$1862
+  0C:02B0    C$lab5_2.c$193$1$1
+  0C:02B2    A$lab5-2$1865
+  0C:02B2    C$lab5_2.c$194$1$1
+  0C:02B2    XG$UART0_INIT$0$0
+  0C:02BE    _vprintf
+  0C:02D7    _printf
+  0C:0397    __print_format
+  0C:0885    _strlen
+  0C:089D    __gptrget
 
 Hexadecimal
 
 Area                               Addr   Size   Decimal Bytes (Attributes)
 --------------------------------   ----   ----   ------- ----- ------------
-CONST                              07A7   0088 =    136. bytes (REL,CON,CODE)
+CONST                              08B9   004E =     78. bytes (REL,CON,CODE)
 
       Value  Global
    --------  --------------------------------
-  0C:07A7    Flab5_1$_str_0$0$0
-  0C:07AC    Flab5_1$_str_1$0$0
-  0C:07B9    Flab5_1$_str_2$0$0
-  0C:07C8    Flab5_1$_str_3$0$0
-  0C:07FD    Flab5_1$_str_4$0$0
+  0C:08B9    Flab5_2$_str_0$0$0
+  0C:08BE    Flab5_2$_str_1$0$0
+  0C:08CE    Flab5_2$_str_2$0$0
+  0C:08E0    Flab5_2$_str_3$0$0
+  0C:08E5    Flab5_2$_str_4$0$0
+  0C:08EA    Flab5_2$_str_5$0$0
 
 ASxxxx Linker V01.75 + NoICE + SDCC Feb 1999,  page 1.
 
 Files Linked      [ module(s) ]
 
-C:\Users\SSP\Documents\Microprocessor Systems\Lab 5\lab5-1.rel
+C:\Users\SSP\Documents\Microprocessor Systems\Lab 5\lab5-2.rel
 
 Libraries Linked            [   object  file   ]
 

@@ -1,9 +1,9 @@
                               1 ;--------------------------------------------------------
                               2 ; File Created by SDCC : free open source ANSI-C Compiler
                               3 ; Version 2.9.0 #5416 (Mar 22 2009) (MINGW32)
-                              4 ; This file was generated Mon Nov 12 18:41:36 2012
+                              4 ; This file was generated Mon Nov 12 21:02:40 2012
                               5 ;--------------------------------------------------------
-                              6 	.module lab5_1
+                              6 	.module lab5_3
                               7 	.optsdcc -mmcs51 --model-small
                               8 	
                               9 ;--------------------------------------------------------
@@ -1182,524 +1182,503 @@
                            1182 ; internal ram data
                            1183 ;--------------------------------------------------------
                            1184 	.area DSEG    (DATA)
-                    0000   1185 Lmain$p$1$1==.
-   0000                    1186 _main_p_1_1:
-   0000                    1187 	.ds 2
-                           1188 ;--------------------------------------------------------
-                           1189 ; overlayable items in internal ram 
-                           1190 ;--------------------------------------------------------
+                           1185 ;--------------------------------------------------------
+                           1186 ; overlayable items in internal ram 
+                           1187 ;--------------------------------------------------------
+                           1188 	.area	OSEG    (OVR,DATA)
+                           1189 	.area	OSEG    (OVR,DATA)
+                           1190 	.area	OSEG    (OVR,DATA)
                            1191 	.area	OSEG    (OVR,DATA)
                            1192 	.area	OSEG    (OVR,DATA)
-                           1193 	.area	OSEG    (OVR,DATA)
-                           1194 	.area	OSEG    (OVR,DATA)
-                           1195 	.area	OSEG    (OVR,DATA)
-                           1196 ;--------------------------------------------------------
-                           1197 ; Stack segment in internal ram 
-                           1198 ;--------------------------------------------------------
-                           1199 	.area	SSEG	(DATA)
-   0000                    1200 __start__stack:
-   0000                    1201 	.ds	1
-                           1202 
-                           1203 ;--------------------------------------------------------
-                           1204 ; indirectly addressable internal ram data
-                           1205 ;--------------------------------------------------------
-                           1206 	.area ISEG    (DATA)
-                           1207 ;--------------------------------------------------------
-                           1208 ; absolute internal ram data
+                           1193 ;--------------------------------------------------------
+                           1194 ; Stack segment in internal ram 
+                           1195 ;--------------------------------------------------------
+                           1196 	.area	SSEG	(DATA)
+   003B                    1197 __start__stack:
+   003B                    1198 	.ds	1
+                           1199 
+                           1200 ;--------------------------------------------------------
+                           1201 ; indirectly addressable internal ram data
+                           1202 ;--------------------------------------------------------
+                           1203 	.area ISEG    (DATA)
+                           1204 ;--------------------------------------------------------
+                           1205 ; absolute internal ram data
+                           1206 ;--------------------------------------------------------
+                           1207 	.area IABS    (ABS,DATA)
+                           1208 	.area IABS    (ABS,DATA)
                            1209 ;--------------------------------------------------------
-                           1210 	.area IABS    (ABS,DATA)
-                           1211 	.area IABS    (ABS,DATA)
-                           1212 ;--------------------------------------------------------
-                           1213 ; bit data
-                           1214 ;--------------------------------------------------------
-                           1215 	.area BSEG    (BIT)
-                           1216 ;--------------------------------------------------------
-                           1217 ; paged external ram data
-                           1218 ;--------------------------------------------------------
-                           1219 	.area PSEG    (PAG,XDATA)
-                           1220 ;--------------------------------------------------------
-                           1221 ; external ram data
-                           1222 ;--------------------------------------------------------
-                           1223 	.area XSEG    (XDATA)
-                           1224 ;--------------------------------------------------------
-                           1225 ; absolute external ram data
-                           1226 ;--------------------------------------------------------
-                           1227 	.area XABS    (ABS,XDATA)
-                           1228 ;--------------------------------------------------------
-                           1229 ; external initialized ram data
-                           1230 ;--------------------------------------------------------
-                           1231 	.area XISEG   (XDATA)
-                           1232 	.area HOME    (CODE)
-                           1233 	.area GSINIT0 (CODE)
-                           1234 	.area GSINIT1 (CODE)
-                           1235 	.area GSINIT2 (CODE)
-                           1236 	.area GSINIT3 (CODE)
-                           1237 	.area GSINIT4 (CODE)
-                           1238 	.area GSINIT5 (CODE)
-                           1239 	.area GSINIT  (CODE)
-                           1240 	.area GSFINAL (CODE)
-                           1241 	.area CSEG    (CODE)
-                           1242 ;--------------------------------------------------------
-                           1243 ; interrupt vector 
-                           1244 ;--------------------------------------------------------
-                           1245 	.area HOME    (CODE)
-   0000                    1246 __interrupt_vect:
-   0000 02s00r00           1247 	ljmp	__sdcc_gsinit_startup
-                           1248 ;--------------------------------------------------------
-                           1249 ; global & static initialisations
-                           1250 ;--------------------------------------------------------
-                           1251 	.area HOME    (CODE)
-                           1252 	.area GSINIT  (CODE)
-                           1253 	.area GSFINAL (CODE)
-                           1254 	.area GSINIT  (CODE)
-                           1255 	.globl __sdcc_gsinit_startup
-                           1256 	.globl __sdcc_program_startup
-                           1257 	.globl __start__stack
-                           1258 	.globl __mcs51_genXINIT
-                           1259 	.globl __mcs51_genXRAMCLEAR
-                           1260 	.globl __mcs51_genRAMCLEAR
-                           1261 	.area GSFINAL (CODE)
-   0000 02s00r03           1262 	ljmp	__sdcc_program_startup
-                           1263 ;--------------------------------------------------------
-                           1264 ; Home
-                           1265 ;--------------------------------------------------------
-                           1266 	.area HOME    (CODE)
-                           1267 	.area HOME    (CODE)
-   0003                    1268 __sdcc_program_startup:
-   0003 12s00r1D           1269 	lcall	_main
-                           1270 ;	return from main will lock up
-   0006 80 FE              1271 	sjmp .
-                           1272 ;--------------------------------------------------------
-                           1273 ; code
-                           1274 ;--------------------------------------------------------
-                           1275 	.area CSEG    (CODE)
-                           1276 ;------------------------------------------------------------
-                           1277 ;Allocation info for local variables in function 'putchar'
-                           1278 ;------------------------------------------------------------
-                           1279 ;c                         Allocated to registers r2 
-                           1280 ;------------------------------------------------------------
-                    0000   1281 	G$putchar$0$0 ==.
-                    0000   1282 	C$putget.h$18$0$0 ==.
-                           1283 ;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 5\/putget.h:18: void putchar(char c)
-                           1284 ;	-----------------------------------------
-                           1285 ;	 function putchar
-                           1286 ;	-----------------------------------------
-   0000                    1287 _putchar:
-                    0002   1288 	ar2 = 0x02
-                    0003   1289 	ar3 = 0x03
-                    0004   1290 	ar4 = 0x04
-                    0005   1291 	ar5 = 0x05
-                    0006   1292 	ar6 = 0x06
-                    0007   1293 	ar7 = 0x07
-                    0000   1294 	ar0 = 0x00
-                    0001   1295 	ar1 = 0x01
-   0000 AA 82              1296 	mov	r2,dpl
-                    0002   1297 	C$putget.h$20$1$1 ==.
-                           1298 ;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 5\/putget.h:20: while(!TI0); 
-   0002                    1299 00101$:
-                    0002   1300 	C$putget.h$21$1$1 ==.
-                           1301 ;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 5\/putget.h:21: TI0=0;
-   0002 10 99 02           1302 	jbc	_TI0,00108$
-   0005 80 FB              1303 	sjmp	00101$
-   0007                    1304 00108$:
-                    0007   1305 	C$putget.h$22$1$1 ==.
-                           1306 ;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 5\/putget.h:22: SBUF0 = c;
-   0007 8A 99              1307 	mov	_SBUF0,r2
-                    0009   1308 	C$putget.h$23$1$1 ==.
-                    0009   1309 	XG$putchar$0$0 ==.
-   0009 22                 1310 	ret
-                           1311 ;------------------------------------------------------------
-                           1312 ;Allocation info for local variables in function 'getchar'
-                           1313 ;------------------------------------------------------------
-                           1314 ;c                         Allocated to registers 
-                           1315 ;------------------------------------------------------------
-                    000A   1316 	G$getchar$0$0 ==.
-                    000A   1317 	C$putget.h$28$1$1 ==.
-                           1318 ;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 5\/putget.h:28: char getchar(void)
-                           1319 ;	-----------------------------------------
-                           1320 ;	 function getchar
-                           1321 ;	-----------------------------------------
-   000A                    1322 _getchar:
-                    000A   1323 	C$putget.h$31$1$1 ==.
-                           1324 ;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 5\/putget.h:31: while(!RI0);
-   000A                    1325 00101$:
-                    000A   1326 	C$putget.h$32$1$1 ==.
-                           1327 ;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 5\/putget.h:32: RI0 =0;
-   000A 10 98 02           1328 	jbc	_RI0,00108$
-   000D 80 FB              1329 	sjmp	00101$
-   000F                    1330 00108$:
-                    000F   1331 	C$putget.h$33$1$1 ==.
-                           1332 ;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 5\/putget.h:33: c = SBUF0;
-   000F 85 99 82           1333 	mov	dpl,_SBUF0
-                    0012   1334 	C$putget.h$35$1$1 ==.
-                           1335 ;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 5\/putget.h:35: return c;
-                    0012   1336 	C$putget.h$36$1$1 ==.
-                    0012   1337 	XG$getchar$0$0 ==.
-   0012 22                 1338 	ret
+                           1210 ; bit data
+                           1211 ;--------------------------------------------------------
+                           1212 	.area BSEG    (BIT)
+                           1213 ;--------------------------------------------------------
+                           1214 ; paged external ram data
+                           1215 ;--------------------------------------------------------
+                           1216 	.area PSEG    (PAG,XDATA)
+                           1217 ;--------------------------------------------------------
+                           1218 ; external ram data
+                           1219 ;--------------------------------------------------------
+                           1220 	.area XSEG    (XDATA)
+                           1221 ;--------------------------------------------------------
+                           1222 ; absolute external ram data
+                           1223 ;--------------------------------------------------------
+                           1224 	.area XABS    (ABS,XDATA)
+                           1225 ;--------------------------------------------------------
+                           1226 ; external initialized ram data
+                           1227 ;--------------------------------------------------------
+                           1228 	.area XISEG   (XDATA)
+                           1229 	.area HOME    (CODE)
+                           1230 	.area GSINIT0 (CODE)
+                           1231 	.area GSINIT1 (CODE)
+                           1232 	.area GSINIT2 (CODE)
+                           1233 	.area GSINIT3 (CODE)
+                           1234 	.area GSINIT4 (CODE)
+                           1235 	.area GSINIT5 (CODE)
+                           1236 	.area GSINIT  (CODE)
+                           1237 	.area GSFINAL (CODE)
+                           1238 	.area CSEG    (CODE)
+                           1239 ;--------------------------------------------------------
+                           1240 ; interrupt vector 
+                           1241 ;--------------------------------------------------------
+                           1242 	.area HOME    (CODE)
+   0000                    1243 __interrupt_vect:
+   0000 02 00 08           1244 	ljmp	__sdcc_gsinit_startup
+                           1245 ;--------------------------------------------------------
+                           1246 ; global & static initialisations
+                           1247 ;--------------------------------------------------------
+                           1248 	.area HOME    (CODE)
+                           1249 	.area GSINIT  (CODE)
+                           1250 	.area GSFINAL (CODE)
+                           1251 	.area GSINIT  (CODE)
+                           1252 	.globl __sdcc_gsinit_startup
+                           1253 	.globl __sdcc_program_startup
+                           1254 	.globl __start__stack
+                           1255 	.globl __mcs51_genXINIT
+                           1256 	.globl __mcs51_genXRAMCLEAR
+                           1257 	.globl __mcs51_genRAMCLEAR
+                           1258 	.area GSFINAL (CODE)
+   0061 02 00 03           1259 	ljmp	__sdcc_program_startup
+                           1260 ;--------------------------------------------------------
+                           1261 ; Home
+                           1262 ;--------------------------------------------------------
+                           1263 	.area HOME    (CODE)
+                           1264 	.area HOME    (CODE)
+   0003                    1265 __sdcc_program_startup:
+   0003 12 00 81           1266 	lcall	_main
+                           1267 ;	return from main will lock up
+   0006 80 FE              1268 	sjmp .
+                           1269 ;--------------------------------------------------------
+                           1270 ; code
+                           1271 ;--------------------------------------------------------
+                           1272 	.area CSEG    (CODE)
+                           1273 ;------------------------------------------------------------
+                           1274 ;Allocation info for local variables in function 'putchar'
+                           1275 ;------------------------------------------------------------
+                           1276 ;c                         Allocated to registers r2 
+                           1277 ;------------------------------------------------------------
+                    0000   1278 	G$putchar$0$0 ==.
+                    0000   1279 	C$putget.h$18$0$0 ==.
+                           1280 ;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 5\/putget.h:18: void putchar(char c)
+                           1281 ;	-----------------------------------------
+                           1282 ;	 function putchar
+                           1283 ;	-----------------------------------------
+   0064                    1284 _putchar:
+                    0002   1285 	ar2 = 0x02
+                    0003   1286 	ar3 = 0x03
+                    0004   1287 	ar4 = 0x04
+                    0005   1288 	ar5 = 0x05
+                    0006   1289 	ar6 = 0x06
+                    0007   1290 	ar7 = 0x07
+                    0000   1291 	ar0 = 0x00
+                    0001   1292 	ar1 = 0x01
+   0064 AA 82              1293 	mov	r2,dpl
+                    0002   1294 	C$putget.h$20$1$1 ==.
+                           1295 ;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 5\/putget.h:20: while(!TI0); 
+   0066                    1296 00101$:
+                    0002   1297 	C$putget.h$21$1$1 ==.
+                           1298 ;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 5\/putget.h:21: TI0=0;
+   0066 10 99 02           1299 	jbc	_TI0,00108$
+   0069 80 FB              1300 	sjmp	00101$
+   006B                    1301 00108$:
+                    0007   1302 	C$putget.h$22$1$1 ==.
+                           1303 ;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 5\/putget.h:22: SBUF0 = c;
+   006B 8A 99              1304 	mov	_SBUF0,r2
+                    0009   1305 	C$putget.h$23$1$1 ==.
+                    0009   1306 	XG$putchar$0$0 ==.
+   006D 22                 1307 	ret
+                           1308 ;------------------------------------------------------------
+                           1309 ;Allocation info for local variables in function 'getchar'
+                           1310 ;------------------------------------------------------------
+                           1311 ;c                         Allocated to registers 
+                           1312 ;------------------------------------------------------------
+                    000A   1313 	G$getchar$0$0 ==.
+                    000A   1314 	C$putget.h$28$1$1 ==.
+                           1315 ;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 5\/putget.h:28: char getchar(void)
+                           1316 ;	-----------------------------------------
+                           1317 ;	 function getchar
+                           1318 ;	-----------------------------------------
+   006E                    1319 _getchar:
+                    000A   1320 	C$putget.h$31$1$1 ==.
+                           1321 ;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 5\/putget.h:31: while(!RI0);
+   006E                    1322 00101$:
+                    000A   1323 	C$putget.h$32$1$1 ==.
+                           1324 ;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 5\/putget.h:32: RI0 =0;
+   006E 10 98 02           1325 	jbc	_RI0,00108$
+   0071 80 FB              1326 	sjmp	00101$
+   0073                    1327 00108$:
+                    000F   1328 	C$putget.h$33$1$1 ==.
+                           1329 ;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 5\/putget.h:33: c = SBUF0;
+   0073 85 99 82           1330 	mov	dpl,_SBUF0
+                    0012   1331 	C$putget.h$35$1$1 ==.
+                           1332 ;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 5\/putget.h:35: return c;
+                    0012   1333 	C$putget.h$36$1$1 ==.
+                    0012   1334 	XG$getchar$0$0 ==.
+   0076 22                 1335 	ret
+                           1336 ;------------------------------------------------------------
+                           1337 ;Allocation info for local variables in function '_sdcc_external_startup'
+                           1338 ;------------------------------------------------------------
                            1339 ;------------------------------------------------------------
-                           1340 ;Allocation info for local variables in function '_sdcc_external_startup'
-                           1341 ;------------------------------------------------------------
-                           1342 ;------------------------------------------------------------
-                    0013   1343 	G$_sdcc_external_startup$0$0 ==.
-                    0013   1344 	C$lab5_1.c$42$1$1 ==.
-                           1345 ;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 5\lab5-1.c:42: unsigned char _sdcc_external_startup(void)
-                           1346 ;	-----------------------------------------
-                           1347 ;	 function _sdcc_external_startup
-                           1348 ;	-----------------------------------------
-   0013                    1349 __sdcc_external_startup:
-                    0013   1350 	C$lab5_1.c$44$1$1 ==.
-                           1351 ;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 5\lab5-1.c:44: WDTCN = 0xDE;   // Disable the watchdog timer
-   0013 75 FF DE           1352 	mov	_WDTCN,#0xDE
-                    0016   1353 	C$lab5_1.c$45$1$1 ==.
-                           1354 ;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 5\lab5-1.c:45: WDTCN = 0xAD;
-   0016 75 FF AD           1355 	mov	_WDTCN,#0xAD
-                    0019   1356 	C$lab5_1.c$47$1$1 ==.
-                           1357 ;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 5\lab5-1.c:47: return 0;       // init everything else normally
-   0019 75 82 00           1358 	mov	dpl,#0x00
-                    001C   1359 	C$lab5_1.c$48$1$1 ==.
-                    001C   1360 	XG$_sdcc_external_startup$0$0 ==.
-   001C 22                 1361 	ret
-                           1362 ;------------------------------------------------------------
-                           1363 ;Allocation info for local variables in function 'main'
-                           1364 ;------------------------------------------------------------
-                           1365 ;p                         Allocated with name '_main_p_1_1'
-                           1366 ;mem                       Allocated to registers r2 r3 
-                           1367 ;i                         Allocated to registers r6 r7 
-                           1368 ;------------------------------------------------------------
-                    001D   1369 	G$main$0$0 ==.
-                    001D   1370 	C$lab5_1.c$52$1$1 ==.
-                           1371 ;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 5\lab5-1.c:52: void main(void)
-                           1372 ;	-----------------------------------------
-                           1373 ;	 function main
-                           1374 ;	-----------------------------------------
-   001D                    1375 _main:
-                    001D   1376 	C$lab5_1.c$55$1$1 ==.
-                           1377 ;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 5\lab5-1.c:55: int mem = 0x2000;
-   001D 7A 00              1378 	mov	r2,#0x00
-   001F 7B 20              1379 	mov	r3,#0x20
-                    0021   1380 	C$lab5_1.c$58$1$1 ==.
-                           1381 ;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 5\lab5-1.c:58: p = (__xdata unsigned char*)(0x2000);
-   0021 75*00 00           1382 	mov	_main_p_1_1,#0x00
-   0024 75*01 20           1383 	mov	(_main_p_1_1 + 1),#0x20
-                    0027   1384 	C$lab5_1.c$61$1$1 ==.
-                           1385 ;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 5\lab5-1.c:61: SYSCLK_INIT();          // Initialize the oscillator
-   0027 C0 02              1386 	push	ar2
-   0029 C0 03              1387 	push	ar3
-   002B 12s00rD1           1388 	lcall	_SYSCLK_INIT
-                    002E   1389 	C$lab5_1.c$62$1$1 ==.
-                           1390 ;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 5\lab5-1.c:62: PORT_INIT();            // Initialize the Crossbar and GPIO
-   002E 12s00rF4           1391 	lcall	_PORT_INIT
-                    0031   1392 	C$lab5_1.c$63$1$1 ==.
-                           1393 ;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 5\lab5-1.c:63: UART0_INIT();           // Initialize UART0
-   0031 12s01r26           1394 	lcall	_UART0_INIT
-                    0034   1395 	C$lab5_1.c$65$1$1 ==.
-                           1396 ;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 5\lab5-1.c:65: SFRPAGE = UART0_PAGE;   // Direct output to UART0
-   0034 75 84 00           1397 	mov	_SFRPAGE,#0x00
-                    0037   1398 	C$lab5_1.c$67$1$1 ==.
-                           1399 ;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 5\lab5-1.c:67: printf("\033[2J");     // Erase ANSI terminal & move cursor to home position
-   0037 74r00              1400 	mov	a,#__str_0
-   0039 C0 E0              1401 	push	acc
-   003B 74s00              1402 	mov	a,#(__str_0 >> 8)
-   003D C0 E0              1403 	push	acc
-   003F 74 80              1404 	mov	a,#0x80
-   0041 C0 E0              1405 	push	acc
-   0043 12s00r00           1406 	lcall	_printf
-   0046 15 81              1407 	dec	sp
-   0048 15 81              1408 	dec	sp
-   004A 15 81              1409 	dec	sp
-                    004C   1410 	C$lab5_1.c$68$1$1 ==.
-                           1411 ;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 5\lab5-1.c:68: printf("crystal fair\n\n\r");
-   004C 74r05              1412 	mov	a,#__str_1
-   004E C0 E0              1413 	push	acc
-   0050 74s00              1414 	mov	a,#(__str_1 >> 8)
-   0052 C0 E0              1415 	push	acc
-   0054 74 80              1416 	mov	a,#0x80
-   0056 C0 E0              1417 	push	acc
-   0058 12s00r00           1418 	lcall	_printf
-   005B 15 81              1419 	dec	sp
-   005D 15 81              1420 	dec	sp
-   005F 15 81              1421 	dec	sp
-   0061 D0 03              1422 	pop	ar3
-   0063 D0 02              1423 	pop	ar2
-                    0065   1424 	C$lab5_1.c$69$1$1 ==.
-                           1425 ;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 5\lab5-1.c:69: *p = 'a';
-   0065 90 20 00           1426 	mov	dptr,#0x2000
-   0068 74 61              1427 	mov	a,#0x61
-   006A F0                 1428 	movx	@dptr,a
-                    006B   1429 	C$lab5_1.c$70$1$1 ==.
-                           1430 ;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 5\lab5-1.c:70: while(1)
-   006B                    1431 00102$:
-                    006B   1432 	C$lab5_1.c$72$2$2 ==.
-                           1433 ;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 5\lab5-1.c:72: for(i=0; i<0x900;i++)
-   006B 7E 00              1434 	mov	r6,#0x00
-   006D 7F 00              1435 	mov	r7,#0x00
-   006F 8A 00              1436 	mov	ar0,r2
-   0071 8B 01              1437 	mov	ar1,r3
-   0073                    1438 00104$:
-   0073 C3                 1439 	clr	c
-   0074 EF                 1440 	mov	a,r7
-   0075 64 80              1441 	xrl	a,#0x80
-   0077 94 89              1442 	subb	a,#0x89
-   0079 50 50              1443 	jnc	00107$
-                    007B   1444 	C$lab5_1.c$74$3$3 ==.
-                           1445 ;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 5\lab5-1.c:74: p[i] = 0xAA;
-   007B EE                 1446 	mov	a,r6
-   007C 25*00              1447 	add	a,_main_p_1_1
-   007E FC                 1448 	mov	r4,a
-   007F EF                 1449 	mov	a,r7
-   0080 35*01              1450 	addc	a,(_main_p_1_1 + 1)
-   0082 FD                 1451 	mov	r5,a
-   0083 8C 82              1452 	mov	dpl,r4
-   0085 8D 83              1453 	mov	dph,r5
-   0087 74 AA              1454 	mov	a,#0xAA
-   0089 F0                 1455 	movx	@dptr,a
-                    008A   1456 	C$lab5_1.c$75$3$3 ==.
-                           1457 ;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 5\lab5-1.c:75: printf("\r\nCharacter stored in memory %x: %x\r\n", mem, p[i]);
-   008A 8C 82              1458 	mov	dpl,r4
-   008C 8D 83              1459 	mov	dph,r5
-   008E E0                 1460 	movx	a,@dptr
-   008F FC                 1461 	mov	r4,a
-   0090 7D 00              1462 	mov	r5,#0x00
-   0092 C0 06              1463 	push	ar6
-   0094 C0 07              1464 	push	ar7
-   0096 C0 00              1465 	push	ar0
-   0098 C0 01              1466 	push	ar1
-   009A C0 04              1467 	push	ar4
-   009C C0 05              1468 	push	ar5
-   009E C0 00              1469 	push	ar0
-   00A0 C0 01              1470 	push	ar1
-   00A2 74r15              1471 	mov	a,#__str_2
-   00A4 C0 E0              1472 	push	acc
-   00A6 74s00              1473 	mov	a,#(__str_2 >> 8)
-   00A8 C0 E0              1474 	push	acc
-   00AA 74 80              1475 	mov	a,#0x80
-   00AC C0 E0              1476 	push	acc
-   00AE 12s00r00           1477 	lcall	_printf
-   00B1 E5 81              1478 	mov	a,sp
-   00B3 24 F9              1479 	add	a,#0xf9
-   00B5 F5 81              1480 	mov	sp,a
-   00B7 D0 01              1481 	pop	ar1
-   00B9 D0 00              1482 	pop	ar0
-   00BB D0 07              1483 	pop	ar7
-   00BD D0 06              1484 	pop	ar6
-                    00BF   1485 	C$lab5_1.c$76$3$3 ==.
-                           1486 ;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 5\lab5-1.c:76: mem++;
-   00BF 08                 1487 	inc	r0
-   00C0 B8 00 01           1488 	cjne	r0,#0x00,00115$
-   00C3 09                 1489 	inc	r1
-   00C4                    1490 00115$:
-                    00C4   1491 	C$lab5_1.c$72$2$2 ==.
-                           1492 ;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 5\lab5-1.c:72: for(i=0; i<0x900;i++)
-   00C4 0E                 1493 	inc	r6
-   00C5 BE 00 AB           1494 	cjne	r6,#0x00,00104$
-   00C8 0F                 1495 	inc	r7
-   00C9 80 A8              1496 	sjmp	00104$
-   00CB                    1497 00107$:
-                    00CB   1498 	C$lab5_1.c$78$2$2 ==.
-                           1499 ;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 5\lab5-1.c:78: mem=0x2000;
-   00CB 7A 00              1500 	mov	r2,#0x00
-   00CD 7B 20              1501 	mov	r3,#0x20
-                    00CF   1502 	C$lab5_1.c$80$1$1 ==.
-                    00CF   1503 	XG$main$0$0 ==.
-   00CF 80 9A              1504 	sjmp	00102$
-                           1505 ;------------------------------------------------------------
-                           1506 ;Allocation info for local variables in function 'SYSCLK_INIT'
-                           1507 ;------------------------------------------------------------
-                           1508 ;i                         Allocated to registers r3 r4 
-                           1509 ;SFRPAGE_SAVE              Allocated to registers r2 
-                           1510 ;------------------------------------------------------------
-                    00D1   1511 	G$SYSCLK_INIT$0$0 ==.
-                    00D1   1512 	C$lab5_1.c$88$1$1 ==.
-                           1513 ;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 5\lab5-1.c:88: void SYSCLK_INIT(void)
-                           1514 ;	-----------------------------------------
-                           1515 ;	 function SYSCLK_INIT
-                           1516 ;	-----------------------------------------
-   00D1                    1517 _SYSCLK_INIT:
-                    00D1   1518 	C$lab5_1.c$93$1$1 ==.
-                           1519 ;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 5\lab5-1.c:93: SFRPAGE_SAVE = SFRPAGE;     // Save Current SFR page SFRPAGE = CONFIG_PAGE;
-   00D1 AA 84              1520 	mov	r2,_SFRPAGE
-                    00D3   1521 	C$lab5_1.c$94$1$1 ==.
-                           1522 ;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 5\lab5-1.c:94: SFRPAGE = CONFIG_PAGE;
-   00D3 75 84 0F           1523 	mov	_SFRPAGE,#0x0F
-                    00D6   1524 	C$lab5_1.c$96$1$1 ==.
-                           1525 ;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 5\lab5-1.c:96: OSCXCN = 0x67;              // Start ext osc with 22.1184MHz crystal
-   00D6 75 8C 67           1526 	mov	_OSCXCN,#0x67
-                    00D9   1527 	C$lab5_1.c$97$1$1 ==.
-                           1528 ;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 5\lab5-1.c:97: for(i=0; i < 3000; i++);    // Wait for the oscillator to start up
-   00D9 7B B8              1529 	mov	r3,#0xB8
-   00DB 7C 0B              1530 	mov	r4,#0x0B
-   00DD                    1531 00106$:
-   00DD 1B                 1532 	dec	r3
-   00DE BB FF 01           1533 	cjne	r3,#0xff,00114$
-   00E1 1C                 1534 	dec	r4
-   00E2                    1535 00114$:
-   00E2 EB                 1536 	mov	a,r3
-   00E3 4C                 1537 	orl	a,r4
-   00E4 70 F7              1538 	jnz	00106$
-                    00E6   1539 	C$lab5_1.c$98$1$1 ==.
-                           1540 ;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 5\lab5-1.c:98: while(!(OSCXCN & 0x80));
-   00E6                    1541 00101$:
-   00E6 E5 8C              1542 	mov	a,_OSCXCN
-   00E8 30 E7 FB           1543 	jnb	acc.7,00101$
-                    00EB   1544 	C$lab5_1.c$99$1$1 ==.
-                           1545 ;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 5\lab5-1.c:99: CLKSEL = 0x01;              // Switch to the external crystal oscillator
-   00EB 75 97 01           1546 	mov	_CLKSEL,#0x01
-                    00EE   1547 	C$lab5_1.c$100$1$1 ==.
-                           1548 ;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 5\lab5-1.c:100: OSCICN = 0x00	;              // Disable the internal oscillator
-   00EE 75 8A 00           1549 	mov	_OSCICN,#0x00
-                    00F1   1550 	C$lab5_1.c$102$1$1 ==.
-                           1551 ;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 5\lab5-1.c:102: SFRPAGE = SFRPAGE_SAVE;     // Restore SFR page
-   00F1 8A 84              1552 	mov	_SFRPAGE,r2
-                    00F3   1553 	C$lab5_1.c$103$1$1 ==.
-                    00F3   1554 	XG$SYSCLK_INIT$0$0 ==.
-   00F3 22                 1555 	ret
-                           1556 ;------------------------------------------------------------
-                           1557 ;Allocation info for local variables in function 'PORT_INIT'
-                           1558 ;------------------------------------------------------------
-                           1559 ;SFRPAGE_SAVE              Allocated to registers r2 
-                           1560 ;------------------------------------------------------------
-                    00F4   1561 	G$PORT_INIT$0$0 ==.
-                    00F4   1562 	C$lab5_1.c$111$1$1 ==.
-                           1563 ;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 5\lab5-1.c:111: void PORT_INIT(void)
-                           1564 ;	-----------------------------------------
-                           1565 ;	 function PORT_INIT
-                           1566 ;	-----------------------------------------
-   00F4                    1567 _PORT_INIT:
-                    00F4   1568 	C$lab5_1.c$113$1$1 ==.
-                           1569 ;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 5\lab5-1.c:113: char SFRPAGE_SAVE = SFRPAGE;    // Save Current SFR page
-   00F4 AA 84              1570 	mov	r2,_SFRPAGE
-                    00F6   1571 	C$lab5_1.c$114$1$1 ==.
-                           1572 ;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 5\lab5-1.c:114: SFRPAGE = CONFIG_PAGE;
-   00F6 75 84 0F           1573 	mov	_SFRPAGE,#0x0F
-                    00F9   1574 	C$lab5_1.c$116$1$1 ==.
-                           1575 ;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 5\lab5-1.c:116: XBR0 = 0x04;        // Enable UART0
-   00F9 75 E1 04           1576 	mov	_XBR0,#0x04
-                    00FC   1577 	C$lab5_1.c$117$1$1 ==.
-                           1578 ;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 5\lab5-1.c:117: XBR1 = 0x00;
-   00FC 75 E2 00           1579 	mov	_XBR1,#0x00
-                    00FF   1580 	C$lab5_1.c$118$1$1 ==.
-                           1581 ;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 5\lab5-1.c:118: XBR2 = 0x40;        // Enable Crossbar and weak pull-up
-   00FF 75 E3 40           1582 	mov	_XBR2,#0x40
-                    0102   1583 	C$lab5_1.c$120$1$1 ==.
-                           1584 ;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 5\lab5-1.c:120: P0MDOUT |= 0x01;    // Set TX0 pin to push-pull
-   0102 43 A4 01           1585 	orl	_P0MDOUT,#0x01
-                    0105   1586 	C$lab5_1.c$121$1$1 ==.
-                           1587 ;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 5\lab5-1.c:121: P4MDOUT = 0xFF;     // Output configuration for P4 all pushpull
-   0105 75 9C FF           1588 	mov	_P4MDOUT,#0xFF
-                    0108   1589 	C$lab5_1.c$122$1$1 ==.
-                           1590 ;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 5\lab5-1.c:122: P5MDOUT = 0xFF;     // Output configuration for P5 pushpull EM addr
-   0108 75 9D FF           1591 	mov	_P5MDOUT,#0xFF
-                    010B   1592 	C$lab5_1.c$123$1$1 ==.
-                           1593 ;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 5\lab5-1.c:123: P6MDOUT = 0xFF;     // Output configuration for P6 pushpull EM addr
-   010B 75 9E FF           1594 	mov	_P6MDOUT,#0xFF
-                    010E   1595 	C$lab5_1.c$124$1$1 ==.
-                           1596 ;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 5\lab5-1.c:124: P7MDOUT = 0xFF;     // Output configuration for P7 pushpull EM data
-   010E 75 9F FF           1597 	mov	_P7MDOUT,#0xFF
-                    0111   1598 	C$lab5_1.c$126$1$1 ==.
-                           1599 ;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 5\lab5-1.c:126: P5 = 0xFF;
-   0111 75 D8 FF           1600 	mov	_P5,#0xFF
-                    0114   1601 	C$lab5_1.c$127$1$1 ==.
-                           1602 ;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 5\lab5-1.c:127: P6 = 0xFF;
-   0114 75 E8 FF           1603 	mov	_P6,#0xFF
-                    0117   1604 	C$lab5_1.c$128$1$1 ==.
-                           1605 ;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 5\lab5-1.c:128: P7 = 0xFF;
-   0117 75 F8 FF           1606 	mov	_P7,#0xFF
-                    011A   1607 	C$lab5_1.c$132$1$1 ==.
-                           1608 ;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 5\lab5-1.c:132: SFRPAGE = EMI0_PAGE;
-   011A 75 84 00           1609 	mov	_SFRPAGE,#0x00
-                    011D   1610 	C$lab5_1.c$133$1$1 ==.
-                           1611 ;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 5\lab5-1.c:133: EMI0CF = 0x3b;              //34
-   011D 75 A3 3B           1612 	mov	_EMI0CF,#0x3B
-                    0120   1613 	C$lab5_1.c$134$1$1 ==.
-                           1614 ;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 5\lab5-1.c:134: EMI0TC = 0xFF;
-   0120 75 A1 FF           1615 	mov	_EMI0TC,#0xFF
-                    0123   1616 	C$lab5_1.c$136$1$1 ==.
-                           1617 ;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 5\lab5-1.c:136: SFRPAGE = SFRPAGE_SAVE;     // Restore SFR page
-   0123 8A 84              1618 	mov	_SFRPAGE,r2
-                    0125   1619 	C$lab5_1.c$137$1$1 ==.
-                    0125   1620 	XG$PORT_INIT$0$0 ==.
-   0125 22                 1621 	ret
-                           1622 ;------------------------------------------------------------
-                           1623 ;Allocation info for local variables in function 'UART0_INIT'
-                           1624 ;------------------------------------------------------------
-                           1625 ;SFRPAGE_SAVE              Allocated to registers r2 
-                           1626 ;------------------------------------------------------------
-                    0126   1627 	G$UART0_INIT$0$0 ==.
-                    0126   1628 	C$lab5_1.c$145$1$1 ==.
-                           1629 ;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 5\lab5-1.c:145: void UART0_INIT(void)
-                           1630 ;	-----------------------------------------
-                           1631 ;	 function UART0_INIT
-                           1632 ;	-----------------------------------------
-   0126                    1633 _UART0_INIT:
-                    0126   1634 	C$lab5_1.c$149$1$1 ==.
-                           1635 ;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 5\lab5-1.c:149: SFRPAGE_SAVE = SFRPAGE;     // Save Current SFR page
-   0126 AA 84              1636 	mov	r2,_SFRPAGE
-                    0128   1637 	C$lab5_1.c$150$1$1 ==.
-                           1638 ;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 5\lab5-1.c:150: SFRPAGE = TIMER01_PAGE;
-   0128 75 84 00           1639 	mov	_SFRPAGE,#0x00
-                    012B   1640 	C$lab5_1.c$152$1$1 ==.
-                           1641 ;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 5\lab5-1.c:152: TCON = 0x40;
-   012B 75 88 40           1642 	mov	_TCON,#0x40
-                    012E   1643 	C$lab5_1.c$153$1$1 ==.
-                           1644 ;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 5\lab5-1.c:153: TMOD &= 0x0F;
-   012E 53 89 0F           1645 	anl	_TMOD,#0x0F
-                    0131   1646 	C$lab5_1.c$154$1$1 ==.
-                           1647 ;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 5\lab5-1.c:154: TMOD |= 0x20;               // Timer1, Mode 2, 8-bit reload
-   0131 43 89 20           1648 	orl	_TMOD,#0x20
-                    0134   1649 	C$lab5_1.c$155$1$1 ==.
-                           1650 ;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 5\lab5-1.c:155: CKCON |= 0x10;              // Timer1 uses SYSCLK as time base
-   0134 43 8E 10           1651 	orl	_CKCON,#0x10
-                    0137   1652 	C$lab5_1.c$157$1$1 ==.
-                           1653 ;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 5\lab5-1.c:157: TH1 = 0xE8;                 // 0xE8 = 232
-   0137 75 8D E8           1654 	mov	_TH1,#0xE8
-                    013A   1655 	C$lab5_1.c$158$1$1 ==.
-                           1656 ;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 5\lab5-1.c:158: TR1 = 1;                    // Start Timer1
-   013A D2 8E              1657 	setb	_TR1
-                    013C   1658 	C$lab5_1.c$160$1$1 ==.
-                           1659 ;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 5\lab5-1.c:160: SFRPAGE = UART0_PAGE;
-   013C 75 84 00           1660 	mov	_SFRPAGE,#0x00
-                    013F   1661 	C$lab5_1.c$161$1$1 ==.
-                           1662 ;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 5\lab5-1.c:161: SCON0 = 0x50;               // Mode 1, 8-bit UART, enable RX
-   013F 75 98 50           1663 	mov	_SCON0,#0x50
-                    0142   1664 	C$lab5_1.c$162$1$1 ==.
-                           1665 ;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 5\lab5-1.c:162: SSTA0 = 0x00;               // SMOD0 = 0, in this mode
-   0142 75 91 00           1666 	mov	_SSTA0,#0x00
-                    0145   1667 	C$lab5_1.c$165$1$1 ==.
-                           1668 ;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 5\lab5-1.c:165: TI0 = 1;                    // Indicate TX0 ready
-   0145 D2 99              1669 	setb	_TI0
-                    0147   1670 	C$lab5_1.c$167$1$1 ==.
-                           1671 ;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 5\lab5-1.c:167: SFRPAGE = SFRPAGE_SAVE;     // Restore SFR page
-   0147 8A 84              1672 	mov	_SFRPAGE,r2
-                    0149   1673 	C$lab5_1.c$168$1$1 ==.
-                    0149   1674 	XG$UART0_INIT$0$0 ==.
-   0149 22                 1675 	ret
-                           1676 	.area CSEG    (CODE)
-                           1677 	.area CONST   (CODE)
-                    0000   1678 Flab5_1$_str_0$0$0 == .
-   0000                    1679 __str_0:
-   0000 1B                 1680 	.db 0x1B
-   0001 5B 32 4A           1681 	.ascii "[2J"
-   0004 00                 1682 	.db 0x00
-                    0005   1683 Flab5_1$_str_1$0$0 == .
-   0005                    1684 __str_1:
-   0005 63 72 79 73 74 61  1685 	.ascii "crystal fair"
+                    0013   1340 	G$_sdcc_external_startup$0$0 ==.
+                    0013   1341 	C$lab5_3.c$42$1$1 ==.
+                           1342 ;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 5\lab5-3.c:42: unsigned char _sdcc_external_startup(void)
+                           1343 ;	-----------------------------------------
+                           1344 ;	 function _sdcc_external_startup
+                           1345 ;	-----------------------------------------
+   0077                    1346 __sdcc_external_startup:
+                    0013   1347 	C$lab5_3.c$44$1$1 ==.
+                           1348 ;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 5\lab5-3.c:44: WDTCN = 0xDE;   // Disable the watchdog timer
+   0077 75 FF DE           1349 	mov	_WDTCN,#0xDE
+                    0016   1350 	C$lab5_3.c$45$1$1 ==.
+                           1351 ;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 5\lab5-3.c:45: WDTCN = 0xAD;
+   007A 75 FF AD           1352 	mov	_WDTCN,#0xAD
+                    0019   1353 	C$lab5_3.c$47$1$1 ==.
+                           1354 ;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 5\lab5-3.c:47: return 0;       // init everything else normally
+   007D 75 82 00           1355 	mov	dpl,#0x00
+                    001C   1356 	C$lab5_3.c$48$1$1 ==.
+                    001C   1357 	XG$_sdcc_external_startup$0$0 ==.
+   0080 22                 1358 	ret
+                           1359 ;------------------------------------------------------------
+                           1360 ;Allocation info for local variables in function 'main'
+                           1361 ;------------------------------------------------------------
+                           1362 ;p                         Allocated to registers r6 r7 
+                           1363 ;mem                       Allocated to registers r2 r3 
+                           1364 ;i                         Allocated to registers r4 r5 
+                           1365 ;------------------------------------------------------------
+                    001D   1366 	G$main$0$0 ==.
+                    001D   1367 	C$lab5_3.c$52$1$1 ==.
+                           1368 ;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 5\lab5-3.c:52: void main(void)
+                           1369 ;	-----------------------------------------
+                           1370 ;	 function main
+                           1371 ;	-----------------------------------------
+   0081                    1372 _main:
+                    001D   1373 	C$lab5_3.c$55$1$1 ==.
+                           1374 ;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 5\lab5-3.c:55: int mem = 0x2000;
+   0081 7A 00              1375 	mov	r2,#0x00
+   0083 7B 20              1376 	mov	r3,#0x20
+                    0021   1377 	C$lab5_3.c$61$1$1 ==.
+                           1378 ;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 5\lab5-3.c:61: SYSCLK_INIT();          // Initialize the oscillator
+   0085 C0 02              1379 	push	ar2
+   0087 C0 03              1380 	push	ar3
+   0089 12 01 19           1381 	lcall	_SYSCLK_INIT
+                    0028   1382 	C$lab5_3.c$62$1$1 ==.
+                           1383 ;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 5\lab5-3.c:62: PORT_INIT();            // Initialize the Crossbar and GPIO
+   008C 12 01 3C           1384 	lcall	_PORT_INIT
+                    002B   1385 	C$lab5_3.c$63$1$1 ==.
+                           1386 ;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 5\lab5-3.c:63: UART0_INIT();           // Initialize UART0
+   008F 12 01 6E           1387 	lcall	_UART0_INIT
+                    002E   1388 	C$lab5_3.c$65$1$1 ==.
+                           1389 ;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 5\lab5-3.c:65: SFRPAGE = UART0_PAGE;   // Direct output to UART0
+   0092 75 84 00           1390 	mov	_SFRPAGE,#0x00
+                    0031   1391 	C$lab5_3.c$67$1$1 ==.
+                           1392 ;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 5\lab5-3.c:67: printf("\033[2J");     // Erase ANSI terminal & move cursor to home position
+   0095 74 98              1393 	mov	a,#__str_0
+   0097 C0 E0              1394 	push	acc
+   0099 74 07              1395 	mov	a,#(__str_0 >> 8)
+   009B C0 E0              1396 	push	acc
+   009D 74 80              1397 	mov	a,#0x80
+   009F C0 E0              1398 	push	acc
+   00A1 12 01 B6           1399 	lcall	_printf
+   00A4 15 81              1400 	dec	sp
+   00A6 15 81              1401 	dec	sp
+   00A8 15 81              1402 	dec	sp
+                    0046   1403 	C$lab5_3.c$68$1$1 ==.
+                           1404 ;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 5\lab5-3.c:68: printf("crystal fair\n\n\r");
+   00AA 74 9D              1405 	mov	a,#__str_1
+   00AC C0 E0              1406 	push	acc
+   00AE 74 07              1407 	mov	a,#(__str_1 >> 8)
+   00B0 C0 E0              1408 	push	acc
+   00B2 74 80              1409 	mov	a,#0x80
+   00B4 C0 E0              1410 	push	acc
+   00B6 12 01 B6           1411 	lcall	_printf
+   00B9 15 81              1412 	dec	sp
+   00BB 15 81              1413 	dec	sp
+   00BD 15 81              1414 	dec	sp
+   00BF D0 03              1415 	pop	ar3
+   00C1 D0 02              1416 	pop	ar2
+                    005F   1417 	C$lab5_3.c$69$1$1 ==.
+                           1418 ;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 5\lab5-3.c:69: *p = 'a';
+   00C3 90 20 00           1419 	mov	dptr,#0x2000
+   00C6 74 61              1420 	mov	a,#0x61
+   00C8 F0                 1421 	movx	@dptr,a
+                    0065   1422 	C$lab5_3.c$70$1$1 ==.
+                           1423 ;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 5\lab5-3.c:70: while(1)
+   00C9                    1424 00102$:
+                    0065   1425 	C$lab5_3.c$72$2$2 ==.
+                           1426 ;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 5\lab5-3.c:72: for(i=0x0600; i<0x1100;i++)
+   00C9 7C 00              1427 	mov	r4,#0x00
+   00CB 7D 06              1428 	mov	r5,#0x06
+   00CD                    1429 00104$:
+   00CD C3                 1430 	clr	c
+   00CE ED                 1431 	mov	a,r5
+   00CF 64 80              1432 	xrl	a,#0x80
+   00D1 94 91              1433 	subb	a,#0x91
+   00D3 50 F4              1434 	jnc	00102$
+                    0071   1435 	C$lab5_3.c$74$3$3 ==.
+                           1436 ;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 5\lab5-3.c:74: p = (__xdata unsigned char*)(mem);
+   00D5 8A 06              1437 	mov	ar6,r2
+   00D7 8B 07              1438 	mov	ar7,r3
+                    0075   1439 	C$lab5_3.c$75$3$3 ==.
+                           1440 ;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 5\lab5-3.c:75: *p = 0;
+   00D9 8E 82              1441 	mov	dpl,r6
+   00DB 8F 83              1442 	mov	dph,r7
+   00DD E4                 1443 	clr	a
+   00DE F0                 1444 	movx	@dptr,a
+                    007B   1445 	C$lab5_3.c$76$3$3 ==.
+                           1446 ;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 5\lab5-3.c:76: printf("\r\nCharacter stored in memory %x: %x\r\n", mem, *p);
+   00DF 8E 82              1447 	mov	dpl,r6
+   00E1 8F 83              1448 	mov	dph,r7
+   00E3 E0                 1449 	movx	a,@dptr
+   00E4 FE                 1450 	mov	r6,a
+   00E5 7F 00              1451 	mov	r7,#0x00
+   00E7 C0 04              1452 	push	ar4
+   00E9 C0 05              1453 	push	ar5
+   00EB C0 06              1454 	push	ar6
+   00ED C0 07              1455 	push	ar7
+   00EF C0 02              1456 	push	ar2
+   00F1 C0 03              1457 	push	ar3
+   00F3 74 AD              1458 	mov	a,#__str_2
+   00F5 C0 E0              1459 	push	acc
+   00F7 74 07              1460 	mov	a,#(__str_2 >> 8)
+   00F9 C0 E0              1461 	push	acc
+   00FB 74 80              1462 	mov	a,#0x80
+   00FD C0 E0              1463 	push	acc
+   00FF 12 01 B6           1464 	lcall	_printf
+   0102 E5 81              1465 	mov	a,sp
+   0104 24 F9              1466 	add	a,#0xf9
+   0106 F5 81              1467 	mov	sp,a
+   0108 D0 05              1468 	pop	ar5
+   010A D0 04              1469 	pop	ar4
+                    00A8   1470 	C$lab5_3.c$77$3$3 ==.
+                           1471 ;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 5\lab5-3.c:77: mem = 0x2000 + i;
+   010C 8C 02              1472 	mov	ar2,r4
+   010E 74 20              1473 	mov	a,#0x20
+   0110 2D                 1474 	add	a,r5
+   0111 FB                 1475 	mov	r3,a
+                    00AE   1476 	C$lab5_3.c$72$2$2 ==.
+                           1477 ;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 5\lab5-3.c:72: for(i=0x0600; i<0x1100;i++)
+   0112 0C                 1478 	inc	r4
+   0113 BC 00 B7           1479 	cjne	r4,#0x00,00104$
+   0116 0D                 1480 	inc	r5
+                    00B3   1481 	C$lab5_3.c$80$1$1 ==.
+                    00B3   1482 	XG$main$0$0 ==.
+   0117 80 B4              1483 	sjmp	00104$
+                           1484 ;------------------------------------------------------------
+                           1485 ;Allocation info for local variables in function 'SYSCLK_INIT'
+                           1486 ;------------------------------------------------------------
+                           1487 ;i                         Allocated to registers r3 r4 
+                           1488 ;SFRPAGE_SAVE              Allocated to registers r2 
+                           1489 ;------------------------------------------------------------
+                    00B5   1490 	G$SYSCLK_INIT$0$0 ==.
+                    00B5   1491 	C$lab5_3.c$88$1$1 ==.
+                           1492 ;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 5\lab5-3.c:88: void SYSCLK_INIT(void)
+                           1493 ;	-----------------------------------------
+                           1494 ;	 function SYSCLK_INIT
+                           1495 ;	-----------------------------------------
+   0119                    1496 _SYSCLK_INIT:
+                    00B5   1497 	C$lab5_3.c$93$1$1 ==.
+                           1498 ;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 5\lab5-3.c:93: SFRPAGE_SAVE = SFRPAGE;     // Save Current SFR page SFRPAGE = CONFIG_PAGE;
+   0119 AA 84              1499 	mov	r2,_SFRPAGE
+                    00B7   1500 	C$lab5_3.c$94$1$1 ==.
+                           1501 ;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 5\lab5-3.c:94: SFRPAGE = CONFIG_PAGE;
+   011B 75 84 0F           1502 	mov	_SFRPAGE,#0x0F
+                    00BA   1503 	C$lab5_3.c$96$1$1 ==.
+                           1504 ;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 5\lab5-3.c:96: OSCXCN = 0x67;              // Start ext osc with 22.1184MHz crystal
+   011E 75 8C 67           1505 	mov	_OSCXCN,#0x67
+                    00BD   1506 	C$lab5_3.c$97$1$1 ==.
+                           1507 ;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 5\lab5-3.c:97: for(i=0; i < 3000; i++);    // Wait for the oscillator to start up
+   0121 7B B8              1508 	mov	r3,#0xB8
+   0123 7C 0B              1509 	mov	r4,#0x0B
+   0125                    1510 00106$:
+   0125 1B                 1511 	dec	r3
+   0126 BB FF 01           1512 	cjne	r3,#0xff,00114$
+   0129 1C                 1513 	dec	r4
+   012A                    1514 00114$:
+   012A EB                 1515 	mov	a,r3
+   012B 4C                 1516 	orl	a,r4
+   012C 70 F7              1517 	jnz	00106$
+                    00CA   1518 	C$lab5_3.c$98$1$1 ==.
+                           1519 ;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 5\lab5-3.c:98: while(!(OSCXCN & 0x80));
+   012E                    1520 00101$:
+   012E E5 8C              1521 	mov	a,_OSCXCN
+   0130 30 E7 FB           1522 	jnb	acc.7,00101$
+                    00CF   1523 	C$lab5_3.c$99$1$1 ==.
+                           1524 ;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 5\lab5-3.c:99: CLKSEL = 0x01;              // Switch to the external crystal oscillator
+   0133 75 97 01           1525 	mov	_CLKSEL,#0x01
+                    00D2   1526 	C$lab5_3.c$100$1$1 ==.
+                           1527 ;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 5\lab5-3.c:100: OSCICN = 0x00	;              // Disable the internal oscillator
+   0136 75 8A 00           1528 	mov	_OSCICN,#0x00
+                    00D5   1529 	C$lab5_3.c$102$1$1 ==.
+                           1530 ;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 5\lab5-3.c:102: SFRPAGE = SFRPAGE_SAVE;     // Restore SFR page
+   0139 8A 84              1531 	mov	_SFRPAGE,r2
+                    00D7   1532 	C$lab5_3.c$103$1$1 ==.
+                    00D7   1533 	XG$SYSCLK_INIT$0$0 ==.
+   013B 22                 1534 	ret
+                           1535 ;------------------------------------------------------------
+                           1536 ;Allocation info for local variables in function 'PORT_INIT'
+                           1537 ;------------------------------------------------------------
+                           1538 ;SFRPAGE_SAVE              Allocated to registers r2 
+                           1539 ;------------------------------------------------------------
+                    00D8   1540 	G$PORT_INIT$0$0 ==.
+                    00D8   1541 	C$lab5_3.c$111$1$1 ==.
+                           1542 ;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 5\lab5-3.c:111: void PORT_INIT(void)
+                           1543 ;	-----------------------------------------
+                           1544 ;	 function PORT_INIT
+                           1545 ;	-----------------------------------------
+   013C                    1546 _PORT_INIT:
+                    00D8   1547 	C$lab5_3.c$113$1$1 ==.
+                           1548 ;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 5\lab5-3.c:113: char SFRPAGE_SAVE = SFRPAGE;    // Save Current SFR page
+   013C AA 84              1549 	mov	r2,_SFRPAGE
+                    00DA   1550 	C$lab5_3.c$114$1$1 ==.
+                           1551 ;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 5\lab5-3.c:114: SFRPAGE = CONFIG_PAGE;
+   013E 75 84 0F           1552 	mov	_SFRPAGE,#0x0F
+                    00DD   1553 	C$lab5_3.c$116$1$1 ==.
+                           1554 ;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 5\lab5-3.c:116: XBR0 = 0x04;        // Enable UART0
+   0141 75 E1 04           1555 	mov	_XBR0,#0x04
+                    00E0   1556 	C$lab5_3.c$117$1$1 ==.
+                           1557 ;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 5\lab5-3.c:117: XBR1 = 0x00;
+   0144 75 E2 00           1558 	mov	_XBR1,#0x00
+                    00E3   1559 	C$lab5_3.c$118$1$1 ==.
+                           1560 ;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 5\lab5-3.c:118: XBR2 = 0x40;        // Enable Crossbar and weak pull-up
+   0147 75 E3 40           1561 	mov	_XBR2,#0x40
+                    00E6   1562 	C$lab5_3.c$120$1$1 ==.
+                           1563 ;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 5\lab5-3.c:120: P0MDOUT |= 0x01;    // Set TX0 pin to push-pull
+   014A 43 A4 01           1564 	orl	_P0MDOUT,#0x01
+                    00E9   1565 	C$lab5_3.c$121$1$1 ==.
+                           1566 ;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 5\lab5-3.c:121: P4MDOUT = 0xFF;     // Output configuration for P4 all pushpull
+   014D 75 9C FF           1567 	mov	_P4MDOUT,#0xFF
+                    00EC   1568 	C$lab5_3.c$122$1$1 ==.
+                           1569 ;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 5\lab5-3.c:122: P5MDOUT = 0xFF;     // Output configuration for P5 pushpull EM addr
+   0150 75 9D FF           1570 	mov	_P5MDOUT,#0xFF
+                    00EF   1571 	C$lab5_3.c$123$1$1 ==.
+                           1572 ;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 5\lab5-3.c:123: P6MDOUT = 0xFF;     // Output configuration for P6 pushpull EM addr
+   0153 75 9E FF           1573 	mov	_P6MDOUT,#0xFF
+                    00F2   1574 	C$lab5_3.c$124$1$1 ==.
+                           1575 ;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 5\lab5-3.c:124: P7MDOUT = 0xFF;     // Output configuration for P7 pushpull EM data
+   0156 75 9F FF           1576 	mov	_P7MDOUT,#0xFF
+                    00F5   1577 	C$lab5_3.c$126$1$1 ==.
+                           1578 ;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 5\lab5-3.c:126: P5 = 0xFF;
+   0159 75 D8 FF           1579 	mov	_P5,#0xFF
+                    00F8   1580 	C$lab5_3.c$127$1$1 ==.
+                           1581 ;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 5\lab5-3.c:127: P6 = 0xFF;
+   015C 75 E8 FF           1582 	mov	_P6,#0xFF
+                    00FB   1583 	C$lab5_3.c$128$1$1 ==.
+                           1584 ;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 5\lab5-3.c:128: P7 = 0xFF;
+   015F 75 F8 FF           1585 	mov	_P7,#0xFF
+                    00FE   1586 	C$lab5_3.c$132$1$1 ==.
+                           1587 ;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 5\lab5-3.c:132: SFRPAGE = EMI0_PAGE;
+   0162 75 84 00           1588 	mov	_SFRPAGE,#0x00
+                    0101   1589 	C$lab5_3.c$133$1$1 ==.
+                           1590 ;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 5\lab5-3.c:133: EMI0CF = 0x3b;              //34
+   0165 75 A3 3B           1591 	mov	_EMI0CF,#0x3B
+                    0104   1592 	C$lab5_3.c$134$1$1 ==.
+                           1593 ;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 5\lab5-3.c:134: EMI0TC = 0xFF;
+   0168 75 A1 FF           1594 	mov	_EMI0TC,#0xFF
+                    0107   1595 	C$lab5_3.c$136$1$1 ==.
+                           1596 ;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 5\lab5-3.c:136: SFRPAGE = SFRPAGE_SAVE;     // Restore SFR page
+   016B 8A 84              1597 	mov	_SFRPAGE,r2
+                    0109   1598 	C$lab5_3.c$137$1$1 ==.
+                    0109   1599 	XG$PORT_INIT$0$0 ==.
+   016D 22                 1600 	ret
+                           1601 ;------------------------------------------------------------
+                           1602 ;Allocation info for local variables in function 'UART0_INIT'
+                           1603 ;------------------------------------------------------------
+                           1604 ;SFRPAGE_SAVE              Allocated to registers r2 
+                           1605 ;------------------------------------------------------------
+                    010A   1606 	G$UART0_INIT$0$0 ==.
+                    010A   1607 	C$lab5_3.c$145$1$1 ==.
+                           1608 ;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 5\lab5-3.c:145: void UART0_INIT(void)
+                           1609 ;	-----------------------------------------
+                           1610 ;	 function UART0_INIT
+                           1611 ;	-----------------------------------------
+   016E                    1612 _UART0_INIT:
+                    010A   1613 	C$lab5_3.c$149$1$1 ==.
+                           1614 ;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 5\lab5-3.c:149: SFRPAGE_SAVE = SFRPAGE;     // Save Current SFR page
+   016E AA 84              1615 	mov	r2,_SFRPAGE
+                    010C   1616 	C$lab5_3.c$150$1$1 ==.
+                           1617 ;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 5\lab5-3.c:150: SFRPAGE = TIMER01_PAGE;
+   0170 75 84 00           1618 	mov	_SFRPAGE,#0x00
+                    010F   1619 	C$lab5_3.c$152$1$1 ==.
+                           1620 ;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 5\lab5-3.c:152: TCON = 0x40;
+   0173 75 88 40           1621 	mov	_TCON,#0x40
+                    0112   1622 	C$lab5_3.c$153$1$1 ==.
+                           1623 ;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 5\lab5-3.c:153: TMOD &= 0x0F;
+   0176 53 89 0F           1624 	anl	_TMOD,#0x0F
+                    0115   1625 	C$lab5_3.c$154$1$1 ==.
+                           1626 ;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 5\lab5-3.c:154: TMOD |= 0x20;               // Timer1, Mode 2, 8-bit reload
+   0179 43 89 20           1627 	orl	_TMOD,#0x20
+                    0118   1628 	C$lab5_3.c$155$1$1 ==.
+                           1629 ;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 5\lab5-3.c:155: CKCON |= 0x10;              // Timer1 uses SYSCLK as time base
+   017C 43 8E 10           1630 	orl	_CKCON,#0x10
+                    011B   1631 	C$lab5_3.c$157$1$1 ==.
+                           1632 ;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 5\lab5-3.c:157: TH1 = 0xE8;                 // 0xE8 = 232
+   017F 75 8D E8           1633 	mov	_TH1,#0xE8
+                    011E   1634 	C$lab5_3.c$158$1$1 ==.
+                           1635 ;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 5\lab5-3.c:158: TR1 = 1;                    // Start Timer1
+   0182 D2 8E              1636 	setb	_TR1
+                    0120   1637 	C$lab5_3.c$160$1$1 ==.
+                           1638 ;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 5\lab5-3.c:160: SFRPAGE = UART0_PAGE;
+   0184 75 84 00           1639 	mov	_SFRPAGE,#0x00
+                    0123   1640 	C$lab5_3.c$161$1$1 ==.
+                           1641 ;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 5\lab5-3.c:161: SCON0 = 0x50;               // Mode 1, 8-bit UART, enable RX
+   0187 75 98 50           1642 	mov	_SCON0,#0x50
+                    0126   1643 	C$lab5_3.c$162$1$1 ==.
+                           1644 ;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 5\lab5-3.c:162: SSTA0 = 0x00;               // SMOD0 = 0, in this mode
+   018A 75 91 00           1645 	mov	_SSTA0,#0x00
+                    0129   1646 	C$lab5_3.c$165$1$1 ==.
+                           1647 ;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 5\lab5-3.c:165: TI0 = 1;                    // Indicate TX0 ready
+   018D D2 99              1648 	setb	_TI0
+                    012B   1649 	C$lab5_3.c$167$1$1 ==.
+                           1650 ;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 5\lab5-3.c:167: SFRPAGE = SFRPAGE_SAVE;     // Restore SFR page
+   018F 8A 84              1651 	mov	_SFRPAGE,r2
+                    012D   1652 	C$lab5_3.c$168$1$1 ==.
+                    012D   1653 	XG$UART0_INIT$0$0 ==.
+   0191 22                 1654 	ret
+                           1655 	.area CSEG    (CODE)
+                           1656 	.area CONST   (CODE)
+                    0000   1657 Flab5_3$_str_0$0$0 == .
+   0798                    1658 __str_0:
+   0798 1B                 1659 	.db 0x1B
+   0799 5B 32 4A           1660 	.ascii "[2J"
+   079C 00                 1661 	.db 0x00
+                    0005   1662 Flab5_3$_str_1$0$0 == .
+   079D                    1663 __str_1:
+   079D 63 72 79 73 74 61  1664 	.ascii "crystal fair"
         6C 20 66 61 69 72
-   0011 0A                 1686 	.db 0x0A
-   0012 0A                 1687 	.db 0x0A
-   0013 0D                 1688 	.db 0x0D
-   0014 00                 1689 	.db 0x00
-                    0015   1690 Flab5_1$_str_2$0$0 == .
-   0015                    1691 __str_2:
-   0015 0D                 1692 	.db 0x0D
-   0016 0A                 1693 	.db 0x0A
-   0017 43 68 61 72 61 63  1694 	.ascii "Character stored in memory %x: %x"
+   07A9 0A                 1665 	.db 0x0A
+   07AA 0A                 1666 	.db 0x0A
+   07AB 0D                 1667 	.db 0x0D
+   07AC 00                 1668 	.db 0x00
+                    0015   1669 Flab5_3$_str_2$0$0 == .
+   07AD                    1670 __str_2:
+   07AD 0D                 1671 	.db 0x0D
+   07AE 0A                 1672 	.db 0x0A
+   07AF 43 68 61 72 61 63  1673 	.ascii "Character stored in memory %x: %x"
         74 65 72 20 73 74
         6F 72 65 64 20 69
         6E 20 6D 65 6D 6F
         72 79 20 25 78 3A
         20 25 78
-   0038 0D                 1695 	.db 0x0D
-   0039 0A                 1696 	.db 0x0A
-   003A 00                 1697 	.db 0x00
-                           1698 	.area XINIT   (CODE)
-                           1699 	.area CABS    (ABS,CODE)
+   07D0 0D                 1674 	.db 0x0D
+   07D1 0A                 1675 	.db 0x0A
+   07D2 00                 1676 	.db 0x00
+                           1677 	.area XINIT   (CODE)
+                           1678 	.area CABS    (ABS,CODE)

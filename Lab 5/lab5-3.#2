@@ -51,7 +51,7 @@ unsigned char _sdcc_external_startup(void)
 //------------------------------------------------------------------------------------
 void main(void)
 {
-    xdata unsigned char *p;
+    __xdata unsigned char *p;
 	int mem = 0x2000;
 	int i;
 
@@ -69,13 +69,13 @@ void main(void)
     *p = 'a';
     while(1)
     {
-		for(i=0; i<0x900;i++)
+		for(i=0x0900; i<0x1100;i++)
 		{
-			p[i] = 0xAA;
-			printf("\r\nCharacter stored in memory %x: %x\r\n", mem, p[i]);
-			mem++;
+			p = (__xdata unsigned char*)(mem);
+			*p = 0;
+			printf("\r\nCharacter stored in memory %x: %x\r\n", mem, *p);
+			mem = 0x2000 + i;
 		}
-		mem=0x2000;
     }
 }
 

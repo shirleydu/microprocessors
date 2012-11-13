@@ -55,6 +55,9 @@ void main(void)
 	int mem = 0x2000;
 	int i;
 
+	unsigned static char __xdata count[256];
+	int buf = 0;
+	int j;
 	p = (__xdata unsigned char*)(0x2000);
 	
 
@@ -69,13 +72,36 @@ void main(void)
     *p = 'a';
     while(1)
     {
-		for(i=0; i<0x900;i++)
+		for(i=0; i<0x800;i++)
 		{
-			p[i] = 0xAA;
-			printf("\r\nCharacter stored in memory %x: %x\r\n", mem, p[i]);
+			p[i] = 0x55;
+			//printf("\r\nCharacter stored in memory %x: %x\r\n", mem, p[i]);
 			mem++;
+			if (p[i] != 0x55)
+			{
+				//printf("error\n\r");
+				count[buf] = i;
+				buf++;
+
+				if (buf == 255)
+				{
+					printf("dumping buffer:\n\r");
+					for(j=0; j<255; j++)
+						printf("%x\n\r", count[j]+0x2000);
+					buf = 0;
+				}
+			}
 		}
 		mem=0x2000;
+		if(buf > 0)
+		{
+			for(j=0; j<buf; j++)
+				printf("%d\n\r", count[j]);
+		}
+		else
+		{
+			printf("no errors found\n\r");
+		}
     }
 }
 

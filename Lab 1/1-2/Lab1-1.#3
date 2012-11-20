@@ -43,7 +43,9 @@ void main(void)
 	//print the program info
 	printf("Returns input char. To exit hit ESC.\n\n\r");
 
-	while(1)
+	P1 = 0x0F;
+
+	/*while(1)
 	{
 		choice=getchar();
 		if (choice >= 32 && choice <= 126)
@@ -59,7 +61,7 @@ void main(void)
 			}
 		}
 
-	}
+	}*/
 }
 
 //------------------------------------------------------------------------------------

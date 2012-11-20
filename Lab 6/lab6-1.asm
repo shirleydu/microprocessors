@@ -1,9 +1,9 @@
 ;--------------------------------------------------------
 ; File Created by SDCC : free open source ANSI-C Compiler
 ; Version 2.9.0 #5416 (Mar 22 2009) (MINGW32)
-; This file was generated Mon Nov 19 17:53:36 2012
+; This file was generated Mon Nov 19 16:01:35 2012
 ;--------------------------------------------------------
-	.module lab2_3
+	.module lab6_1
 	.optsdcc -mmcs51 --model-small
 	
 ;--------------------------------------------------------
@@ -392,24 +392,18 @@
 	.globl _DPL
 	.globl _SP
 	.globl _P0
-	.globl _gameStarted
-	.globl _buttonPressed
-	.globl _n
-	.globl _total
-	.globl _bounce
-	.globl _overflows
+	.globl _seed
 	.globl _putchar
 	.globl _getchar
 	.globl _main
-	.globl _playGame
-	.globl _SW1_ISR
-	.globl _SW2_ISR
+	.globl _printMenu
+	.globl _yesNo
+	.globl _trueFalse
+	.globl _dayOfWeek
+	.globl _randomNumber
 	.globl _Timer0_Init
 	.globl _Timer0_ISR
-	.globl _Timer2_Init
-	.globl _Timer2_ISR
 	.globl _SYSCLK_INIT
-	.globl _SYSCLK_INIT2
 	.globl _PORT_INIT
 	.globl _UART0_INIT
 ;--------------------------------------------------------
@@ -1192,40 +1186,18 @@ _P7_7	=	0x00ff
 	.area REG_BANK_0	(REL,OVR,DATA)
 	.ds 8
 ;--------------------------------------------------------
-; overlayable bit register bank
-;--------------------------------------------------------
-	.area BIT_BANK	(REL,OVR,DATA)
-bits:
-	.ds 1
-	b0 = bits[0]
-	b1 = bits[1]
-	b2 = bits[2]
-	b3 = bits[3]
-	b4 = bits[4]
-	b5 = bits[5]
-	b6 = bits[6]
-	b7 = bits[7]
-;--------------------------------------------------------
 ; internal ram data
 ;--------------------------------------------------------
 	.area DSEG    (DATA)
-G$overflows$0$0==.
-_overflows::
+G$seed$0$0==.
+_seed::
 	.ds 2
-G$bounce$0$0==.
-_bounce::
-	.ds 2
-G$total$0$0==.
-_total::
-	.ds 2
-G$n$0$0==.
-_n::
-	.ds 2
+LdayOfWeek$days$1$1==.
+_dayOfWeek_days_1_1:
+	.ds 21
 ;--------------------------------------------------------
 ; overlayable items in internal ram 
 ;--------------------------------------------------------
-	.area	OSEG    (OVR,DATA)
-	.area	OSEG    (OVR,DATA)
 	.area	OSEG    (OVR,DATA)
 	.area	OSEG    (OVR,DATA)
 	.area	OSEG    (OVR,DATA)
@@ -1251,12 +1223,6 @@ __start__stack:
 ; bit data
 ;--------------------------------------------------------
 	.area BSEG    (BIT)
-G$buttonPressed$0$0==.
-_buttonPressed::
-	.ds 1
-G$gameStarted$0$0==.
-_gameStarted::
-	.ds 1
 ;--------------------------------------------------------
 ; paged external ram data
 ;--------------------------------------------------------
@@ -1289,17 +1255,9 @@ _gameStarted::
 	.area HOME    (CODE)
 __interrupt_vect:
 	ljmp	__sdcc_gsinit_startup
-	ljmp	_SW2_ISR
-	.ds	5
+	reti
+	.ds	7
 	ljmp	_Timer0_ISR
-	.ds	5
-	ljmp	_SW1_ISR
-	.ds	5
-	reti
-	.ds	7
-	reti
-	.ds	7
-	ljmp	_Timer2_ISR
 ;--------------------------------------------------------
 ; global & static initialisations
 ;--------------------------------------------------------
@@ -1314,37 +1272,11 @@ __interrupt_vect:
 	.globl __mcs51_genXRAMCLEAR
 	.globl __mcs51_genRAMCLEAR
 	G$UART0_INIT$0$0 ==.
-	C$lab2_3.c$35$1$1 ==.
-;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 2\lab2-3.c:35: int overflows = 0;					//timer2 overflows
+	C$lab6_1.c$38$1$1 ==.
+;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 6\lab6-1.c:38: int seed = 0;
 	clr	a
-	mov	_overflows,a
-	mov	(_overflows + 1),a
-	G$UART0_INIT$0$0 ==.
-	C$lab2_3.c$36$1$1 ==.
-;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 2\lab2-3.c:36: short bounce = 5;					//bounce wait (in overflows)
-	mov	_bounce,#0x05
-	clr	a
-	mov	(_bounce + 1),a
-	G$UART0_INIT$0$0 ==.
-	C$lab2_3.c$40$1$1 ==.
-;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 2\lab2-3.c:40: int total = 0;						//sum of all time
-	clr	a
-	mov	_total,a
-	mov	(_total + 1),a
-	G$UART0_INIT$0$0 ==.
-	C$lab2_3.c$41$1$1 ==.
-;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 2\lab2-3.c:41: int n = 0;							//number of games played
-	clr	a
-	mov	_n,a
-	mov	(_n + 1),a
-	G$UART0_INIT$0$0 ==.
-	C$lab2_3.c$37$1$1 ==.
-;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 2\lab2-3.c:37: bit buttonPressed = 1;				//if SW2 is pressed
-	setb	_buttonPressed
-	G$UART0_INIT$0$0 ==.
-	C$lab2_3.c$38$1$1 ==.
-;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 2\lab2-3.c:38: bit gameStarted = 0;				//if game started
-	clr	_gameStarted
+	mov	_seed,a
+	mov	(_seed + 1),a
 	.area GSFINAL (CODE)
 	ljmp	__sdcc_program_startup
 ;--------------------------------------------------------
@@ -1367,7 +1299,7 @@ __sdcc_program_startup:
 ;------------------------------------------------------------
 	G$putchar$0$0 ==.
 	C$putget.h$18$0$0 ==.
-;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 2\/putget.h:18: void putchar(char c)
+;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 6\/putget.h:18: void putchar(char c)
 ;	-----------------------------------------
 ;	 function putchar
 ;	-----------------------------------------
@@ -1382,15 +1314,15 @@ _putchar:
 	ar1 = 0x01
 	mov	r2,dpl
 	C$putget.h$20$1$1 ==.
-;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 2\/putget.h:20: while(!TI0); 
+;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 6\/putget.h:20: while(!TI0); 
 00101$:
 	C$putget.h$21$1$1 ==.
-;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 2\/putget.h:21: TI0=0;
+;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 6\/putget.h:21: TI0=0;
 	jbc	_TI0,00108$
 	sjmp	00101$
 00108$:
 	C$putget.h$22$1$1 ==.
-;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 2\/putget.h:22: SBUF0 = c;
+;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 6\/putget.h:22: SBUF0 = c;
 	mov	_SBUF0,r2
 	C$putget.h$23$1$1 ==.
 	XG$putchar$0$0 ==.
@@ -1402,129 +1334,65 @@ _putchar:
 ;------------------------------------------------------------
 	G$getchar$0$0 ==.
 	C$putget.h$28$1$1 ==.
-;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 2\/putget.h:28: char getchar(void)
+;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 6\/putget.h:28: char getchar(void)
 ;	-----------------------------------------
 ;	 function getchar
 ;	-----------------------------------------
 _getchar:
 	C$putget.h$31$1$1 ==.
-;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 2\/putget.h:31: while(!RI0);
+;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 6\/putget.h:31: while(!RI0);
 00101$:
 	C$putget.h$32$1$1 ==.
-;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 2\/putget.h:32: RI0 =0;
+;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 6\/putget.h:32: RI0 =0;
 	jbc	_RI0,00108$
 	sjmp	00101$
 00108$:
 	C$putget.h$33$1$1 ==.
-;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 2\/putget.h:33: c = SBUF0;
+;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 6\/putget.h:33: c = SBUF0;
 	mov	dpl,_SBUF0
 	C$putget.h$35$1$1 ==.
-;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 2\/putget.h:35: return c;
+;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 6\/putget.h:35: return c;
 	C$putget.h$36$1$1 ==.
 	XG$getchar$0$0 ==.
 	ret
 ;------------------------------------------------------------
 ;Allocation info for local variables in function 'main'
 ;------------------------------------------------------------
-;randnum                   Allocated to registers 
+;choice                    Allocated to registers r2 
 ;------------------------------------------------------------
 	G$main$0$0 ==.
-	C$lab2_3.c$67$1$1 ==.
-;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 2\lab2-3.c:67: void main (void)
+	C$lab6_1.c$44$1$1 ==.
+;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 6\lab6-1.c:44: void main(void)
 ;	-----------------------------------------
 ;	 function main
 ;	-----------------------------------------
 _main:
-	C$lab2_3.c$72$1$1 ==.
-;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 2\lab2-3.c:72: WDTCN = 0xDE;					// Disable the watchdog timer
+	C$lab6_1.c$47$1$1 ==.
+;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 6\lab6-1.c:47: WDTCN = 0xDE;						// Disable the watchdog timer
 	mov	_WDTCN,#0xDE
-	C$lab2_3.c$73$1$1 ==.
-;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 2\lab2-3.c:73: WDTCN = 0xAD;					// Note: = "DEAD"!
+	C$lab6_1.c$48$1$1 ==.
+;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 6\lab6-1.c:48: WDTCN = 0xAD;						// Note: = "DEAD"!
 	mov	_WDTCN,#0xAD
-	C$lab2_3.c$75$1$1 ==.
-;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 2\lab2-3.c:75: SYSCLK_INIT();					// Initialize the oscillator.
+	C$lab6_1.c$50$1$1 ==.
+;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 6\lab6-1.c:50: SYSCLK_INIT();						// Initialize the oscillator
 	lcall	_SYSCLK_INIT
-	C$lab2_3.c$76$1$1 ==.
-;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 2\lab2-3.c:76: PORT_INIT();					// Configure the Crossbar and GPIO.
+	C$lab6_1.c$51$1$1 ==.
+;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 6\lab6-1.c:51: PORT_INIT();						// Initialize the Crossbar and GPIO
 	lcall	_PORT_INIT
-	C$lab2_3.c$77$1$1 ==.
-;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 2\lab2-3.c:77: UART0_INIT();					// Initialize UART0.
+	C$lab6_1.c$52$1$1 ==.
+;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 6\lab6-1.c:52: UART0_INIT();						// Initialize UART0
 	lcall	_UART0_INIT
-	C$lab2_3.c$79$1$1 ==.
-;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 2\lab2-3.c:79: SFRPAGE = LEGACY_PAGE;
-	mov	_SFRPAGE,#0x00
-	C$lab2_3.c$80$1$1 ==.
-;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 2\lab2-3.c:80: IT0		= 1;					// /INT0 is edge triggered, falling-edge.
-	setb	_IT0
-	C$lab2_3.c$81$1$1 ==.
-;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 2\lab2-3.c:81: IT1		= 1;					// INT1 falling-edge-triggered
-	setb	_IT1
-	C$lab2_3.c$83$1$1 ==.
-;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 2\lab2-3.c:83: SFRPAGE = CONFIG_PAGE;
-	mov	_SFRPAGE,#0x0F
-	C$lab2_3.c$84$1$1 ==.
-;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 2\lab2-3.c:84: EX0		= 1;					// Enable Ext Int 0 only after everything is settled.
-	setb	_EX0
-	C$lab2_3.c$85$1$1 ==.
-;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 2\lab2-3.c:85: EX1 	= 1;					// Enable External Interrupt 2
-	setb	_EX1
-	C$lab2_3.c$87$1$1 ==.
-;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 2\lab2-3.c:87: SFRPAGE = UART0_PAGE;			// Direct output to UART0
-	mov	_SFRPAGE,#0x00
-	C$lab2_3.c$89$1$1 ==.
-;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 2\lab2-3.c:89: printf("\033[2J");				// Erase screen and move cursor to the home posiiton.
-	mov	a,#__str_0
-	push	acc
-	mov	a,#(__str_0 >> 8)
-	push	acc
-	mov	a,#0x80
-	push	acc
-	lcall	_printf
-	dec	sp
-	dec	sp
-	dec	sp
-	C$lab2_3.c$91$1$1 ==.
-;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 2\lab2-3.c:91: Timer0_Init();					//enable timer0
+	C$lab6_1.c$53$1$1 ==.
+;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 6\lab6-1.c:53: Timer0_Init();						// Initialize Timer0
 	lcall	_Timer0_Init
-	C$lab2_3.c$92$1$1 ==.
-;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 2\lab2-3.c:92: TR0 = 1;
+	C$lab6_1.c$55$1$1 ==.
+;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 6\lab6-1.c:55: TR0 = 1;							// Enable Timer0
 	setb	_TR0
-	C$lab2_3.c$94$1$1 ==.
-;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 2\lab2-3.c:94: Timer2_Init();					
-	lcall	_Timer2_Init
-	C$lab2_3.c$95$1$1 ==.
-;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 2\lab2-3.c:95: TR2 = 1;						//enable timer2
-	setb	_TR2
-	C$lab2_3.c$99$1$1 ==.
-;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 2\lab2-3.c:99: while (1)
-00102$:
-	C$lab2_3.c$100$1$1 ==.
-;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 2\lab2-3.c:100: playGame();
-	lcall	_playGame
-	C$lab2_3.c$102$1$1 ==.
-	XG$main$0$0 ==.
-	sjmp	00102$
-;------------------------------------------------------------
-;Allocation info for local variables in function 'playGame'
-;------------------------------------------------------------
-;waitTime                  Allocated to registers r2 r3 
-;------------------------------------------------------------
-	G$playGame$0$0 ==.
-	C$lab2_3.c$104$1$1 ==.
-;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 2\lab2-3.c:104: void playGame()
-;	-----------------------------------------
-;	 function playGame
-;	-----------------------------------------
-_playGame:
-	C$lab2_3.c$107$1$1 ==.
-;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 2\lab2-3.c:107: n++;									//increments counter for average
-	inc	_n
-	clr	a
-	cjne	a,_n,00130$
-	inc	(_n + 1)
-00130$:
-	C$lab2_3.c$108$1$1 ==.
-;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 2\lab2-3.c:108: printf("\033[2J");
+	C$lab6_1.c$57$1$1 ==.
+;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 6\lab6-1.c:57: SFRPAGE = UART0_PAGE;				// Direct output to UART0
+	mov	_SFRPAGE,#0x00
+	C$lab6_1.c$60$1$1 ==.
+;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 6\lab6-1.c:60: printf("\033[2J");
 	mov	a,#__str_0
 	push	acc
 	mov	a,#(__str_0 >> 8)
@@ -1535,17 +1403,8 @@ _playGame:
 	dec	sp
 	dec	sp
 	dec	sp
-	C$lab2_3.c$109$1$1 ==.
-;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 2\lab2-3.c:109: printf("Your Average Response Time is: %d    ms\n\r", total/n);
-	mov	__divsint_PARM_2,_n
-	mov	(__divsint_PARM_2 + 1),(_n + 1)
-	mov	dpl,_total
-	mov	dph,(_total + 1)
-	lcall	__divsint
-	mov	r2,dpl
-	mov	r3,dph
-	push	ar2
-	push	ar3
+	C$lab6_1.c$61$1$1 ==.
+;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 6\lab6-1.c:61: printf("Ask me your questions, Bridge Keeper. I am not afraid.\n\n\r");
 	mov	a,#__str_1
 	push	acc
 	mov	a,#(__str_1 >> 8)
@@ -1553,11 +1412,73 @@ _playGame:
 	mov	a,#0x80
 	push	acc
 	lcall	_printf
-	mov	a,sp
-	add	a,#0xfb
-	mov	sp,a
-	C$lab2_3.c$110$1$1 ==.
-;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 2\lab2-3.c:110: printf("Ready?\r\n");
+	dec	sp
+	dec	sp
+	dec	sp
+	C$lab6_1.c$63$1$1 ==.
+;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 6\lab6-1.c:63: while(1)
+00108$:
+	C$lab6_1.c$65$2$2 ==.
+;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 6\lab6-1.c:65: printMenu();
+	lcall	_printMenu
+	C$lab6_1.c$66$2$2 ==.
+;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 6\lab6-1.c:66: choice = getchar();	
+	lcall	_getchar
+	mov	r2,dpl
+	C$lab6_1.c$68$2$2 ==.
+;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 6\lab6-1.c:68: switch(choice){
+	cjne	r2,#0x31,00117$
+	sjmp	00101$
+00117$:
+	cjne	r2,#0x32,00118$
+	sjmp	00102$
+00118$:
+	cjne	r2,#0x33,00119$
+	sjmp	00103$
+00119$:
+	C$lab6_1.c$69$3$3 ==.
+;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 6\lab6-1.c:69: case '1':
+	cjne	r2,#0x34,00105$
+	sjmp	00104$
+00101$:
+	C$lab6_1.c$70$3$3 ==.
+;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 6\lab6-1.c:70: yesNo();
+	lcall	_yesNo
+	C$lab6_1.c$71$3$3 ==.
+;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 6\lab6-1.c:71: break;
+	C$lab6_1.c$72$3$3 ==.
+;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 6\lab6-1.c:72: case '2':
+	sjmp	00108$
+00102$:
+	C$lab6_1.c$73$3$3 ==.
+;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 6\lab6-1.c:73: trueFalse();
+	lcall	_trueFalse
+	C$lab6_1.c$74$3$3 ==.
+;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 6\lab6-1.c:74: break;
+	C$lab6_1.c$75$3$3 ==.
+;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 6\lab6-1.c:75: case '3':
+	sjmp	00108$
+00103$:
+	C$lab6_1.c$76$3$3 ==.
+;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 6\lab6-1.c:76: dayOfWeek();
+	lcall	_dayOfWeek
+	C$lab6_1.c$77$3$3 ==.
+;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 6\lab6-1.c:77: break;
+	C$lab6_1.c$78$3$3 ==.
+;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 6\lab6-1.c:78: case '4':
+	sjmp	00108$
+00104$:
+	C$lab6_1.c$79$3$3 ==.
+;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 6\lab6-1.c:79: randomNumber();
+	lcall	_randomNumber
+	C$lab6_1.c$80$3$3 ==.
+;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 6\lab6-1.c:80: break;
+	C$lab6_1.c$81$3$3 ==.
+;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 6\lab6-1.c:81: default:
+	sjmp	00108$
+00105$:
+	C$lab6_1.c$82$3$3 ==.
+;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 6\lab6-1.c:82: printf("invalid choice. go die.\n\r");
 	mov	a,#__str_2
 	push	acc
 	mov	a,#(__str_2 >> 8)
@@ -1568,55 +1489,24 @@ _playGame:
 	dec	sp
 	dec	sp
 	dec	sp
-	C$lab2_3.c$111$1$1 ==.
-;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 2\lab2-3.c:111: gameStarted = 0;
-	clr	_gameStarted
-	C$lab2_3.c$113$1$1 ==.
-;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 2\lab2-3.c:113: srand(TL1);								// seed the random fuction
-	mov	r2,_TL1
-	mov	r3,#0x00
-	mov	dpl,r2
-	mov	dph,r3
-	lcall	_srand
-	C$lab2_3.c$114$1$1 ==.
-;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 2\lab2-3.c:114: waitTime = rand()%100;					// wait 0-100 millisecs
-	lcall	_rand
-	mov	__modsint_PARM_2,#0x64
-	clr	a
-	mov	(__modsint_PARM_2 + 1),a
-	lcall	__modsint
-	mov	r2,dpl
-	mov	r3,dph
-	C$lab2_3.c$116$1$1 ==.
-;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 2\lab2-3.c:116: overflows = 0;
-	clr	a
-	mov	_overflows,a
-	mov	(_overflows + 1),a
-	C$lab2_3.c$117$1$1 ==.
-;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 2\lab2-3.c:117: while(overflows < waitTime);
-00101$:
-	clr	c
-	mov	a,_overflows
-	subb	a,r2
-	mov	a,(_overflows + 1)
-	xrl	a,#0x80
-	mov	b,r3
-	xrl	b,#0x80
-	subb	a,b
-	jc	00101$
-	C$lab2_3.c$119$1$1 ==.
-;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 2\lab2-3.c:119: if (gameStarted)
-	jnb	_gameStarted,00108$
-	C$lab2_3.c$121$2$2 ==.
-;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 2\lab2-3.c:121: total += 200;
-	mov	a,#0xC8
-	add	a,_total
-	mov	_total,a
-	clr	a
-	addc	a,(_total + 1)
-	mov	(_total + 1),a
-	C$lab2_3.c$124$2$2 ==.
-;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 2\lab2-3.c:124: printf("\033[4;0HPush the button for next round!! (push other button to reset)\r\n");
+	C$lab6_1.c$84$1$1 ==.
+;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 6\lab6-1.c:84: }
+	C$lab6_1.c$86$1$1 ==.
+	XG$main$0$0 ==.
+	sjmp	00108$
+;------------------------------------------------------------
+;Allocation info for local variables in function 'printMenu'
+;------------------------------------------------------------
+;------------------------------------------------------------
+	G$printMenu$0$0 ==.
+	C$lab6_1.c$88$1$1 ==.
+;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 6\lab6-1.c:88: void printMenu(void)
+;	-----------------------------------------
+;	 function printMenu
+;	-----------------------------------------
+_printMenu:
+	C$lab6_1.c$95$1$1 ==.
+;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 6\lab6-1.c:95: \n\r");
 	mov	a,#__str_3
 	push	acc
 	mov	a,#(__str_3 >> 8)
@@ -1627,31 +1517,49 @@ _playGame:
 	dec	sp
 	dec	sp
 	dec	sp
-	C$lab2_3.c$125$2$2 ==.
-;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 2\lab2-3.c:125: buttonPressed = 0;
-	clr	_buttonPressed
-	C$lab2_3.c$126$2$2 ==.
-;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 2\lab2-3.c:126: while(!buttonPressed);
-00104$:
-	jnb	_buttonPressed,00104$
-	C$lab2_3.c$128$2$2 ==.
-;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 2\lab2-3.c:128: return;
+	C$lab6_1.c$96$1$1 ==.
+	XG$printMenu$0$0 ==.
 	ret
+;------------------------------------------------------------
+;Allocation info for local variables in function 'yesNo'
+;------------------------------------------------------------
+;res                       Allocated to registers r2 r3 
+;------------------------------------------------------------
+	G$yesNo$0$0 ==.
+	C$lab6_1.c$99$1$1 ==.
+;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 6\lab6-1.c:99: void yesNo(void)
+;	-----------------------------------------
+;	 function yesNo
+;	-----------------------------------------
+_yesNo:
+	C$lab6_1.c$102$1$1 ==.
+;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 6\lab6-1.c:102: srand(seed);	
+	mov	dpl,_seed
+	mov	dph,(_seed + 1)
+	lcall	_srand
+	C$lab6_1.c$103$1$1 ==.
+;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 6\lab6-1.c:103: res = rand()%2;
+	lcall	_rand
+	mov	__modsint_PARM_2,#0x02
+	clr	a
+	mov	(__modsint_PARM_2 + 1),a
+	lcall	__modsint
+	mov	r2,dpl
+	mov	r3,dph
+	C$lab6_1.c$105$1$1 ==.
+;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 6\lab6-1.c:105: switch(res){
+	cjne	r2,#0x00,00108$
+	cjne	r3,#0x00,00108$
+	sjmp	00101$
 00108$:
-	C$lab2_3.c$132$1$1 ==.
-;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 2\lab2-3.c:132: printf("\033[2J");						//clear the screen
-	mov	a,#__str_0
-	push	acc
-	mov	a,#(__str_0 >> 8)
-	push	acc
-	mov	a,#0x80
-	push	acc
-	lcall	_printf
-	dec	sp
-	dec	sp
-	dec	sp
-	C$lab2_3.c$133$1$1 ==.
-;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 2\lab2-3.c:133: printf("\033[1;46m");					//change background
+	C$lab6_1.c$106$2$2 ==.
+;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 6\lab6-1.c:106: case 0:
+	cjne	r2,#0x01,00103$
+	cjne	r3,#0x00,00103$
+	sjmp	00102$
+00101$:
+	C$lab6_1.c$107$2$2 ==.
+;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 6\lab6-1.c:107: printf("No. fuck you. \n\r");
 	mov	a,#__str_4
 	push	acc
 	mov	a,#(__str_4 >> 8)
@@ -1662,47 +1570,14 @@ _playGame:
 	dec	sp
 	dec	sp
 	dec	sp
-	C$lab2_3.c$134$1$1 ==.
-;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 2\lab2-3.c:134: printf("\033[2J");
-	mov	a,#__str_0
-	push	acc
-	mov	a,#(__str_0 >> 8)
-	push	acc
-	mov	a,#0x80
-	push	acc
-	lcall	_printf
-	dec	sp
-	dec	sp
-	dec	sp
-	C$lab2_3.c$136$1$1 ==.
-;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 2\lab2-3.c:136: overflows = 0;
-	clr	a
-	mov	_overflows,a
-	mov	(_overflows + 1),a
-	C$lab2_3.c$137$1$1 ==.
-;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 2\lab2-3.c:137: while(overflows<5);
-00109$:
-	clr	c
-	mov	a,_overflows
-	subb	a,#0x05
-	mov	a,(_overflows + 1)
-	xrl	a,#0x80
-	subb	a,#0x80
-	jc	00109$
-	C$lab2_3.c$139$1$1 ==.
-;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 2\lab2-3.c:139: printf("\033[2J");
-	mov	a,#__str_0
-	push	acc
-	mov	a,#(__str_0 >> 8)
-	push	acc
-	mov	a,#0x80
-	push	acc
-	lcall	_printf
-	dec	sp
-	dec	sp
-	dec	sp
-	C$lab2_3.c$140$1$1 ==.
-;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 2\lab2-3.c:140: printf("\033[0m");
+	C$lab6_1.c$108$2$2 ==.
+;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 6\lab6-1.c:108: break;
+	C$lab6_1.c$109$2$2 ==.
+;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 6\lab6-1.c:109: case 1:
+	sjmp	00103$
+00102$:
+	C$lab6_1.c$110$2$2 ==.
+;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 6\lab6-1.c:110: printf("Yes. Fuck yea. \n\r");
 	mov	a,#__str_5
 	push	acc
 	mov	a,#(__str_5 >> 8)
@@ -1713,20 +1588,11 @@ _playGame:
 	dec	sp
 	dec	sp
 	dec	sp
-	C$lab2_3.c$142$1$1 ==.
-;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 2\lab2-3.c:142: printf("\033[2J");
-	mov	a,#__str_0
-	push	acc
-	mov	a,#(__str_0 >> 8)
-	push	acc
-	mov	a,#0x80
-	push	acc
-	lcall	_printf
-	dec	sp
-	dec	sp
-	dec	sp
-	C$lab2_3.c$143$1$1 ==.
-;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 2\lab2-3.c:143: printf("\033[44m");
+	C$lab6_1.c$112$1$1 ==.
+;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 6\lab6-1.c:112: }
+00103$:
+	C$lab6_1.c$113$1$1 ==.
+;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 6\lab6-1.c:113: printf("\n\r");
 	mov	a,#__str_6
 	push	acc
 	mov	a,#(__str_6 >> 8)
@@ -1737,41 +1603,49 @@ _playGame:
 	dec	sp
 	dec	sp
 	dec	sp
-	C$lab2_3.c$144$1$1 ==.
-;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 2\lab2-3.c:144: printf("\033[2J");
-	mov	a,#__str_0
-	push	acc
-	mov	a,#(__str_0 >> 8)
-	push	acc
-	mov	a,#0x80
-	push	acc
-	lcall	_printf
-	dec	sp
-	dec	sp
-	dec	sp
-	C$lab2_3.c$147$1$1 ==.
-;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 2\lab2-3.c:147: printf("Your Average Response Time is: %d    ms\n\r", total/n);
-	mov	__divsint_PARM_2,_n
-	mov	(__divsint_PARM_2 + 1),(_n + 1)
-	mov	dpl,_total
-	mov	dph,(_total + 1)
-	lcall	__divsint
+	C$lab6_1.c$114$1$1 ==.
+	XG$yesNo$0$0 ==.
+	ret
+;------------------------------------------------------------
+;Allocation info for local variables in function 'trueFalse'
+;------------------------------------------------------------
+;res                       Allocated to registers r2 r3 
+;------------------------------------------------------------
+	G$trueFalse$0$0 ==.
+	C$lab6_1.c$116$1$1 ==.
+;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 6\lab6-1.c:116: void trueFalse(void)
+;	-----------------------------------------
+;	 function trueFalse
+;	-----------------------------------------
+_trueFalse:
+	C$lab6_1.c$119$1$1 ==.
+;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 6\lab6-1.c:119: srand(seed);	
+	mov	dpl,_seed
+	mov	dph,(_seed + 1)
+	lcall	_srand
+	C$lab6_1.c$120$1$1 ==.
+;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 6\lab6-1.c:120: res = rand()%2;
+	lcall	_rand
+	mov	__modsint_PARM_2,#0x02
+	clr	a
+	mov	(__modsint_PARM_2 + 1),a
+	lcall	__modsint
 	mov	r2,dpl
 	mov	r3,dph
-	push	ar2
-	push	ar3
-	mov	a,#__str_1
-	push	acc
-	mov	a,#(__str_1 >> 8)
-	push	acc
-	mov	a,#0x80
-	push	acc
-	lcall	_printf
-	mov	a,sp
-	add	a,#0xfb
-	mov	sp,a
-	C$lab2_3.c$148$1$1 ==.
-;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 2\lab2-3.c:148: printf("GO!!\n\r");
+	C$lab6_1.c$122$1$1 ==.
+;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 6\lab6-1.c:122: switch(res){
+	cjne	r2,#0x00,00108$
+	cjne	r3,#0x00,00108$
+	sjmp	00101$
+00108$:
+	C$lab6_1.c$123$2$2 ==.
+;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 6\lab6-1.c:123: case 0:
+	cjne	r2,#0x01,00103$
+	cjne	r3,#0x00,00103$
+	sjmp	00102$
+00101$:
+	C$lab6_1.c$124$2$2 ==.
+;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 6\lab6-1.c:124: printf("FALSE. YOU LIE. \n\r");
 	mov	a,#__str_7
 	push	acc
 	mov	a,#(__str_7 >> 8)
@@ -1782,25 +1656,14 @@ _playGame:
 	dec	sp
 	dec	sp
 	dec	sp
-	C$lab2_3.c$150$1$1 ==.
-;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 2\lab2-3.c:150: gameStarted = 1;
-	setb	_gameStarted
-	C$lab2_3.c$152$1$1 ==.
-;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 2\lab2-3.c:152: buttonPressed = 0;
-	clr	_buttonPressed
-	C$lab2_3.c$153$1$1 ==.
-;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 2\lab2-3.c:153: overflows = 0;
-	clr	a
-	mov	_overflows,a
-	mov	(_overflows + 1),a
-	C$lab2_3.c$154$1$1 ==.
-;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 2\lab2-3.c:154: while(!buttonPressed);
-00112$:
-	jnb	_buttonPressed,00112$
-	C$lab2_3.c$156$1$1 ==.
-;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 2\lab2-3.c:156: printf("Time: %d    ms\n\r", overflows);
-	push	_overflows
-	push	(_overflows + 1)
+	C$lab6_1.c$125$2$2 ==.
+;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 6\lab6-1.c:125: break;
+	C$lab6_1.c$126$2$2 ==.
+;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 6\lab6-1.c:126: case 1:
+	sjmp	00103$
+00102$:
+	C$lab6_1.c$127$2$2 ==.
+;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 6\lab6-1.c:127: printf("TRUE, MOTHERFUCKER \n\r");
 	mov	a,#__str_8
 	push	acc
 	mov	a,#(__str_8 >> 8)
@@ -1808,43 +1671,17 @@ _playGame:
 	mov	a,#0x80
 	push	acc
 	lcall	_printf
-	mov	a,sp
-	add	a,#0xfb
-	mov	sp,a
-	C$lab2_3.c$157$1$1 ==.
-;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 2\lab2-3.c:157: total += overflows;
-	mov	a,_overflows
-	add	a,_total
-	mov	_total,a
-	mov	a,(_overflows + 1)
-	addc	a,(_total + 1)
-	mov	(_total + 1),a
-	C$lab2_3.c$158$1$1 ==.
-;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 2\lab2-3.c:158: printf("\033[0;0HYour Average Response Time is : %d    ms\n\r", total/n);
-	mov	__divsint_PARM_2,_n
-	mov	(__divsint_PARM_2 + 1),(_n + 1)
-	mov	dpl,_total
-	mov	dph,(_total + 1)
-	lcall	__divsint
-	mov	r2,dpl
-	mov	r3,dph
-	push	ar2
-	push	ar3
-	mov	a,#__str_9
+	dec	sp
+	dec	sp
+	dec	sp
+	C$lab6_1.c$129$1$1 ==.
+;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 6\lab6-1.c:129: }
+00103$:
+	C$lab6_1.c$130$1$1 ==.
+;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 6\lab6-1.c:130: printf("\n\r");
+	mov	a,#__str_6
 	push	acc
-	mov	a,#(__str_9 >> 8)
-	push	acc
-	mov	a,#0x80
-	push	acc
-	lcall	_printf
-	mov	a,sp
-	add	a,#0xfb
-	mov	sp,a
-	C$lab2_3.c$161$1$1 ==.
-;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 2\lab2-3.c:161: printf("\033[4;0HPush the button for next round!! (push other button to reset)\r\n");
-	mov	a,#__str_3
-	push	acc
-	mov	a,#(__str_3 >> 8)
+	mov	a,#(__str_6 >> 8)
 	push	acc
 	mov	a,#0x80
 	push	acc
@@ -1852,47 +1689,67 @@ _playGame:
 	dec	sp
 	dec	sp
 	dec	sp
-	C$lab2_3.c$162$1$1 ==.
-;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 2\lab2-3.c:162: buttonPressed = 0;
-	clr	_buttonPressed
-	C$lab2_3.c$163$1$1 ==.
-;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 2\lab2-3.c:163: while(!buttonPressed);
-00115$:
-	jnb	_buttonPressed,00115$
-	C$lab2_3.c$164$1$1 ==.
-	XG$playGame$0$0 ==.
+	C$lab6_1.c$131$1$1 ==.
+	XG$trueFalse$0$0 ==.
 	ret
 ;------------------------------------------------------------
-;Allocation info for local variables in function 'SW1_ISR'
+;Allocation info for local variables in function 'dayOfWeek'
 ;------------------------------------------------------------
+;res                       Allocated to registers r2 r3 
+;time                      Allocated with name '_dayOfWeek_time_1_1'
+;days                      Allocated with name '_dayOfWeek_days_1_1'
 ;------------------------------------------------------------
-	G$SW1_ISR$0$0 ==.
-	C$lab2_3.c$166$1$1 ==.
-;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 2\lab2-3.c:166: void SW1_ISR (void) interrupt 2
+	G$dayOfWeek$0$0 ==.
+	C$lab6_1.c$133$1$1 ==.
+;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 6\lab6-1.c:133: void dayOfWeek(void)
 ;	-----------------------------------------
-;	 function SW1_ISR
+;	 function dayOfWeek
 ;	-----------------------------------------
-_SW1_ISR:
-	push	bits
+_dayOfWeek:
+	C$lab6_1.c$138$1$1 ==.
+;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 6\lab6-1.c:138: char* days[] = {"MERNDEY!", "TWOSDEY!", "WERNSDEY!", "TURSDEY!", "FRRDEY!", "SERTERDEY!", "SURNDEY!"};
+	mov	_dayOfWeek_days_1_1,#__str_9
+	mov	(_dayOfWeek_days_1_1 + 1),#(__str_9 >> 8)
+	mov	(_dayOfWeek_days_1_1 + 2),#0x80
+	mov	(_dayOfWeek_days_1_1 + 0x0003),#__str_10
+	mov	((_dayOfWeek_days_1_1 + 0x0003) + 1),#(__str_10 >> 8)
+	mov	((_dayOfWeek_days_1_1 + 0x0003) + 2),#0x80
+	mov	(_dayOfWeek_days_1_1 + 0x0006),#__str_11
+	mov	((_dayOfWeek_days_1_1 + 0x0006) + 1),#(__str_11 >> 8)
+	mov	((_dayOfWeek_days_1_1 + 0x0006) + 2),#0x80
+	mov	(_dayOfWeek_days_1_1 + 0x0009),#__str_12
+	mov	((_dayOfWeek_days_1_1 + 0x0009) + 1),#(__str_12 >> 8)
+	mov	((_dayOfWeek_days_1_1 + 0x0009) + 2),#0x80
+	mov	(_dayOfWeek_days_1_1 + 0x000c),#__str_13
+	mov	((_dayOfWeek_days_1_1 + 0x000c) + 1),#(__str_13 >> 8)
+	mov	((_dayOfWeek_days_1_1 + 0x000c) + 2),#0x80
+	mov	(_dayOfWeek_days_1_1 + 0x000f),#__str_14
+	mov	((_dayOfWeek_days_1_1 + 0x000f) + 1),#(__str_14 >> 8)
+	mov	((_dayOfWeek_days_1_1 + 0x000f) + 2),#0x80
+	mov	(_dayOfWeek_days_1_1 + 0x0012),#__str_15
+	mov	((_dayOfWeek_days_1_1 + 0x0012) + 1),#(__str_15 >> 8)
+	mov	((_dayOfWeek_days_1_1 + 0x0012) + 2),#0x80
+	C$lab6_1.c$140$1$1 ==.
+;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 6\lab6-1.c:140: srand(seed);	
+	mov	dpl,_seed
+	mov	dph,(_seed + 1)
+	lcall	_srand
+	C$lab6_1.c$141$1$1 ==.
+;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 6\lab6-1.c:141: res = rand()%7;
+	lcall	_rand
+	mov	__modsint_PARM_2,#0x07
+	clr	a
+	mov	(__modsint_PARM_2 + 1),a
+	lcall	__modsint
+	mov	r2,dpl
+	mov	r3,dph
+	C$lab6_1.c$142$1$1 ==.
+;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 6\lab6-1.c:142: printf("ERMERGERD! GERD DERM ");
+	push	ar2
+	push	ar3
+	mov	a,#__str_16
 	push	acc
-	push	b
-	push	dpl
-	push	dph
-	push	(0+2)
-	push	(0+3)
-	push	(0+4)
-	push	(0+5)
-	push	(0+6)
-	push	(0+7)
-	push	(0+0)
-	push	(0+1)
-	push	psw
-	mov	psw,#0x00
-	C$lab2_3.c$168$1$1 ==.
-;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 2\lab2-3.c:168: printf("\033[0;0HYour Average Response Time is :   0    ms\n\r");
-	mov	a,#__str_10
-	push	acc
-	mov	a,#(__str_10 >> 8)
+	mov	a,#(__str_16 >> 8)
 	push	acc
 	mov	a,#0x80
 	push	acc
@@ -1900,80 +1757,218 @@ _SW1_ISR:
 	dec	sp
 	dec	sp
 	dec	sp
-	C$lab2_3.c$169$1$1 ==.
-;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 2\lab2-3.c:169: n = 0;
-	C$lab2_3.c$170$1$1 ==.
-;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 2\lab2-3.c:170: total = 0;
-	clr	a
-	mov	_n,a
-	mov	(_n + 1),a
-	mov	_total,a
-	mov	(_total + 1),a
-	pop	psw
-	pop	(0+1)
-	pop	(0+0)
-	pop	(0+7)
-	pop	(0+6)
-	pop	(0+5)
-	pop	(0+4)
-	pop	(0+3)
-	pop	(0+2)
-	pop	dph
-	pop	dpl
-	pop	b
-	pop	acc
-	pop	bits
-	C$lab2_3.c$171$1$1 ==.
-	XG$SW1_ISR$0$0 ==.
-	reti
-;------------------------------------------------------------
-;Allocation info for local variables in function 'SW2_ISR'
-;------------------------------------------------------------
-;------------------------------------------------------------
-	G$SW2_ISR$0$0 ==.
-	C$lab2_3.c$173$1$1 ==.
-;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 2\lab2-3.c:173: void SW2_ISR (void) interrupt 0		// Interrupt 0 corresponds to vector address 0003h.
-;	-----------------------------------------
-;	 function SW2_ISR
-;	-----------------------------------------
-_SW2_ISR:
-	push	bits
+	pop	ar3
+	pop	ar2
+	C$lab6_1.c$143$1$1 ==.
+;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 6\lab6-1.c:143: puts(days[res]);
+	mov	__mulint_PARM_2,r2
+	mov	(__mulint_PARM_2 + 1),r3
+	mov	dptr,#0x0003
+	lcall	__mulint
+	mov	r2,dpl
+	mov	a,r2
+	add	a,#_dayOfWeek_days_1_1
+	mov	r0,a
+	mov	ar2,@r0
+	inc	r0
+	mov	ar3,@r0
+	inc	r0
+	mov	ar4,@r0
+	mov	dpl,r2
+	mov	dph,r3
+	mov	b,r4
+	lcall	_puts
+	C$lab6_1.c$144$1$1 ==.
+;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 6\lab6-1.c:144: printf("\n\r");
+	mov	a,#__str_6
 	push	acc
-	push	b
-	push	dpl
-	push	dph
-	push	(0+2)
-	push	(0+3)
-	push	(0+4)
-	push	(0+5)
-	push	(0+6)
-	push	(0+7)
-	push	(0+0)
-	push	(0+1)
-	push	psw
-	mov	psw,#0x00
-	C$lab2_3.c$177$1$1 ==.
-;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 2\lab2-3.c:177: if (bounce == 0)
-	mov	a,_bounce
-	orl	a,(_bounce + 1)
-	jnz	00102$
-	C$lab2_3.c$179$2$2 ==.
-;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 2\lab2-3.c:179: buttonPressed = 1;
-	setb	_buttonPressed
-	C$lab2_3.c$180$2$2 ==.
-;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 2\lab2-3.c:180: bounce = 10;
-	mov	_bounce,#0x0A
+	mov	a,#(__str_6 >> 8)
+	push	acc
+	mov	a,#0x80
+	push	acc
+	lcall	_printf
+	dec	sp
+	dec	sp
+	dec	sp
+	C$lab6_1.c$145$1$1 ==.
+	XG$dayOfWeek$0$0 ==.
+	ret
+;------------------------------------------------------------
+;Allocation info for local variables in function 'randomNumber'
+;------------------------------------------------------------
+;first                     Allocated to registers r2 r3 
+;second                    Allocated to registers r4 r5 
+;lesser                    Allocated to registers r6 r7 
+;diff                      Allocated to registers r0 r1 
+;res                       Allocated to registers r2 r3 
+;choice                    Allocated to registers r6 r7 
+;------------------------------------------------------------
+	G$randomNumber$0$0 ==.
+	C$lab6_1.c$148$1$1 ==.
+;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 6\lab6-1.c:148: void randomNumber(void)
+;	-----------------------------------------
+;	 function randomNumber
+;	-----------------------------------------
+_randomNumber:
+	C$lab6_1.c$150$1$1 ==.
+;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 6\lab6-1.c:150: int first = 0;
+	mov	r2,#0x00
+	mov	r3,#0x00
+	C$lab6_1.c$151$1$1 ==.
+;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 6\lab6-1.c:151: int second = 0;
+	mov	r4,#0x00
+	mov	r5,#0x00
+	C$lab6_1.c$157$1$1 ==.
+;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 6\lab6-1.c:157: int choice = '\t';
+	mov	r6,#0x09
+	mov	r7,#0x00
+	C$lab6_1.c$158$1$1 ==.
+;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 6\lab6-1.c:158: printf("Enter first number: ");
+	push	ar2
+	push	ar3
+	push	ar4
+	push	ar5
+	push	ar6
+	push	ar7
+	mov	a,#__str_17
+	push	acc
+	mov	a,#(__str_17 >> 8)
+	push	acc
+	mov	a,#0x80
+	push	acc
+	lcall	_printf
+	dec	sp
+	dec	sp
+	dec	sp
+	pop	ar7
+	pop	ar6
+	pop	ar5
+	pop	ar4
+	pop	ar3
+	pop	ar2
+	C$lab6_1.c$159$1$1 ==.
+;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 6\lab6-1.c:159: while (choice != 13)
+00103$:
+	cjne	r6,#0x0D,00127$
+	cjne	r7,#0x00,00127$
+	ljmp	00105$
+00127$:
+	C$lab6_1.c$161$2$2 ==.
+;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 6\lab6-1.c:161: if (choice >= 48 & choice <= 57)
+	clr	c
+	mov	a,r6
+	subb	a,#0x30
+	mov	a,r7
+	xrl	a,#0x80
+	subb	a,#0x80
+	cpl	c
 	clr	a
-	mov	(_bounce + 1),a
+	rlc	a
+	mov	r0,a
+	clr	c
+	mov	a,#0x39
+	subb	a,r6
+	mov	a,#(0x00 ^ 0x80)
+	mov	b,r7
+	xrl	b,#0x80
+	subb	a,b
+	cpl	c
+	clr	a
+	rlc	a
+	mov	r1,a
+	anl	a,r0
+	jz	00102$
+	C$lab6_1.c$163$3$3 ==.
+;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 6\lab6-1.c:163: printf("%d", choice-48);
+	mov	a,r6
+	add	a,#0xd0
+	mov	r0,a
+	mov	a,r7
+	addc	a,#0xff
+	mov	r1,a
+	push	ar2
+	push	ar3
+	push	ar4
+	push	ar5
+	push	ar0
+	push	ar1
+	push	ar0
+	push	ar1
+	mov	a,#__str_18
+	push	acc
+	mov	a,#(__str_18 >> 8)
+	push	acc
+	mov	a,#0x80
+	push	acc
+	lcall	_printf
+	mov	a,sp
+	add	a,#0xfb
+	mov	sp,a
+	pop	ar1
+	pop	ar0
+	pop	ar5
+	pop	ar4
+	pop	ar3
+	pop	ar2
+	C$lab6_1.c$164$1$1 ==.
+;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 6\lab6-1.c:164: first = first * 10;
+	mov	__mulint_PARM_2,r2
+	mov	(__mulint_PARM_2 + 1),r3
+	mov	dptr,#0x000A
+	push	ar4
+	push	ar5
+	push	ar0
+	push	ar1
+	lcall	__mulint
+	mov	r2,dpl
+	mov	r3,dph
+	pop	ar1
+	pop	ar0
+	pop	ar5
+	pop	ar4
+	C$lab6_1.c$165$3$3 ==.
+;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 6\lab6-1.c:165: first += (choice-48);
+	mov	a,r0
+	add	a,r2
+	mov	r2,a
+	mov	a,r1
+	addc	a,r3
+	mov	r3,a
 00102$:
-	C$lab2_3.c$183$1$1 ==.
-;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 2\lab2-3.c:183: if (!gameStarted)
-	jb	_gameStarted,00105$
-	C$lab2_3.c$185$2$3 ==.
-;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 2\lab2-3.c:185: printf("Too early! Penalty time +200  ms!\n\r");
-	mov	a,#__str_11
+	C$lab6_1.c$167$2$2 ==.
+;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 6\lab6-1.c:167: choice = getchar();
+	push	ar2
+	push	ar3
+	push	ar4
+	push	ar5
+	lcall	_getchar
+	mov	r0,dpl
+	pop	ar5
+	pop	ar4
+	pop	ar3
+	pop	ar2
+	mov	a,r0
+	mov	r6,a
+	rlc	a
+	subb	a,acc
+	mov	r7,a
+	ljmp	00103$
+00105$:
+	C$lab6_1.c$171$1$1 ==.
+;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 6\lab6-1.c:171: choice = '\t';
+	mov	r6,#0x09
+	mov	r7,#0x00
+	C$lab6_1.c$172$1$1 ==.
+;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 6\lab6-1.c:172: printf("\n\rEnter second number: ");
+	push	ar2
+	push	ar3
+	push	ar4
+	push	ar5
+	push	ar6
+	push	ar7
+	mov	a,#__str_19
 	push	acc
-	mov	a,#(__str_11 >> 8)
+	mov	a,#(__str_19 >> 8)
 	push	acc
 	mov	a,#0x80
 	push	acc
@@ -1981,57 +1976,282 @@ _SW2_ISR:
 	dec	sp
 	dec	sp
 	dec	sp
-	C$lab2_3.c$186$2$3 ==.
-;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 2\lab2-3.c:186: gameStarted = 1;
-	setb	_gameStarted
-00105$:
-	pop	psw
-	pop	(0+1)
-	pop	(0+0)
-	pop	(0+7)
-	pop	(0+6)
-	pop	(0+5)
-	pop	(0+4)
-	pop	(0+3)
-	pop	(0+2)
-	pop	dph
-	pop	dpl
-	pop	b
-	pop	acc
-	pop	bits
-	C$lab2_3.c$189$2$1 ==.
-	XG$SW2_ISR$0$0 ==.
-	reti
+	pop	ar7
+	pop	ar6
+	pop	ar5
+	pop	ar4
+	pop	ar3
+	pop	ar2
+	C$lab6_1.c$173$1$1 ==.
+;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 6\lab6-1.c:173: while (choice != 13)
+00108$:
+	cjne	r6,#0x0D,00131$
+	cjne	r7,#0x00,00131$
+	ljmp	00110$
+00131$:
+	C$lab6_1.c$175$2$4 ==.
+;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 6\lab6-1.c:175: if (choice >= 48 & choice <= 57)
+	clr	c
+	mov	a,r6
+	subb	a,#0x30
+	mov	a,r7
+	xrl	a,#0x80
+	subb	a,#0x80
+	cpl	c
+	clr	a
+	rlc	a
+	mov	r0,a
+	clr	c
+	mov	a,#0x39
+	subb	a,r6
+	mov	a,#(0x00 ^ 0x80)
+	mov	b,r7
+	xrl	b,#0x80
+	subb	a,b
+	cpl	c
+	clr	a
+	rlc	a
+	mov	r1,a
+	anl	a,r0
+	jz	00107$
+	C$lab6_1.c$177$3$5 ==.
+;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 6\lab6-1.c:177: printf("%d", choice-48);
+	mov	a,r6
+	add	a,#0xd0
+	mov	r0,a
+	mov	a,r7
+	addc	a,#0xff
+	mov	r1,a
+	push	ar2
+	push	ar3
+	push	ar4
+	push	ar5
+	push	ar0
+	push	ar1
+	push	ar0
+	push	ar1
+	mov	a,#__str_18
+	push	acc
+	mov	a,#(__str_18 >> 8)
+	push	acc
+	mov	a,#0x80
+	push	acc
+	lcall	_printf
+	mov	a,sp
+	add	a,#0xfb
+	mov	sp,a
+	pop	ar1
+	pop	ar0
+	pop	ar5
+	pop	ar4
+	C$lab6_1.c$178$1$1 ==.
+;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 6\lab6-1.c:178: second = second * 10;
+	mov	__mulint_PARM_2,r4
+	mov	(__mulint_PARM_2 + 1),r5
+	mov	dptr,#0x000A
+	push	ar0
+	push	ar1
+	lcall	__mulint
+	mov	r4,dpl
+	mov	r5,dph
+	pop	ar1
+	pop	ar0
+	pop	ar3
+	pop	ar2
+	C$lab6_1.c$179$3$5 ==.
+;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 6\lab6-1.c:179: second += (choice-48);
+	mov	a,r0
+	add	a,r4
+	mov	r4,a
+	mov	a,r1
+	addc	a,r5
+	mov	r5,a
+00107$:
+	C$lab6_1.c$181$2$4 ==.
+;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 6\lab6-1.c:181: choice = getchar();
+	push	ar2
+	push	ar3
+	push	ar4
+	push	ar5
+	lcall	_getchar
+	mov	r0,dpl
+	pop	ar5
+	pop	ar4
+	pop	ar3
+	pop	ar2
+	mov	a,r0
+	mov	r6,a
+	rlc	a
+	subb	a,acc
+	mov	r7,a
+	ljmp	00108$
+00110$:
+	C$lab6_1.c$184$1$1 ==.
+;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 6\lab6-1.c:184: printf("\n\r");
+	push	ar2
+	push	ar3
+	push	ar4
+	push	ar5
+	mov	a,#__str_6
+	push	acc
+	mov	a,#(__str_6 >> 8)
+	push	acc
+	mov	a,#0x80
+	push	acc
+	lcall	_printf
+	dec	sp
+	dec	sp
+	dec	sp
+	pop	ar5
+	pop	ar4
+	pop	ar3
+	pop	ar2
+	C$lab6_1.c$187$1$1 ==.
+;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 6\lab6-1.c:187: if (second > first)
+	clr	c
+	mov	a,r2
+	subb	a,r4
+	mov	a,r3
+	xrl	a,#0x80
+	mov	b,r5
+	xrl	b,#0x80
+	subb	a,b
+	jnc	00115$
+	C$lab6_1.c$189$2$6 ==.
+;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 6\lab6-1.c:189: lesser = first;
+	mov	ar6,r2
+	mov	ar7,r3
+	C$lab6_1.c$190$2$6 ==.
+;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 6\lab6-1.c:190: diff = second - first;
+	mov	a,r4
+	clr	c
+	subb	a,r2
+	mov	r0,a
+	mov	a,r5
+	subb	a,r3
+	mov	r1,a
+	sjmp	00116$
+00115$:
+	C$lab6_1.c$192$1$1 ==.
+;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 6\lab6-1.c:192: else if (second < first) 
+	clr	c
+	mov	a,r4
+	subb	a,r2
+	mov	a,r5
+	xrl	a,#0x80
+	mov	b,r3
+	xrl	b,#0x80
+	subb	a,b
+	jnc	00112$
+	C$lab6_1.c$194$2$7 ==.
+;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 6\lab6-1.c:194: lesser = second;
+	mov	ar6,r4
+	mov	ar7,r5
+	C$lab6_1.c$195$2$7 ==.
+;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 6\lab6-1.c:195: diff = first - second;
+	mov	a,r2
+	clr	c
+	subb	a,r4
+	mov	r0,a
+	mov	a,r3
+	subb	a,r5
+	mov	r1,a
+	sjmp	00116$
+00112$:
+	C$lab6_1.c$199$2$8 ==.
+;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 6\lab6-1.c:199: printf("Same fuckin' number: %d\n\r", first);
+	push	ar2
+	push	ar3
+	mov	a,#__str_20
+	push	acc
+	mov	a,#(__str_20 >> 8)
+	push	acc
+	mov	a,#0x80
+	push	acc
+	lcall	_printf
+	mov	a,sp
+	add	a,#0xfb
+	mov	sp,a
+	C$lab6_1.c$200$2$8 ==.
+;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 6\lab6-1.c:200: return;
+	ret
+00116$:
+	C$lab6_1.c$203$1$1 ==.
+;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 6\lab6-1.c:203: srand(seed);	
+	mov	dpl,_seed
+	mov	dph,(_seed + 1)
+	push	ar6
+	push	ar7
+	push	ar0
+	push	ar1
+	lcall	_srand
+	C$lab6_1.c$204$1$1 ==.
+;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 6\lab6-1.c:204: res = rand()%diff;
+	lcall	_rand
+	pop	ar1
+	pop	ar0
+	mov	__modsint_PARM_2,r0
+	mov	(__modsint_PARM_2 + 1),r1
+	lcall	__modsint
+	mov	r2,dpl
+	mov	r3,dph
+	pop	ar7
+	pop	ar6
+	C$lab6_1.c$205$1$1 ==.
+;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 6\lab6-1.c:205: res += lesser;
+	mov	a,r6
+	add	a,r2
+	mov	r2,a
+	mov	a,r7
+	addc	a,r3
+	mov	r3,a
+	C$lab6_1.c$207$1$1 ==.
+;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 6\lab6-1.c:207: printf("Fuckin' %d\n\r\n\r", res);
+	push	ar2
+	push	ar3
+	mov	a,#__str_21
+	push	acc
+	mov	a,#(__str_21 >> 8)
+	push	acc
+	mov	a,#0x80
+	push	acc
+	lcall	_printf
+	mov	a,sp
+	add	a,#0xfb
+	mov	sp,a
+	C$lab6_1.c$208$1$1 ==.
+	XG$randomNumber$0$0 ==.
+	ret
 ;------------------------------------------------------------
 ;Allocation info for local variables in function 'Timer0_Init'
 ;------------------------------------------------------------
 ;------------------------------------------------------------
 	G$Timer0_Init$0$0 ==.
-	C$lab2_3.c$191$2$1 ==.
-;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 2\lab2-3.c:191: void Timer0_Init()		//timer0 init.
+	C$lab6_1.c$210$1$1 ==.
+;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 6\lab6-1.c:210: void Timer0_Init()		//timer0 init.
 ;	-----------------------------------------
 ;	 function Timer0_Init
 ;	-----------------------------------------
 _Timer0_Init:
-	C$lab2_3.c$193$1$1 ==.
-;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 2\lab2-3.c:193: CKCON &= ~0x08; 	//sysclk/12
+	C$lab6_1.c$212$1$1 ==.
+;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 6\lab6-1.c:212: CKCON &= ~0x08; 	//sysclk/12
 	anl	_CKCON,#0xF7
-	C$lab2_3.c$194$1$1 ==.
-;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 2\lab2-3.c:194: TMOD &= 0xF0;		//clear bits 0-3 of timer mode register
+	C$lab6_1.c$213$1$1 ==.
+;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 6\lab6-1.c:213: TMOD &= 0xF0;		//clear bits 0-3 of timer mode register
 	anl	_TMOD,#0xF0
-	C$lab2_3.c$195$1$1 ==.
-;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 2\lab2-3.c:195: TMOD |= 0x01;		//set timer 0 to mode 1 (16-bit counter/timer)
+	C$lab6_1.c$214$1$1 ==.
+;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 6\lab6-1.c:214: TMOD |= 0x01;		//set timer 0 to mode 1 (16-bit counter/timer)
 	orl	_TMOD,#0x01
-	C$lab2_3.c$196$1$1 ==.
-;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 2\lab2-3.c:196: TR0 = 0;			//disable timer
+	C$lab6_1.c$215$1$1 ==.
+;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 6\lab6-1.c:215: TR0 = 0;			//disable timer
 	clr	_TR0
-	C$lab2_3.c$197$1$1 ==.
-;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 2\lab2-3.c:197: TL0 = 0;			//clear low byte of timer count
+	C$lab6_1.c$216$1$1 ==.
+;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 6\lab6-1.c:216: TL0 = 0;			//clear low byte of timer count
 	mov	_TL0,#0x00
-	C$lab2_3.c$198$1$1 ==.
-;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 2\lab2-3.c:198: TH0 = 0;			//clear high byte of timer count
+	C$lab6_1.c$217$1$1 ==.
+;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 6\lab6-1.c:217: TH0 = 0;			//clear high byte of timer count
 	mov	_TH0,#0x00
-	C$lab2_3.c$199$1$1 ==.
+	C$lab6_1.c$218$1$1 ==.
 	XG$Timer0_Init$0$0 ==.
 	ret
 ;------------------------------------------------------------
@@ -2039,124 +2259,32 @@ _Timer0_Init:
 ;------------------------------------------------------------
 ;------------------------------------------------------------
 	G$Timer0_ISR$0$0 ==.
-	C$lab2_3.c$201$1$1 ==.
-;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 2\lab2-3.c:201: void Timer0_ISR() interrupt 1		//timer0 interrupt
+	C$lab6_1.c$220$1$1 ==.
+;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 6\lab6-1.c:220: void Timer0_ISR() interrupt 1		//timer0 interrupt
 ;	-----------------------------------------
 ;	 function Timer0_ISR
 ;	-----------------------------------------
 _Timer0_ISR:
 	push	acc
-	push	b
 	push	psw
 	mov	psw,#0x00
-	C$lab2_3.c$203$1$1 ==.
-;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 2\lab2-3.c:203: TH0 = 0x5E;
+	C$lab6_1.c$222$1$1 ==.
+;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 6\lab6-1.c:222: TH0 = 0x5E;
 	mov	_TH0,#0x5E
-	C$lab2_3.c$204$1$1 ==.
-;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 2\lab2-3.c:204: TL0 = 0x05;
+	C$lab6_1.c$223$1$1 ==.
+;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 6\lab6-1.c:223: TL0 = 0x05;
 	mov	_TL0,#0x05
-	C$lab2_3.c$206$1$1 ==.
-;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 2\lab2-3.c:206: if (bounce > 0)
-	clr	c
+	C$lab6_1.c$225$1$1 ==.
+;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 6\lab6-1.c:225: seed++;
+	inc	_seed
 	clr	a
-	subb	a,_bounce
-	mov	a,#(0x00 ^ 0x80)
-	mov	b,(_bounce + 1)
-	xrl	b,#0x80
-	subb	a,b
-	jnc	00103$
-	C$lab2_3.c$207$1$1 ==.
-;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 2\lab2-3.c:207: bounce--;
-	dec	_bounce
-	mov	a,#0xff
-	cjne	a,_bounce,00107$
-	dec	(_bounce + 1)
-00107$:
+	cjne	a,_seed,00103$
+	inc	(_seed + 1)
 00103$:
 	pop	psw
-	pop	b
 	pop	acc
-	C$lab2_3.c$208$1$1 ==.
+	C$lab6_1.c$226$1$1 ==.
 	XG$Timer0_ISR$0$0 ==.
-	reti
-;	eliminated unneeded push/pop dpl
-;	eliminated unneeded push/pop dph
-;------------------------------------------------------------
-;Allocation info for local variables in function 'Timer2_Init'
-;------------------------------------------------------------
-;SFRPAGE_SAVE              Allocated to registers r2 
-;------------------------------------------------------------
-	G$Timer2_Init$0$0 ==.
-	C$lab2_3.c$210$1$1 ==.
-;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 2\lab2-3.c:210: void Timer2_Init()		//timer 2 init
-;	-----------------------------------------
-;	 function Timer2_Init
-;	-----------------------------------------
-_Timer2_Init:
-	C$lab2_3.c$212$1$1 ==.
-;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 2\lab2-3.c:212: char SFRPAGE_SAVE = SFRPAGE;	// Save Current SFR page.
-	mov	r2,_SFRPAGE
-	C$lab2_3.c$213$1$1 ==.
-;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 2\lab2-3.c:213: SFRPAGE = CONFIG_PAGE;
-	mov	_SFRPAGE,#0x0F
-	C$lab2_3.c$215$1$1 ==.
-;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 2\lab2-3.c:215: TMR2CN &= ~0x04;		//ignore outside input
-	anl	_TMR2CN,#0xFB
-	C$lab2_3.c$217$1$1 ==.
-;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 2\lab2-3.c:217: TMR2CF |= 0x18;		//sysclk/2
-	orl	_TMR2CF,#0x18
-	C$lab2_3.c$218$1$1 ==.
-;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 2\lab2-3.c:218: TMR2CF &= 0xFE;		//count up
-	anl	_TMR2CF,#0xFE
-	C$lab2_3.c$219$1$1 ==.
-;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 2\lab2-3.c:219: TR2 = 0;			//disable timer
-	clr	_TR2
-	C$lab2_3.c$220$1$1 ==.
-;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 2\lab2-3.c:220: TL2 = 0;			//clear low byte of timer count
-	mov	_TL2,#0x00
-	C$lab2_3.c$221$1$1 ==.
-;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 2\lab2-3.c:221: TH2 = 0;			//clear high byte of timer count
-	mov	_TH2,#0x00
-	C$lab2_3.c$223$1$1 ==.
-;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 2\lab2-3.c:223: SFRPAGE = SFRPAGE_SAVE;
-	mov	_SFRPAGE,r2
-	C$lab2_3.c$224$1$1 ==.
-	XG$Timer2_Init$0$0 ==.
-	ret
-;------------------------------------------------------------
-;Allocation info for local variables in function 'Timer2_ISR'
-;------------------------------------------------------------
-;------------------------------------------------------------
-	G$Timer2_ISR$0$0 ==.
-	C$lab2_3.c$226$1$1 ==.
-;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 2\lab2-3.c:226: void Timer2_ISR() interrupt 5		//timer2 interrupt
-;	-----------------------------------------
-;	 function Timer2_ISR
-;	-----------------------------------------
-_Timer2_ISR:
-	push	acc
-	push	psw
-	mov	psw,#0x00
-	C$lab2_3.c$228$1$1 ==.
-;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 2\lab2-3.c:228: TF2=0;					//resets interrupt flag
-	clr	_TF2
-	C$lab2_3.c$229$1$1 ==.
-;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 2\lab2-3.c:229: TL2 =0xD0;				//reset low byte
-	mov	_TL2,#0xD0
-	C$lab2_3.c$230$1$1 ==.
-;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 2\lab2-3.c:230: TH2 =0x9E;				//reset high byte
-	mov	_TH2,#0x9E
-	C$lab2_3.c$231$1$1 ==.
-;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 2\lab2-3.c:231: overflows++;
-	inc	_overflows
-	clr	a
-	cjne	a,_overflows,00103$
-	inc	(_overflows + 1)
-00103$:
-	pop	psw
-	pop	acc
-	C$lab2_3.c$232$1$1 ==.
-	XG$Timer2_ISR$0$0 ==.
 	reti
 ;	eliminated unneeded push/pop dpl
 ;	eliminated unneeded push/pop dph
@@ -2168,23 +2296,23 @@ _Timer2_ISR:
 ;SFRPAGE_SAVE              Allocated to registers r2 
 ;------------------------------------------------------------
 	G$SYSCLK_INIT$0$0 ==.
-	C$lab2_3.c$241$1$1 ==.
-;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 2\lab2-3.c:241: void SYSCLK_INIT(void)
+	C$lab6_1.c$234$1$1 ==.
+;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 6\lab6-1.c:234: void SYSCLK_INIT(void)
 ;	-----------------------------------------
 ;	 function SYSCLK_INIT
 ;	-----------------------------------------
 _SYSCLK_INIT:
-	C$lab2_3.c$245$1$1 ==.
-;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 2\lab2-3.c:245: char SFRPAGE_SAVE = SFRPAGE;	// Save Current SFR page.
+	C$lab6_1.c$239$1$1 ==.
+;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 6\lab6-1.c:239: SFRPAGE_SAVE = SFRPAGE;				// Save Current SFR page	SFRPAGE = CONFIG_PAGE;
 	mov	r2,_SFRPAGE
-	C$lab2_3.c$246$1$1 ==.
-;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 2\lab2-3.c:246: SFRPAGE = CONFIG_PAGE;
+	C$lab6_1.c$240$1$1 ==.
+;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 6\lab6-1.c:240: SFRPAGE   = CONFIG_PAGE;
 	mov	_SFRPAGE,#0x0F
-	C$lab2_3.c$248$1$1 ==.
-;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 2\lab2-3.c:248: OSCXCN	= 0x67;			// Start external oscillator
+	C$lab6_1.c$242$1$1 ==.
+;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 6\lab6-1.c:242: OSCXCN = 0x67;						// Start ext osc with 22.1184MHz crystal
 	mov	_OSCXCN,#0x67
-	C$lab2_3.c$249$1$1 ==.
-;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 2\lab2-3.c:249: for(i=0; i < 3000; i++);// Wait for the oscillator to start up.
+	C$lab6_1.c$243$1$1 ==.
+;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 6\lab6-1.c:243: for(i=0; i < 3000; i++);			// Wait for the oscillator to start up
 	mov	r3,#0xB8
 	mov	r4,#0x0B
 00106$:
@@ -2195,125 +2323,22 @@ _SYSCLK_INIT:
 	mov	a,r3
 	orl	a,r4
 	jnz	00106$
-	C$lab2_3.c$250$1$1 ==.
-;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 2\lab2-3.c:250: while(!(OSCXCN & 0x80));// Check to see if the Crystal Oscillator Valid Flag is set.
+	C$lab6_1.c$244$1$1 ==.
+;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 6\lab6-1.c:244: while(!(OSCXCN & 0x80));
 00101$:
 	mov	a,_OSCXCN
 	jnb	acc.7,00101$
-	C$lab2_3.c$251$1$1 ==.
-;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 2\lab2-3.c:251: CLKSEL	= 0x01;			// SYSCLK derived from the External Oscillator circuit.
+	C$lab6_1.c$245$1$1 ==.
+;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 6\lab6-1.c:245: CLKSEL = 0x01;						// Switch to the external crystal oscillator
 	mov	_CLKSEL,#0x01
-	C$lab2_3.c$252$1$1 ==.
-;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 2\lab2-3.c:252: OSCICN	= 0x00;			// Disable the internal oscillator.
+	C$lab6_1.c$246$1$1 ==.
+;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 6\lab6-1.c:246: OSCICN = 0x00;						// Disable the internal oscillator
 	mov	_OSCICN,#0x00
-	C$lab2_3.c$254$1$1 ==.
-;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 2\lab2-3.c:254: SFRPAGE = SFRPAGE_SAVE;	// Restore SFR page.
+	C$lab6_1.c$248$1$1 ==.
+;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 6\lab6-1.c:248: SFRPAGE = SFRPAGE_SAVE;             // Restore SFR page
 	mov	_SFRPAGE,r2
-	C$lab2_3.c$255$1$1 ==.
+	C$lab6_1.c$249$1$1 ==.
 	XG$SYSCLK_INIT$0$0 ==.
-	ret
-;------------------------------------------------------------
-;Allocation info for local variables in function 'SYSCLK_INIT2'
-;------------------------------------------------------------
-;i                         Allocated to registers r3 r4 
-;SFRPAGE_SAVE              Allocated to registers r2 
-;------------------------------------------------------------
-	G$SYSCLK_INIT2$0$0 ==.
-	C$lab2_3.c$265$1$1 ==.
-;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 2\lab2-3.c:265: void SYSCLK_INIT2(void)
-;	-----------------------------------------
-;	 function SYSCLK_INIT2
-;	-----------------------------------------
-_SYSCLK_INIT2:
-	C$lab2_3.c$269$1$1 ==.
-;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 2\lab2-3.c:269: char SFRPAGE_SAVE = SFRPAGE;	// Save Current SFR page.
-	mov	r2,_SFRPAGE
-	C$lab2_3.c$270$1$1 ==.
-;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 2\lab2-3.c:270: SFRPAGE = CONFIG_PAGE;
-	mov	_SFRPAGE,#0x0F
-	C$lab2_3.c$272$1$1 ==.
-;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 2\lab2-3.c:272: OSCXCN	= 0x67;			// Start external oscillator
-	mov	_OSCXCN,#0x67
-	C$lab2_3.c$273$1$1 ==.
-;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 2\lab2-3.c:273: for(i=0; i < 3000; i++);// Wait for the oscillator to start up.
-	mov	r3,#0xB8
-	mov	r4,#0x0B
-	mov	ar5,r3
-	mov	ar6,r4
-00109$:
-	dec	r5
-	cjne	r5,#0xff,00125$
-	dec	r6
-00125$:
-	mov	a,r5
-	orl	a,r6
-	jnz	00109$
-	C$lab2_3.c$274$1$1 ==.
-;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 2\lab2-3.c:274: while(!(OSCXCN & 0x80));// Check to see if the Crystal Oscillator Valid Flag is set.
-00101$:
-	mov	a,_OSCXCN
-	jnb	acc.7,00101$
-	C$lab2_3.c$275$1$1 ==.
-;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 2\lab2-3.c:275: CLKSEL	= 0x01;			// SYSCLK derived from the External Oscillator circuit.
-	mov	_CLKSEL,#0x01
-	C$lab2_3.c$276$1$1 ==.
-;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 2\lab2-3.c:276: OSCICN	= 0x00;			// Disable the internal oscillator.
-	mov	_OSCICN,#0x00
-	C$lab2_3.c$278$1$1 ==.
-;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 2\lab2-3.c:278: SFRPAGE = CONFIG_PAGE;
-	mov	_SFRPAGE,#0x0F
-	C$lab2_3.c$279$1$1 ==.
-;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 2\lab2-3.c:279: PLL0CN	= 0x04;
-	mov	_PLL0CN,#0x04
-	C$lab2_3.c$280$1$1 ==.
-;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 2\lab2-3.c:280: SFRPAGE = LEGACY_PAGE;
-	mov	_SFRPAGE,#0x00
-	C$lab2_3.c$281$1$1 ==.
-;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 2\lab2-3.c:281: FLSCL	= 0x10;
-	mov	_FLSCL,#0x10
-	C$lab2_3.c$282$1$1 ==.
-;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 2\lab2-3.c:282: SFRPAGE = CONFIG_PAGE;
-	mov	_SFRPAGE,#0x0F
-	C$lab2_3.c$283$1$1 ==.
-;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 2\lab2-3.c:283: PLL0CN	|= 0x01;
-	orl	_PLL0CN,#0x01
-	C$lab2_3.c$284$1$1 ==.
-;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 2\lab2-3.c:284: PLL0DIV = 0x04;
-	mov	_PLL0DIV,#0x04
-	C$lab2_3.c$285$1$1 ==.
-;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 2\lab2-3.c:285: PLL0FLT = 0x01;
-	mov	_PLL0FLT,#0x01
-	C$lab2_3.c$286$1$1 ==.
-;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 2\lab2-3.c:286: PLL0MUL = 0x09;
-	mov	_PLL0MUL,#0x09
-	C$lab2_3.c$287$1$1 ==.
-;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 2\lab2-3.c:287: for(i=0; i < 256; i++);
-	mov	r3,#0x00
-	mov	r4,#0x01
-00112$:
-	dec	r3
-	cjne	r3,#0xff,00128$
-	dec	r4
-00128$:
-	mov	a,r3
-	orl	a,r4
-	jnz	00112$
-	C$lab2_3.c$288$1$1 ==.
-;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 2\lab2-3.c:288: PLL0CN	|= 0x02;
-	orl	_PLL0CN,#0x02
-	C$lab2_3.c$289$1$1 ==.
-;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 2\lab2-3.c:289: while(!(PLL0CN & 0x10));
-00104$:
-	mov	a,_PLL0CN
-	jnb	acc.4,00104$
-	C$lab2_3.c$290$1$1 ==.
-;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 2\lab2-3.c:290: CLKSEL	= 0x02;			// SYSCLK derived from the PLL.
-	mov	_CLKSEL,#0x02
-	C$lab2_3.c$292$1$1 ==.
-;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 2\lab2-3.c:292: SFRPAGE = SFRPAGE_SAVE;	// Restore SFR page.
-	mov	_SFRPAGE,r2
-	C$lab2_3.c$293$1$1 ==.
-	XG$SYSCLK_INIT2$0$0 ==.
 	ret
 ;------------------------------------------------------------
 ;Allocation info for local variables in function 'PORT_INIT'
@@ -2321,46 +2346,43 @@ _SYSCLK_INIT2:
 ;SFRPAGE_SAVE              Allocated to registers r2 
 ;------------------------------------------------------------
 	G$PORT_INIT$0$0 ==.
-	C$lab2_3.c$301$1$1 ==.
-;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 2\lab2-3.c:301: void PORT_INIT(void)
+	C$lab6_1.c$257$1$1 ==.
+;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 6\lab6-1.c:257: void PORT_INIT(void)
 ;	-----------------------------------------
 ;	 function PORT_INIT
 ;	-----------------------------------------
 _PORT_INIT:
-	C$lab2_3.c$303$1$1 ==.
-;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 2\lab2-3.c:303: char SFRPAGE_SAVE = SFRPAGE;    // Save Current SFR page.
+	C$lab6_1.c$261$1$1 ==.
+;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 6\lab6-1.c:261: SFRPAGE_SAVE = SFRPAGE;				// Save Current SFR page
 	mov	r2,_SFRPAGE
-	C$lab2_3.c$304$1$1 ==.
-;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 2\lab2-3.c:304: SFRPAGE = CONFIG_PAGE;
+	C$lab6_1.c$262$1$1 ==.
+;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 6\lab6-1.c:262: SFRPAGE = CONFIG_PAGE;
 	mov	_SFRPAGE,#0x0F
-	C$lab2_3.c$306$1$1 ==.
-;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 2\lab2-3.c:306: EA		= 1;			// Enable interrupts as selected.
+	C$lab6_1.c$264$1$1 ==.
+;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 6\lab6-1.c:264: EA		= 1;			// Enable interrupts as selected.
 	setb	_EA
-	C$lab2_3.c$307$1$1 ==.
-;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 2\lab2-3.c:307: ET0 	= 1;			// enable timer 0 overflow interrupts
+	C$lab6_1.c$265$1$1 ==.
+;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 6\lab6-1.c:265: ET0 	= 1;			// enable timer 0 overflow interrupts
 	setb	_ET0
-	C$lab2_3.c$308$1$1 ==.
-;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 2\lab2-3.c:308: ET2 = 1;				// Enable Timer 2 overflow interrupt
-	setb	_ET2
-	C$lab2_3.c$310$1$1 ==.
-;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 2\lab2-3.c:310: XBR0	= 0x04;			// Enable UART0.
+	C$lab6_1.c$267$1$1 ==.
+;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 6\lab6-1.c:267: XBR0	 = 0x04;					// Enable UART0
 	mov	_XBR0,#0x04
-	C$lab2_3.c$311$1$1 ==.
-;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 2\lab2-3.c:311: XBR1	= 0x14;			// /INT0, INT1 routed to port pin.
-	mov	_XBR1,#0x14
-	C$lab2_3.c$312$1$1 ==.
-;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 2\lab2-3.c:312: XBR2	= 0x40;			// Enable Crossbar and weak pull-ups.
+	C$lab6_1.c$268$1$1 ==.
+;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 6\lab6-1.c:268: XBR1	 = 0x00;
+	mov	_XBR1,#0x00
+	C$lab6_1.c$269$1$1 ==.
+;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 6\lab6-1.c:269: XBR2	 = 0x40;					// Enable Crossbar and weak pull-up
 	mov	_XBR2,#0x40
-	C$lab2_3.c$314$1$1 ==.
-;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 2\lab2-3.c:314: P0MDOUT = 0x01;			// P0.0 (TX0) is configured as Push-Pull for output.
-	mov	_P0MDOUT,#0x01
-	C$lab2_3.c$318$1$1 ==.
-;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 2\lab2-3.c:318: P0		= 0x0E;			// Additionally, set P0.0=0, P0.1=1, P0.2=1, P0.3=1.
-	mov	_P0,#0x0E
-	C$lab2_3.c$320$1$1 ==.
-;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 2\lab2-3.c:320: SFRPAGE = SFRPAGE_SAVE;	// Restore SFR page.
+	C$lab6_1.c$270$1$1 ==.
+;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 6\lab6-1.c:270: P0MDOUT |= 0x01;					// Set TX0 on P0.0 pin to push-pull
+	orl	_P0MDOUT,#0x01
+	C$lab6_1.c$271$1$1 ==.
+;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 6\lab6-1.c:271: P1MDOUT	|= 0x40;					// Set green LED ooutput P1.6 to push-pull
+	orl	_P1MDOUT,#0x40
+	C$lab6_1.c$273$1$1 ==.
+;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 6\lab6-1.c:273: SFRPAGE = SFRPAGE_SAVE;             // Restore SFR page
 	mov	_SFRPAGE,r2
-	C$lab2_3.c$321$1$1 ==.
+	C$lab6_1.c$274$1$1 ==.
 	XG$PORT_INIT$0$0 ==.
 	ret
 ;------------------------------------------------------------
@@ -2369,125 +2391,183 @@ _PORT_INIT:
 ;SFRPAGE_SAVE              Allocated to registers r2 
 ;------------------------------------------------------------
 	G$UART0_INIT$0$0 ==.
-	C$lab2_3.c$329$1$1 ==.
-;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 2\lab2-3.c:329: void UART0_INIT(void)
+	C$lab6_1.c$282$1$1 ==.
+;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 6\lab6-1.c:282: void UART0_INIT(void)
 ;	-----------------------------------------
 ;	 function UART0_INIT
 ;	-----------------------------------------
 _UART0_INIT:
-	C$lab2_3.c$331$1$1 ==.
-;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 2\lab2-3.c:331: char SFRPAGE_SAVE = SFRPAGE;    // Save Current SFR page.
+	C$lab6_1.c$286$1$1 ==.
+;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 6\lab6-1.c:286: SFRPAGE_SAVE = SFRPAGE;				// Save Current SFR page
 	mov	r2,_SFRPAGE
-	C$lab2_3.c$332$1$1 ==.
-;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 2\lab2-3.c:332: SFRPAGE = TIMER01_PAGE;
+	C$lab6_1.c$287$1$1 ==.
+;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 6\lab6-1.c:287: SFRPAGE = TIMER01_PAGE;
 	mov	_SFRPAGE,#0x00
-	C$lab2_3.c$334$1$1 ==.
-;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 2\lab2-3.c:334: TCON	 = 0x40;				// Enable Timer 1 running (TR1)
+	C$lab6_1.c$289$1$1 ==.
+;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 6\lab6-1.c:289: TCON	 = 0x40;
 	mov	_TCON,#0x40
-	C$lab2_3.c$335$1$1 ==.
-;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 2\lab2-3.c:335: TMOD	&= 0x0F;
+	C$lab6_1.c$290$1$1 ==.
+;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 6\lab6-1.c:290: TMOD	&= 0x0F;
 	anl	_TMOD,#0x0F
-	C$lab2_3.c$336$1$1 ==.
-;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 2\lab2-3.c:336: TMOD	|= 0x20;				// Timer1, Mode 2: 8-bit counter/timer with auto-reload.
+	C$lab6_1.c$291$1$1 ==.
+;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 6\lab6-1.c:291: TMOD	|= 0x20;					// Timer1, Mode 2, 8-bit reload
 	orl	_TMOD,#0x20
-	C$lab2_3.c$337$1$1 ==.
-;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 2\lab2-3.c:337: CKCON	|= 0x10;				// Timer1 uses SYSCLK as time base.
+	C$lab6_1.c$292$1$1 ==.
+;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 6\lab6-1.c:292: CKCON	|= 0x10;					// Timer1 uses SYSCLK as time base
 	orl	_CKCON,#0x10
-	C$lab2_3.c$339$1$1 ==.
-;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 2\lab2-3.c:339: TH1		 = 0xE8;				// 0xE8 = 232
+	C$lab6_1.c$294$1$1 ==.
+;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 6\lab6-1.c:294: TH1		 = 0xE8;					// 0xE8 = 232
 	mov	_TH1,#0xE8
-	C$lab2_3.c$340$1$1 ==.
-;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 2\lab2-3.c:340: TR1		 = 1;					// Start Timer1.
+	C$lab6_1.c$295$1$1 ==.
+;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 6\lab6-1.c:295: TR1		 = 1;						// Start Timer1
 	setb	_TR1
-	C$lab2_3.c$342$1$1 ==.
-;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 2\lab2-3.c:342: SFRPAGE = UART0_PAGE;
+	C$lab6_1.c$297$1$1 ==.
+;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 6\lab6-1.c:297: SFRPAGE = UART0_PAGE;
 	mov	_SFRPAGE,#0x00
-	C$lab2_3.c$343$1$1 ==.
-;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 2\lab2-3.c:343: SCON0	= 0x50;					// Set Mode 1: 8-Bit UART
+	C$lab6_1.c$298$1$1 ==.
+;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 6\lab6-1.c:298: SCON0	 = 0x50;					// Mode 1, 8-bit UART, enable RX
 	mov	_SCON0,#0x50
-	C$lab2_3.c$344$1$1 ==.
-;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 2\lab2-3.c:344: SSTA0	 = 0x00;				// SMOD0 = 0, in this mode
+	C$lab6_1.c$299$1$1 ==.
+;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 6\lab6-1.c:299: SSTA0	 = 0x00;					// SMOD0 = 0, in this mode
 	mov	_SSTA0,#0x00
-	C$lab2_3.c$346$1$1 ==.
-;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 2\lab2-3.c:346: TI0		= 1;					// Indicate TX0 ready.
+	C$lab6_1.c$302$1$1 ==.
+;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 6\lab6-1.c:302: TI0 = 1;							// Indicate TX0 ready
 	setb	_TI0
-	C$lab2_3.c$348$1$1 ==.
-;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 2\lab2-3.c:348: SFRPAGE = SFRPAGE_SAVE;			// Restore SFR page.
+	C$lab6_1.c$304$1$1 ==.
+;	C:\Users\SSP\Documents\Microprocessor Systems\Lab 6\lab6-1.c:304: SFRPAGE = SFRPAGE_SAVE;             // Restore SFR page
 	mov	_SFRPAGE,r2
-	C$lab2_3.c$349$1$1 ==.
+	C$lab6_1.c$305$1$1 ==.
 	XG$UART0_INIT$0$0 ==.
 	ret
 	.area CSEG    (CODE)
 	.area CONST   (CODE)
-Flab2_3$_str_0$0$0 == .
+Flab6_1$_str_0$0$0 == .
 __str_0:
 	.db 0x1B
 	.ascii "[2J"
 	.db 0x00
-Flab2_3$_str_1$0$0 == .
+Flab6_1$_str_1$0$0 == .
 __str_1:
-	.ascii "Your Average Response Time is: %d    ms"
+	.ascii "Ask me your questions, Bridge Keeper. I am not afraid."
+	.db 0x0A
 	.db 0x0A
 	.db 0x0D
 	.db 0x00
-Flab2_3$_str_2$0$0 == .
+Flab6_1$_str_2$0$0 == .
 __str_2:
-	.ascii "Ready?"
-	.db 0x0D
+	.ascii "invalid choice. go die."
 	.db 0x0A
+	.db 0x0D
 	.db 0x00
-Flab2_3$_str_3$0$0 == .
+Flab6_1$_str_3$0$0 == .
 __str_3:
-	.db 0x1B
-	.ascii "[4;0HPush the button for next round!! (push other button to"
-	.ascii " reset)"
+	.db 0x0A
+	.db 0x0D
+	.ascii "Choose one of the following:"
 	.db 0x0D
 	.db 0x0A
+	.ascii "   1: Yes/No"
+	.db 0x0D
+	.db 0x0A
+	.ascii "   2: True/Fal"
+	.ascii "se"
+	.db 0x0D
+	.db 0x0A
+	.ascii "   3: Day of Week"
+	.db 0x0D
+	.db 0x0A
+	.ascii "   4: Random Number"
+	.db 0x0A
+	.ascii "   "
+	.db 0x0A
+	.db 0x0D
 	.db 0x00
-Flab2_3$_str_4$0$0 == .
+Flab6_1$_str_4$0$0 == .
 __str_4:
-	.db 0x1B
-	.ascii "[1;46m"
+	.ascii "No. fuck you. "
+	.db 0x0A
+	.db 0x0D
 	.db 0x00
-Flab2_3$_str_5$0$0 == .
+Flab6_1$_str_5$0$0 == .
 __str_5:
-	.db 0x1B
-	.ascii "[0m"
+	.ascii "Yes. Fuck yea. "
+	.db 0x0A
+	.db 0x0D
 	.db 0x00
-Flab2_3$_str_6$0$0 == .
+Flab6_1$_str_6$0$0 == .
 __str_6:
-	.db 0x1B
-	.ascii "[44m"
+	.db 0x0A
+	.db 0x0D
 	.db 0x00
-Flab2_3$_str_7$0$0 == .
+Flab6_1$_str_7$0$0 == .
 __str_7:
-	.ascii "GO!!"
+	.ascii "FALSE. YOU LIE. "
 	.db 0x0A
 	.db 0x0D
 	.db 0x00
-Flab2_3$_str_8$0$0 == .
+Flab6_1$_str_8$0$0 == .
 __str_8:
-	.ascii "Time: %d    ms"
+	.ascii "TRUE, MOTHERFUCKER "
 	.db 0x0A
 	.db 0x0D
 	.db 0x00
-Flab2_3$_str_9$0$0 == .
+Flab6_1$_str_9$0$0 == .
 __str_9:
-	.db 0x1B
-	.ascii "[0;0HYour Average Response Time is : %d    ms"
-	.db 0x0A
-	.db 0x0D
+	.ascii "MERNDEY!"
 	.db 0x00
-Flab2_3$_str_10$0$0 == .
+Flab6_1$_str_10$0$0 == .
 __str_10:
-	.db 0x1B
-	.ascii "[0;0HYour Average Response Time is :   0    ms"
+	.ascii "TWOSDEY!"
+	.db 0x00
+Flab6_1$_str_11$0$0 == .
+__str_11:
+	.ascii "WERNSDEY!"
+	.db 0x00
+Flab6_1$_str_12$0$0 == .
+__str_12:
+	.ascii "TURSDEY!"
+	.db 0x00
+Flab6_1$_str_13$0$0 == .
+__str_13:
+	.ascii "FRRDEY!"
+	.db 0x00
+Flab6_1$_str_14$0$0 == .
+__str_14:
+	.ascii "SERTERDEY!"
+	.db 0x00
+Flab6_1$_str_15$0$0 == .
+__str_15:
+	.ascii "SURNDEY!"
+	.db 0x00
+Flab6_1$_str_16$0$0 == .
+__str_16:
+	.ascii "ERMERGERD! GERD DERM "
+	.db 0x00
+Flab6_1$_str_17$0$0 == .
+__str_17:
+	.ascii "Enter first number: "
+	.db 0x00
+Flab6_1$_str_18$0$0 == .
+__str_18:
+	.ascii "%d"
+	.db 0x00
+Flab6_1$_str_19$0$0 == .
+__str_19:
+	.db 0x0A
+	.db 0x0D
+	.ascii "Enter second number: "
+	.db 0x00
+Flab6_1$_str_20$0$0 == .
+__str_20:
+	.ascii "Same fuckin' number: %d"
 	.db 0x0A
 	.db 0x0D
 	.db 0x00
-Flab2_3$_str_11$0$0 == .
-__str_11:
-	.ascii "Too early! Penalty time +200  ms!"
+Flab6_1$_str_21$0$0 == .
+__str_21:
+	.ascii "Fuckin' %d"
+	.db 0x0A
+	.db 0x0D
 	.db 0x0A
 	.db 0x0D
 	.db 0x00

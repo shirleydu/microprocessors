@@ -1,7 +1,7 @@
                               1 ;--------------------------------------------------------
                               2 ; File Created by SDCC : free open source ANSI-C Compiler
                               3 ; Version 2.9.0 #5416 (Mar 22 2009) (MINGW32)
-                              4 ; This file was generated Thu Nov 29 17:58:58 2012
+                              4 ; This file was generated Mon Dec 03 17:28:14 2012
                               5 ;--------------------------------------------------------
                               6 	.module final
                               7 	.optsdcc -mmcs51 --model-small
@@ -393,2191 +393,3060 @@
                             393 	.globl _SP
                             394 	.globl _P0
                             395 	.globl _board
-                            396 	.globl _turn
-                            397 	.globl _won
-                            398 	.globl _move
-                            399 	.globl _current
-                            400 	.globl _putchar
-                            401 	.globl _getchar
-                            402 	.globl _main
-                            403 	.globl _gameStart
-                            404 	.globl _printBoard
-                            405 	.globl _printSubBoard
-                            406 	.globl _SYSCLK_INIT
-                            407 	.globl _PORT_INIT
-                            408 	.globl _UART0_INIT
-                            409 ;--------------------------------------------------------
-                            410 ; special function registers
+                            396 	.globl _getMove_PARM_1
+                            397 	.globl _turn
+                            398 	.globl _current
+                            399 	.globl _putchar
+                            400 	.globl _getchar
+                            401 	.globl _main
+                            402 	.globl _gameStart
+                            403 	.globl _printBoard
+                            404 	.globl _printSubBoard
+                            405 	.globl _checkBoardWin
+                            406 	.globl _gameWon
+                            407 	.globl _getMove
+                            408 	.globl _SYSCLK_INIT
+                            409 	.globl _PORT_INIT
+                            410 	.globl _UART0_INIT
                             411 ;--------------------------------------------------------
-                            412 	.area RSEG    (DATA)
-                    0080    413 G$P0$0$0 == 0x0080
-                    0080    414 _P0	=	0x0080
-                    0081    415 G$SP$0$0 == 0x0081
-                    0081    416 _SP	=	0x0081
-                    0082    417 G$DPL$0$0 == 0x0082
-                    0082    418 _DPL	=	0x0082
-                    0083    419 G$DPH$0$0 == 0x0083
-                    0083    420 _DPH	=	0x0083
-                    0084    421 G$SFRPAGE$0$0 == 0x0084
-                    0084    422 _SFRPAGE	=	0x0084
-                    0085    423 G$SFRNEXT$0$0 == 0x0085
-                    0085    424 _SFRNEXT	=	0x0085
-                    0086    425 G$SFRLAST$0$0 == 0x0086
-                    0086    426 _SFRLAST	=	0x0086
-                    0087    427 G$PCON$0$0 == 0x0087
-                    0087    428 _PCON	=	0x0087
-                    0090    429 G$P1$0$0 == 0x0090
-                    0090    430 _P1	=	0x0090
-                    00A0    431 G$P2$0$0 == 0x00a0
-                    00A0    432 _P2	=	0x00a0
-                    00A8    433 G$IE$0$0 == 0x00a8
-                    00A8    434 _IE	=	0x00a8
-                    00B0    435 G$P3$0$0 == 0x00b0
-                    00B0    436 _P3	=	0x00b0
-                    00B1    437 G$PSBANK$0$0 == 0x00b1
-                    00B1    438 _PSBANK	=	0x00b1
-                    00B8    439 G$IP$0$0 == 0x00b8
-                    00B8    440 _IP	=	0x00b8
-                    00D0    441 G$PSW$0$0 == 0x00d0
-                    00D0    442 _PSW	=	0x00d0
-                    00E0    443 G$ACC$0$0 == 0x00e0
-                    00E0    444 _ACC	=	0x00e0
-                    00E6    445 G$EIE1$0$0 == 0x00e6
-                    00E6    446 _EIE1	=	0x00e6
-                    00E7    447 G$EIE2$0$0 == 0x00e7
-                    00E7    448 _EIE2	=	0x00e7
-                    00F0    449 G$B$0$0 == 0x00f0
-                    00F0    450 _B	=	0x00f0
-                    00F6    451 G$EIP1$0$0 == 0x00f6
-                    00F6    452 _EIP1	=	0x00f6
-                    00F7    453 G$EIP2$0$0 == 0x00f7
-                    00F7    454 _EIP2	=	0x00f7
-                    00FF    455 G$WDTCN$0$0 == 0x00ff
-                    00FF    456 _WDTCN	=	0x00ff
-                    0088    457 G$TCON$0$0 == 0x0088
-                    0088    458 _TCON	=	0x0088
-                    0089    459 G$TMOD$0$0 == 0x0089
-                    0089    460 _TMOD	=	0x0089
-                    008A    461 G$TL0$0$0 == 0x008a
-                    008A    462 _TL0	=	0x008a
-                    008B    463 G$TL1$0$0 == 0x008b
-                    008B    464 _TL1	=	0x008b
-                    008C    465 G$TH0$0$0 == 0x008c
-                    008C    466 _TH0	=	0x008c
-                    008D    467 G$TH1$0$0 == 0x008d
-                    008D    468 _TH1	=	0x008d
-                    008E    469 G$CKCON$0$0 == 0x008e
-                    008E    470 _CKCON	=	0x008e
-                    008F    471 G$PSCTL$0$0 == 0x008f
-                    008F    472 _PSCTL	=	0x008f
-                    0091    473 G$SSTA0$0$0 == 0x0091
-                    0091    474 _SSTA0	=	0x0091
-                    0098    475 G$SCON0$0$0 == 0x0098
-                    0098    476 _SCON0	=	0x0098
-                    0098    477 G$SCON$0$0 == 0x0098
-                    0098    478 _SCON	=	0x0098
-                    0099    479 G$SBUF0$0$0 == 0x0099
-                    0099    480 _SBUF0	=	0x0099
-                    0099    481 G$SBUF$0$0 == 0x0099
-                    0099    482 _SBUF	=	0x0099
-                    009A    483 G$SPI0CFG$0$0 == 0x009a
-                    009A    484 _SPI0CFG	=	0x009a
-                    009B    485 G$SPI0DAT$0$0 == 0x009b
-                    009B    486 _SPI0DAT	=	0x009b
-                    009D    487 G$SPI0CKR$0$0 == 0x009d
-                    009D    488 _SPI0CKR	=	0x009d
-                    00A1    489 G$EMI0TC$0$0 == 0x00a1
-                    00A1    490 _EMI0TC	=	0x00a1
-                    00A2    491 G$EMI0CN$0$0 == 0x00a2
-                    00A2    492 _EMI0CN	=	0x00a2
-                    00A2    493 G$_XPAGE$0$0 == 0x00a2
-                    00A2    494 __XPAGE	=	0x00a2
-                    00A3    495 G$EMI0CF$0$0 == 0x00a3
-                    00A3    496 _EMI0CF	=	0x00a3
-                    00A9    497 G$SADDR0$0$0 == 0x00a9
-                    00A9    498 _SADDR0	=	0x00a9
-                    00B7    499 G$FLSCL$0$0 == 0x00b7
-                    00B7    500 _FLSCL	=	0x00b7
-                    00B9    501 G$SADEN0$0$0 == 0x00b9
-                    00B9    502 _SADEN0	=	0x00b9
-                    00BA    503 G$AMX0CF$0$0 == 0x00ba
-                    00BA    504 _AMX0CF	=	0x00ba
-                    00BB    505 G$AMX0SL$0$0 == 0x00bb
-                    00BB    506 _AMX0SL	=	0x00bb
-                    00BC    507 G$ADC0CF$0$0 == 0x00bc
-                    00BC    508 _ADC0CF	=	0x00bc
-                    00BE    509 G$ADC0L$0$0 == 0x00be
-                    00BE    510 _ADC0L	=	0x00be
-                    00BF    511 G$ADC0H$0$0 == 0x00bf
-                    00BF    512 _ADC0H	=	0x00bf
-                    00C0    513 G$SMB0CN$0$0 == 0x00c0
-                    00C0    514 _SMB0CN	=	0x00c0
-                    00C1    515 G$SMB0STA$0$0 == 0x00c1
-                    00C1    516 _SMB0STA	=	0x00c1
-                    00C2    517 G$SMB0DAT$0$0 == 0x00c2
-                    00C2    518 _SMB0DAT	=	0x00c2
-                    00C3    519 G$SMB0ADR$0$0 == 0x00c3
-                    00C3    520 _SMB0ADR	=	0x00c3
-                    00C4    521 G$ADC0GTL$0$0 == 0x00c4
-                    00C4    522 _ADC0GTL	=	0x00c4
-                    00C5    523 G$ADC0GTH$0$0 == 0x00c5
-                    00C5    524 _ADC0GTH	=	0x00c5
-                    00C6    525 G$ADC0LTL$0$0 == 0x00c6
-                    00C6    526 _ADC0LTL	=	0x00c6
-                    00C7    527 G$ADC0LTH$0$0 == 0x00c7
-                    00C7    528 _ADC0LTH	=	0x00c7
-                    00C8    529 G$TMR2CN$0$0 == 0x00c8
-                    00C8    530 _TMR2CN	=	0x00c8
-                    00C9    531 G$TMR2CF$0$0 == 0x00c9
-                    00C9    532 _TMR2CF	=	0x00c9
-                    00CA    533 G$RCAP2L$0$0 == 0x00ca
-                    00CA    534 _RCAP2L	=	0x00ca
-                    00CB    535 G$RCAP2H$0$0 == 0x00cb
-                    00CB    536 _RCAP2H	=	0x00cb
-                    00CC    537 G$TMR2L$0$0 == 0x00cc
-                    00CC    538 _TMR2L	=	0x00cc
-                    00CC    539 G$TL2$0$0 == 0x00cc
-                    00CC    540 _TL2	=	0x00cc
-                    00CD    541 G$TMR2H$0$0 == 0x00cd
-                    00CD    542 _TMR2H	=	0x00cd
-                    00CD    543 G$TH2$0$0 == 0x00cd
-                    00CD    544 _TH2	=	0x00cd
-                    00CF    545 G$SMB0CR$0$0 == 0x00cf
-                    00CF    546 _SMB0CR	=	0x00cf
-                    00D1    547 G$REF0CN$0$0 == 0x00d1
-                    00D1    548 _REF0CN	=	0x00d1
-                    00D2    549 G$DAC0L$0$0 == 0x00d2
-                    00D2    550 _DAC0L	=	0x00d2
-                    00D3    551 G$DAC0H$0$0 == 0x00d3
-                    00D3    552 _DAC0H	=	0x00d3
-                    00D4    553 G$DAC0CN$0$0 == 0x00d4
-                    00D4    554 _DAC0CN	=	0x00d4
-                    00D8    555 G$PCA0CN$0$0 == 0x00d8
-                    00D8    556 _PCA0CN	=	0x00d8
-                    00D9    557 G$PCA0MD$0$0 == 0x00d9
-                    00D9    558 _PCA0MD	=	0x00d9
-                    00DA    559 G$PCA0CPM0$0$0 == 0x00da
-                    00DA    560 _PCA0CPM0	=	0x00da
-                    00DB    561 G$PCA0CPM1$0$0 == 0x00db
-                    00DB    562 _PCA0CPM1	=	0x00db
-                    00DC    563 G$PCA0CPM2$0$0 == 0x00dc
-                    00DC    564 _PCA0CPM2	=	0x00dc
-                    00DD    565 G$PCA0CPM3$0$0 == 0x00dd
-                    00DD    566 _PCA0CPM3	=	0x00dd
-                    00DE    567 G$PCA0CPM4$0$0 == 0x00de
-                    00DE    568 _PCA0CPM4	=	0x00de
-                    00DF    569 G$PCA0CPM5$0$0 == 0x00df
-                    00DF    570 _PCA0CPM5	=	0x00df
-                    00E1    571 G$PCA0CPL5$0$0 == 0x00e1
-                    00E1    572 _PCA0CPL5	=	0x00e1
-                    00E2    573 G$PCA0CPH5$0$0 == 0x00e2
-                    00E2    574 _PCA0CPH5	=	0x00e2
-                    00E8    575 G$ADC0CN$0$0 == 0x00e8
-                    00E8    576 _ADC0CN	=	0x00e8
-                    00E9    577 G$PCA0CPL2$0$0 == 0x00e9
-                    00E9    578 _PCA0CPL2	=	0x00e9
-                    00EA    579 G$PCA0CPH2$0$0 == 0x00ea
-                    00EA    580 _PCA0CPH2	=	0x00ea
-                    00EB    581 G$PCA0CPL3$0$0 == 0x00eb
-                    00EB    582 _PCA0CPL3	=	0x00eb
-                    00EC    583 G$PCA0CPH3$0$0 == 0x00ec
-                    00EC    584 _PCA0CPH3	=	0x00ec
-                    00ED    585 G$PCA0CPL4$0$0 == 0x00ed
-                    00ED    586 _PCA0CPL4	=	0x00ed
-                    00EE    587 G$PCA0CPH4$0$0 == 0x00ee
-                    00EE    588 _PCA0CPH4	=	0x00ee
-                    00EF    589 G$RSTSRC$0$0 == 0x00ef
-                    00EF    590 _RSTSRC	=	0x00ef
-                    00F8    591 G$SPI0CN$0$0 == 0x00f8
-                    00F8    592 _SPI0CN	=	0x00f8
-                    00F9    593 G$PCA0L$0$0 == 0x00f9
-                    00F9    594 _PCA0L	=	0x00f9
-                    00FA    595 G$PCA0H$0$0 == 0x00fa
-                    00FA    596 _PCA0H	=	0x00fa
-                    00FB    597 G$PCA0CPL0$0$0 == 0x00fb
-                    00FB    598 _PCA0CPL0	=	0x00fb
-                    00FC    599 G$PCA0CPH0$0$0 == 0x00fc
-                    00FC    600 _PCA0CPH0	=	0x00fc
-                    00FD    601 G$PCA0CPL1$0$0 == 0x00fd
-                    00FD    602 _PCA0CPL1	=	0x00fd
-                    00FE    603 G$PCA0CPH1$0$0 == 0x00fe
-                    00FE    604 _PCA0CPH1	=	0x00fe
-                    0088    605 G$CPT0CN$0$0 == 0x0088
-                    0088    606 _CPT0CN	=	0x0088
-                    0089    607 G$CPT0MD$0$0 == 0x0089
-                    0089    608 _CPT0MD	=	0x0089
-                    0098    609 G$SCON1$0$0 == 0x0098
-                    0098    610 _SCON1	=	0x0098
-                    0099    611 G$SBUF1$0$0 == 0x0099
-                    0099    612 _SBUF1	=	0x0099
-                    00C8    613 G$TMR3CN$0$0 == 0x00c8
-                    00C8    614 _TMR3CN	=	0x00c8
-                    00C9    615 G$TMR3CF$0$0 == 0x00c9
-                    00C9    616 _TMR3CF	=	0x00c9
-                    00CA    617 G$RCAP3L$0$0 == 0x00ca
-                    00CA    618 _RCAP3L	=	0x00ca
-                    00CB    619 G$RCAP3H$0$0 == 0x00cb
-                    00CB    620 _RCAP3H	=	0x00cb
-                    00CC    621 G$TMR3L$0$0 == 0x00cc
-                    00CC    622 _TMR3L	=	0x00cc
-                    00CD    623 G$TMR3H$0$0 == 0x00cd
-                    00CD    624 _TMR3H	=	0x00cd
-                    00D2    625 G$DAC1L$0$0 == 0x00d2
-                    00D2    626 _DAC1L	=	0x00d2
-                    00D3    627 G$DAC1H$0$0 == 0x00d3
-                    00D3    628 _DAC1H	=	0x00d3
-                    00D4    629 G$DAC1CN$0$0 == 0x00d4
-                    00D4    630 _DAC1CN	=	0x00d4
-                    0088    631 G$CPT1CN$0$0 == 0x0088
-                    0088    632 _CPT1CN	=	0x0088
-                    0089    633 G$CPT1MD$0$0 == 0x0089
-                    0089    634 _CPT1MD	=	0x0089
-                    00BA    635 G$AMX2CF$0$0 == 0x00ba
-                    00BA    636 _AMX2CF	=	0x00ba
-                    00BB    637 G$AMX2SL$0$0 == 0x00bb
-                    00BB    638 _AMX2SL	=	0x00bb
-                    00BC    639 G$ADC2CF$0$0 == 0x00bc
-                    00BC    640 _ADC2CF	=	0x00bc
-                    00BE    641 G$ADC2$0$0 == 0x00be
-                    00BE    642 _ADC2	=	0x00be
-                    00C4    643 G$ADC2GT$0$0 == 0x00c4
-                    00C4    644 _ADC2GT	=	0x00c4
-                    00C6    645 G$ADC2LT$0$0 == 0x00c6
-                    00C6    646 _ADC2LT	=	0x00c6
-                    00C8    647 G$TMR4CN$0$0 == 0x00c8
-                    00C8    648 _TMR4CN	=	0x00c8
-                    00C9    649 G$TMR4CF$0$0 == 0x00c9
-                    00C9    650 _TMR4CF	=	0x00c9
-                    00CA    651 G$RCAP4L$0$0 == 0x00ca
-                    00CA    652 _RCAP4L	=	0x00ca
-                    00CB    653 G$RCAP4H$0$0 == 0x00cb
-                    00CB    654 _RCAP4H	=	0x00cb
-                    00CC    655 G$TMR4L$0$0 == 0x00cc
-                    00CC    656 _TMR4L	=	0x00cc
-                    00CD    657 G$TMR4H$0$0 == 0x00cd
-                    00CD    658 _TMR4H	=	0x00cd
-                    00E8    659 G$ADC2CN$0$0 == 0x00e8
-                    00E8    660 _ADC2CN	=	0x00e8
-                    0091    661 G$MAC0BL$0$0 == 0x0091
-                    0091    662 _MAC0BL	=	0x0091
-                    0092    663 G$MAC0BH$0$0 == 0x0092
-                    0092    664 _MAC0BH	=	0x0092
-                    0093    665 G$MAC0ACC0$0$0 == 0x0093
-                    0093    666 _MAC0ACC0	=	0x0093
-                    0094    667 G$MAC0ACC1$0$0 == 0x0094
-                    0094    668 _MAC0ACC1	=	0x0094
-                    0095    669 G$MAC0ACC2$0$0 == 0x0095
-                    0095    670 _MAC0ACC2	=	0x0095
-                    0096    671 G$MAC0ACC3$0$0 == 0x0096
-                    0096    672 _MAC0ACC3	=	0x0096
-                    0097    673 G$MAC0OVR$0$0 == 0x0097
-                    0097    674 _MAC0OVR	=	0x0097
-                    00C0    675 G$MAC0STA$0$0 == 0x00c0
-                    00C0    676 _MAC0STA	=	0x00c0
-                    00C1    677 G$MAC0AL$0$0 == 0x00c1
-                    00C1    678 _MAC0AL	=	0x00c1
-                    00C2    679 G$MAC0AH$0$0 == 0x00c2
-                    00C2    680 _MAC0AH	=	0x00c2
-                    00C3    681 G$MAC0CF$0$0 == 0x00c3
-                    00C3    682 _MAC0CF	=	0x00c3
-                    00CE    683 G$MAC0RNDL$0$0 == 0x00ce
-                    00CE    684 _MAC0RNDL	=	0x00ce
-                    00CF    685 G$MAC0RNDH$0$0 == 0x00cf
-                    00CF    686 _MAC0RNDH	=	0x00cf
-                    0088    687 G$FLSTAT$0$0 == 0x0088
-                    0088    688 _FLSTAT	=	0x0088
-                    0089    689 G$PLL0CN$0$0 == 0x0089
-                    0089    690 _PLL0CN	=	0x0089
-                    008A    691 G$OSCICN$0$0 == 0x008a
-                    008A    692 _OSCICN	=	0x008a
-                    008B    693 G$OSCICL$0$0 == 0x008b
-                    008B    694 _OSCICL	=	0x008b
-                    008C    695 G$OSCXCN$0$0 == 0x008c
-                    008C    696 _OSCXCN	=	0x008c
-                    008D    697 G$PLL0DIV$0$0 == 0x008d
-                    008D    698 _PLL0DIV	=	0x008d
-                    008E    699 G$PLL0MUL$0$0 == 0x008e
-                    008E    700 _PLL0MUL	=	0x008e
-                    008F    701 G$PLL0FLT$0$0 == 0x008f
-                    008F    702 _PLL0FLT	=	0x008f
-                    0096    703 G$SFRPGCN$0$0 == 0x0096
-                    0096    704 _SFRPGCN	=	0x0096
-                    0097    705 G$CLKSEL$0$0 == 0x0097
-                    0097    706 _CLKSEL	=	0x0097
-                    009A    707 G$CCH0MA$0$0 == 0x009a
-                    009A    708 _CCH0MA	=	0x009a
-                    009C    709 G$P4MDOUT$0$0 == 0x009c
-                    009C    710 _P4MDOUT	=	0x009c
-                    009D    711 G$P5MDOUT$0$0 == 0x009d
-                    009D    712 _P5MDOUT	=	0x009d
-                    009E    713 G$P6MDOUT$0$0 == 0x009e
-                    009E    714 _P6MDOUT	=	0x009e
-                    009F    715 G$P7MDOUT$0$0 == 0x009f
-                    009F    716 _P7MDOUT	=	0x009f
-                    00A1    717 G$CCH0CN$0$0 == 0x00a1
-                    00A1    718 _CCH0CN	=	0x00a1
-                    00A2    719 G$CCH0TN$0$0 == 0x00a2
-                    00A2    720 _CCH0TN	=	0x00a2
-                    00A3    721 G$CCH0LC$0$0 == 0x00a3
-                    00A3    722 _CCH0LC	=	0x00a3
-                    00A4    723 G$P0MDOUT$0$0 == 0x00a4
-                    00A4    724 _P0MDOUT	=	0x00a4
-                    00A5    725 G$P1MDOUT$0$0 == 0x00a5
-                    00A5    726 _P1MDOUT	=	0x00a5
-                    00A6    727 G$P2MDOUT$0$0 == 0x00a6
-                    00A6    728 _P2MDOUT	=	0x00a6
-                    00A7    729 G$P3MDOUT$0$0 == 0x00a7
-                    00A7    730 _P3MDOUT	=	0x00a7
-                    00AD    731 G$P1MDIN$0$0 == 0x00ad
-                    00AD    732 _P1MDIN	=	0x00ad
-                    00B7    733 G$FLACL$0$0 == 0x00b7
-                    00B7    734 _FLACL	=	0x00b7
-                    00C8    735 G$P4$0$0 == 0x00c8
-                    00C8    736 _P4	=	0x00c8
-                    00D8    737 G$P5$0$0 == 0x00d8
-                    00D8    738 _P5	=	0x00d8
-                    00E1    739 G$XBR0$0$0 == 0x00e1
-                    00E1    740 _XBR0	=	0x00e1
-                    00E2    741 G$XBR1$0$0 == 0x00e2
-                    00E2    742 _XBR1	=	0x00e2
-                    00E3    743 G$XBR2$0$0 == 0x00e3
-                    00E3    744 _XBR2	=	0x00e3
-                    00E8    745 G$P6$0$0 == 0x00e8
-                    00E8    746 _P6	=	0x00e8
-                    00F8    747 G$P7$0$0 == 0x00f8
-                    00F8    748 _P7	=	0x00f8
-                    8C8A    749 G$TMR0$0$0 == 0x8c8a
-                    8C8A    750 _TMR0	=	0x8c8a
-                    8D8B    751 G$TMR1$0$0 == 0x8d8b
-                    8D8B    752 _TMR1	=	0x8d8b
-                    CDCC    753 G$TMR2$0$0 == 0xcdcc
-                    CDCC    754 _TMR2	=	0xcdcc
-                    CBCA    755 G$RCAP2$0$0 == 0xcbca
-                    CBCA    756 _RCAP2	=	0xcbca
-                    BFBE    757 G$ADC0$0$0 == 0xbfbe
-                    BFBE    758 _ADC0	=	0xbfbe
-                    C5C4    759 G$ADC0GT$0$0 == 0xc5c4
-                    C5C4    760 _ADC0GT	=	0xc5c4
-                    C7C6    761 G$ADC0LT$0$0 == 0xc7c6
-                    C7C6    762 _ADC0LT	=	0xc7c6
-                    D3D2    763 G$DAC0$0$0 == 0xd3d2
-                    D3D2    764 _DAC0	=	0xd3d2
-                    FAF9    765 G$PCA0$0$0 == 0xfaf9
-                    FAF9    766 _PCA0	=	0xfaf9
-                    FCFB    767 G$PCA0CP0$0$0 == 0xfcfb
-                    FCFB    768 _PCA0CP0	=	0xfcfb
-                    FEFD    769 G$PCA0CP1$0$0 == 0xfefd
-                    FEFD    770 _PCA0CP1	=	0xfefd
-                    EAE9    771 G$PCA0CP2$0$0 == 0xeae9
-                    EAE9    772 _PCA0CP2	=	0xeae9
-                    ECEB    773 G$PCA0CP3$0$0 == 0xeceb
-                    ECEB    774 _PCA0CP3	=	0xeceb
-                    EEED    775 G$PCA0CP4$0$0 == 0xeeed
-                    EEED    776 _PCA0CP4	=	0xeeed
-                    E2E1    777 G$PCA0CP5$0$0 == 0xe2e1
-                    E2E1    778 _PCA0CP5	=	0xe2e1
-                    CDCC    779 G$TMR3$0$0 == 0xcdcc
-                    CDCC    780 _TMR3	=	0xcdcc
-                    CBCA    781 G$RCAP3$0$0 == 0xcbca
-                    CBCA    782 _RCAP3	=	0xcbca
-                    D3D2    783 G$DAC1$0$0 == 0xd3d2
-                    D3D2    784 _DAC1	=	0xd3d2
-                    CDCC    785 G$TMR4$0$0 == 0xcdcc
-                    CDCC    786 _TMR4	=	0xcdcc
-                    CBCA    787 G$RCAP4$0$0 == 0xcbca
-                    CBCA    788 _RCAP4	=	0xcbca
-                    C2C1    789 G$MAC0A$0$0 == 0xc2c1
-                    C2C1    790 _MAC0A	=	0xc2c1
-                    96959493    791 G$MAC0ACC$0$0 == 0x96959493
-                    96959493    792 _MAC0ACC	=	0x96959493
-                    CFCE    793 G$MAC0RND$0$0 == 0xcfce
-                    CFCE    794 _MAC0RND	=	0xcfce
-                            795 ;--------------------------------------------------------
-                            796 ; special function bits
+                            412 ; special function registers
+                            413 ;--------------------------------------------------------
+                            414 	.area RSEG    (DATA)
+                    0080    415 G$P0$0$0 == 0x0080
+                    0080    416 _P0	=	0x0080
+                    0081    417 G$SP$0$0 == 0x0081
+                    0081    418 _SP	=	0x0081
+                    0082    419 G$DPL$0$0 == 0x0082
+                    0082    420 _DPL	=	0x0082
+                    0083    421 G$DPH$0$0 == 0x0083
+                    0083    422 _DPH	=	0x0083
+                    0084    423 G$SFRPAGE$0$0 == 0x0084
+                    0084    424 _SFRPAGE	=	0x0084
+                    0085    425 G$SFRNEXT$0$0 == 0x0085
+                    0085    426 _SFRNEXT	=	0x0085
+                    0086    427 G$SFRLAST$0$0 == 0x0086
+                    0086    428 _SFRLAST	=	0x0086
+                    0087    429 G$PCON$0$0 == 0x0087
+                    0087    430 _PCON	=	0x0087
+                    0090    431 G$P1$0$0 == 0x0090
+                    0090    432 _P1	=	0x0090
+                    00A0    433 G$P2$0$0 == 0x00a0
+                    00A0    434 _P2	=	0x00a0
+                    00A8    435 G$IE$0$0 == 0x00a8
+                    00A8    436 _IE	=	0x00a8
+                    00B0    437 G$P3$0$0 == 0x00b0
+                    00B0    438 _P3	=	0x00b0
+                    00B1    439 G$PSBANK$0$0 == 0x00b1
+                    00B1    440 _PSBANK	=	0x00b1
+                    00B8    441 G$IP$0$0 == 0x00b8
+                    00B8    442 _IP	=	0x00b8
+                    00D0    443 G$PSW$0$0 == 0x00d0
+                    00D0    444 _PSW	=	0x00d0
+                    00E0    445 G$ACC$0$0 == 0x00e0
+                    00E0    446 _ACC	=	0x00e0
+                    00E6    447 G$EIE1$0$0 == 0x00e6
+                    00E6    448 _EIE1	=	0x00e6
+                    00E7    449 G$EIE2$0$0 == 0x00e7
+                    00E7    450 _EIE2	=	0x00e7
+                    00F0    451 G$B$0$0 == 0x00f0
+                    00F0    452 _B	=	0x00f0
+                    00F6    453 G$EIP1$0$0 == 0x00f6
+                    00F6    454 _EIP1	=	0x00f6
+                    00F7    455 G$EIP2$0$0 == 0x00f7
+                    00F7    456 _EIP2	=	0x00f7
+                    00FF    457 G$WDTCN$0$0 == 0x00ff
+                    00FF    458 _WDTCN	=	0x00ff
+                    0088    459 G$TCON$0$0 == 0x0088
+                    0088    460 _TCON	=	0x0088
+                    0089    461 G$TMOD$0$0 == 0x0089
+                    0089    462 _TMOD	=	0x0089
+                    008A    463 G$TL0$0$0 == 0x008a
+                    008A    464 _TL0	=	0x008a
+                    008B    465 G$TL1$0$0 == 0x008b
+                    008B    466 _TL1	=	0x008b
+                    008C    467 G$TH0$0$0 == 0x008c
+                    008C    468 _TH0	=	0x008c
+                    008D    469 G$TH1$0$0 == 0x008d
+                    008D    470 _TH1	=	0x008d
+                    008E    471 G$CKCON$0$0 == 0x008e
+                    008E    472 _CKCON	=	0x008e
+                    008F    473 G$PSCTL$0$0 == 0x008f
+                    008F    474 _PSCTL	=	0x008f
+                    0091    475 G$SSTA0$0$0 == 0x0091
+                    0091    476 _SSTA0	=	0x0091
+                    0098    477 G$SCON0$0$0 == 0x0098
+                    0098    478 _SCON0	=	0x0098
+                    0098    479 G$SCON$0$0 == 0x0098
+                    0098    480 _SCON	=	0x0098
+                    0099    481 G$SBUF0$0$0 == 0x0099
+                    0099    482 _SBUF0	=	0x0099
+                    0099    483 G$SBUF$0$0 == 0x0099
+                    0099    484 _SBUF	=	0x0099
+                    009A    485 G$SPI0CFG$0$0 == 0x009a
+                    009A    486 _SPI0CFG	=	0x009a
+                    009B    487 G$SPI0DAT$0$0 == 0x009b
+                    009B    488 _SPI0DAT	=	0x009b
+                    009D    489 G$SPI0CKR$0$0 == 0x009d
+                    009D    490 _SPI0CKR	=	0x009d
+                    00A1    491 G$EMI0TC$0$0 == 0x00a1
+                    00A1    492 _EMI0TC	=	0x00a1
+                    00A2    493 G$EMI0CN$0$0 == 0x00a2
+                    00A2    494 _EMI0CN	=	0x00a2
+                    00A2    495 G$_XPAGE$0$0 == 0x00a2
+                    00A2    496 __XPAGE	=	0x00a2
+                    00A3    497 G$EMI0CF$0$0 == 0x00a3
+                    00A3    498 _EMI0CF	=	0x00a3
+                    00A9    499 G$SADDR0$0$0 == 0x00a9
+                    00A9    500 _SADDR0	=	0x00a9
+                    00B7    501 G$FLSCL$0$0 == 0x00b7
+                    00B7    502 _FLSCL	=	0x00b7
+                    00B9    503 G$SADEN0$0$0 == 0x00b9
+                    00B9    504 _SADEN0	=	0x00b9
+                    00BA    505 G$AMX0CF$0$0 == 0x00ba
+                    00BA    506 _AMX0CF	=	0x00ba
+                    00BB    507 G$AMX0SL$0$0 == 0x00bb
+                    00BB    508 _AMX0SL	=	0x00bb
+                    00BC    509 G$ADC0CF$0$0 == 0x00bc
+                    00BC    510 _ADC0CF	=	0x00bc
+                    00BE    511 G$ADC0L$0$0 == 0x00be
+                    00BE    512 _ADC0L	=	0x00be
+                    00BF    513 G$ADC0H$0$0 == 0x00bf
+                    00BF    514 _ADC0H	=	0x00bf
+                    00C0    515 G$SMB0CN$0$0 == 0x00c0
+                    00C0    516 _SMB0CN	=	0x00c0
+                    00C1    517 G$SMB0STA$0$0 == 0x00c1
+                    00C1    518 _SMB0STA	=	0x00c1
+                    00C2    519 G$SMB0DAT$0$0 == 0x00c2
+                    00C2    520 _SMB0DAT	=	0x00c2
+                    00C3    521 G$SMB0ADR$0$0 == 0x00c3
+                    00C3    522 _SMB0ADR	=	0x00c3
+                    00C4    523 G$ADC0GTL$0$0 == 0x00c4
+                    00C4    524 _ADC0GTL	=	0x00c4
+                    00C5    525 G$ADC0GTH$0$0 == 0x00c5
+                    00C5    526 _ADC0GTH	=	0x00c5
+                    00C6    527 G$ADC0LTL$0$0 == 0x00c6
+                    00C6    528 _ADC0LTL	=	0x00c6
+                    00C7    529 G$ADC0LTH$0$0 == 0x00c7
+                    00C7    530 _ADC0LTH	=	0x00c7
+                    00C8    531 G$TMR2CN$0$0 == 0x00c8
+                    00C8    532 _TMR2CN	=	0x00c8
+                    00C9    533 G$TMR2CF$0$0 == 0x00c9
+                    00C9    534 _TMR2CF	=	0x00c9
+                    00CA    535 G$RCAP2L$0$0 == 0x00ca
+                    00CA    536 _RCAP2L	=	0x00ca
+                    00CB    537 G$RCAP2H$0$0 == 0x00cb
+                    00CB    538 _RCAP2H	=	0x00cb
+                    00CC    539 G$TMR2L$0$0 == 0x00cc
+                    00CC    540 _TMR2L	=	0x00cc
+                    00CC    541 G$TL2$0$0 == 0x00cc
+                    00CC    542 _TL2	=	0x00cc
+                    00CD    543 G$TMR2H$0$0 == 0x00cd
+                    00CD    544 _TMR2H	=	0x00cd
+                    00CD    545 G$TH2$0$0 == 0x00cd
+                    00CD    546 _TH2	=	0x00cd
+                    00CF    547 G$SMB0CR$0$0 == 0x00cf
+                    00CF    548 _SMB0CR	=	0x00cf
+                    00D1    549 G$REF0CN$0$0 == 0x00d1
+                    00D1    550 _REF0CN	=	0x00d1
+                    00D2    551 G$DAC0L$0$0 == 0x00d2
+                    00D2    552 _DAC0L	=	0x00d2
+                    00D3    553 G$DAC0H$0$0 == 0x00d3
+                    00D3    554 _DAC0H	=	0x00d3
+                    00D4    555 G$DAC0CN$0$0 == 0x00d4
+                    00D4    556 _DAC0CN	=	0x00d4
+                    00D8    557 G$PCA0CN$0$0 == 0x00d8
+                    00D8    558 _PCA0CN	=	0x00d8
+                    00D9    559 G$PCA0MD$0$0 == 0x00d9
+                    00D9    560 _PCA0MD	=	0x00d9
+                    00DA    561 G$PCA0CPM0$0$0 == 0x00da
+                    00DA    562 _PCA0CPM0	=	0x00da
+                    00DB    563 G$PCA0CPM1$0$0 == 0x00db
+                    00DB    564 _PCA0CPM1	=	0x00db
+                    00DC    565 G$PCA0CPM2$0$0 == 0x00dc
+                    00DC    566 _PCA0CPM2	=	0x00dc
+                    00DD    567 G$PCA0CPM3$0$0 == 0x00dd
+                    00DD    568 _PCA0CPM3	=	0x00dd
+                    00DE    569 G$PCA0CPM4$0$0 == 0x00de
+                    00DE    570 _PCA0CPM4	=	0x00de
+                    00DF    571 G$PCA0CPM5$0$0 == 0x00df
+                    00DF    572 _PCA0CPM5	=	0x00df
+                    00E1    573 G$PCA0CPL5$0$0 == 0x00e1
+                    00E1    574 _PCA0CPL5	=	0x00e1
+                    00E2    575 G$PCA0CPH5$0$0 == 0x00e2
+                    00E2    576 _PCA0CPH5	=	0x00e2
+                    00E8    577 G$ADC0CN$0$0 == 0x00e8
+                    00E8    578 _ADC0CN	=	0x00e8
+                    00E9    579 G$PCA0CPL2$0$0 == 0x00e9
+                    00E9    580 _PCA0CPL2	=	0x00e9
+                    00EA    581 G$PCA0CPH2$0$0 == 0x00ea
+                    00EA    582 _PCA0CPH2	=	0x00ea
+                    00EB    583 G$PCA0CPL3$0$0 == 0x00eb
+                    00EB    584 _PCA0CPL3	=	0x00eb
+                    00EC    585 G$PCA0CPH3$0$0 == 0x00ec
+                    00EC    586 _PCA0CPH3	=	0x00ec
+                    00ED    587 G$PCA0CPL4$0$0 == 0x00ed
+                    00ED    588 _PCA0CPL4	=	0x00ed
+                    00EE    589 G$PCA0CPH4$0$0 == 0x00ee
+                    00EE    590 _PCA0CPH4	=	0x00ee
+                    00EF    591 G$RSTSRC$0$0 == 0x00ef
+                    00EF    592 _RSTSRC	=	0x00ef
+                    00F8    593 G$SPI0CN$0$0 == 0x00f8
+                    00F8    594 _SPI0CN	=	0x00f8
+                    00F9    595 G$PCA0L$0$0 == 0x00f9
+                    00F9    596 _PCA0L	=	0x00f9
+                    00FA    597 G$PCA0H$0$0 == 0x00fa
+                    00FA    598 _PCA0H	=	0x00fa
+                    00FB    599 G$PCA0CPL0$0$0 == 0x00fb
+                    00FB    600 _PCA0CPL0	=	0x00fb
+                    00FC    601 G$PCA0CPH0$0$0 == 0x00fc
+                    00FC    602 _PCA0CPH0	=	0x00fc
+                    00FD    603 G$PCA0CPL1$0$0 == 0x00fd
+                    00FD    604 _PCA0CPL1	=	0x00fd
+                    00FE    605 G$PCA0CPH1$0$0 == 0x00fe
+                    00FE    606 _PCA0CPH1	=	0x00fe
+                    0088    607 G$CPT0CN$0$0 == 0x0088
+                    0088    608 _CPT0CN	=	0x0088
+                    0089    609 G$CPT0MD$0$0 == 0x0089
+                    0089    610 _CPT0MD	=	0x0089
+                    0098    611 G$SCON1$0$0 == 0x0098
+                    0098    612 _SCON1	=	0x0098
+                    0099    613 G$SBUF1$0$0 == 0x0099
+                    0099    614 _SBUF1	=	0x0099
+                    00C8    615 G$TMR3CN$0$0 == 0x00c8
+                    00C8    616 _TMR3CN	=	0x00c8
+                    00C9    617 G$TMR3CF$0$0 == 0x00c9
+                    00C9    618 _TMR3CF	=	0x00c9
+                    00CA    619 G$RCAP3L$0$0 == 0x00ca
+                    00CA    620 _RCAP3L	=	0x00ca
+                    00CB    621 G$RCAP3H$0$0 == 0x00cb
+                    00CB    622 _RCAP3H	=	0x00cb
+                    00CC    623 G$TMR3L$0$0 == 0x00cc
+                    00CC    624 _TMR3L	=	0x00cc
+                    00CD    625 G$TMR3H$0$0 == 0x00cd
+                    00CD    626 _TMR3H	=	0x00cd
+                    00D2    627 G$DAC1L$0$0 == 0x00d2
+                    00D2    628 _DAC1L	=	0x00d2
+                    00D3    629 G$DAC1H$0$0 == 0x00d3
+                    00D3    630 _DAC1H	=	0x00d3
+                    00D4    631 G$DAC1CN$0$0 == 0x00d4
+                    00D4    632 _DAC1CN	=	0x00d4
+                    0088    633 G$CPT1CN$0$0 == 0x0088
+                    0088    634 _CPT1CN	=	0x0088
+                    0089    635 G$CPT1MD$0$0 == 0x0089
+                    0089    636 _CPT1MD	=	0x0089
+                    00BA    637 G$AMX2CF$0$0 == 0x00ba
+                    00BA    638 _AMX2CF	=	0x00ba
+                    00BB    639 G$AMX2SL$0$0 == 0x00bb
+                    00BB    640 _AMX2SL	=	0x00bb
+                    00BC    641 G$ADC2CF$0$0 == 0x00bc
+                    00BC    642 _ADC2CF	=	0x00bc
+                    00BE    643 G$ADC2$0$0 == 0x00be
+                    00BE    644 _ADC2	=	0x00be
+                    00C4    645 G$ADC2GT$0$0 == 0x00c4
+                    00C4    646 _ADC2GT	=	0x00c4
+                    00C6    647 G$ADC2LT$0$0 == 0x00c6
+                    00C6    648 _ADC2LT	=	0x00c6
+                    00C8    649 G$TMR4CN$0$0 == 0x00c8
+                    00C8    650 _TMR4CN	=	0x00c8
+                    00C9    651 G$TMR4CF$0$0 == 0x00c9
+                    00C9    652 _TMR4CF	=	0x00c9
+                    00CA    653 G$RCAP4L$0$0 == 0x00ca
+                    00CA    654 _RCAP4L	=	0x00ca
+                    00CB    655 G$RCAP4H$0$0 == 0x00cb
+                    00CB    656 _RCAP4H	=	0x00cb
+                    00CC    657 G$TMR4L$0$0 == 0x00cc
+                    00CC    658 _TMR4L	=	0x00cc
+                    00CD    659 G$TMR4H$0$0 == 0x00cd
+                    00CD    660 _TMR4H	=	0x00cd
+                    00E8    661 G$ADC2CN$0$0 == 0x00e8
+                    00E8    662 _ADC2CN	=	0x00e8
+                    0091    663 G$MAC0BL$0$0 == 0x0091
+                    0091    664 _MAC0BL	=	0x0091
+                    0092    665 G$MAC0BH$0$0 == 0x0092
+                    0092    666 _MAC0BH	=	0x0092
+                    0093    667 G$MAC0ACC0$0$0 == 0x0093
+                    0093    668 _MAC0ACC0	=	0x0093
+                    0094    669 G$MAC0ACC1$0$0 == 0x0094
+                    0094    670 _MAC0ACC1	=	0x0094
+                    0095    671 G$MAC0ACC2$0$0 == 0x0095
+                    0095    672 _MAC0ACC2	=	0x0095
+                    0096    673 G$MAC0ACC3$0$0 == 0x0096
+                    0096    674 _MAC0ACC3	=	0x0096
+                    0097    675 G$MAC0OVR$0$0 == 0x0097
+                    0097    676 _MAC0OVR	=	0x0097
+                    00C0    677 G$MAC0STA$0$0 == 0x00c0
+                    00C0    678 _MAC0STA	=	0x00c0
+                    00C1    679 G$MAC0AL$0$0 == 0x00c1
+                    00C1    680 _MAC0AL	=	0x00c1
+                    00C2    681 G$MAC0AH$0$0 == 0x00c2
+                    00C2    682 _MAC0AH	=	0x00c2
+                    00C3    683 G$MAC0CF$0$0 == 0x00c3
+                    00C3    684 _MAC0CF	=	0x00c3
+                    00CE    685 G$MAC0RNDL$0$0 == 0x00ce
+                    00CE    686 _MAC0RNDL	=	0x00ce
+                    00CF    687 G$MAC0RNDH$0$0 == 0x00cf
+                    00CF    688 _MAC0RNDH	=	0x00cf
+                    0088    689 G$FLSTAT$0$0 == 0x0088
+                    0088    690 _FLSTAT	=	0x0088
+                    0089    691 G$PLL0CN$0$0 == 0x0089
+                    0089    692 _PLL0CN	=	0x0089
+                    008A    693 G$OSCICN$0$0 == 0x008a
+                    008A    694 _OSCICN	=	0x008a
+                    008B    695 G$OSCICL$0$0 == 0x008b
+                    008B    696 _OSCICL	=	0x008b
+                    008C    697 G$OSCXCN$0$0 == 0x008c
+                    008C    698 _OSCXCN	=	0x008c
+                    008D    699 G$PLL0DIV$0$0 == 0x008d
+                    008D    700 _PLL0DIV	=	0x008d
+                    008E    701 G$PLL0MUL$0$0 == 0x008e
+                    008E    702 _PLL0MUL	=	0x008e
+                    008F    703 G$PLL0FLT$0$0 == 0x008f
+                    008F    704 _PLL0FLT	=	0x008f
+                    0096    705 G$SFRPGCN$0$0 == 0x0096
+                    0096    706 _SFRPGCN	=	0x0096
+                    0097    707 G$CLKSEL$0$0 == 0x0097
+                    0097    708 _CLKSEL	=	0x0097
+                    009A    709 G$CCH0MA$0$0 == 0x009a
+                    009A    710 _CCH0MA	=	0x009a
+                    009C    711 G$P4MDOUT$0$0 == 0x009c
+                    009C    712 _P4MDOUT	=	0x009c
+                    009D    713 G$P5MDOUT$0$0 == 0x009d
+                    009D    714 _P5MDOUT	=	0x009d
+                    009E    715 G$P6MDOUT$0$0 == 0x009e
+                    009E    716 _P6MDOUT	=	0x009e
+                    009F    717 G$P7MDOUT$0$0 == 0x009f
+                    009F    718 _P7MDOUT	=	0x009f
+                    00A1    719 G$CCH0CN$0$0 == 0x00a1
+                    00A1    720 _CCH0CN	=	0x00a1
+                    00A2    721 G$CCH0TN$0$0 == 0x00a2
+                    00A2    722 _CCH0TN	=	0x00a2
+                    00A3    723 G$CCH0LC$0$0 == 0x00a3
+                    00A3    724 _CCH0LC	=	0x00a3
+                    00A4    725 G$P0MDOUT$0$0 == 0x00a4
+                    00A4    726 _P0MDOUT	=	0x00a4
+                    00A5    727 G$P1MDOUT$0$0 == 0x00a5
+                    00A5    728 _P1MDOUT	=	0x00a5
+                    00A6    729 G$P2MDOUT$0$0 == 0x00a6
+                    00A6    730 _P2MDOUT	=	0x00a6
+                    00A7    731 G$P3MDOUT$0$0 == 0x00a7
+                    00A7    732 _P3MDOUT	=	0x00a7
+                    00AD    733 G$P1MDIN$0$0 == 0x00ad
+                    00AD    734 _P1MDIN	=	0x00ad
+                    00B7    735 G$FLACL$0$0 == 0x00b7
+                    00B7    736 _FLACL	=	0x00b7
+                    00C8    737 G$P4$0$0 == 0x00c8
+                    00C8    738 _P4	=	0x00c8
+                    00D8    739 G$P5$0$0 == 0x00d8
+                    00D8    740 _P5	=	0x00d8
+                    00E1    741 G$XBR0$0$0 == 0x00e1
+                    00E1    742 _XBR0	=	0x00e1
+                    00E2    743 G$XBR1$0$0 == 0x00e2
+                    00E2    744 _XBR1	=	0x00e2
+                    00E3    745 G$XBR2$0$0 == 0x00e3
+                    00E3    746 _XBR2	=	0x00e3
+                    00E8    747 G$P6$0$0 == 0x00e8
+                    00E8    748 _P6	=	0x00e8
+                    00F8    749 G$P7$0$0 == 0x00f8
+                    00F8    750 _P7	=	0x00f8
+                    8C8A    751 G$TMR0$0$0 == 0x8c8a
+                    8C8A    752 _TMR0	=	0x8c8a
+                    8D8B    753 G$TMR1$0$0 == 0x8d8b
+                    8D8B    754 _TMR1	=	0x8d8b
+                    CDCC    755 G$TMR2$0$0 == 0xcdcc
+                    CDCC    756 _TMR2	=	0xcdcc
+                    CBCA    757 G$RCAP2$0$0 == 0xcbca
+                    CBCA    758 _RCAP2	=	0xcbca
+                    BFBE    759 G$ADC0$0$0 == 0xbfbe
+                    BFBE    760 _ADC0	=	0xbfbe
+                    C5C4    761 G$ADC0GT$0$0 == 0xc5c4
+                    C5C4    762 _ADC0GT	=	0xc5c4
+                    C7C6    763 G$ADC0LT$0$0 == 0xc7c6
+                    C7C6    764 _ADC0LT	=	0xc7c6
+                    D3D2    765 G$DAC0$0$0 == 0xd3d2
+                    D3D2    766 _DAC0	=	0xd3d2
+                    FAF9    767 G$PCA0$0$0 == 0xfaf9
+                    FAF9    768 _PCA0	=	0xfaf9
+                    FCFB    769 G$PCA0CP0$0$0 == 0xfcfb
+                    FCFB    770 _PCA0CP0	=	0xfcfb
+                    FEFD    771 G$PCA0CP1$0$0 == 0xfefd
+                    FEFD    772 _PCA0CP1	=	0xfefd
+                    EAE9    773 G$PCA0CP2$0$0 == 0xeae9
+                    EAE9    774 _PCA0CP2	=	0xeae9
+                    ECEB    775 G$PCA0CP3$0$0 == 0xeceb
+                    ECEB    776 _PCA0CP3	=	0xeceb
+                    EEED    777 G$PCA0CP4$0$0 == 0xeeed
+                    EEED    778 _PCA0CP4	=	0xeeed
+                    E2E1    779 G$PCA0CP5$0$0 == 0xe2e1
+                    E2E1    780 _PCA0CP5	=	0xe2e1
+                    CDCC    781 G$TMR3$0$0 == 0xcdcc
+                    CDCC    782 _TMR3	=	0xcdcc
+                    CBCA    783 G$RCAP3$0$0 == 0xcbca
+                    CBCA    784 _RCAP3	=	0xcbca
+                    D3D2    785 G$DAC1$0$0 == 0xd3d2
+                    D3D2    786 _DAC1	=	0xd3d2
+                    CDCC    787 G$TMR4$0$0 == 0xcdcc
+                    CDCC    788 _TMR4	=	0xcdcc
+                    CBCA    789 G$RCAP4$0$0 == 0xcbca
+                    CBCA    790 _RCAP4	=	0xcbca
+                    C2C1    791 G$MAC0A$0$0 == 0xc2c1
+                    C2C1    792 _MAC0A	=	0xc2c1
+                    96959493    793 G$MAC0ACC$0$0 == 0x96959493
+                    96959493    794 _MAC0ACC	=	0x96959493
+                    CFCE    795 G$MAC0RND$0$0 == 0xcfce
+                    CFCE    796 _MAC0RND	=	0xcfce
                             797 ;--------------------------------------------------------
-                            798 	.area RSEG    (DATA)
-                    0080    799 G$P0_0$0$0 == 0x0080
-                    0080    800 _P0_0	=	0x0080
-                    0081    801 G$P0_1$0$0 == 0x0081
-                    0081    802 _P0_1	=	0x0081
-                    0082    803 G$P0_2$0$0 == 0x0082
-                    0082    804 _P0_2	=	0x0082
-                    0083    805 G$P0_3$0$0 == 0x0083
-                    0083    806 _P0_3	=	0x0083
-                    0084    807 G$P0_4$0$0 == 0x0084
-                    0084    808 _P0_4	=	0x0084
-                    0085    809 G$P0_5$0$0 == 0x0085
-                    0085    810 _P0_5	=	0x0085
-                    0086    811 G$P0_6$0$0 == 0x0086
-                    0086    812 _P0_6	=	0x0086
-                    0087    813 G$P0_7$0$0 == 0x0087
-                    0087    814 _P0_7	=	0x0087
-                    0088    815 G$IT0$0$0 == 0x0088
-                    0088    816 _IT0	=	0x0088
-                    0089    817 G$IE0$0$0 == 0x0089
-                    0089    818 _IE0	=	0x0089
-                    008A    819 G$IT1$0$0 == 0x008a
-                    008A    820 _IT1	=	0x008a
-                    008B    821 G$IE1$0$0 == 0x008b
-                    008B    822 _IE1	=	0x008b
-                    008C    823 G$TR0$0$0 == 0x008c
-                    008C    824 _TR0	=	0x008c
-                    008D    825 G$TF0$0$0 == 0x008d
-                    008D    826 _TF0	=	0x008d
-                    008E    827 G$TR1$0$0 == 0x008e
-                    008E    828 _TR1	=	0x008e
-                    008F    829 G$TF1$0$0 == 0x008f
-                    008F    830 _TF1	=	0x008f
-                    0088    831 G$CP0HYN0$0$0 == 0x0088
-                    0088    832 _CP0HYN0	=	0x0088
-                    0089    833 G$CP0HYN1$0$0 == 0x0089
-                    0089    834 _CP0HYN1	=	0x0089
-                    008A    835 G$CP0HYP0$0$0 == 0x008a
-                    008A    836 _CP0HYP0	=	0x008a
-                    008B    837 G$CP0HYP1$0$0 == 0x008b
-                    008B    838 _CP0HYP1	=	0x008b
-                    008C    839 G$CP0FIF$0$0 == 0x008c
-                    008C    840 _CP0FIF	=	0x008c
-                    008D    841 G$CP0RIF$0$0 == 0x008d
-                    008D    842 _CP0RIF	=	0x008d
-                    008E    843 G$CP0OUT$0$0 == 0x008e
-                    008E    844 _CP0OUT	=	0x008e
-                    008F    845 G$CP0EN$0$0 == 0x008f
-                    008F    846 _CP0EN	=	0x008f
-                    0088    847 G$CP1HYN0$0$0 == 0x0088
-                    0088    848 _CP1HYN0	=	0x0088
-                    0089    849 G$CP1HYN1$0$0 == 0x0089
-                    0089    850 _CP1HYN1	=	0x0089
-                    008A    851 G$CP1HYP0$0$0 == 0x008a
-                    008A    852 _CP1HYP0	=	0x008a
-                    008B    853 G$CP1HYP1$0$0 == 0x008b
-                    008B    854 _CP1HYP1	=	0x008b
-                    008C    855 G$CP1FIF$0$0 == 0x008c
-                    008C    856 _CP1FIF	=	0x008c
-                    008D    857 G$CP1RIF$0$0 == 0x008d
-                    008D    858 _CP1RIF	=	0x008d
-                    008E    859 G$CP1OUT$0$0 == 0x008e
-                    008E    860 _CP1OUT	=	0x008e
-                    008F    861 G$CP1EN$0$0 == 0x008f
-                    008F    862 _CP1EN	=	0x008f
-                    0088    863 G$FLHBUSY$0$0 == 0x0088
-                    0088    864 _FLHBUSY	=	0x0088
-                    0090    865 G$P1_0$0$0 == 0x0090
-                    0090    866 _P1_0	=	0x0090
-                    0091    867 G$P1_1$0$0 == 0x0091
-                    0091    868 _P1_1	=	0x0091
-                    0092    869 G$P1_2$0$0 == 0x0092
-                    0092    870 _P1_2	=	0x0092
-                    0093    871 G$P1_3$0$0 == 0x0093
-                    0093    872 _P1_3	=	0x0093
-                    0094    873 G$P1_4$0$0 == 0x0094
-                    0094    874 _P1_4	=	0x0094
-                    0095    875 G$P1_5$0$0 == 0x0095
-                    0095    876 _P1_5	=	0x0095
-                    0096    877 G$P1_6$0$0 == 0x0096
-                    0096    878 _P1_6	=	0x0096
-                    0097    879 G$P1_7$0$0 == 0x0097
-                    0097    880 _P1_7	=	0x0097
-                    0098    881 G$RI0$0$0 == 0x0098
-                    0098    882 _RI0	=	0x0098
-                    0098    883 G$RI$0$0 == 0x0098
-                    0098    884 _RI	=	0x0098
-                    0099    885 G$TI0$0$0 == 0x0099
-                    0099    886 _TI0	=	0x0099
-                    0099    887 G$TI$0$0 == 0x0099
-                    0099    888 _TI	=	0x0099
-                    009A    889 G$RB80$0$0 == 0x009a
-                    009A    890 _RB80	=	0x009a
-                    009B    891 G$TB80$0$0 == 0x009b
-                    009B    892 _TB80	=	0x009b
-                    009C    893 G$REN0$0$0 == 0x009c
-                    009C    894 _REN0	=	0x009c
-                    009C    895 G$REN$0$0 == 0x009c
-                    009C    896 _REN	=	0x009c
-                    009D    897 G$SM20$0$0 == 0x009d
-                    009D    898 _SM20	=	0x009d
-                    009E    899 G$SM10$0$0 == 0x009e
-                    009E    900 _SM10	=	0x009e
-                    009F    901 G$SM00$0$0 == 0x009f
-                    009F    902 _SM00	=	0x009f
-                    0098    903 G$RI1$0$0 == 0x0098
-                    0098    904 _RI1	=	0x0098
-                    0099    905 G$TI1$0$0 == 0x0099
-                    0099    906 _TI1	=	0x0099
-                    009A    907 G$RB81$0$0 == 0x009a
-                    009A    908 _RB81	=	0x009a
-                    009B    909 G$TB81$0$0 == 0x009b
-                    009B    910 _TB81	=	0x009b
-                    009C    911 G$REN1$0$0 == 0x009c
-                    009C    912 _REN1	=	0x009c
-                    009D    913 G$MCE1$0$0 == 0x009d
-                    009D    914 _MCE1	=	0x009d
-                    009F    915 G$S1MODE$0$0 == 0x009f
-                    009F    916 _S1MODE	=	0x009f
-                    00A0    917 G$P2_0$0$0 == 0x00a0
-                    00A0    918 _P2_0	=	0x00a0
-                    00A1    919 G$P2_1$0$0 == 0x00a1
-                    00A1    920 _P2_1	=	0x00a1
-                    00A2    921 G$P2_2$0$0 == 0x00a2
-                    00A2    922 _P2_2	=	0x00a2
-                    00A3    923 G$P2_3$0$0 == 0x00a3
-                    00A3    924 _P2_3	=	0x00a3
-                    00A4    925 G$P2_4$0$0 == 0x00a4
-                    00A4    926 _P2_4	=	0x00a4
-                    00A5    927 G$P2_5$0$0 == 0x00a5
-                    00A5    928 _P2_5	=	0x00a5
-                    00A6    929 G$P2_6$0$0 == 0x00a6
-                    00A6    930 _P2_6	=	0x00a6
-                    00A7    931 G$P2_7$0$0 == 0x00a7
-                    00A7    932 _P2_7	=	0x00a7
-                    00A8    933 G$EX0$0$0 == 0x00a8
-                    00A8    934 _EX0	=	0x00a8
-                    00A9    935 G$ET0$0$0 == 0x00a9
-                    00A9    936 _ET0	=	0x00a9
-                    00AA    937 G$EX1$0$0 == 0x00aa
-                    00AA    938 _EX1	=	0x00aa
-                    00AB    939 G$ET1$0$0 == 0x00ab
-                    00AB    940 _ET1	=	0x00ab
-                    00AC    941 G$ES0$0$0 == 0x00ac
-                    00AC    942 _ES0	=	0x00ac
-                    00AC    943 G$ES$0$0 == 0x00ac
-                    00AC    944 _ES	=	0x00ac
-                    00AD    945 G$ET2$0$0 == 0x00ad
-                    00AD    946 _ET2	=	0x00ad
-                    00AF    947 G$EA$0$0 == 0x00af
-                    00AF    948 _EA	=	0x00af
-                    00B0    949 G$P3_0$0$0 == 0x00b0
-                    00B0    950 _P3_0	=	0x00b0
-                    00B1    951 G$P3_1$0$0 == 0x00b1
-                    00B1    952 _P3_1	=	0x00b1
-                    00B2    953 G$P3_2$0$0 == 0x00b2
-                    00B2    954 _P3_2	=	0x00b2
-                    00B3    955 G$P3_3$0$0 == 0x00b3
-                    00B3    956 _P3_3	=	0x00b3
-                    00B4    957 G$P3_4$0$0 == 0x00b4
-                    00B4    958 _P3_4	=	0x00b4
-                    00B5    959 G$P3_5$0$0 == 0x00b5
-                    00B5    960 _P3_5	=	0x00b5
-                    00B6    961 G$P3_6$0$0 == 0x00b6
-                    00B6    962 _P3_6	=	0x00b6
-                    00B7    963 G$P3_7$0$0 == 0x00b7
-                    00B7    964 _P3_7	=	0x00b7
-                    00B8    965 G$PX0$0$0 == 0x00b8
-                    00B8    966 _PX0	=	0x00b8
-                    00B9    967 G$PT0$0$0 == 0x00b9
-                    00B9    968 _PT0	=	0x00b9
-                    00BA    969 G$PX1$0$0 == 0x00ba
-                    00BA    970 _PX1	=	0x00ba
-                    00BB    971 G$PT1$0$0 == 0x00bb
-                    00BB    972 _PT1	=	0x00bb
-                    00BC    973 G$PS0$0$0 == 0x00bc
-                    00BC    974 _PS0	=	0x00bc
-                    00BC    975 G$PS$0$0 == 0x00bc
-                    00BC    976 _PS	=	0x00bc
-                    00BD    977 G$PT2$0$0 == 0x00bd
-                    00BD    978 _PT2	=	0x00bd
-                    00C0    979 G$SMBTOE$0$0 == 0x00c0
-                    00C0    980 _SMBTOE	=	0x00c0
-                    00C1    981 G$SMBFTE$0$0 == 0x00c1
-                    00C1    982 _SMBFTE	=	0x00c1
-                    00C2    983 G$AA$0$0 == 0x00c2
-                    00C2    984 _AA	=	0x00c2
-                    00C3    985 G$SI$0$0 == 0x00c3
-                    00C3    986 _SI	=	0x00c3
-                    00C4    987 G$STO$0$0 == 0x00c4
-                    00C4    988 _STO	=	0x00c4
-                    00C5    989 G$STA$0$0 == 0x00c5
-                    00C5    990 _STA	=	0x00c5
-                    00C6    991 G$ENSMB$0$0 == 0x00c6
-                    00C6    992 _ENSMB	=	0x00c6
-                    00C7    993 G$BUSY$0$0 == 0x00c7
-                    00C7    994 _BUSY	=	0x00c7
-                    00C0    995 G$MAC0N$0$0 == 0x00c0
-                    00C0    996 _MAC0N	=	0x00c0
-                    00C1    997 G$MAC0SO$0$0 == 0x00c1
-                    00C1    998 _MAC0SO	=	0x00c1
-                    00C2    999 G$MAC0Z$0$0 == 0x00c2
-                    00C2   1000 _MAC0Z	=	0x00c2
-                    00C3   1001 G$MAC0HO$0$0 == 0x00c3
-                    00C3   1002 _MAC0HO	=	0x00c3
-                    00C8   1003 G$CPRL2$0$0 == 0x00c8
-                    00C8   1004 _CPRL2	=	0x00c8
-                    00C9   1005 G$CT2$0$0 == 0x00c9
-                    00C9   1006 _CT2	=	0x00c9
-                    00CA   1007 G$TR2$0$0 == 0x00ca
-                    00CA   1008 _TR2	=	0x00ca
-                    00CB   1009 G$EXEN2$0$0 == 0x00cb
-                    00CB   1010 _EXEN2	=	0x00cb
-                    00CE   1011 G$EXF2$0$0 == 0x00ce
-                    00CE   1012 _EXF2	=	0x00ce
-                    00CF   1013 G$TF2$0$0 == 0x00cf
-                    00CF   1014 _TF2	=	0x00cf
-                    00C8   1015 G$CPRL3$0$0 == 0x00c8
-                    00C8   1016 _CPRL3	=	0x00c8
-                    00C9   1017 G$CT3$0$0 == 0x00c9
-                    00C9   1018 _CT3	=	0x00c9
-                    00CA   1019 G$TR3$0$0 == 0x00ca
-                    00CA   1020 _TR3	=	0x00ca
-                    00CB   1021 G$EXEN3$0$0 == 0x00cb
-                    00CB   1022 _EXEN3	=	0x00cb
-                    00CE   1023 G$EXF3$0$0 == 0x00ce
-                    00CE   1024 _EXF3	=	0x00ce
-                    00CF   1025 G$TF3$0$0 == 0x00cf
-                    00CF   1026 _TF3	=	0x00cf
-                    00C8   1027 G$CPRL4$0$0 == 0x00c8
-                    00C8   1028 _CPRL4	=	0x00c8
-                    00C9   1029 G$CT4$0$0 == 0x00c9
-                    00C9   1030 _CT4	=	0x00c9
-                    00CA   1031 G$TR4$0$0 == 0x00ca
-                    00CA   1032 _TR4	=	0x00ca
-                    00CB   1033 G$EXEN4$0$0 == 0x00cb
-                    00CB   1034 _EXEN4	=	0x00cb
-                    00CE   1035 G$EXF4$0$0 == 0x00ce
-                    00CE   1036 _EXF4	=	0x00ce
-                    00CF   1037 G$TF4$0$0 == 0x00cf
-                    00CF   1038 _TF4	=	0x00cf
-                    00C8   1039 G$P4_0$0$0 == 0x00c8
-                    00C8   1040 _P4_0	=	0x00c8
-                    00C9   1041 G$P4_1$0$0 == 0x00c9
-                    00C9   1042 _P4_1	=	0x00c9
-                    00CA   1043 G$P4_2$0$0 == 0x00ca
-                    00CA   1044 _P4_2	=	0x00ca
-                    00CB   1045 G$P4_3$0$0 == 0x00cb
-                    00CB   1046 _P4_3	=	0x00cb
-                    00CC   1047 G$P4_4$0$0 == 0x00cc
-                    00CC   1048 _P4_4	=	0x00cc
-                    00CD   1049 G$P4_5$0$0 == 0x00cd
-                    00CD   1050 _P4_5	=	0x00cd
-                    00CE   1051 G$P4_6$0$0 == 0x00ce
-                    00CE   1052 _P4_6	=	0x00ce
-                    00CF   1053 G$P4_7$0$0 == 0x00cf
-                    00CF   1054 _P4_7	=	0x00cf
-                    00D0   1055 G$P$0$0 == 0x00d0
-                    00D0   1056 _P	=	0x00d0
-                    00D1   1057 G$F1$0$0 == 0x00d1
-                    00D1   1058 _F1	=	0x00d1
-                    00D2   1059 G$OV$0$0 == 0x00d2
-                    00D2   1060 _OV	=	0x00d2
-                    00D3   1061 G$RS0$0$0 == 0x00d3
-                    00D3   1062 _RS0	=	0x00d3
-                    00D4   1063 G$RS1$0$0 == 0x00d4
-                    00D4   1064 _RS1	=	0x00d4
-                    00D5   1065 G$F0$0$0 == 0x00d5
-                    00D5   1066 _F0	=	0x00d5
-                    00D6   1067 G$AC$0$0 == 0x00d6
-                    00D6   1068 _AC	=	0x00d6
-                    00D7   1069 G$CY$0$0 == 0x00d7
-                    00D7   1070 _CY	=	0x00d7
-                    00D8   1071 G$CCF0$0$0 == 0x00d8
-                    00D8   1072 _CCF0	=	0x00d8
-                    00D9   1073 G$CCF1$0$0 == 0x00d9
-                    00D9   1074 _CCF1	=	0x00d9
-                    00DA   1075 G$CCF2$0$0 == 0x00da
-                    00DA   1076 _CCF2	=	0x00da
-                    00DB   1077 G$CCF3$0$0 == 0x00db
-                    00DB   1078 _CCF3	=	0x00db
-                    00DC   1079 G$CCF4$0$0 == 0x00dc
-                    00DC   1080 _CCF4	=	0x00dc
-                    00DD   1081 G$CCF5$0$0 == 0x00dd
-                    00DD   1082 _CCF5	=	0x00dd
-                    00DE   1083 G$CR$0$0 == 0x00de
-                    00DE   1084 _CR	=	0x00de
-                    00DF   1085 G$CF$0$0 == 0x00df
-                    00DF   1086 _CF	=	0x00df
-                    00D8   1087 G$P5_0$0$0 == 0x00d8
-                    00D8   1088 _P5_0	=	0x00d8
-                    00D9   1089 G$P5_1$0$0 == 0x00d9
-                    00D9   1090 _P5_1	=	0x00d9
-                    00DA   1091 G$P5_2$0$0 == 0x00da
-                    00DA   1092 _P5_2	=	0x00da
-                    00DB   1093 G$P5_3$0$0 == 0x00db
-                    00DB   1094 _P5_3	=	0x00db
-                    00DC   1095 G$P5_4$0$0 == 0x00dc
-                    00DC   1096 _P5_4	=	0x00dc
-                    00DD   1097 G$P5_5$0$0 == 0x00dd
-                    00DD   1098 _P5_5	=	0x00dd
-                    00DE   1099 G$P5_6$0$0 == 0x00de
-                    00DE   1100 _P5_6	=	0x00de
-                    00DF   1101 G$P5_7$0$0 == 0x00df
-                    00DF   1102 _P5_7	=	0x00df
-                    00E8   1103 G$AD0LJST$0$0 == 0x00e8
-                    00E8   1104 _AD0LJST	=	0x00e8
-                    00E9   1105 G$AD0WINT$0$0 == 0x00e9
-                    00E9   1106 _AD0WINT	=	0x00e9
-                    00EA   1107 G$AD0CM0$0$0 == 0x00ea
-                    00EA   1108 _AD0CM0	=	0x00ea
-                    00EB   1109 G$AD0CM1$0$0 == 0x00eb
-                    00EB   1110 _AD0CM1	=	0x00eb
-                    00EC   1111 G$AD0BUSY$0$0 == 0x00ec
-                    00EC   1112 _AD0BUSY	=	0x00ec
-                    00ED   1113 G$AD0INT$0$0 == 0x00ed
-                    00ED   1114 _AD0INT	=	0x00ed
-                    00EE   1115 G$AD0TM$0$0 == 0x00ee
-                    00EE   1116 _AD0TM	=	0x00ee
-                    00EF   1117 G$AD0EN$0$0 == 0x00ef
-                    00EF   1118 _AD0EN	=	0x00ef
-                    00E8   1119 G$AD2WINT$0$0 == 0x00e8
-                    00E8   1120 _AD2WINT	=	0x00e8
-                    00E9   1121 G$AD2CM0$0$0 == 0x00e9
-                    00E9   1122 _AD2CM0	=	0x00e9
-                    00EA   1123 G$AD2CM1$0$0 == 0x00ea
-                    00EA   1124 _AD2CM1	=	0x00ea
-                    00EB   1125 G$AD2CM2$0$0 == 0x00eb
-                    00EB   1126 _AD2CM2	=	0x00eb
-                    00EC   1127 G$AD2BUSY$0$0 == 0x00ec
-                    00EC   1128 _AD2BUSY	=	0x00ec
-                    00ED   1129 G$AD2INT$0$0 == 0x00ed
-                    00ED   1130 _AD2INT	=	0x00ed
-                    00EE   1131 G$AD2TM$0$0 == 0x00ee
-                    00EE   1132 _AD2TM	=	0x00ee
-                    00EF   1133 G$AD2EN$0$0 == 0x00ef
-                    00EF   1134 _AD2EN	=	0x00ef
-                    00E8   1135 G$P6_0$0$0 == 0x00e8
-                    00E8   1136 _P6_0	=	0x00e8
-                    00E9   1137 G$P6_1$0$0 == 0x00e9
-                    00E9   1138 _P6_1	=	0x00e9
-                    00EA   1139 G$P6_2$0$0 == 0x00ea
-                    00EA   1140 _P6_2	=	0x00ea
-                    00EB   1141 G$P6_3$0$0 == 0x00eb
-                    00EB   1142 _P6_3	=	0x00eb
-                    00EC   1143 G$P6_4$0$0 == 0x00ec
-                    00EC   1144 _P6_4	=	0x00ec
-                    00ED   1145 G$P6_5$0$0 == 0x00ed
-                    00ED   1146 _P6_5	=	0x00ed
-                    00EE   1147 G$P6_6$0$0 == 0x00ee
-                    00EE   1148 _P6_6	=	0x00ee
-                    00EF   1149 G$P6_7$0$0 == 0x00ef
-                    00EF   1150 _P6_7	=	0x00ef
-                    00F8   1151 G$SPIEN$0$0 == 0x00f8
-                    00F8   1152 _SPIEN	=	0x00f8
-                    00F9   1153 G$TXBMT$0$0 == 0x00f9
-                    00F9   1154 _TXBMT	=	0x00f9
-                    00FA   1155 G$NSSMD0$0$0 == 0x00fa
-                    00FA   1156 _NSSMD0	=	0x00fa
-                    00FB   1157 G$NSSMD1$0$0 == 0x00fb
-                    00FB   1158 _NSSMD1	=	0x00fb
-                    00FC   1159 G$RXOVRN$0$0 == 0x00fc
-                    00FC   1160 _RXOVRN	=	0x00fc
-                    00FD   1161 G$MODF$0$0 == 0x00fd
-                    00FD   1162 _MODF	=	0x00fd
-                    00FE   1163 G$WCOL$0$0 == 0x00fe
-                    00FE   1164 _WCOL	=	0x00fe
-                    00FF   1165 G$SPIF$0$0 == 0x00ff
-                    00FF   1166 _SPIF	=	0x00ff
-                    00F8   1167 G$P7_0$0$0 == 0x00f8
-                    00F8   1168 _P7_0	=	0x00f8
-                    00F9   1169 G$P7_1$0$0 == 0x00f9
-                    00F9   1170 _P7_1	=	0x00f9
-                    00FA   1171 G$P7_2$0$0 == 0x00fa
-                    00FA   1172 _P7_2	=	0x00fa
-                    00FB   1173 G$P7_3$0$0 == 0x00fb
-                    00FB   1174 _P7_3	=	0x00fb
-                    00FC   1175 G$P7_4$0$0 == 0x00fc
-                    00FC   1176 _P7_4	=	0x00fc
-                    00FD   1177 G$P7_5$0$0 == 0x00fd
-                    00FD   1178 _P7_5	=	0x00fd
-                    00FE   1179 G$P7_6$0$0 == 0x00fe
-                    00FE   1180 _P7_6	=	0x00fe
-                    00FF   1181 G$P7_7$0$0 == 0x00ff
-                    00FF   1182 _P7_7	=	0x00ff
-                           1183 ;--------------------------------------------------------
-                           1184 ; overlayable register banks
+                            798 ; special function bits
+                            799 ;--------------------------------------------------------
+                            800 	.area RSEG    (DATA)
+                    0080    801 G$P0_0$0$0 == 0x0080
+                    0080    802 _P0_0	=	0x0080
+                    0081    803 G$P0_1$0$0 == 0x0081
+                    0081    804 _P0_1	=	0x0081
+                    0082    805 G$P0_2$0$0 == 0x0082
+                    0082    806 _P0_2	=	0x0082
+                    0083    807 G$P0_3$0$0 == 0x0083
+                    0083    808 _P0_3	=	0x0083
+                    0084    809 G$P0_4$0$0 == 0x0084
+                    0084    810 _P0_4	=	0x0084
+                    0085    811 G$P0_5$0$0 == 0x0085
+                    0085    812 _P0_5	=	0x0085
+                    0086    813 G$P0_6$0$0 == 0x0086
+                    0086    814 _P0_6	=	0x0086
+                    0087    815 G$P0_7$0$0 == 0x0087
+                    0087    816 _P0_7	=	0x0087
+                    0088    817 G$IT0$0$0 == 0x0088
+                    0088    818 _IT0	=	0x0088
+                    0089    819 G$IE0$0$0 == 0x0089
+                    0089    820 _IE0	=	0x0089
+                    008A    821 G$IT1$0$0 == 0x008a
+                    008A    822 _IT1	=	0x008a
+                    008B    823 G$IE1$0$0 == 0x008b
+                    008B    824 _IE1	=	0x008b
+                    008C    825 G$TR0$0$0 == 0x008c
+                    008C    826 _TR0	=	0x008c
+                    008D    827 G$TF0$0$0 == 0x008d
+                    008D    828 _TF0	=	0x008d
+                    008E    829 G$TR1$0$0 == 0x008e
+                    008E    830 _TR1	=	0x008e
+                    008F    831 G$TF1$0$0 == 0x008f
+                    008F    832 _TF1	=	0x008f
+                    0088    833 G$CP0HYN0$0$0 == 0x0088
+                    0088    834 _CP0HYN0	=	0x0088
+                    0089    835 G$CP0HYN1$0$0 == 0x0089
+                    0089    836 _CP0HYN1	=	0x0089
+                    008A    837 G$CP0HYP0$0$0 == 0x008a
+                    008A    838 _CP0HYP0	=	0x008a
+                    008B    839 G$CP0HYP1$0$0 == 0x008b
+                    008B    840 _CP0HYP1	=	0x008b
+                    008C    841 G$CP0FIF$0$0 == 0x008c
+                    008C    842 _CP0FIF	=	0x008c
+                    008D    843 G$CP0RIF$0$0 == 0x008d
+                    008D    844 _CP0RIF	=	0x008d
+                    008E    845 G$CP0OUT$0$0 == 0x008e
+                    008E    846 _CP0OUT	=	0x008e
+                    008F    847 G$CP0EN$0$0 == 0x008f
+                    008F    848 _CP0EN	=	0x008f
+                    0088    849 G$CP1HYN0$0$0 == 0x0088
+                    0088    850 _CP1HYN0	=	0x0088
+                    0089    851 G$CP1HYN1$0$0 == 0x0089
+                    0089    852 _CP1HYN1	=	0x0089
+                    008A    853 G$CP1HYP0$0$0 == 0x008a
+                    008A    854 _CP1HYP0	=	0x008a
+                    008B    855 G$CP1HYP1$0$0 == 0x008b
+                    008B    856 _CP1HYP1	=	0x008b
+                    008C    857 G$CP1FIF$0$0 == 0x008c
+                    008C    858 _CP1FIF	=	0x008c
+                    008D    859 G$CP1RIF$0$0 == 0x008d
+                    008D    860 _CP1RIF	=	0x008d
+                    008E    861 G$CP1OUT$0$0 == 0x008e
+                    008E    862 _CP1OUT	=	0x008e
+                    008F    863 G$CP1EN$0$0 == 0x008f
+                    008F    864 _CP1EN	=	0x008f
+                    0088    865 G$FLHBUSY$0$0 == 0x0088
+                    0088    866 _FLHBUSY	=	0x0088
+                    0090    867 G$P1_0$0$0 == 0x0090
+                    0090    868 _P1_0	=	0x0090
+                    0091    869 G$P1_1$0$0 == 0x0091
+                    0091    870 _P1_1	=	0x0091
+                    0092    871 G$P1_2$0$0 == 0x0092
+                    0092    872 _P1_2	=	0x0092
+                    0093    873 G$P1_3$0$0 == 0x0093
+                    0093    874 _P1_3	=	0x0093
+                    0094    875 G$P1_4$0$0 == 0x0094
+                    0094    876 _P1_4	=	0x0094
+                    0095    877 G$P1_5$0$0 == 0x0095
+                    0095    878 _P1_5	=	0x0095
+                    0096    879 G$P1_6$0$0 == 0x0096
+                    0096    880 _P1_6	=	0x0096
+                    0097    881 G$P1_7$0$0 == 0x0097
+                    0097    882 _P1_7	=	0x0097
+                    0098    883 G$RI0$0$0 == 0x0098
+                    0098    884 _RI0	=	0x0098
+                    0098    885 G$RI$0$0 == 0x0098
+                    0098    886 _RI	=	0x0098
+                    0099    887 G$TI0$0$0 == 0x0099
+                    0099    888 _TI0	=	0x0099
+                    0099    889 G$TI$0$0 == 0x0099
+                    0099    890 _TI	=	0x0099
+                    009A    891 G$RB80$0$0 == 0x009a
+                    009A    892 _RB80	=	0x009a
+                    009B    893 G$TB80$0$0 == 0x009b
+                    009B    894 _TB80	=	0x009b
+                    009C    895 G$REN0$0$0 == 0x009c
+                    009C    896 _REN0	=	0x009c
+                    009C    897 G$REN$0$0 == 0x009c
+                    009C    898 _REN	=	0x009c
+                    009D    899 G$SM20$0$0 == 0x009d
+                    009D    900 _SM20	=	0x009d
+                    009E    901 G$SM10$0$0 == 0x009e
+                    009E    902 _SM10	=	0x009e
+                    009F    903 G$SM00$0$0 == 0x009f
+                    009F    904 _SM00	=	0x009f
+                    0098    905 G$RI1$0$0 == 0x0098
+                    0098    906 _RI1	=	0x0098
+                    0099    907 G$TI1$0$0 == 0x0099
+                    0099    908 _TI1	=	0x0099
+                    009A    909 G$RB81$0$0 == 0x009a
+                    009A    910 _RB81	=	0x009a
+                    009B    911 G$TB81$0$0 == 0x009b
+                    009B    912 _TB81	=	0x009b
+                    009C    913 G$REN1$0$0 == 0x009c
+                    009C    914 _REN1	=	0x009c
+                    009D    915 G$MCE1$0$0 == 0x009d
+                    009D    916 _MCE1	=	0x009d
+                    009F    917 G$S1MODE$0$0 == 0x009f
+                    009F    918 _S1MODE	=	0x009f
+                    00A0    919 G$P2_0$0$0 == 0x00a0
+                    00A0    920 _P2_0	=	0x00a0
+                    00A1    921 G$P2_1$0$0 == 0x00a1
+                    00A1    922 _P2_1	=	0x00a1
+                    00A2    923 G$P2_2$0$0 == 0x00a2
+                    00A2    924 _P2_2	=	0x00a2
+                    00A3    925 G$P2_3$0$0 == 0x00a3
+                    00A3    926 _P2_3	=	0x00a3
+                    00A4    927 G$P2_4$0$0 == 0x00a4
+                    00A4    928 _P2_4	=	0x00a4
+                    00A5    929 G$P2_5$0$0 == 0x00a5
+                    00A5    930 _P2_5	=	0x00a5
+                    00A6    931 G$P2_6$0$0 == 0x00a6
+                    00A6    932 _P2_6	=	0x00a6
+                    00A7    933 G$P2_7$0$0 == 0x00a7
+                    00A7    934 _P2_7	=	0x00a7
+                    00A8    935 G$EX0$0$0 == 0x00a8
+                    00A8    936 _EX0	=	0x00a8
+                    00A9    937 G$ET0$0$0 == 0x00a9
+                    00A9    938 _ET0	=	0x00a9
+                    00AA    939 G$EX1$0$0 == 0x00aa
+                    00AA    940 _EX1	=	0x00aa
+                    00AB    941 G$ET1$0$0 == 0x00ab
+                    00AB    942 _ET1	=	0x00ab
+                    00AC    943 G$ES0$0$0 == 0x00ac
+                    00AC    944 _ES0	=	0x00ac
+                    00AC    945 G$ES$0$0 == 0x00ac
+                    00AC    946 _ES	=	0x00ac
+                    00AD    947 G$ET2$0$0 == 0x00ad
+                    00AD    948 _ET2	=	0x00ad
+                    00AF    949 G$EA$0$0 == 0x00af
+                    00AF    950 _EA	=	0x00af
+                    00B0    951 G$P3_0$0$0 == 0x00b0
+                    00B0    952 _P3_0	=	0x00b0
+                    00B1    953 G$P3_1$0$0 == 0x00b1
+                    00B1    954 _P3_1	=	0x00b1
+                    00B2    955 G$P3_2$0$0 == 0x00b2
+                    00B2    956 _P3_2	=	0x00b2
+                    00B3    957 G$P3_3$0$0 == 0x00b3
+                    00B3    958 _P3_3	=	0x00b3
+                    00B4    959 G$P3_4$0$0 == 0x00b4
+                    00B4    960 _P3_4	=	0x00b4
+                    00B5    961 G$P3_5$0$0 == 0x00b5
+                    00B5    962 _P3_5	=	0x00b5
+                    00B6    963 G$P3_6$0$0 == 0x00b6
+                    00B6    964 _P3_6	=	0x00b6
+                    00B7    965 G$P3_7$0$0 == 0x00b7
+                    00B7    966 _P3_7	=	0x00b7
+                    00B8    967 G$PX0$0$0 == 0x00b8
+                    00B8    968 _PX0	=	0x00b8
+                    00B9    969 G$PT0$0$0 == 0x00b9
+                    00B9    970 _PT0	=	0x00b9
+                    00BA    971 G$PX1$0$0 == 0x00ba
+                    00BA    972 _PX1	=	0x00ba
+                    00BB    973 G$PT1$0$0 == 0x00bb
+                    00BB    974 _PT1	=	0x00bb
+                    00BC    975 G$PS0$0$0 == 0x00bc
+                    00BC    976 _PS0	=	0x00bc
+                    00BC    977 G$PS$0$0 == 0x00bc
+                    00BC    978 _PS	=	0x00bc
+                    00BD    979 G$PT2$0$0 == 0x00bd
+                    00BD    980 _PT2	=	0x00bd
+                    00C0    981 G$SMBTOE$0$0 == 0x00c0
+                    00C0    982 _SMBTOE	=	0x00c0
+                    00C1    983 G$SMBFTE$0$0 == 0x00c1
+                    00C1    984 _SMBFTE	=	0x00c1
+                    00C2    985 G$AA$0$0 == 0x00c2
+                    00C2    986 _AA	=	0x00c2
+                    00C3    987 G$SI$0$0 == 0x00c3
+                    00C3    988 _SI	=	0x00c3
+                    00C4    989 G$STO$0$0 == 0x00c4
+                    00C4    990 _STO	=	0x00c4
+                    00C5    991 G$STA$0$0 == 0x00c5
+                    00C5    992 _STA	=	0x00c5
+                    00C6    993 G$ENSMB$0$0 == 0x00c6
+                    00C6    994 _ENSMB	=	0x00c6
+                    00C7    995 G$BUSY$0$0 == 0x00c7
+                    00C7    996 _BUSY	=	0x00c7
+                    00C0    997 G$MAC0N$0$0 == 0x00c0
+                    00C0    998 _MAC0N	=	0x00c0
+                    00C1    999 G$MAC0SO$0$0 == 0x00c1
+                    00C1   1000 _MAC0SO	=	0x00c1
+                    00C2   1001 G$MAC0Z$0$0 == 0x00c2
+                    00C2   1002 _MAC0Z	=	0x00c2
+                    00C3   1003 G$MAC0HO$0$0 == 0x00c3
+                    00C3   1004 _MAC0HO	=	0x00c3
+                    00C8   1005 G$CPRL2$0$0 == 0x00c8
+                    00C8   1006 _CPRL2	=	0x00c8
+                    00C9   1007 G$CT2$0$0 == 0x00c9
+                    00C9   1008 _CT2	=	0x00c9
+                    00CA   1009 G$TR2$0$0 == 0x00ca
+                    00CA   1010 _TR2	=	0x00ca
+                    00CB   1011 G$EXEN2$0$0 == 0x00cb
+                    00CB   1012 _EXEN2	=	0x00cb
+                    00CE   1013 G$EXF2$0$0 == 0x00ce
+                    00CE   1014 _EXF2	=	0x00ce
+                    00CF   1015 G$TF2$0$0 == 0x00cf
+                    00CF   1016 _TF2	=	0x00cf
+                    00C8   1017 G$CPRL3$0$0 == 0x00c8
+                    00C8   1018 _CPRL3	=	0x00c8
+                    00C9   1019 G$CT3$0$0 == 0x00c9
+                    00C9   1020 _CT3	=	0x00c9
+                    00CA   1021 G$TR3$0$0 == 0x00ca
+                    00CA   1022 _TR3	=	0x00ca
+                    00CB   1023 G$EXEN3$0$0 == 0x00cb
+                    00CB   1024 _EXEN3	=	0x00cb
+                    00CE   1025 G$EXF3$0$0 == 0x00ce
+                    00CE   1026 _EXF3	=	0x00ce
+                    00CF   1027 G$TF3$0$0 == 0x00cf
+                    00CF   1028 _TF3	=	0x00cf
+                    00C8   1029 G$CPRL4$0$0 == 0x00c8
+                    00C8   1030 _CPRL4	=	0x00c8
+                    00C9   1031 G$CT4$0$0 == 0x00c9
+                    00C9   1032 _CT4	=	0x00c9
+                    00CA   1033 G$TR4$0$0 == 0x00ca
+                    00CA   1034 _TR4	=	0x00ca
+                    00CB   1035 G$EXEN4$0$0 == 0x00cb
+                    00CB   1036 _EXEN4	=	0x00cb
+                    00CE   1037 G$EXF4$0$0 == 0x00ce
+                    00CE   1038 _EXF4	=	0x00ce
+                    00CF   1039 G$TF4$0$0 == 0x00cf
+                    00CF   1040 _TF4	=	0x00cf
+                    00C8   1041 G$P4_0$0$0 == 0x00c8
+                    00C8   1042 _P4_0	=	0x00c8
+                    00C9   1043 G$P4_1$0$0 == 0x00c9
+                    00C9   1044 _P4_1	=	0x00c9
+                    00CA   1045 G$P4_2$0$0 == 0x00ca
+                    00CA   1046 _P4_2	=	0x00ca
+                    00CB   1047 G$P4_3$0$0 == 0x00cb
+                    00CB   1048 _P4_3	=	0x00cb
+                    00CC   1049 G$P4_4$0$0 == 0x00cc
+                    00CC   1050 _P4_4	=	0x00cc
+                    00CD   1051 G$P4_5$0$0 == 0x00cd
+                    00CD   1052 _P4_5	=	0x00cd
+                    00CE   1053 G$P4_6$0$0 == 0x00ce
+                    00CE   1054 _P4_6	=	0x00ce
+                    00CF   1055 G$P4_7$0$0 == 0x00cf
+                    00CF   1056 _P4_7	=	0x00cf
+                    00D0   1057 G$P$0$0 == 0x00d0
+                    00D0   1058 _P	=	0x00d0
+                    00D1   1059 G$F1$0$0 == 0x00d1
+                    00D1   1060 _F1	=	0x00d1
+                    00D2   1061 G$OV$0$0 == 0x00d2
+                    00D2   1062 _OV	=	0x00d2
+                    00D3   1063 G$RS0$0$0 == 0x00d3
+                    00D3   1064 _RS0	=	0x00d3
+                    00D4   1065 G$RS1$0$0 == 0x00d4
+                    00D4   1066 _RS1	=	0x00d4
+                    00D5   1067 G$F0$0$0 == 0x00d5
+                    00D5   1068 _F0	=	0x00d5
+                    00D6   1069 G$AC$0$0 == 0x00d6
+                    00D6   1070 _AC	=	0x00d6
+                    00D7   1071 G$CY$0$0 == 0x00d7
+                    00D7   1072 _CY	=	0x00d7
+                    00D8   1073 G$CCF0$0$0 == 0x00d8
+                    00D8   1074 _CCF0	=	0x00d8
+                    00D9   1075 G$CCF1$0$0 == 0x00d9
+                    00D9   1076 _CCF1	=	0x00d9
+                    00DA   1077 G$CCF2$0$0 == 0x00da
+                    00DA   1078 _CCF2	=	0x00da
+                    00DB   1079 G$CCF3$0$0 == 0x00db
+                    00DB   1080 _CCF3	=	0x00db
+                    00DC   1081 G$CCF4$0$0 == 0x00dc
+                    00DC   1082 _CCF4	=	0x00dc
+                    00DD   1083 G$CCF5$0$0 == 0x00dd
+                    00DD   1084 _CCF5	=	0x00dd
+                    00DE   1085 G$CR$0$0 == 0x00de
+                    00DE   1086 _CR	=	0x00de
+                    00DF   1087 G$CF$0$0 == 0x00df
+                    00DF   1088 _CF	=	0x00df
+                    00D8   1089 G$P5_0$0$0 == 0x00d8
+                    00D8   1090 _P5_0	=	0x00d8
+                    00D9   1091 G$P5_1$0$0 == 0x00d9
+                    00D9   1092 _P5_1	=	0x00d9
+                    00DA   1093 G$P5_2$0$0 == 0x00da
+                    00DA   1094 _P5_2	=	0x00da
+                    00DB   1095 G$P5_3$0$0 == 0x00db
+                    00DB   1096 _P5_3	=	0x00db
+                    00DC   1097 G$P5_4$0$0 == 0x00dc
+                    00DC   1098 _P5_4	=	0x00dc
+                    00DD   1099 G$P5_5$0$0 == 0x00dd
+                    00DD   1100 _P5_5	=	0x00dd
+                    00DE   1101 G$P5_6$0$0 == 0x00de
+                    00DE   1102 _P5_6	=	0x00de
+                    00DF   1103 G$P5_7$0$0 == 0x00df
+                    00DF   1104 _P5_7	=	0x00df
+                    00E8   1105 G$AD0LJST$0$0 == 0x00e8
+                    00E8   1106 _AD0LJST	=	0x00e8
+                    00E9   1107 G$AD0WINT$0$0 == 0x00e9
+                    00E9   1108 _AD0WINT	=	0x00e9
+                    00EA   1109 G$AD0CM0$0$0 == 0x00ea
+                    00EA   1110 _AD0CM0	=	0x00ea
+                    00EB   1111 G$AD0CM1$0$0 == 0x00eb
+                    00EB   1112 _AD0CM1	=	0x00eb
+                    00EC   1113 G$AD0BUSY$0$0 == 0x00ec
+                    00EC   1114 _AD0BUSY	=	0x00ec
+                    00ED   1115 G$AD0INT$0$0 == 0x00ed
+                    00ED   1116 _AD0INT	=	0x00ed
+                    00EE   1117 G$AD0TM$0$0 == 0x00ee
+                    00EE   1118 _AD0TM	=	0x00ee
+                    00EF   1119 G$AD0EN$0$0 == 0x00ef
+                    00EF   1120 _AD0EN	=	0x00ef
+                    00E8   1121 G$AD2WINT$0$0 == 0x00e8
+                    00E8   1122 _AD2WINT	=	0x00e8
+                    00E9   1123 G$AD2CM0$0$0 == 0x00e9
+                    00E9   1124 _AD2CM0	=	0x00e9
+                    00EA   1125 G$AD2CM1$0$0 == 0x00ea
+                    00EA   1126 _AD2CM1	=	0x00ea
+                    00EB   1127 G$AD2CM2$0$0 == 0x00eb
+                    00EB   1128 _AD2CM2	=	0x00eb
+                    00EC   1129 G$AD2BUSY$0$0 == 0x00ec
+                    00EC   1130 _AD2BUSY	=	0x00ec
+                    00ED   1131 G$AD2INT$0$0 == 0x00ed
+                    00ED   1132 _AD2INT	=	0x00ed
+                    00EE   1133 G$AD2TM$0$0 == 0x00ee
+                    00EE   1134 _AD2TM	=	0x00ee
+                    00EF   1135 G$AD2EN$0$0 == 0x00ef
+                    00EF   1136 _AD2EN	=	0x00ef
+                    00E8   1137 G$P6_0$0$0 == 0x00e8
+                    00E8   1138 _P6_0	=	0x00e8
+                    00E9   1139 G$P6_1$0$0 == 0x00e9
+                    00E9   1140 _P6_1	=	0x00e9
+                    00EA   1141 G$P6_2$0$0 == 0x00ea
+                    00EA   1142 _P6_2	=	0x00ea
+                    00EB   1143 G$P6_3$0$0 == 0x00eb
+                    00EB   1144 _P6_3	=	0x00eb
+                    00EC   1145 G$P6_4$0$0 == 0x00ec
+                    00EC   1146 _P6_4	=	0x00ec
+                    00ED   1147 G$P6_5$0$0 == 0x00ed
+                    00ED   1148 _P6_5	=	0x00ed
+                    00EE   1149 G$P6_6$0$0 == 0x00ee
+                    00EE   1150 _P6_6	=	0x00ee
+                    00EF   1151 G$P6_7$0$0 == 0x00ef
+                    00EF   1152 _P6_7	=	0x00ef
+                    00F8   1153 G$SPIEN$0$0 == 0x00f8
+                    00F8   1154 _SPIEN	=	0x00f8
+                    00F9   1155 G$TXBMT$0$0 == 0x00f9
+                    00F9   1156 _TXBMT	=	0x00f9
+                    00FA   1157 G$NSSMD0$0$0 == 0x00fa
+                    00FA   1158 _NSSMD0	=	0x00fa
+                    00FB   1159 G$NSSMD1$0$0 == 0x00fb
+                    00FB   1160 _NSSMD1	=	0x00fb
+                    00FC   1161 G$RXOVRN$0$0 == 0x00fc
+                    00FC   1162 _RXOVRN	=	0x00fc
+                    00FD   1163 G$MODF$0$0 == 0x00fd
+                    00FD   1164 _MODF	=	0x00fd
+                    00FE   1165 G$WCOL$0$0 == 0x00fe
+                    00FE   1166 _WCOL	=	0x00fe
+                    00FF   1167 G$SPIF$0$0 == 0x00ff
+                    00FF   1168 _SPIF	=	0x00ff
+                    00F8   1169 G$P7_0$0$0 == 0x00f8
+                    00F8   1170 _P7_0	=	0x00f8
+                    00F9   1171 G$P7_1$0$0 == 0x00f9
+                    00F9   1172 _P7_1	=	0x00f9
+                    00FA   1173 G$P7_2$0$0 == 0x00fa
+                    00FA   1174 _P7_2	=	0x00fa
+                    00FB   1175 G$P7_3$0$0 == 0x00fb
+                    00FB   1176 _P7_3	=	0x00fb
+                    00FC   1177 G$P7_4$0$0 == 0x00fc
+                    00FC   1178 _P7_4	=	0x00fc
+                    00FD   1179 G$P7_5$0$0 == 0x00fd
+                    00FD   1180 _P7_5	=	0x00fd
+                    00FE   1181 G$P7_6$0$0 == 0x00fe
+                    00FE   1182 _P7_6	=	0x00fe
+                    00FF   1183 G$P7_7$0$0 == 0x00ff
+                    00FF   1184 _P7_7	=	0x00ff
                            1185 ;--------------------------------------------------------
-                           1186 	.area REG_BANK_0	(REL,OVR,DATA)
-   0000                    1187 	.ds 8
-                           1188 ;--------------------------------------------------------
-                           1189 ; internal ram data
+                           1186 ; overlayable register banks
+                           1187 ;--------------------------------------------------------
+                           1188 	.area REG_BANK_0	(REL,OVR,DATA)
+   0000                    1189 	.ds 8
                            1190 ;--------------------------------------------------------
-                           1191 	.area DSEG    (DATA)
-                    0000   1192 G$current$0$0==.
-   0008                    1193 _current::
-   0008                    1194 	.ds 1
-                    0001   1195 G$move$0$0==.
-   0009                    1196 _move::
-   0009                    1197 	.ds 1
-                    0002   1198 LprintSubBoard$sloc0$1$0==.
-   000A                    1199 _printSubBoard_sloc0_1_0:
-   000A                    1200 	.ds 2
-                    0004   1201 LprintSubBoard$sloc1$1$0==.
-   000C                    1202 _printSubBoard_sloc1_1_0:
-   000C                    1203 	.ds 2
-                           1204 ;--------------------------------------------------------
-                           1205 ; overlayable items in internal ram 
-                           1206 ;--------------------------------------------------------
+                           1191 ; internal ram data
+                           1192 ;--------------------------------------------------------
+                           1193 	.area DSEG    (DATA)
+                    0000   1194 G$current$0$0==.
+   0008                    1195 _current::
+   0008                    1196 	.ds 1
+                    0001   1197 LprintSubBoard$sloc0$1$0==.
+   0009                    1198 _printSubBoard_sloc0_1_0:
+   0009                    1199 	.ds 2
+                    0003   1200 LprintSubBoard$sloc1$1$0==.
+   000B                    1201 _printSubBoard_sloc1_1_0:
+   000B                    1202 	.ds 2
+                           1203 ;--------------------------------------------------------
+                           1204 ; overlayable items in internal ram 
+                           1205 ;--------------------------------------------------------
+                           1206 	.area	OSEG    (OVR,DATA)
                            1207 	.area	OSEG    (OVR,DATA)
                            1208 	.area	OSEG    (OVR,DATA)
-                           1209 	.area	OSEG    (OVR,DATA)
-                           1210 	.area	OSEG    (OVR,DATA)
-                           1211 	.area	OSEG    (OVR,DATA)
-                           1212 ;--------------------------------------------------------
-                           1213 ; Stack segment in internal ram 
-                           1214 ;--------------------------------------------------------
-                           1215 	.area	SSEG	(DATA)
-   003B                    1216 __start__stack:
-   003B                    1217 	.ds	1
-                           1218 
-                           1219 ;--------------------------------------------------------
-                           1220 ; indirectly addressable internal ram data
-                           1221 ;--------------------------------------------------------
-                           1222 	.area ISEG    (DATA)
-                           1223 ;--------------------------------------------------------
-                           1224 ; absolute internal ram data
-                           1225 ;--------------------------------------------------------
-                           1226 	.area IABS    (ABS,DATA)
-                           1227 	.area IABS    (ABS,DATA)
+                    0000   1209 LcheckBoardWin$b$1$1==.
+   000F                    1210 _checkBoardWin_b_1_1::
+   000F                    1211 	.ds 3
+                           1212 	.area	OSEG    (OVR,DATA)
+                           1213 	.area	OSEG    (OVR,DATA)
+                           1214 	.area	OSEG    (OVR,DATA)
+                           1215 ;--------------------------------------------------------
+                           1216 ; Stack segment in internal ram 
+                           1217 ;--------------------------------------------------------
+                           1218 	.area	SSEG	(DATA)
+   003B                    1219 __start__stack:
+   003B                    1220 	.ds	1
+                           1221 
+                           1222 ;--------------------------------------------------------
+                           1223 ; indirectly addressable internal ram data
+                           1224 ;--------------------------------------------------------
+                           1225 	.area ISEG    (DATA)
+                           1226 ;--------------------------------------------------------
+                           1227 ; absolute internal ram data
                            1228 ;--------------------------------------------------------
-                           1229 ; bit data
-                           1230 ;--------------------------------------------------------
-                           1231 	.area BSEG    (BIT)
-                    0000   1232 G$won$0$0==.
-   0000                    1233 _won::
-   0000                    1234 	.ds 1
-                    0001   1235 G$turn$0$0==.
-   0001                    1236 _turn::
-   0001                    1237 	.ds 1
-                           1238 ;--------------------------------------------------------
-                           1239 ; paged external ram data
-                           1240 ;--------------------------------------------------------
-                           1241 	.area PSEG    (PAG,XDATA)
-                           1242 ;--------------------------------------------------------
-                           1243 ; external ram data
-                           1244 ;--------------------------------------------------------
-                           1245 	.area XSEG    (XDATA)
-                    0000   1246 G$board$0$0==.
-   0000                    1247 _board::
-   0000                    1248 	.ds 160
-                           1249 ;--------------------------------------------------------
-                           1250 ; absolute external ram data
-                           1251 ;--------------------------------------------------------
-                           1252 	.area XABS    (ABS,XDATA)
-                           1253 ;--------------------------------------------------------
-                           1254 ; external initialized ram data
-                           1255 ;--------------------------------------------------------
-                           1256 	.area XISEG   (XDATA)
-                           1257 	.area HOME    (CODE)
-                           1258 	.area GSINIT0 (CODE)
-                           1259 	.area GSINIT1 (CODE)
-                           1260 	.area GSINIT2 (CODE)
-                           1261 	.area GSINIT3 (CODE)
-                           1262 	.area GSINIT4 (CODE)
-                           1263 	.area GSINIT5 (CODE)
-                           1264 	.area GSINIT  (CODE)
-                           1265 	.area GSFINAL (CODE)
-                           1266 	.area CSEG    (CODE)
-                           1267 ;--------------------------------------------------------
-                           1268 ; interrupt vector 
-                           1269 ;--------------------------------------------------------
-                           1270 	.area HOME    (CODE)
-   0000                    1271 __interrupt_vect:
-   0000 02 00 08           1272 	ljmp	__sdcc_gsinit_startup
-                           1273 ;--------------------------------------------------------
-                           1274 ; global & static initialisations
-                           1275 ;--------------------------------------------------------
-                           1276 	.area HOME    (CODE)
-                           1277 	.area GSINIT  (CODE)
-                           1278 	.area GSFINAL (CODE)
-                           1279 	.area GSINIT  (CODE)
-                           1280 	.globl __sdcc_gsinit_startup
-                           1281 	.globl __sdcc_program_startup
-                           1282 	.globl __start__stack
-                           1283 	.globl __mcs51_genXINIT
-                           1284 	.globl __mcs51_genXRAMCLEAR
-                           1285 	.globl __mcs51_genRAMCLEAR
-                    0000   1286 	G$UART0_INIT$0$0 ==.
-                    0000   1287 	C$final.c$45$1$1 ==.
-                           1288 ;	C:\Users\SSP\Documents\Microprocessor Systems\Final\final.c:45: char current = 0;	//current subboard
-   0061 75 08 00           1289 	mov	_current,#0x00
-                    0003   1290 	G$UART0_INIT$0$0 ==.
-                    0003   1291 	C$final.c$46$1$1 ==.
-                           1292 ;	C:\Users\SSP\Documents\Microprocessor Systems\Final\final.c:46: char move = 0;		//player move
-   0064 75 09 00           1293 	mov	_move,#0x00
-                    0006   1294 	G$UART0_INIT$0$0 ==.
-                    0006   1295 	C$final.c$42$1$1 ==.
-                           1296 ;	C:\Users\SSP\Documents\Microprocessor Systems\Final\final.c:42: bit won = 0;
-   0067 C2 00              1297 	clr	_won
-                    0008   1298 	G$UART0_INIT$0$0 ==.
-                    0008   1299 	C$final.c$43$1$1 ==.
-                           1300 ;	C:\Users\SSP\Documents\Microprocessor Systems\Final\final.c:43: bit turn = 0;		//0 = O, 1 = X
-   0069 C2 01              1301 	clr	_turn
-                           1302 	.area GSFINAL (CODE)
-   006B 02 00 03           1303 	ljmp	__sdcc_program_startup
-                           1304 ;--------------------------------------------------------
-                           1305 ; Home
-                           1306 ;--------------------------------------------------------
-                           1307 	.area HOME    (CODE)
-                           1308 	.area HOME    (CODE)
-   0003                    1309 __sdcc_program_startup:
-   0003 12 00 81           1310 	lcall	_main
-                           1311 ;	return from main will lock up
-   0006 80 FE              1312 	sjmp .
-                           1313 ;--------------------------------------------------------
-                           1314 ; code
-                           1315 ;--------------------------------------------------------
-                           1316 	.area CSEG    (CODE)
-                           1317 ;------------------------------------------------------------
-                           1318 ;Allocation info for local variables in function 'putchar'
-                           1319 ;------------------------------------------------------------
-                           1320 ;c                         Allocated to registers r2 
-                           1321 ;------------------------------------------------------------
-                    0000   1322 	G$putchar$0$0 ==.
-                    0000   1323 	C$putget.h$18$0$0 ==.
-                           1324 ;	C:\Users\SSP\Documents\Microprocessor Systems\Final\/putget.h:18: void putchar(char c)
-                           1325 ;	-----------------------------------------
-                           1326 ;	 function putchar
-                           1327 ;	-----------------------------------------
-   006E                    1328 _putchar:
-                    0002   1329 	ar2 = 0x02
-                    0003   1330 	ar3 = 0x03
-                    0004   1331 	ar4 = 0x04
-                    0005   1332 	ar5 = 0x05
-                    0006   1333 	ar6 = 0x06
-                    0007   1334 	ar7 = 0x07
-                    0000   1335 	ar0 = 0x00
-                    0001   1336 	ar1 = 0x01
-   006E AA 82              1337 	mov	r2,dpl
-                    0002   1338 	C$putget.h$20$1$1 ==.
-                           1339 ;	C:\Users\SSP\Documents\Microprocessor Systems\Final\/putget.h:20: while(!TI0); 
-   0070                    1340 00101$:
-                    0002   1341 	C$putget.h$21$1$1 ==.
-                           1342 ;	C:\Users\SSP\Documents\Microprocessor Systems\Final\/putget.h:21: TI0=0;
-   0070 10 99 02           1343 	jbc	_TI0,00108$
-   0073 80 FB              1344 	sjmp	00101$
-   0075                    1345 00108$:
-                    0007   1346 	C$putget.h$22$1$1 ==.
-                           1347 ;	C:\Users\SSP\Documents\Microprocessor Systems\Final\/putget.h:22: SBUF0 = c;
-   0075 8A 99              1348 	mov	_SBUF0,r2
-                    0009   1349 	C$putget.h$23$1$1 ==.
-                    0009   1350 	XG$putchar$0$0 ==.
-   0077 22                 1351 	ret
-                           1352 ;------------------------------------------------------------
-                           1353 ;Allocation info for local variables in function 'getchar'
-                           1354 ;------------------------------------------------------------
-                           1355 ;c                         Allocated to registers 
-                           1356 ;------------------------------------------------------------
-                    000A   1357 	G$getchar$0$0 ==.
-                    000A   1358 	C$putget.h$28$1$1 ==.
-                           1359 ;	C:\Users\SSP\Documents\Microprocessor Systems\Final\/putget.h:28: char getchar(void)
-                           1360 ;	-----------------------------------------
-                           1361 ;	 function getchar
-                           1362 ;	-----------------------------------------
-   0078                    1363 _getchar:
-                    000A   1364 	C$putget.h$31$1$1 ==.
-                           1365 ;	C:\Users\SSP\Documents\Microprocessor Systems\Final\/putget.h:31: while(!RI0);
-   0078                    1366 00101$:
-                    000A   1367 	C$putget.h$32$1$1 ==.
-                           1368 ;	C:\Users\SSP\Documents\Microprocessor Systems\Final\/putget.h:32: RI0 =0;
-   0078 10 98 02           1369 	jbc	_RI0,00108$
-   007B 80 FB              1370 	sjmp	00101$
-   007D                    1371 00108$:
-                    000F   1372 	C$putget.h$33$1$1 ==.
-                           1373 ;	C:\Users\SSP\Documents\Microprocessor Systems\Final\/putget.h:33: c = SBUF0;
-   007D 85 99 82           1374 	mov	dpl,_SBUF0
-                    0012   1375 	C$putget.h$35$1$1 ==.
-                           1376 ;	C:\Users\SSP\Documents\Microprocessor Systems\Final\/putget.h:35: return c;
-                    0012   1377 	C$putget.h$36$1$1 ==.
-                    0012   1378 	XG$getchar$0$0 ==.
-   0080 22                 1379 	ret
-                           1380 ;------------------------------------------------------------
-                           1381 ;Allocation info for local variables in function 'main'
-                           1382 ;------------------------------------------------------------
-                           1383 ;------------------------------------------------------------
-                    0013   1384 	G$main$0$0 ==.
-                    0013   1385 	C$final.c$53$1$1 ==.
-                           1386 ;	C:\Users\SSP\Documents\Microprocessor Systems\Final\final.c:53: void main(void)
-                           1387 ;	-----------------------------------------
-                           1388 ;	 function main
-                           1389 ;	-----------------------------------------
-   0081                    1390 _main:
-                    0013   1391 	C$final.c$55$1$1 ==.
-                           1392 ;	C:\Users\SSP\Documents\Microprocessor Systems\Final\final.c:55: WDTCN = 0xDE;						// Disable the watchdog timer
-   0081 75 FF DE           1393 	mov	_WDTCN,#0xDE
-                    0016   1394 	C$final.c$56$1$1 ==.
-                           1395 ;	C:\Users\SSP\Documents\Microprocessor Systems\Final\final.c:56: WDTCN = 0xAD;						// Note: = "DEAD"!
-   0084 75 FF AD           1396 	mov	_WDTCN,#0xAD
-                    0019   1397 	C$final.c$58$1$1 ==.
-                           1398 ;	C:\Users\SSP\Documents\Microprocessor Systems\Final\final.c:58: SYSCLK_INIT();						// Initialize the oscillator
-   0087 12 06 7D           1399 	lcall	_SYSCLK_INIT
-                    001C   1400 	C$final.c$59$1$1 ==.
-                           1401 ;	C:\Users\SSP\Documents\Microprocessor Systems\Final\final.c:59: PORT_INIT();						// Initialize the Crossbar and GPIO
-   008A 12 06 A0           1402 	lcall	_PORT_INIT
-                    001F   1403 	C$final.c$60$1$1 ==.
-                           1404 ;	C:\Users\SSP\Documents\Microprocessor Systems\Final\final.c:60: UART0_INIT();						// Initialize UART0
-   008D 12 06 B7           1405 	lcall	_UART0_INIT
-                    0022   1406 	C$final.c$62$1$1 ==.
-                           1407 ;	C:\Users\SSP\Documents\Microprocessor Systems\Final\final.c:62: SFRPAGE = UART0_PAGE;				// Direct output to UART0
-   0090 75 84 00           1408 	mov	_SFRPAGE,#0x00
-                    0025   1409 	C$final.c$64$1$1 ==.
-                           1410 ;	C:\Users\SSP\Documents\Microprocessor Systems\Final\final.c:64: printf("\033[2J");					// Erase ANSI terminal & move cursor to home position
-   0093 74 D5              1411 	mov	a,#__str_0
-   0095 C0 E0              1412 	push	acc
-   0097 74 0D              1413 	mov	a,#(__str_0 >> 8)
-   0099 C0 E0              1414 	push	acc
-   009B 74 80              1415 	mov	a,#0x80
-   009D C0 E0              1416 	push	acc
-   009F 12 07 75           1417 	lcall	_printf
-   00A2 15 81              1418 	dec	sp
-   00A4 15 81              1419 	dec	sp
-   00A6 15 81              1420 	dec	sp
-                    003A   1421 	C$final.c$65$1$1 ==.
-                           1422 ;	C:\Users\SSP\Documents\Microprocessor Systems\Final\final.c:65: printf("With each revolution, we get one step closer; that's how a drill works.\n\r");
-   00A8 74 DA              1423 	mov	a,#__str_1
-   00AA C0 E0              1424 	push	acc
-   00AC 74 0D              1425 	mov	a,#(__str_1 >> 8)
-   00AE C0 E0              1426 	push	acc
-   00B0 74 80              1427 	mov	a,#0x80
-   00B2 C0 E0              1428 	push	acc
-   00B4 12 07 75           1429 	lcall	_printf
-   00B7 15 81              1430 	dec	sp
-   00B9 15 81              1431 	dec	sp
-   00BB 15 81              1432 	dec	sp
-                    004F   1433 	C$final.c$68$1$1 ==.
-                           1434 ;	C:\Users\SSP\Documents\Microprocessor Systems\Final\final.c:68: while(1)
-   00BD                    1435 00105$:
-                    004F   1436 	C$final.c$70$2$2 ==.
-                           1437 ;	C:\Users\SSP\Documents\Microprocessor Systems\Final\final.c:70: gameStart();
-   00BD 12 01 09           1438 	lcall	_gameStart
-                    0052   1439 	C$final.c$73$2$2 ==.
-                           1440 ;	C:\Users\SSP\Documents\Microprocessor Systems\Final\final.c:73: printf("\033[15;1H");
-   00C0 74 24              1441 	mov	a,#__str_2
+                           1229 	.area IABS    (ABS,DATA)
+                           1230 	.area IABS    (ABS,DATA)
+                           1231 ;--------------------------------------------------------
+                           1232 ; bit data
+                           1233 ;--------------------------------------------------------
+                           1234 	.area BSEG    (BIT)
+                    0000   1235 G$turn$0$0==.
+   0000                    1236 _turn::
+   0000                    1237 	.ds 1
+                    0001   1238 LgetMove$freeMove$1$1==.
+   0001                    1239 _getMove_PARM_1:
+   0001                    1240 	.ds 1
+                           1241 ;--------------------------------------------------------
+                           1242 ; paged external ram data
+                           1243 ;--------------------------------------------------------
+                           1244 	.area PSEG    (PAG,XDATA)
+                           1245 ;--------------------------------------------------------
+                           1246 ; external ram data
+                           1247 ;--------------------------------------------------------
+                           1248 	.area XSEG    (XDATA)
+                    0000   1249 G$board$0$0==.
+   0000                    1250 _board::
+   0000                    1251 	.ds 160
+                           1252 ;--------------------------------------------------------
+                           1253 ; absolute external ram data
+                           1254 ;--------------------------------------------------------
+                           1255 	.area XABS    (ABS,XDATA)
+                           1256 ;--------------------------------------------------------
+                           1257 ; external initialized ram data
+                           1258 ;--------------------------------------------------------
+                           1259 	.area XISEG   (XDATA)
+                           1260 	.area HOME    (CODE)
+                           1261 	.area GSINIT0 (CODE)
+                           1262 	.area GSINIT1 (CODE)
+                           1263 	.area GSINIT2 (CODE)
+                           1264 	.area GSINIT3 (CODE)
+                           1265 	.area GSINIT4 (CODE)
+                           1266 	.area GSINIT5 (CODE)
+                           1267 	.area GSINIT  (CODE)
+                           1268 	.area GSFINAL (CODE)
+                           1269 	.area CSEG    (CODE)
+                           1270 ;--------------------------------------------------------
+                           1271 ; interrupt vector 
+                           1272 ;--------------------------------------------------------
+                           1273 	.area HOME    (CODE)
+   0000                    1274 __interrupt_vect:
+   0000 02 00 08           1275 	ljmp	__sdcc_gsinit_startup
+                           1276 ;--------------------------------------------------------
+                           1277 ; global & static initialisations
+                           1278 ;--------------------------------------------------------
+                           1279 	.area HOME    (CODE)
+                           1280 	.area GSINIT  (CODE)
+                           1281 	.area GSFINAL (CODE)
+                           1282 	.area GSINIT  (CODE)
+                           1283 	.globl __sdcc_gsinit_startup
+                           1284 	.globl __sdcc_program_startup
+                           1285 	.globl __start__stack
+                           1286 	.globl __mcs51_genXINIT
+                           1287 	.globl __mcs51_genXRAMCLEAR
+                           1288 	.globl __mcs51_genRAMCLEAR
+                    0000   1289 	G$UART0_INIT$0$0 ==.
+                    0000   1290 	C$final.c$47$1$1 ==.
+                           1291 ;	C:\Users\SSP\Documents\Microprocessor Systems\Final\final.c:47: char current = 0;	//current subboard
+   0061 75 08 00           1292 	mov	_current,#0x00
+                    0003   1293 	G$UART0_INIT$0$0 ==.
+                    0003   1294 	C$final.c$46$1$1 ==.
+                           1295 ;	C:\Users\SSP\Documents\Microprocessor Systems\Final\final.c:46: bit turn = 0;		//0 = O, 1 = X
+   0064 C2 00              1296 	clr	_turn
+                           1297 	.area GSFINAL (CODE)
+   0066 02 00 03           1298 	ljmp	__sdcc_program_startup
+                           1299 ;--------------------------------------------------------
+                           1300 ; Home
+                           1301 ;--------------------------------------------------------
+                           1302 	.area HOME    (CODE)
+                           1303 	.area HOME    (CODE)
+   0003                    1304 __sdcc_program_startup:
+   0003 12 00 7C           1305 	lcall	_main
+                           1306 ;	return from main will lock up
+   0006 80 FE              1307 	sjmp .
+                           1308 ;--------------------------------------------------------
+                           1309 ; code
+                           1310 ;--------------------------------------------------------
+                           1311 	.area CSEG    (CODE)
+                           1312 ;------------------------------------------------------------
+                           1313 ;Allocation info for local variables in function 'putchar'
+                           1314 ;------------------------------------------------------------
+                           1315 ;c                         Allocated to registers r2 
+                           1316 ;------------------------------------------------------------
+                    0000   1317 	G$putchar$0$0 ==.
+                    0000   1318 	C$putget.h$18$0$0 ==.
+                           1319 ;	C:\Users\SSP\Documents\Microprocessor Systems\Final\/putget.h:18: void putchar(char c)
+                           1320 ;	-----------------------------------------
+                           1321 ;	 function putchar
+                           1322 ;	-----------------------------------------
+   0069                    1323 _putchar:
+                    0002   1324 	ar2 = 0x02
+                    0003   1325 	ar3 = 0x03
+                    0004   1326 	ar4 = 0x04
+                    0005   1327 	ar5 = 0x05
+                    0006   1328 	ar6 = 0x06
+                    0007   1329 	ar7 = 0x07
+                    0000   1330 	ar0 = 0x00
+                    0001   1331 	ar1 = 0x01
+   0069 AA 82              1332 	mov	r2,dpl
+                    0002   1333 	C$putget.h$20$1$1 ==.
+                           1334 ;	C:\Users\SSP\Documents\Microprocessor Systems\Final\/putget.h:20: while(!TI0); 
+   006B                    1335 00101$:
+                    0002   1336 	C$putget.h$21$1$1 ==.
+                           1337 ;	C:\Users\SSP\Documents\Microprocessor Systems\Final\/putget.h:21: TI0=0;
+   006B 10 99 02           1338 	jbc	_TI0,00108$
+   006E 80 FB              1339 	sjmp	00101$
+   0070                    1340 00108$:
+                    0007   1341 	C$putget.h$22$1$1 ==.
+                           1342 ;	C:\Users\SSP\Documents\Microprocessor Systems\Final\/putget.h:22: SBUF0 = c;
+   0070 8A 99              1343 	mov	_SBUF0,r2
+                    0009   1344 	C$putget.h$23$1$1 ==.
+                    0009   1345 	XG$putchar$0$0 ==.
+   0072 22                 1346 	ret
+                           1347 ;------------------------------------------------------------
+                           1348 ;Allocation info for local variables in function 'getchar'
+                           1349 ;------------------------------------------------------------
+                           1350 ;c                         Allocated to registers 
+                           1351 ;------------------------------------------------------------
+                    000A   1352 	G$getchar$0$0 ==.
+                    000A   1353 	C$putget.h$28$1$1 ==.
+                           1354 ;	C:\Users\SSP\Documents\Microprocessor Systems\Final\/putget.h:28: char getchar(void)
+                           1355 ;	-----------------------------------------
+                           1356 ;	 function getchar
+                           1357 ;	-----------------------------------------
+   0073                    1358 _getchar:
+                    000A   1359 	C$putget.h$31$1$1 ==.
+                           1360 ;	C:\Users\SSP\Documents\Microprocessor Systems\Final\/putget.h:31: while(!RI0);
+   0073                    1361 00101$:
+                    000A   1362 	C$putget.h$32$1$1 ==.
+                           1363 ;	C:\Users\SSP\Documents\Microprocessor Systems\Final\/putget.h:32: RI0 =0;
+   0073 10 98 02           1364 	jbc	_RI0,00108$
+   0076 80 FB              1365 	sjmp	00101$
+   0078                    1366 00108$:
+                    000F   1367 	C$putget.h$33$1$1 ==.
+                           1368 ;	C:\Users\SSP\Documents\Microprocessor Systems\Final\/putget.h:33: c = SBUF0;
+   0078 85 99 82           1369 	mov	dpl,_SBUF0
+                    0012   1370 	C$putget.h$35$1$1 ==.
+                           1371 ;	C:\Users\SSP\Documents\Microprocessor Systems\Final\/putget.h:35: return c;
+                    0012   1372 	C$putget.h$36$1$1 ==.
+                    0012   1373 	XG$getchar$0$0 ==.
+   007B 22                 1374 	ret
+                           1375 ;------------------------------------------------------------
+                           1376 ;Allocation info for local variables in function 'main'
+                           1377 ;------------------------------------------------------------
+                           1378 ;------------------------------------------------------------
+                    0013   1379 	G$main$0$0 ==.
+                    0013   1380 	C$final.c$54$1$1 ==.
+                           1381 ;	C:\Users\SSP\Documents\Microprocessor Systems\Final\final.c:54: void main(void)
+                           1382 ;	-----------------------------------------
+                           1383 ;	 function main
+                           1384 ;	-----------------------------------------
+   007C                    1385 _main:
+                    0013   1386 	C$final.c$56$1$1 ==.
+                           1387 ;	C:\Users\SSP\Documents\Microprocessor Systems\Final\final.c:56: WDTCN = 0xDE;						// Disable the watchdog timer
+   007C 75 FF DE           1388 	mov	_WDTCN,#0xDE
+                    0016   1389 	C$final.c$57$1$1 ==.
+                           1390 ;	C:\Users\SSP\Documents\Microprocessor Systems\Final\final.c:57: WDTCN = 0xAD;						// Note: = "DEAD"!
+   007F 75 FF AD           1391 	mov	_WDTCN,#0xAD
+                    0019   1392 	C$final.c$59$1$1 ==.
+                           1393 ;	C:\Users\SSP\Documents\Microprocessor Systems\Final\final.c:59: SYSCLK_INIT();						// Initialize the oscillator
+   0082 12 0B 34           1394 	lcall	_SYSCLK_INIT
+                    001C   1395 	C$final.c$60$1$1 ==.
+                           1396 ;	C:\Users\SSP\Documents\Microprocessor Systems\Final\final.c:60: PORT_INIT();						// Initialize the Crossbar and GPIO
+   0085 12 0B 57           1397 	lcall	_PORT_INIT
+                    001F   1398 	C$final.c$61$1$1 ==.
+                           1399 ;	C:\Users\SSP\Documents\Microprocessor Systems\Final\final.c:61: UART0_INIT();						// Initialize UART0
+   0088 12 0B 6E           1400 	lcall	_UART0_INIT
+                    0022   1401 	C$final.c$63$1$1 ==.
+                           1402 ;	C:\Users\SSP\Documents\Microprocessor Systems\Final\final.c:63: SFRPAGE = UART0_PAGE;				// Direct output to UART0
+   008B 75 84 00           1403 	mov	_SFRPAGE,#0x00
+                    0025   1404 	C$final.c$65$1$1 ==.
+                           1405 ;	C:\Users\SSP\Documents\Microprocessor Systems\Final\final.c:65: printf("\033[2J");					// Erase ANSI terminal & move cursor to home position
+   008E 74 8C              1406 	mov	a,#__str_0
+   0090 C0 E0              1407 	push	acc
+   0092 74 12              1408 	mov	a,#(__str_0 >> 8)
+   0094 C0 E0              1409 	push	acc
+   0096 74 80              1410 	mov	a,#0x80
+   0098 C0 E0              1411 	push	acc
+   009A 12 0C 2C           1412 	lcall	_printf
+   009D 15 81              1413 	dec	sp
+   009F 15 81              1414 	dec	sp
+   00A1 15 81              1415 	dec	sp
+                    003A   1416 	C$final.c$66$1$1 ==.
+                           1417 ;	C:\Users\SSP\Documents\Microprocessor Systems\Final\final.c:66: printf("With each revolution, we get one step closer; that's how a drill works.\n\r");
+   00A3 74 91              1418 	mov	a,#__str_1
+   00A5 C0 E0              1419 	push	acc
+   00A7 74 12              1420 	mov	a,#(__str_1 >> 8)
+   00A9 C0 E0              1421 	push	acc
+   00AB 74 80              1422 	mov	a,#0x80
+   00AD C0 E0              1423 	push	acc
+   00AF 12 0C 2C           1424 	lcall	_printf
+   00B2 15 81              1425 	dec	sp
+   00B4 15 81              1426 	dec	sp
+   00B6 15 81              1427 	dec	sp
+                    004F   1428 	C$final.c$69$1$1 ==.
+                           1429 ;	C:\Users\SSP\Documents\Microprocessor Systems\Final\final.c:69: while(1)
+   00B8                    1430 00111$:
+                    004F   1431 	C$final.c$71$2$2 ==.
+                           1432 ;	C:\Users\SSP\Documents\Microprocessor Systems\Final\final.c:71: gameStart();
+   00B8 12 01 55           1433 	lcall	_gameStart
+                    0052   1434 	C$final.c$73$3$3 ==.
+                           1435 ;	C:\Users\SSP\Documents\Microprocessor Systems\Final\final.c:73: while(!gameWon())
+   00BB                    1436 00107$:
+   00BB 12 09 1E           1437 	lcall	_gameWon
+   00BE 40 65              1438 	jc	00109$
+                    0057   1439 	C$final.c$76$3$3 ==.
+                           1440 ;	C:\Users\SSP\Documents\Microprocessor Systems\Final\final.c:76: printf("\033[15;1H");
+   00C0 74 DB              1441 	mov	a,#__str_2
    00C2 C0 E0              1442 	push	acc
-   00C4 74 0E              1443 	mov	a,#(__str_2 >> 8)
+   00C4 74 12              1443 	mov	a,#(__str_2 >> 8)
    00C6 C0 E0              1444 	push	acc
    00C8 74 80              1445 	mov	a,#0x80
    00CA C0 E0              1446 	push	acc
-   00CC 12 07 75           1447 	lcall	_printf
+   00CC 12 0C 2C           1447 	lcall	_printf
    00CF 15 81              1448 	dec	sp
    00D1 15 81              1449 	dec	sp
    00D3 15 81              1450 	dec	sp
-                    0067   1451 	C$final.c$74$2$2 ==.
-                           1452 ;	C:\Users\SSP\Documents\Microprocessor Systems\Final\final.c:74: if(turn == 0)
-   00D5 20 01 17           1453 	jb	_turn,00102$
-                    006A   1454 	C$final.c$75$2$2 ==.
-                           1455 ;	C:\Users\SSP\Documents\Microprocessor Systems\Final\final.c:75: printf("O's turn.\n\r");
-   00D8 74 2C              1456 	mov	a,#__str_3
+                    006C   1451 	C$final.c$77$3$3 ==.
+                           1452 ;	C:\Users\SSP\Documents\Microprocessor Systems\Final\final.c:77: if(turn == 0)
+   00D5 20 00 17           1453 	jb	_turn,00102$
+                    006F   1454 	C$final.c$78$3$3 ==.
+                           1455 ;	C:\Users\SSP\Documents\Microprocessor Systems\Final\final.c:78: printf("It is currently O's turn.\n\r");
+   00D8 74 E3              1456 	mov	a,#__str_3
    00DA C0 E0              1457 	push	acc
-   00DC 74 0E              1458 	mov	a,#(__str_3 >> 8)
+   00DC 74 12              1458 	mov	a,#(__str_3 >> 8)
    00DE C0 E0              1459 	push	acc
    00E0 74 80              1460 	mov	a,#0x80
    00E2 C0 E0              1461 	push	acc
-   00E4 12 07 75           1462 	lcall	_printf
+   00E4 12 0C 2C           1462 	lcall	_printf
    00E7 15 81              1463 	dec	sp
    00E9 15 81              1464 	dec	sp
    00EB 15 81              1465 	dec	sp
    00ED 80 15              1466 	sjmp	00103$
    00EF                    1467 00102$:
-                    0081   1468 	C$final.c$77$2$2 ==.
-                           1469 ;	C:\Users\SSP\Documents\Microprocessor Systems\Final\final.c:77: printf("X's turn.\n\r");
-   00EF 74 38              1470 	mov	a,#__str_4
+                    0086   1468 	C$final.c$80$3$3 ==.
+                           1469 ;	C:\Users\SSP\Documents\Microprocessor Systems\Final\final.c:80: printf("It is currently X's turn.\n\r");
+   00EF 74 FF              1470 	mov	a,#__str_4
    00F1 C0 E0              1471 	push	acc
-   00F3 74 0E              1472 	mov	a,#(__str_4 >> 8)
+   00F3 74 12              1472 	mov	a,#(__str_4 >> 8)
    00F5 C0 E0              1473 	push	acc
    00F7 74 80              1474 	mov	a,#0x80
    00F9 C0 E0              1475 	push	acc
-   00FB 12 07 75           1476 	lcall	_printf
+   00FB 12 0C 2C           1476 	lcall	_printf
    00FE 15 81              1477 	dec	sp
    0100 15 81              1478 	dec	sp
    0102 15 81              1479 	dec	sp
    0104                    1480 00103$:
-                    0096   1481 	C$final.c$78$2$2 ==.
-                           1482 ;	C:\Users\SSP\Documents\Microprocessor Systems\Final\final.c:78: getchar();
-   0104 12 00 78           1483 	lcall	_getchar
-                    0099   1484 	C$final.c$80$1$1 ==.
-                    0099   1485 	XG$main$0$0 ==.
-   0107 80 B4              1486 	sjmp	00105$
-                           1487 ;------------------------------------------------------------
-                           1488 ;Allocation info for local variables in function 'gameStart'
-                           1489 ;------------------------------------------------------------
-                           1490 ;i                         Allocated to registers r2 r3 
-                           1491 ;j                         Allocated to registers r4 r5 
-                           1492 ;------------------------------------------------------------
-                    009B   1493 	G$gameStart$0$0 ==.
-                    009B   1494 	C$final.c$83$1$1 ==.
-                           1495 ;	C:\Users\SSP\Documents\Microprocessor Systems\Final\final.c:83: void gameStart(void)
-                           1496 ;	-----------------------------------------
-                           1497 ;	 function gameStart
-                           1498 ;	-----------------------------------------
-   0109                    1499 _gameStart:
-                    009B   1500 	C$final.c$89$1$1 ==.
-                           1501 ;	C:\Users\SSP\Documents\Microprocessor Systems\Final\final.c:89: for(i=0; i<10; i++)
-   0109 7A 00              1502 	mov	r2,#0x00
-   010B 7B 00              1503 	mov	r3,#0x00
-   010D                    1504 00105$:
-   010D C3                 1505 	clr	c
-   010E EA                 1506 	mov	a,r2
-   010F 94 0A              1507 	subb	a,#0x0A
-   0111 EB                 1508 	mov	a,r3
-   0112 64 80              1509 	xrl	a,#0x80
-   0114 94 80              1510 	subb	a,#0x80
-   0116 50 40              1511 	jnc	00108$
-                    00AA   1512 	C$final.c$91$2$2 ==.
-                           1513 ;	C:\Users\SSP\Documents\Microprocessor Systems\Final\final.c:91: for(j=0; j<9; j++)
-   0118 7C 00              1514 	mov	r4,#0x00
-   011A 7D 00              1515 	mov	r5,#0x00
-   011C 8A 06              1516 	mov	ar6,r2
-   011E EB                 1517 	mov	a,r3
-   011F C4                 1518 	swap	a
-   0120 54 F0              1519 	anl	a,#0xf0
-   0122 CE                 1520 	xch	a,r6
-   0123 C4                 1521 	swap	a
-   0124 CE                 1522 	xch	a,r6
-   0125 6E                 1523 	xrl	a,r6
-   0126 CE                 1524 	xch	a,r6
-   0127 54 F0              1525 	anl	a,#0xf0
-   0129 CE                 1526 	xch	a,r6
-   012A 6E                 1527 	xrl	a,r6
-   012B FF                 1528 	mov	r7,a
-   012C EE                 1529 	mov	a,r6
-   012D 24 00              1530 	add	a,#_board
-   012F FE                 1531 	mov	r6,a
-   0130 EF                 1532 	mov	a,r7
-   0131 34 00              1533 	addc	a,#(_board >> 8)
-   0133 FF                 1534 	mov	r7,a
-   0134                    1535 00101$:
-   0134 C3                 1536 	clr	c
-   0135 EC                 1537 	mov	a,r4
-   0136 94 09              1538 	subb	a,#0x09
-   0138 ED                 1539 	mov	a,r5
-   0139 64 80              1540 	xrl	a,#0x80
-   013B 94 80              1541 	subb	a,#0x80
-   013D 50 12              1542 	jnc	00107$
-                    00D1   1543 	C$final.c$93$3$3 ==.
-                           1544 ;	C:\Users\SSP\Documents\Microprocessor Systems\Final\final.c:93: board[i][j] = ' ';
-   013F EC                 1545 	mov	a,r4
-   0140 2E                 1546 	add	a,r6
-   0141 F5 82              1547 	mov	dpl,a
-   0143 ED                 1548 	mov	a,r5
-   0144 3F                 1549 	addc	a,r7
-   0145 F5 83              1550 	mov	dph,a
-   0147 74 20              1551 	mov	a,#0x20
-   0149 F0                 1552 	movx	@dptr,a
-                    00DC   1553 	C$final.c$91$2$2 ==.
-                           1554 ;	C:\Users\SSP\Documents\Microprocessor Systems\Final\final.c:91: for(j=0; j<9; j++)
-   014A 0C                 1555 	inc	r4
-   014B BC 00 E6           1556 	cjne	r4,#0x00,00101$
-   014E 0D                 1557 	inc	r5
-   014F 80 E3              1558 	sjmp	00101$
-   0151                    1559 00107$:
-                    00E3   1560 	C$final.c$89$1$1 ==.
-                           1561 ;	C:\Users\SSP\Documents\Microprocessor Systems\Final\final.c:89: for(i=0; i<10; i++)
-   0151 0A                 1562 	inc	r2
-   0152 BA 00 B8           1563 	cjne	r2,#0x00,00105$
-   0155 0B                 1564 	inc	r3
-   0156 80 B5              1565 	sjmp	00105$
-   0158                    1566 00108$:
-                    00EA   1567 	C$final.c$98$1$1 ==.
-                           1568 ;	C:\Users\SSP\Documents\Microprocessor Systems\Final\final.c:98: printBoard();
-                    00EA   1569 	C$final.c$99$1$1 ==.
-                    00EA   1570 	XG$gameStart$0$0 ==.
-   0158 02 01 5B           1571 	ljmp	_printBoard
-                           1572 ;------------------------------------------------------------
-                           1573 ;Allocation info for local variables in function 'printBoard'
-                           1574 ;------------------------------------------------------------
-                           1575 ;i                         Allocated to registers r2 r3 
-                           1576 ;------------------------------------------------------------
-                    00ED   1577 	G$printBoard$0$0 ==.
-                    00ED   1578 	C$final.c$101$1$1 ==.
-                           1579 ;	C:\Users\SSP\Documents\Microprocessor Systems\Final\final.c:101: void printBoard(void)
-                           1580 ;	-----------------------------------------
-                           1581 ;	 function printBoard
-                           1582 ;	-----------------------------------------
-   015B                    1583 _printBoard:
-                    00ED   1584 	C$final.c$105$1$1 ==.
-                           1585 ;	C:\Users\SSP\Documents\Microprocessor Systems\Final\final.c:105: printf("\033[3;1H");
-   015B 74 44              1586 	mov	a,#__str_5
-   015D C0 E0              1587 	push	acc
-   015F 74 0E              1588 	mov	a,#(__str_5 >> 8)
-   0161 C0 E0              1589 	push	acc
-   0163 74 80              1590 	mov	a,#0x80
-   0165 C0 E0              1591 	push	acc
-   0167 12 07 75           1592 	lcall	_printf
-   016A 15 81              1593 	dec	sp
-   016C 15 81              1594 	dec	sp
-   016E 15 81              1595 	dec	sp
-                    0102   1596 	C$final.c$108$1$1 ==.
-                           1597 ;	C:\Users\SSP\Documents\Microprocessor Systems\Final\final.c:108: for(i=0; i<11; i++)
-   0170 7A 00              1598 	mov	r2,#0x00
-   0172 7B 00              1599 	mov	r3,#0x00
-   0174 8A 04              1600 	mov	ar4,r2
-   0176 8B 05              1601 	mov	ar5,r3
-   0178                    1602 00105$:
-   0178 C3                 1603 	clr	c
-   0179 EC                 1604 	mov	a,r4
-   017A 94 0B              1605 	subb	a,#0x0B
-   017C ED                 1606 	mov	a,r5
-   017D 64 80              1607 	xrl	a,#0x80
-   017F 94 80              1608 	subb	a,#0x80
-   0181 50 51              1609 	jnc	00108$
-                    0115   1610 	C$final.c$110$2$2 ==.
-                           1611 ;	C:\Users\SSP\Documents\Microprocessor Systems\Final\final.c:110: if(i==3 || i==7)
-   0183 BC 03 05           1612 	cjne	r4,#0x03,00123$
-   0186 BD 00 02           1613 	cjne	r5,#0x00,00123$
-   0189 80 06              1614 	sjmp	00101$
-   018B                    1615 00123$:
-   018B BC 07 22           1616 	cjne	r4,#0x07,00102$
-   018E BD 00 1F           1617 	cjne	r5,#0x00,00102$
-   0191                    1618 00101$:
-                    0123   1619 	C$final.c$111$2$2 ==.
-                           1620 ;	C:\Users\SSP\Documents\Microprocessor Systems\Final\final.c:111: printf("-----|-----|-----\n\r");
-   0191 C0 04              1621 	push	ar4
-   0193 C0 05              1622 	push	ar5
-   0195 74 4B              1623 	mov	a,#__str_6
-   0197 C0 E0              1624 	push	acc
-   0199 74 0E              1625 	mov	a,#(__str_6 >> 8)
-   019B C0 E0              1626 	push	acc
-   019D 74 80              1627 	mov	a,#0x80
-   019F C0 E0              1628 	push	acc
-   01A1 12 07 75           1629 	lcall	_printf
-   01A4 15 81              1630 	dec	sp
-   01A6 15 81              1631 	dec	sp
-   01A8 15 81              1632 	dec	sp
-   01AA D0 05              1633 	pop	ar5
-   01AC D0 04              1634 	pop	ar4
-   01AE 80 1D              1635 	sjmp	00107$
-   01B0                    1636 00102$:
-                    0142   1637 	C$final.c$113$2$2 ==.
-                           1638 ;	C:\Users\SSP\Documents\Microprocessor Systems\Final\final.c:113: printf("     |     |     \n\r");
-   01B0 C0 04              1639 	push	ar4
-   01B2 C0 05              1640 	push	ar5
-   01B4 74 5F              1641 	mov	a,#__str_7
-   01B6 C0 E0              1642 	push	acc
-   01B8 74 0E              1643 	mov	a,#(__str_7 >> 8)
-   01BA C0 E0              1644 	push	acc
-   01BC 74 80              1645 	mov	a,#0x80
-   01BE C0 E0              1646 	push	acc
-   01C0 12 07 75           1647 	lcall	_printf
-   01C3 15 81              1648 	dec	sp
-   01C5 15 81              1649 	dec	sp
-   01C7 15 81              1650 	dec	sp
-   01C9 D0 05              1651 	pop	ar5
-   01CB D0 04              1652 	pop	ar4
-   01CD                    1653 00107$:
-                    015F   1654 	C$final.c$108$1$1 ==.
-                           1655 ;	C:\Users\SSP\Documents\Microprocessor Systems\Final\final.c:108: for(i=0; i<11; i++)
-   01CD 0C                 1656 	inc	r4
-   01CE BC 00 A7           1657 	cjne	r4,#0x00,00105$
-   01D1 0D                 1658 	inc	r5
-   01D2 80 A4              1659 	sjmp	00105$
-   01D4                    1660 00108$:
-                    0166   1661 	C$final.c$116$1$1 ==.
-                           1662 ;	C:\Users\SSP\Documents\Microprocessor Systems\Final\final.c:116: for(i=0; i<9; i++)
-   01D4 7A 00              1663 	mov	r2,#0x00
-   01D6 7B 00              1664 	mov	r3,#0x00
-   01D8                    1665 00109$:
-   01D8 C3                 1666 	clr	c
-   01D9 EA                 1667 	mov	a,r2
-   01DA 94 09              1668 	subb	a,#0x09
-   01DC EB                 1669 	mov	a,r3
-   01DD 64 80              1670 	xrl	a,#0x80
-   01DF 94 80              1671 	subb	a,#0x80
-   01E1 50 16              1672 	jnc	00113$
-                    0175   1673 	C$final.c$117$1$1 ==.
-                           1674 ;	C:\Users\SSP\Documents\Microprocessor Systems\Final\final.c:117: printSubBoard(i);
-   01E3 8A 82              1675 	mov	dpl,r2
-   01E5 8B 83              1676 	mov	dph,r3
-   01E7 C0 02              1677 	push	ar2
-   01E9 C0 03              1678 	push	ar3
-   01EB 12 01 FA           1679 	lcall	_printSubBoard
-   01EE D0 03              1680 	pop	ar3
-   01F0 D0 02              1681 	pop	ar2
-                    0184   1682 	C$final.c$116$1$1 ==.
-                           1683 ;	C:\Users\SSP\Documents\Microprocessor Systems\Final\final.c:116: for(i=0; i<9; i++)
-   01F2 0A                 1684 	inc	r2
-   01F3 BA 00 E2           1685 	cjne	r2,#0x00,00109$
-   01F6 0B                 1686 	inc	r3
-   01F7 80 DF              1687 	sjmp	00109$
-   01F9                    1688 00113$:
-                    018B   1689 	C$final.c$118$1$1 ==.
-                    018B   1690 	XG$printBoard$0$0 ==.
-   01F9 22                 1691 	ret
-                           1692 ;------------------------------------------------------------
-                           1693 ;Allocation info for local variables in function 'printSubBoard'
-                           1694 ;------------------------------------------------------------
-                           1695 ;pos                       Allocated to registers r2 r3 
-                           1696 ;i                         Allocated to registers r4 r5 
-                           1697 ;sloc0                     Allocated with name '_printSubBoard_sloc0_1_0'
-                           1698 ;sloc1                     Allocated with name '_printSubBoard_sloc1_1_0'
-                           1699 ;------------------------------------------------------------
-                    018C   1700 	G$printSubBoard$0$0 ==.
-                    018C   1701 	C$final.c$120$1$1 ==.
-                           1702 ;	C:\Users\SSP\Documents\Microprocessor Systems\Final\final.c:120: void printSubBoard(int pos)
-                           1703 ;	-----------------------------------------
-                           1704 ;	 function printSubBoard
-                           1705 ;	-----------------------------------------
-   01FA                    1706 _printSubBoard:
-   01FA AA 82              1707 	mov	r2,dpl
-   01FC AB 83              1708 	mov	r3,dph
-                    0190   1709 	C$final.c$123$1$1 ==.
-                           1710 ;	C:\Users\SSP\Documents\Microprocessor Systems\Final\final.c:123: printf("\033[%d;%dH", startRow[pos/3], startCol[pos%3]);
-   01FE 75 10 03           1711 	mov	__modsint_PARM_2,#0x03
-   0201 E4                 1712 	clr	a
-   0202 F5 11              1713 	mov	(__modsint_PARM_2 + 1),a
-   0204 8A 82              1714 	mov	dpl,r2
-   0206 8B 83              1715 	mov	dph,r3
-   0208 C0 02              1716 	push	ar2
-   020A C0 03              1717 	push	ar3
-   020C 12 0D 57           1718 	lcall	__modsint
-   020F AC 82              1719 	mov	r4,dpl
-   0211 AD 83              1720 	mov	r5,dph
-   0213 D0 03              1721 	pop	ar3
-   0215 D0 02              1722 	pop	ar2
-   0217 ED                 1723 	mov	a,r5
-   0218 CC                 1724 	xch	a,r4
-   0219 25 E0              1725 	add	a,acc
-   021B CC                 1726 	xch	a,r4
-   021C 33                 1727 	rlc	a
-   021D FD                 1728 	mov	r5,a
-   021E EC                 1729 	mov	a,r4
-   021F 24 CF              1730 	add	a,#_startCol
-   0221 F5 82              1731 	mov	dpl,a
-   0223 ED                 1732 	mov	a,r5
-   0224 34 0D              1733 	addc	a,#(_startCol >> 8)
-   0226 F5 83              1734 	mov	dph,a
-   0228 E4                 1735 	clr	a
-   0229 93                 1736 	movc	a,@a+dptr
-   022A FC                 1737 	mov	r4,a
-   022B A3                 1738 	inc	dptr
-   022C E4                 1739 	clr	a
-   022D 93                 1740 	movc	a,@a+dptr
-   022E FD                 1741 	mov	r5,a
-   022F 75 10 03           1742 	mov	__divsint_PARM_2,#0x03
-   0232 E4                 1743 	clr	a
-   0233 F5 11              1744 	mov	(__divsint_PARM_2 + 1),a
-   0235 8A 82              1745 	mov	dpl,r2
-   0237 8B 83              1746 	mov	dph,r3
-   0239 C0 02              1747 	push	ar2
-   023B C0 03              1748 	push	ar3
-   023D C0 04              1749 	push	ar4
-   023F C0 05              1750 	push	ar5
-   0241 12 0D 8D           1751 	lcall	__divsint
-   0244 AE 82              1752 	mov	r6,dpl
-   0246 E5 83              1753 	mov	a,dph
-   0248 CE                 1754 	xch	a,r6
-   0249 25 E0              1755 	add	a,acc
-   024B CE                 1756 	xch	a,r6
-   024C 33                 1757 	rlc	a
-   024D FF                 1758 	mov	r7,a
-   024E EE                 1759 	mov	a,r6
-   024F 24 C9              1760 	add	a,#_startRow
-   0251 F5 82              1761 	mov	dpl,a
-   0253 EF                 1762 	mov	a,r7
-   0254 34 0D              1763 	addc	a,#(_startRow >> 8)
-   0256 F5 83              1764 	mov	dph,a
-   0258 E4                 1765 	clr	a
-   0259 93                 1766 	movc	a,@a+dptr
-   025A FE                 1767 	mov	r6,a
-   025B A3                 1768 	inc	dptr
-   025C E4                 1769 	clr	a
-   025D 93                 1770 	movc	a,@a+dptr
-   025E FF                 1771 	mov	r7,a
-   025F C0 06              1772 	push	ar6
-   0261 C0 07              1773 	push	ar7
-   0263 74 73              1774 	mov	a,#__str_8
-   0265 C0 E0              1775 	push	acc
-   0267 74 0E              1776 	mov	a,#(__str_8 >> 8)
-   0269 C0 E0              1777 	push	acc
-   026B 74 80              1778 	mov	a,#0x80
-   026D C0 E0              1779 	push	acc
-   026F 12 07 75           1780 	lcall	_printf
-   0272 E5 81              1781 	mov	a,sp
-   0274 24 F9              1782 	add	a,#0xf9
-   0276 F5 81              1783 	mov	sp,a
-   0278 D0 03              1784 	pop	ar3
-   027A D0 02              1785 	pop	ar2
-                    020E   1786 	C$final.c$125$1$1 ==.
-                           1787 ;	C:\Users\SSP\Documents\Microprocessor Systems\Final\final.c:125: if(board[9][pos] == 'X')
-   027C EA                 1788 	mov	a,r2
-   027D 24 90              1789 	add	a,#(_board + 0x0090)
-   027F F5 82              1790 	mov	dpl,a
-   0281 EB                 1791 	mov	a,r3
-   0282 34 00              1792 	addc	a,#((_board + 0x0090) >> 8)
-   0284 F5 83              1793 	mov	dph,a
-   0286 E0                 1794 	movx	a,@dptr
-   0287 FC                 1795 	mov	r4,a
-   0288 BC 58 02           1796 	cjne	r4,#0x58,00124$
-   028B 80 03              1797 	sjmp	00125$
-   028D                    1798 00124$:
-   028D 02 03 8A           1799 	ljmp	00109$
-   0290                    1800 00125$:
-                    0222   1801 	C$final.c$127$2$2 ==.
-                           1802 ;	C:\Users\SSP\Documents\Microprocessor Systems\Final\final.c:127: printf("X  X");
-   0290 C0 02              1803 	push	ar2
-   0292 C0 03              1804 	push	ar3
-   0294 74 7C              1805 	mov	a,#__str_9
-   0296 C0 E0              1806 	push	acc
-   0298 74 0E              1807 	mov	a,#(__str_9 >> 8)
-   029A C0 E0              1808 	push	acc
-   029C 74 80              1809 	mov	a,#0x80
-   029E C0 E0              1810 	push	acc
-   02A0 12 07 75           1811 	lcall	_printf
-   02A3 15 81              1812 	dec	sp
-   02A5 15 81              1813 	dec	sp
-   02A7 15 81              1814 	dec	sp
-   02A9 D0 03              1815 	pop	ar3
-   02AB D0 02              1816 	pop	ar2
-                    023F   1817 	C$final.c$128$2$2 ==.
-                           1818 ;	C:\Users\SSP\Documents\Microprocessor Systems\Final\final.c:128: printf("\033[%d;%dH XX ", startRow[pos/3]+1, startCol[pos%3]);
-   02AD 75 10 03           1819 	mov	__modsint_PARM_2,#0x03
-   02B0 E4                 1820 	clr	a
-   02B1 F5 11              1821 	mov	(__modsint_PARM_2 + 1),a
-   02B3 8A 82              1822 	mov	dpl,r2
-   02B5 8B 83              1823 	mov	dph,r3
-   02B7 C0 02              1824 	push	ar2
-   02B9 C0 03              1825 	push	ar3
-   02BB 12 0D 57           1826 	lcall	__modsint
-   02BE AC 82              1827 	mov	r4,dpl
-   02C0 AD 83              1828 	mov	r5,dph
-   02C2 D0 03              1829 	pop	ar3
-   02C4 D0 02              1830 	pop	ar2
-   02C6 ED                 1831 	mov	a,r5
-   02C7 CC                 1832 	xch	a,r4
-   02C8 25 E0              1833 	add	a,acc
-   02CA CC                 1834 	xch	a,r4
-   02CB 33                 1835 	rlc	a
-   02CC FD                 1836 	mov	r5,a
-   02CD EC                 1837 	mov	a,r4
-   02CE 24 CF              1838 	add	a,#_startCol
-   02D0 F5 82              1839 	mov	dpl,a
-   02D2 ED                 1840 	mov	a,r5
-   02D3 34 0D              1841 	addc	a,#(_startCol >> 8)
-   02D5 F5 83              1842 	mov	dph,a
-   02D7 E4                 1843 	clr	a
-   02D8 93                 1844 	movc	a,@a+dptr
-   02D9 F5 0A              1845 	mov	_printSubBoard_sloc0_1_0,a
-   02DB A3                 1846 	inc	dptr
-   02DC E4                 1847 	clr	a
-   02DD 93                 1848 	movc	a,@a+dptr
-   02DE F5 0B              1849 	mov	(_printSubBoard_sloc0_1_0 + 1),a
-   02E0 75 10 03           1850 	mov	__divsint_PARM_2,#0x03
-   02E3 E4                 1851 	clr	a
-   02E4 F5 11              1852 	mov	(__divsint_PARM_2 + 1),a
-   02E6 8A 82              1853 	mov	dpl,r2
-   02E8 8B 83              1854 	mov	dph,r3
-   02EA C0 04              1855 	push	ar4
-   02EC C0 05              1856 	push	ar5
-   02EE 12 0D 8D           1857 	lcall	__divsint
-   02F1 A8 82              1858 	mov	r0,dpl
-   02F3 A9 83              1859 	mov	r1,dph
-   02F5 D0 05              1860 	pop	ar5
-   02F7 D0 04              1861 	pop	ar4
-   02F9 E9                 1862 	mov	a,r1
-   02FA C8                 1863 	xch	a,r0
-   02FB 25 E0              1864 	add	a,acc
-   02FD C8                 1865 	xch	a,r0
-   02FE 33                 1866 	rlc	a
-   02FF F9                 1867 	mov	r1,a
-   0300 E8                 1868 	mov	a,r0
-   0301 24 C9              1869 	add	a,#_startRow
-   0303 F5 82              1870 	mov	dpl,a
-   0305 E9                 1871 	mov	a,r1
-   0306 34 0D              1872 	addc	a,#(_startRow >> 8)
-   0308 F5 83              1873 	mov	dph,a
-   030A E4                 1874 	clr	a
-   030B 93                 1875 	movc	a,@a+dptr
-   030C FE                 1876 	mov	r6,a
-   030D A3                 1877 	inc	dptr
-   030E E4                 1878 	clr	a
-   030F 93                 1879 	movc	a,@a+dptr
-   0310 FF                 1880 	mov	r7,a
-   0311 0E                 1881 	inc	r6
-   0312 BE 00 01           1882 	cjne	r6,#0x00,00126$
-   0315 0F                 1883 	inc	r7
-   0316                    1884 00126$:
-   0316 C0 04              1885 	push	ar4
-   0318 C0 05              1886 	push	ar5
-   031A C0 00              1887 	push	ar0
-   031C C0 01              1888 	push	ar1
-   031E C0 0A              1889 	push	_printSubBoard_sloc0_1_0
-   0320 C0 0B              1890 	push	(_printSubBoard_sloc0_1_0 + 1)
-   0322 C0 06              1891 	push	ar6
-   0324 C0 07              1892 	push	ar7
-   0326 74 81              1893 	mov	a,#__str_10
-   0328 C0 E0              1894 	push	acc
-   032A 74 0E              1895 	mov	a,#(__str_10 >> 8)
-   032C C0 E0              1896 	push	acc
-   032E 74 80              1897 	mov	a,#0x80
-   0330 C0 E0              1898 	push	acc
-   0332 12 07 75           1899 	lcall	_printf
-   0335 E5 81              1900 	mov	a,sp
-   0337 24 F9              1901 	add	a,#0xf9
-   0339 F5 81              1902 	mov	sp,a
-   033B D0 01              1903 	pop	ar1
-   033D D0 00              1904 	pop	ar0
-   033F D0 05              1905 	pop	ar5
-   0341 D0 04              1906 	pop	ar4
-                    02D5   1907 	C$final.c$129$2$2 ==.
-                           1908 ;	C:\Users\SSP\Documents\Microprocessor Systems\Final\final.c:129: printf("\033[%d;%dHX  X", startRow[pos/3]+2, startCol[pos%3]);
-   0343 EC                 1909 	mov	a,r4
-   0344 24 CF              1910 	add	a,#_startCol
-   0346 F5 82              1911 	mov	dpl,a
-   0348 ED                 1912 	mov	a,r5
-   0349 34 0D              1913 	addc	a,#(_startCol >> 8)
-   034B F5 83              1914 	mov	dph,a
-   034D E4                 1915 	clr	a
-   034E 93                 1916 	movc	a,@a+dptr
-   034F FC                 1917 	mov	r4,a
-   0350 A3                 1918 	inc	dptr
-   0351 E4                 1919 	clr	a
-   0352 93                 1920 	movc	a,@a+dptr
-   0353 FD                 1921 	mov	r5,a
-   0354 E8                 1922 	mov	a,r0
-   0355 24 C9              1923 	add	a,#_startRow
-   0357 F5 82              1924 	mov	dpl,a
-   0359 E9                 1925 	mov	a,r1
-   035A 34 0D              1926 	addc	a,#(_startRow >> 8)
-   035C F5 83              1927 	mov	dph,a
-   035E E4                 1928 	clr	a
-   035F 93                 1929 	movc	a,@a+dptr
-   0360 FE                 1930 	mov	r6,a
-   0361 A3                 1931 	inc	dptr
-   0362 E4                 1932 	clr	a
-   0363 93                 1933 	movc	a,@a+dptr
-   0364 FF                 1934 	mov	r7,a
-   0365 74 02              1935 	mov	a,#0x02
-   0367 2E                 1936 	add	a,r6
-   0368 FE                 1937 	mov	r6,a
-   0369 E4                 1938 	clr	a
-   036A 3F                 1939 	addc	a,r7
-   036B FF                 1940 	mov	r7,a
-   036C C0 04              1941 	push	ar4
-   036E C0 05              1942 	push	ar5
-   0370 C0 06              1943 	push	ar6
-   0372 C0 07              1944 	push	ar7
-   0374 74 8E              1945 	mov	a,#__str_11
-   0376 C0 E0              1946 	push	acc
-   0378 74 0E              1947 	mov	a,#(__str_11 >> 8)
-   037A C0 E0              1948 	push	acc
-   037C 74 80              1949 	mov	a,#0x80
-   037E C0 E0              1950 	push	acc
-   0380 12 07 75           1951 	lcall	_printf
-   0383 E5 81              1952 	mov	a,sp
-   0385 24 F9              1953 	add	a,#0xf9
-   0387 F5 81              1954 	mov	sp,a
-   0389 22                 1955 	ret
-   038A                    1956 00109$:
-                    031C   1957 	C$final.c$131$1$1 ==.
-                           1958 ;	C:\Users\SSP\Documents\Microprocessor Systems\Final\final.c:131: else if (board[9][pos] == 'O')
-   038A EA                 1959 	mov	a,r2
-   038B 24 90              1960 	add	a,#(_board + 0x0090)
-   038D F5 82              1961 	mov	dpl,a
-   038F EB                 1962 	mov	a,r3
-   0390 34 00              1963 	addc	a,#((_board + 0x0090) >> 8)
-   0392 F5 83              1964 	mov	dph,a
-   0394 E0                 1965 	movx	a,@dptr
-   0395 FC                 1966 	mov	r4,a
-   0396 BC 4F 02           1967 	cjne	r4,#0x4F,00127$
-   0399 80 03              1968 	sjmp	00128$
-   039B                    1969 00127$:
-   039B 02 04 98           1970 	ljmp	00106$
-   039E                    1971 00128$:
-                    0330   1972 	C$final.c$133$2$3 ==.
-                           1973 ;	C:\Users\SSP\Documents\Microprocessor Systems\Final\final.c:133: printf(" OO ");
-   039E C0 02              1974 	push	ar2
-   03A0 C0 03              1975 	push	ar3
-   03A2 74 9B              1976 	mov	a,#__str_12
-   03A4 C0 E0              1977 	push	acc
-   03A6 74 0E              1978 	mov	a,#(__str_12 >> 8)
+                    009B   1481 	C$final.c$82$3$3 ==.
+                           1482 ;	C:\Users\SSP\Documents\Microprocessor Systems\Final\final.c:82: if(board[9][current] == ' ')
+   0104 E5 08              1483 	mov	a,_current
+   0106 24 90              1484 	add	a,#(_board + 0x0090)
+   0108 F5 82              1485 	mov	dpl,a
+   010A E4                 1486 	clr	a
+   010B 34 00              1487 	addc	a,#((_board + 0x0090) >> 8)
+   010D F5 83              1488 	mov	dph,a
+   010F E0                 1489 	movx	a,@dptr
+   0110 FA                 1490 	mov	r2,a
+   0111 BA 20 07           1491 	cjne	r2,#0x20,00105$
+                    00AB   1492 	C$final.c$83$3$3 ==.
+                           1493 ;	C:\Users\SSP\Documents\Microprocessor Systems\Final\final.c:83: getMove(0);
+   0114 C2 01              1494 	clr	_getMove_PARM_1
+   0116 12 09 71           1495 	lcall	_getMove
+   0119 80 05              1496 	sjmp	00106$
+   011B                    1497 00105$:
+                    00B2   1498 	C$final.c$85$3$3 ==.
+                           1499 ;	C:\Users\SSP\Documents\Microprocessor Systems\Final\final.c:85: getMove(1);
+   011B D2 01              1500 	setb	_getMove_PARM_1
+   011D 12 09 71           1501 	lcall	_getMove
+   0120                    1502 00106$:
+                    00B7   1503 	C$final.c$87$3$3 ==.
+                           1504 ;	C:\Users\SSP\Documents\Microprocessor Systems\Final\final.c:87: printBoard();
+   0120 12 01 DB           1505 	lcall	_printBoard
+   0123 80 96              1506 	sjmp	00107$
+   0125                    1507 00109$:
+                    00BC   1508 	C$final.c$90$2$2 ==.
+                           1509 ;	C:\Users\SSP\Documents\Microprocessor Systems\Final\final.c:90: printf("\033[16;1H");
+   0125 74 1B              1510 	mov	a,#__str_5
+   0127 C0 E0              1511 	push	acc
+   0129 74 13              1512 	mov	a,#(__str_5 >> 8)
+   012B C0 E0              1513 	push	acc
+   012D 74 80              1514 	mov	a,#0x80
+   012F C0 E0              1515 	push	acc
+   0131 12 0C 2C           1516 	lcall	_printf
+   0134 15 81              1517 	dec	sp
+   0136 15 81              1518 	dec	sp
+   0138 15 81              1519 	dec	sp
+                    00D1   1520 	C$final.c$91$2$2 ==.
+                           1521 ;	C:\Users\SSP\Documents\Microprocessor Systems\Final\final.c:91: printf("Press any key to play again");
+   013A 74 23              1522 	mov	a,#__str_6
+   013C C0 E0              1523 	push	acc
+   013E 74 13              1524 	mov	a,#(__str_6 >> 8)
+   0140 C0 E0              1525 	push	acc
+   0142 74 80              1526 	mov	a,#0x80
+   0144 C0 E0              1527 	push	acc
+   0146 12 0C 2C           1528 	lcall	_printf
+   0149 15 81              1529 	dec	sp
+   014B 15 81              1530 	dec	sp
+   014D 15 81              1531 	dec	sp
+                    00E6   1532 	C$final.c$92$2$2 ==.
+                           1533 ;	C:\Users\SSP\Documents\Microprocessor Systems\Final\final.c:92: getchar();
+   014F 12 00 73           1534 	lcall	_getchar
+                    00E9   1535 	C$final.c$94$1$1 ==.
+                    00E9   1536 	XG$main$0$0 ==.
+   0152 02 00 B8           1537 	ljmp	00111$
+                           1538 ;------------------------------------------------------------
+                           1539 ;Allocation info for local variables in function 'gameStart'
+                           1540 ;------------------------------------------------------------
+                           1541 ;i                         Allocated to registers r2 r3 
+                           1542 ;j                         Allocated to registers r4 r5 
+                           1543 ;------------------------------------------------------------
+                    00EC   1544 	G$gameStart$0$0 ==.
+                    00EC   1545 	C$final.c$97$1$1 ==.
+                           1546 ;	C:\Users\SSP\Documents\Microprocessor Systems\Final\final.c:97: void gameStart(void)
+                           1547 ;	-----------------------------------------
+                           1548 ;	 function gameStart
+                           1549 ;	-----------------------------------------
+   0155                    1550 _gameStart:
+                    00EC   1551 	C$final.c$103$1$1 ==.
+                           1552 ;	C:\Users\SSP\Documents\Microprocessor Systems\Final\final.c:103: for(i=0; i<10; i++)
+   0155 7A 00              1553 	mov	r2,#0x00
+   0157 7B 00              1554 	mov	r3,#0x00
+   0159                    1555 00105$:
+   0159 C3                 1556 	clr	c
+   015A EA                 1557 	mov	a,r2
+   015B 94 0A              1558 	subb	a,#0x0A
+   015D EB                 1559 	mov	a,r3
+   015E 64 80              1560 	xrl	a,#0x80
+   0160 94 80              1561 	subb	a,#0x80
+   0162 50 40              1562 	jnc	00108$
+                    00FB   1563 	C$final.c$105$2$2 ==.
+                           1564 ;	C:\Users\SSP\Documents\Microprocessor Systems\Final\final.c:105: for(j=0; j<9; j++)
+   0164 7C 00              1565 	mov	r4,#0x00
+   0166 7D 00              1566 	mov	r5,#0x00
+   0168 8A 06              1567 	mov	ar6,r2
+   016A EB                 1568 	mov	a,r3
+   016B C4                 1569 	swap	a
+   016C 54 F0              1570 	anl	a,#0xf0
+   016E CE                 1571 	xch	a,r6
+   016F C4                 1572 	swap	a
+   0170 CE                 1573 	xch	a,r6
+   0171 6E                 1574 	xrl	a,r6
+   0172 CE                 1575 	xch	a,r6
+   0173 54 F0              1576 	anl	a,#0xf0
+   0175 CE                 1577 	xch	a,r6
+   0176 6E                 1578 	xrl	a,r6
+   0177 FF                 1579 	mov	r7,a
+   0178 EE                 1580 	mov	a,r6
+   0179 24 00              1581 	add	a,#_board
+   017B FE                 1582 	mov	r6,a
+   017C EF                 1583 	mov	a,r7
+   017D 34 00              1584 	addc	a,#(_board >> 8)
+   017F FF                 1585 	mov	r7,a
+   0180                    1586 00101$:
+   0180 C3                 1587 	clr	c
+   0181 EC                 1588 	mov	a,r4
+   0182 94 09              1589 	subb	a,#0x09
+   0184 ED                 1590 	mov	a,r5
+   0185 64 80              1591 	xrl	a,#0x80
+   0187 94 80              1592 	subb	a,#0x80
+   0189 50 12              1593 	jnc	00107$
+                    0122   1594 	C$final.c$107$3$3 ==.
+                           1595 ;	C:\Users\SSP\Documents\Microprocessor Systems\Final\final.c:107: board[i][j] = ' ';
+   018B EC                 1596 	mov	a,r4
+   018C 2E                 1597 	add	a,r6
+   018D F5 82              1598 	mov	dpl,a
+   018F ED                 1599 	mov	a,r5
+   0190 3F                 1600 	addc	a,r7
+   0191 F5 83              1601 	mov	dph,a
+   0193 74 20              1602 	mov	a,#0x20
+   0195 F0                 1603 	movx	@dptr,a
+                    012D   1604 	C$final.c$105$2$2 ==.
+                           1605 ;	C:\Users\SSP\Documents\Microprocessor Systems\Final\final.c:105: for(j=0; j<9; j++)
+   0196 0C                 1606 	inc	r4
+   0197 BC 00 E6           1607 	cjne	r4,#0x00,00101$
+   019A 0D                 1608 	inc	r5
+   019B 80 E3              1609 	sjmp	00101$
+   019D                    1610 00107$:
+                    0134   1611 	C$final.c$103$1$1 ==.
+                           1612 ;	C:\Users\SSP\Documents\Microprocessor Systems\Final\final.c:103: for(i=0; i<10; i++)
+   019D 0A                 1613 	inc	r2
+   019E BA 00 B8           1614 	cjne	r2,#0x00,00105$
+   01A1 0B                 1615 	inc	r3
+   01A2 80 B5              1616 	sjmp	00105$
+   01A4                    1617 00108$:
+                    013B   1618 	C$final.c$111$1$1 ==.
+                           1619 ;	C:\Users\SSP\Documents\Microprocessor Systems\Final\final.c:111: turn = 0;
+   01A4 C2 00              1620 	clr	_turn
+                    013D   1621 	C$final.c$113$1$1 ==.
+                           1622 ;	C:\Users\SSP\Documents\Microprocessor Systems\Final\final.c:113: printBoard();
+   01A6 12 01 DB           1623 	lcall	_printBoard
+                    0140   1624 	C$final.c$114$1$1 ==.
+                           1625 ;	C:\Users\SSP\Documents\Microprocessor Systems\Final\final.c:114: printf("\033[15;1H");
+   01A9 74 DB              1626 	mov	a,#__str_2
+   01AB C0 E0              1627 	push	acc
+   01AD 74 12              1628 	mov	a,#(__str_2 >> 8)
+   01AF C0 E0              1629 	push	acc
+   01B1 74 80              1630 	mov	a,#0x80
+   01B3 C0 E0              1631 	push	acc
+   01B5 12 0C 2C           1632 	lcall	_printf
+   01B8 15 81              1633 	dec	sp
+   01BA 15 81              1634 	dec	sp
+   01BC 15 81              1635 	dec	sp
+                    0155   1636 	C$final.c$115$1$1 ==.
+                           1637 ;	C:\Users\SSP\Documents\Microprocessor Systems\Final\final.c:115: printf("It is currently O's turn.\n\r");
+   01BE 74 E3              1638 	mov	a,#__str_3
+   01C0 C0 E0              1639 	push	acc
+   01C2 74 12              1640 	mov	a,#(__str_3 >> 8)
+   01C4 C0 E0              1641 	push	acc
+   01C6 74 80              1642 	mov	a,#0x80
+   01C8 C0 E0              1643 	push	acc
+   01CA 12 0C 2C           1644 	lcall	_printf
+   01CD 15 81              1645 	dec	sp
+   01CF 15 81              1646 	dec	sp
+   01D1 15 81              1647 	dec	sp
+                    016A   1648 	C$final.c$116$1$1 ==.
+                           1649 ;	C:\Users\SSP\Documents\Microprocessor Systems\Final\final.c:116: getMove(1);
+   01D3 D2 01              1650 	setb	_getMove_PARM_1
+   01D5 12 09 71           1651 	lcall	_getMove
+                    016F   1652 	C$final.c$117$1$1 ==.
+                           1653 ;	C:\Users\SSP\Documents\Microprocessor Systems\Final\final.c:117: printBoard();
+                    016F   1654 	C$final.c$118$1$1 ==.
+                    016F   1655 	XG$gameStart$0$0 ==.
+   01D8 02 01 DB           1656 	ljmp	_printBoard
+                           1657 ;------------------------------------------------------------
+                           1658 ;Allocation info for local variables in function 'printBoard'
+                           1659 ;------------------------------------------------------------
+                           1660 ;i                         Allocated to registers r2 r3 
+                           1661 ;------------------------------------------------------------
+                    0172   1662 	G$printBoard$0$0 ==.
+                    0172   1663 	C$final.c$120$1$1 ==.
+                           1664 ;	C:\Users\SSP\Documents\Microprocessor Systems\Final\final.c:120: void printBoard(void)
+                           1665 ;	-----------------------------------------
+                           1666 ;	 function printBoard
+                           1667 ;	-----------------------------------------
+   01DB                    1668 _printBoard:
+                    0172   1669 	C$final.c$124$1$1 ==.
+                           1670 ;	C:\Users\SSP\Documents\Microprocessor Systems\Final\final.c:124: printf("\033[3;1H");
+   01DB 74 3F              1671 	mov	a,#__str_7
+   01DD C0 E0              1672 	push	acc
+   01DF 74 13              1673 	mov	a,#(__str_7 >> 8)
+   01E1 C0 E0              1674 	push	acc
+   01E3 74 80              1675 	mov	a,#0x80
+   01E5 C0 E0              1676 	push	acc
+   01E7 12 0C 2C           1677 	lcall	_printf
+   01EA 15 81              1678 	dec	sp
+   01EC 15 81              1679 	dec	sp
+   01EE 15 81              1680 	dec	sp
+                    0187   1681 	C$final.c$127$1$1 ==.
+                           1682 ;	C:\Users\SSP\Documents\Microprocessor Systems\Final\final.c:127: for(i=0; i<11; i++)
+   01F0 7A 00              1683 	mov	r2,#0x00
+   01F2 7B 00              1684 	mov	r3,#0x00
+   01F4 8A 04              1685 	mov	ar4,r2
+   01F6 8B 05              1686 	mov	ar5,r3
+   01F8                    1687 00105$:
+   01F8 C3                 1688 	clr	c
+   01F9 EC                 1689 	mov	a,r4
+   01FA 94 0B              1690 	subb	a,#0x0B
+   01FC ED                 1691 	mov	a,r5
+   01FD 64 80              1692 	xrl	a,#0x80
+   01FF 94 80              1693 	subb	a,#0x80
+   0201 50 51              1694 	jnc	00108$
+                    019A   1695 	C$final.c$129$2$2 ==.
+                           1696 ;	C:\Users\SSP\Documents\Microprocessor Systems\Final\final.c:129: if(i==3 || i==7)
+   0203 BC 03 05           1697 	cjne	r4,#0x03,00123$
+   0206 BD 00 02           1698 	cjne	r5,#0x00,00123$
+   0209 80 06              1699 	sjmp	00101$
+   020B                    1700 00123$:
+   020B BC 07 22           1701 	cjne	r4,#0x07,00102$
+   020E BD 00 1F           1702 	cjne	r5,#0x00,00102$
+   0211                    1703 00101$:
+                    01A8   1704 	C$final.c$130$2$2 ==.
+                           1705 ;	C:\Users\SSP\Documents\Microprocessor Systems\Final\final.c:130: printf("-----|-----|-----\n\r");
+   0211 C0 04              1706 	push	ar4
+   0213 C0 05              1707 	push	ar5
+   0215 74 46              1708 	mov	a,#__str_8
+   0217 C0 E0              1709 	push	acc
+   0219 74 13              1710 	mov	a,#(__str_8 >> 8)
+   021B C0 E0              1711 	push	acc
+   021D 74 80              1712 	mov	a,#0x80
+   021F C0 E0              1713 	push	acc
+   0221 12 0C 2C           1714 	lcall	_printf
+   0224 15 81              1715 	dec	sp
+   0226 15 81              1716 	dec	sp
+   0228 15 81              1717 	dec	sp
+   022A D0 05              1718 	pop	ar5
+   022C D0 04              1719 	pop	ar4
+   022E 80 1D              1720 	sjmp	00107$
+   0230                    1721 00102$:
+                    01C7   1722 	C$final.c$132$2$2 ==.
+                           1723 ;	C:\Users\SSP\Documents\Microprocessor Systems\Final\final.c:132: printf("     |     |     \n\r");
+   0230 C0 04              1724 	push	ar4
+   0232 C0 05              1725 	push	ar5
+   0234 74 5A              1726 	mov	a,#__str_9
+   0236 C0 E0              1727 	push	acc
+   0238 74 13              1728 	mov	a,#(__str_9 >> 8)
+   023A C0 E0              1729 	push	acc
+   023C 74 80              1730 	mov	a,#0x80
+   023E C0 E0              1731 	push	acc
+   0240 12 0C 2C           1732 	lcall	_printf
+   0243 15 81              1733 	dec	sp
+   0245 15 81              1734 	dec	sp
+   0247 15 81              1735 	dec	sp
+   0249 D0 05              1736 	pop	ar5
+   024B D0 04              1737 	pop	ar4
+   024D                    1738 00107$:
+                    01E4   1739 	C$final.c$127$1$1 ==.
+                           1740 ;	C:\Users\SSP\Documents\Microprocessor Systems\Final\final.c:127: for(i=0; i<11; i++)
+   024D 0C                 1741 	inc	r4
+   024E BC 00 A7           1742 	cjne	r4,#0x00,00105$
+   0251 0D                 1743 	inc	r5
+   0252 80 A4              1744 	sjmp	00105$
+   0254                    1745 00108$:
+                    01EB   1746 	C$final.c$135$1$1 ==.
+                           1747 ;	C:\Users\SSP\Documents\Microprocessor Systems\Final\final.c:135: for(i=0; i<9; i++)
+   0254 7A 00              1748 	mov	r2,#0x00
+   0256 7B 00              1749 	mov	r3,#0x00
+   0258                    1750 00109$:
+   0258 C3                 1751 	clr	c
+   0259 EA                 1752 	mov	a,r2
+   025A 94 09              1753 	subb	a,#0x09
+   025C EB                 1754 	mov	a,r3
+   025D 64 80              1755 	xrl	a,#0x80
+   025F 94 80              1756 	subb	a,#0x80
+   0261 50 16              1757 	jnc	00113$
+                    01FA   1758 	C$final.c$136$1$1 ==.
+                           1759 ;	C:\Users\SSP\Documents\Microprocessor Systems\Final\final.c:136: printSubBoard(i);
+   0263 8A 82              1760 	mov	dpl,r2
+   0265 8B 83              1761 	mov	dph,r3
+   0267 C0 02              1762 	push	ar2
+   0269 C0 03              1763 	push	ar3
+   026B 12 02 7A           1764 	lcall	_printSubBoard
+   026E D0 03              1765 	pop	ar3
+   0270 D0 02              1766 	pop	ar2
+                    0209   1767 	C$final.c$135$1$1 ==.
+                           1768 ;	C:\Users\SSP\Documents\Microprocessor Systems\Final\final.c:135: for(i=0; i<9; i++)
+   0272 0A                 1769 	inc	r2
+   0273 BA 00 E2           1770 	cjne	r2,#0x00,00109$
+   0276 0B                 1771 	inc	r3
+   0277 80 DF              1772 	sjmp	00109$
+   0279                    1773 00113$:
+                    0210   1774 	C$final.c$137$1$1 ==.
+                    0210   1775 	XG$printBoard$0$0 ==.
+   0279 22                 1776 	ret
+                           1777 ;------------------------------------------------------------
+                           1778 ;Allocation info for local variables in function 'printSubBoard'
+                           1779 ;------------------------------------------------------------
+                           1780 ;pos                       Allocated to registers r2 r3 
+                           1781 ;i                         Allocated to registers r4 r5 
+                           1782 ;sloc0                     Allocated with name '_printSubBoard_sloc0_1_0'
+                           1783 ;sloc1                     Allocated with name '_printSubBoard_sloc1_1_0'
+                           1784 ;------------------------------------------------------------
+                    0211   1785 	G$printSubBoard$0$0 ==.
+                    0211   1786 	C$final.c$139$1$1 ==.
+                           1787 ;	C:\Users\SSP\Documents\Microprocessor Systems\Final\final.c:139: void printSubBoard(int pos)
+                           1788 ;	-----------------------------------------
+                           1789 ;	 function printSubBoard
+                           1790 ;	-----------------------------------------
+   027A                    1791 _printSubBoard:
+   027A AA 82              1792 	mov	r2,dpl
+   027C AB 83              1793 	mov	r3,dph
+                    0215   1794 	C$final.c$142$1$1 ==.
+                           1795 ;	C:\Users\SSP\Documents\Microprocessor Systems\Final\final.c:142: printf("\033[%d;%dH", startRow[pos/3], startCol[pos%3]);
+   027E 75 0F 03           1796 	mov	__modsint_PARM_2,#0x03
+   0281 E4                 1797 	clr	a
+   0282 F5 10              1798 	mov	(__modsint_PARM_2 + 1),a
+   0284 8A 82              1799 	mov	dpl,r2
+   0286 8B 83              1800 	mov	dph,r3
+   0288 C0 02              1801 	push	ar2
+   028A C0 03              1802 	push	ar3
+   028C 12 12 0E           1803 	lcall	__modsint
+   028F AC 82              1804 	mov	r4,dpl
+   0291 AD 83              1805 	mov	r5,dph
+   0293 D0 03              1806 	pop	ar3
+   0295 D0 02              1807 	pop	ar2
+   0297 ED                 1808 	mov	a,r5
+   0298 CC                 1809 	xch	a,r4
+   0299 25 E0              1810 	add	a,acc
+   029B CC                 1811 	xch	a,r4
+   029C 33                 1812 	rlc	a
+   029D FD                 1813 	mov	r5,a
+   029E EC                 1814 	mov	a,r4
+   029F 24 86              1815 	add	a,#_startCol
+   02A1 F5 82              1816 	mov	dpl,a
+   02A3 ED                 1817 	mov	a,r5
+   02A4 34 12              1818 	addc	a,#(_startCol >> 8)
+   02A6 F5 83              1819 	mov	dph,a
+   02A8 E4                 1820 	clr	a
+   02A9 93                 1821 	movc	a,@a+dptr
+   02AA FC                 1822 	mov	r4,a
+   02AB A3                 1823 	inc	dptr
+   02AC E4                 1824 	clr	a
+   02AD 93                 1825 	movc	a,@a+dptr
+   02AE FD                 1826 	mov	r5,a
+   02AF 75 0F 03           1827 	mov	__divsint_PARM_2,#0x03
+   02B2 E4                 1828 	clr	a
+   02B3 F5 10              1829 	mov	(__divsint_PARM_2 + 1),a
+   02B5 8A 82              1830 	mov	dpl,r2
+   02B7 8B 83              1831 	mov	dph,r3
+   02B9 C0 02              1832 	push	ar2
+   02BB C0 03              1833 	push	ar3
+   02BD C0 04              1834 	push	ar4
+   02BF C0 05              1835 	push	ar5
+   02C1 12 12 44           1836 	lcall	__divsint
+   02C4 AE 82              1837 	mov	r6,dpl
+   02C6 E5 83              1838 	mov	a,dph
+   02C8 CE                 1839 	xch	a,r6
+   02C9 25 E0              1840 	add	a,acc
+   02CB CE                 1841 	xch	a,r6
+   02CC 33                 1842 	rlc	a
+   02CD FF                 1843 	mov	r7,a
+   02CE EE                 1844 	mov	a,r6
+   02CF 24 80              1845 	add	a,#_startRow
+   02D1 F5 82              1846 	mov	dpl,a
+   02D3 EF                 1847 	mov	a,r7
+   02D4 34 12              1848 	addc	a,#(_startRow >> 8)
+   02D6 F5 83              1849 	mov	dph,a
+   02D8 E4                 1850 	clr	a
+   02D9 93                 1851 	movc	a,@a+dptr
+   02DA FE                 1852 	mov	r6,a
+   02DB A3                 1853 	inc	dptr
+   02DC E4                 1854 	clr	a
+   02DD 93                 1855 	movc	a,@a+dptr
+   02DE FF                 1856 	mov	r7,a
+   02DF C0 06              1857 	push	ar6
+   02E1 C0 07              1858 	push	ar7
+   02E3 74 6E              1859 	mov	a,#__str_10
+   02E5 C0 E0              1860 	push	acc
+   02E7 74 13              1861 	mov	a,#(__str_10 >> 8)
+   02E9 C0 E0              1862 	push	acc
+   02EB 74 80              1863 	mov	a,#0x80
+   02ED C0 E0              1864 	push	acc
+   02EF 12 0C 2C           1865 	lcall	_printf
+   02F2 E5 81              1866 	mov	a,sp
+   02F4 24 F9              1867 	add	a,#0xf9
+   02F6 F5 81              1868 	mov	sp,a
+   02F8 D0 03              1869 	pop	ar3
+   02FA D0 02              1870 	pop	ar2
+                    0293   1871 	C$final.c$144$1$1 ==.
+                           1872 ;	C:\Users\SSP\Documents\Microprocessor Systems\Final\final.c:144: if(board[9][pos] == 1)
+   02FC EA                 1873 	mov	a,r2
+   02FD 24 90              1874 	add	a,#(_board + 0x0090)
+   02FF F5 82              1875 	mov	dpl,a
+   0301 EB                 1876 	mov	a,r3
+   0302 34 00              1877 	addc	a,#((_board + 0x0090) >> 8)
+   0304 F5 83              1878 	mov	dph,a
+   0306 E0                 1879 	movx	a,@dptr
+   0307 FC                 1880 	mov	r4,a
+   0308 BC 01 02           1881 	cjne	r4,#0x01,00124$
+   030B 80 03              1882 	sjmp	00125$
+   030D                    1883 00124$:
+   030D 02 04 0A           1884 	ljmp	00109$
+   0310                    1885 00125$:
+                    02A7   1886 	C$final.c$146$2$2 ==.
+                           1887 ;	C:\Users\SSP\Documents\Microprocessor Systems\Final\final.c:146: printf("X  X");
+   0310 C0 02              1888 	push	ar2
+   0312 C0 03              1889 	push	ar3
+   0314 74 77              1890 	mov	a,#__str_11
+   0316 C0 E0              1891 	push	acc
+   0318 74 13              1892 	mov	a,#(__str_11 >> 8)
+   031A C0 E0              1893 	push	acc
+   031C 74 80              1894 	mov	a,#0x80
+   031E C0 E0              1895 	push	acc
+   0320 12 0C 2C           1896 	lcall	_printf
+   0323 15 81              1897 	dec	sp
+   0325 15 81              1898 	dec	sp
+   0327 15 81              1899 	dec	sp
+   0329 D0 03              1900 	pop	ar3
+   032B D0 02              1901 	pop	ar2
+                    02C4   1902 	C$final.c$147$2$2 ==.
+                           1903 ;	C:\Users\SSP\Documents\Microprocessor Systems\Final\final.c:147: printf("\033[%d;%dH XX ", startRow[pos/3]+1, startCol[pos%3]);
+   032D 75 0F 03           1904 	mov	__modsint_PARM_2,#0x03
+   0330 E4                 1905 	clr	a
+   0331 F5 10              1906 	mov	(__modsint_PARM_2 + 1),a
+   0333 8A 82              1907 	mov	dpl,r2
+   0335 8B 83              1908 	mov	dph,r3
+   0337 C0 02              1909 	push	ar2
+   0339 C0 03              1910 	push	ar3
+   033B 12 12 0E           1911 	lcall	__modsint
+   033E AC 82              1912 	mov	r4,dpl
+   0340 AD 83              1913 	mov	r5,dph
+   0342 D0 03              1914 	pop	ar3
+   0344 D0 02              1915 	pop	ar2
+   0346 ED                 1916 	mov	a,r5
+   0347 CC                 1917 	xch	a,r4
+   0348 25 E0              1918 	add	a,acc
+   034A CC                 1919 	xch	a,r4
+   034B 33                 1920 	rlc	a
+   034C FD                 1921 	mov	r5,a
+   034D EC                 1922 	mov	a,r4
+   034E 24 86              1923 	add	a,#_startCol
+   0350 F5 82              1924 	mov	dpl,a
+   0352 ED                 1925 	mov	a,r5
+   0353 34 12              1926 	addc	a,#(_startCol >> 8)
+   0355 F5 83              1927 	mov	dph,a
+   0357 E4                 1928 	clr	a
+   0358 93                 1929 	movc	a,@a+dptr
+   0359 F5 09              1930 	mov	_printSubBoard_sloc0_1_0,a
+   035B A3                 1931 	inc	dptr
+   035C E4                 1932 	clr	a
+   035D 93                 1933 	movc	a,@a+dptr
+   035E F5 0A              1934 	mov	(_printSubBoard_sloc0_1_0 + 1),a
+   0360 75 0F 03           1935 	mov	__divsint_PARM_2,#0x03
+   0363 E4                 1936 	clr	a
+   0364 F5 10              1937 	mov	(__divsint_PARM_2 + 1),a
+   0366 8A 82              1938 	mov	dpl,r2
+   0368 8B 83              1939 	mov	dph,r3
+   036A C0 04              1940 	push	ar4
+   036C C0 05              1941 	push	ar5
+   036E 12 12 44           1942 	lcall	__divsint
+   0371 A8 82              1943 	mov	r0,dpl
+   0373 A9 83              1944 	mov	r1,dph
+   0375 D0 05              1945 	pop	ar5
+   0377 D0 04              1946 	pop	ar4
+   0379 E9                 1947 	mov	a,r1
+   037A C8                 1948 	xch	a,r0
+   037B 25 E0              1949 	add	a,acc
+   037D C8                 1950 	xch	a,r0
+   037E 33                 1951 	rlc	a
+   037F F9                 1952 	mov	r1,a
+   0380 E8                 1953 	mov	a,r0
+   0381 24 80              1954 	add	a,#_startRow
+   0383 F5 82              1955 	mov	dpl,a
+   0385 E9                 1956 	mov	a,r1
+   0386 34 12              1957 	addc	a,#(_startRow >> 8)
+   0388 F5 83              1958 	mov	dph,a
+   038A E4                 1959 	clr	a
+   038B 93                 1960 	movc	a,@a+dptr
+   038C FE                 1961 	mov	r6,a
+   038D A3                 1962 	inc	dptr
+   038E E4                 1963 	clr	a
+   038F 93                 1964 	movc	a,@a+dptr
+   0390 FF                 1965 	mov	r7,a
+   0391 0E                 1966 	inc	r6
+   0392 BE 00 01           1967 	cjne	r6,#0x00,00126$
+   0395 0F                 1968 	inc	r7
+   0396                    1969 00126$:
+   0396 C0 04              1970 	push	ar4
+   0398 C0 05              1971 	push	ar5
+   039A C0 00              1972 	push	ar0
+   039C C0 01              1973 	push	ar1
+   039E C0 09              1974 	push	_printSubBoard_sloc0_1_0
+   03A0 C0 0A              1975 	push	(_printSubBoard_sloc0_1_0 + 1)
+   03A2 C0 06              1976 	push	ar6
+   03A4 C0 07              1977 	push	ar7
+   03A6 74 7C              1978 	mov	a,#__str_12
    03A8 C0 E0              1979 	push	acc
-   03AA 74 80              1980 	mov	a,#0x80
+   03AA 74 13              1980 	mov	a,#(__str_12 >> 8)
    03AC C0 E0              1981 	push	acc
-   03AE 12 07 75           1982 	lcall	_printf
-   03B1 15 81              1983 	dec	sp
-   03B3 15 81              1984 	dec	sp
-   03B5 15 81              1985 	dec	sp
-   03B7 D0 03              1986 	pop	ar3
-   03B9 D0 02              1987 	pop	ar2
-                    034D   1988 	C$final.c$134$2$3 ==.
-                           1989 ;	C:\Users\SSP\Documents\Microprocessor Systems\Final\final.c:134: printf("\033[%d;%dHO  O", startRow[pos/3]+1, startCol[pos%3]);
-   03BB 75 10 03           1990 	mov	__modsint_PARM_2,#0x03
-   03BE E4                 1991 	clr	a
-   03BF F5 11              1992 	mov	(__modsint_PARM_2 + 1),a
-   03C1 8A 82              1993 	mov	dpl,r2
-   03C3 8B 83              1994 	mov	dph,r3
-   03C5 C0 02              1995 	push	ar2
-   03C7 C0 03              1996 	push	ar3
-   03C9 12 0D 57           1997 	lcall	__modsint
-   03CC AC 82              1998 	mov	r4,dpl
-   03CE AD 83              1999 	mov	r5,dph
-   03D0 D0 03              2000 	pop	ar3
-   03D2 D0 02              2001 	pop	ar2
-   03D4 ED                 2002 	mov	a,r5
-   03D5 CC                 2003 	xch	a,r4
-   03D6 25 E0              2004 	add	a,acc
-   03D8 CC                 2005 	xch	a,r4
-   03D9 33                 2006 	rlc	a
-   03DA FD                 2007 	mov	r5,a
-   03DB EC                 2008 	mov	a,r4
-   03DC 24 CF              2009 	add	a,#_startCol
-   03DE F5 82              2010 	mov	dpl,a
-   03E0 ED                 2011 	mov	a,r5
-   03E1 34 0D              2012 	addc	a,#(_startCol >> 8)
-   03E3 F5 83              2013 	mov	dph,a
-   03E5 E4                 2014 	clr	a
-   03E6 93                 2015 	movc	a,@a+dptr
-   03E7 F5 0A              2016 	mov	_printSubBoard_sloc0_1_0,a
-   03E9 A3                 2017 	inc	dptr
-   03EA E4                 2018 	clr	a
-   03EB 93                 2019 	movc	a,@a+dptr
-   03EC F5 0B              2020 	mov	(_printSubBoard_sloc0_1_0 + 1),a
-   03EE 75 10 03           2021 	mov	__divsint_PARM_2,#0x03
-   03F1 E4                 2022 	clr	a
-   03F2 F5 11              2023 	mov	(__divsint_PARM_2 + 1),a
-   03F4 8A 82              2024 	mov	dpl,r2
-   03F6 8B 83              2025 	mov	dph,r3
-   03F8 C0 04              2026 	push	ar4
-   03FA C0 05              2027 	push	ar5
-   03FC 12 0D 8D           2028 	lcall	__divsint
-   03FF A8 82              2029 	mov	r0,dpl
-   0401 A9 83              2030 	mov	r1,dph
-   0403 D0 05              2031 	pop	ar5
-   0405 D0 04              2032 	pop	ar4
-   0407 E9                 2033 	mov	a,r1
-   0408 C8                 2034 	xch	a,r0
-   0409 25 E0              2035 	add	a,acc
-   040B C8                 2036 	xch	a,r0
-   040C 33                 2037 	rlc	a
-   040D F9                 2038 	mov	r1,a
-   040E E8                 2039 	mov	a,r0
-   040F 24 C9              2040 	add	a,#_startRow
-   0411 F5 82              2041 	mov	dpl,a
-   0413 E9                 2042 	mov	a,r1
-   0414 34 0D              2043 	addc	a,#(_startRow >> 8)
-   0416 F5 83              2044 	mov	dph,a
-   0418 E4                 2045 	clr	a
-   0419 93                 2046 	movc	a,@a+dptr
-   041A FE                 2047 	mov	r6,a
-   041B A3                 2048 	inc	dptr
-   041C E4                 2049 	clr	a
-   041D 93                 2050 	movc	a,@a+dptr
-   041E FF                 2051 	mov	r7,a
-   041F 0E                 2052 	inc	r6
-   0420 BE 00 01           2053 	cjne	r6,#0x00,00129$
-   0423 0F                 2054 	inc	r7
-   0424                    2055 00129$:
-   0424 C0 04              2056 	push	ar4
-   0426 C0 05              2057 	push	ar5
-   0428 C0 00              2058 	push	ar0
-   042A C0 01              2059 	push	ar1
-   042C C0 0A              2060 	push	_printSubBoard_sloc0_1_0
-   042E C0 0B              2061 	push	(_printSubBoard_sloc0_1_0 + 1)
-   0430 C0 06              2062 	push	ar6
-   0432 C0 07              2063 	push	ar7
-   0434 74 A0              2064 	mov	a,#__str_13
-   0436 C0 E0              2065 	push	acc
-   0438 74 0E              2066 	mov	a,#(__str_13 >> 8)
-   043A C0 E0              2067 	push	acc
-   043C 74 80              2068 	mov	a,#0x80
-   043E C0 E0              2069 	push	acc
-   0440 12 07 75           2070 	lcall	_printf
-   0443 E5 81              2071 	mov	a,sp
-   0445 24 F9              2072 	add	a,#0xf9
-   0447 F5 81              2073 	mov	sp,a
-   0449 D0 01              2074 	pop	ar1
-   044B D0 00              2075 	pop	ar0
-   044D D0 05              2076 	pop	ar5
-   044F D0 04              2077 	pop	ar4
-                    03E3   2078 	C$final.c$135$2$3 ==.
-                           2079 ;	C:\Users\SSP\Documents\Microprocessor Systems\Final\final.c:135: printf("\033[%d;%dH OO", startRow[pos/3]+2, startCol[pos%3]);
-   0451 EC                 2080 	mov	a,r4
-   0452 24 CF              2081 	add	a,#_startCol
-   0454 F5 82              2082 	mov	dpl,a
-   0456 ED                 2083 	mov	a,r5
-   0457 34 0D              2084 	addc	a,#(_startCol >> 8)
-   0459 F5 83              2085 	mov	dph,a
-   045B E4                 2086 	clr	a
-   045C 93                 2087 	movc	a,@a+dptr
-   045D FC                 2088 	mov	r4,a
-   045E A3                 2089 	inc	dptr
-   045F E4                 2090 	clr	a
-   0460 93                 2091 	movc	a,@a+dptr
-   0461 FD                 2092 	mov	r5,a
-   0462 E8                 2093 	mov	a,r0
-   0463 24 C9              2094 	add	a,#_startRow
-   0465 F5 82              2095 	mov	dpl,a
-   0467 E9                 2096 	mov	a,r1
-   0468 34 0D              2097 	addc	a,#(_startRow >> 8)
-   046A F5 83              2098 	mov	dph,a
-   046C E4                 2099 	clr	a
-   046D 93                 2100 	movc	a,@a+dptr
-   046E FE                 2101 	mov	r6,a
-   046F A3                 2102 	inc	dptr
-   0470 E4                 2103 	clr	a
-   0471 93                 2104 	movc	a,@a+dptr
-   0472 FF                 2105 	mov	r7,a
-   0473 74 02              2106 	mov	a,#0x02
-   0475 2E                 2107 	add	a,r6
-   0476 FE                 2108 	mov	r6,a
-   0477 E4                 2109 	clr	a
-   0478 3F                 2110 	addc	a,r7
-   0479 FF                 2111 	mov	r7,a
-   047A C0 04              2112 	push	ar4
-   047C C0 05              2113 	push	ar5
-   047E C0 06              2114 	push	ar6
-   0480 C0 07              2115 	push	ar7
-   0482 74 AD              2116 	mov	a,#__str_14
-   0484 C0 E0              2117 	push	acc
-   0486 74 0E              2118 	mov	a,#(__str_14 >> 8)
-   0488 C0 E0              2119 	push	acc
-   048A 74 80              2120 	mov	a,#0x80
-   048C C0 E0              2121 	push	acc
-   048E 12 07 75           2122 	lcall	_printf
-   0491 E5 81              2123 	mov	a,sp
-   0493 24 F9              2124 	add	a,#0xf9
-   0495 F5 81              2125 	mov	sp,a
-   0497 22                 2126 	ret
-   0498                    2127 00106$:
-                    042A   2128 	C$final.c$139$2$4 ==.
-                           2129 ;	C:\Users\SSP\Documents\Microprocessor Systems\Final\final.c:139: for(i=0; i<9; i++)
-   0498 7C 00              2130 	mov	r4,#0x00
-   049A 7D 00              2131 	mov	r5,#0x00
-   049C 75 10 03           2132 	mov	__modsint_PARM_2,#0x03
-   049F E4                 2133 	clr	a
-   04A0 F5 11              2134 	mov	(__modsint_PARM_2 + 1),a
-   04A2 8A 82              2135 	mov	dpl,r2
-   04A4 8B 83              2136 	mov	dph,r3
-   04A6 C0 02              2137 	push	ar2
-   04A8 C0 03              2138 	push	ar3
-   04AA C0 04              2139 	push	ar4
-   04AC C0 05              2140 	push	ar5
-   04AE 12 0D 57           2141 	lcall	__modsint
-   04B1 AE 82              2142 	mov	r6,dpl
-   04B3 AF 83              2143 	mov	r7,dph
-   04B5 D0 05              2144 	pop	ar5
-   04B7 D0 04              2145 	pop	ar4
-   04B9 D0 03              2146 	pop	ar3
-   04BB D0 02              2147 	pop	ar2
-   04BD EF                 2148 	mov	a,r7
-   04BE CE                 2149 	xch	a,r6
-   04BF 25 E0              2150 	add	a,acc
-   04C1 CE                 2151 	xch	a,r6
-   04C2 33                 2152 	rlc	a
-   04C3 FF                 2153 	mov	r7,a
-   04C4 75 10 03           2154 	mov	__divsint_PARM_2,#0x03
-   04C7 E4                 2155 	clr	a
-   04C8 F5 11              2156 	mov	(__divsint_PARM_2 + 1),a
-   04CA 8A 82              2157 	mov	dpl,r2
-   04CC 8B 83              2158 	mov	dph,r3
-   04CE C0 02              2159 	push	ar2
-   04D0 C0 03              2160 	push	ar3
-   04D2 C0 04              2161 	push	ar4
-   04D4 C0 05              2162 	push	ar5
-   04D6 C0 06              2163 	push	ar6
-   04D8 C0 07              2164 	push	ar7
-   04DA 12 0D 8D           2165 	lcall	__divsint
-   04DD A8 82              2166 	mov	r0,dpl
-   04DF A9 83              2167 	mov	r1,dph
-   04E1 D0 07              2168 	pop	ar7
-   04E3 D0 06              2169 	pop	ar6
-   04E5 D0 05              2170 	pop	ar5
-   04E7 D0 04              2171 	pop	ar4
-   04E9 D0 03              2172 	pop	ar3
-   04EB D0 02              2173 	pop	ar2
-   04ED 88 0A              2174 	mov	_printSubBoard_sloc0_1_0,r0
-   04EF E9                 2175 	mov	a,r1
-   04F0 C5 0A              2176 	xch	a,_printSubBoard_sloc0_1_0
-   04F2 25 E0              2177 	add	a,acc
-   04F4 C5 0A              2178 	xch	a,_printSubBoard_sloc0_1_0
-   04F6 33                 2179 	rlc	a
-   04F7 F5 0B              2180 	mov	(_printSubBoard_sloc0_1_0 + 1),a
-   04F9 EB                 2181 	mov	a,r3
-   04FA C4                 2182 	swap	a
-   04FB 54 F0              2183 	anl	a,#0xf0
-   04FD CA                 2184 	xch	a,r2
-   04FE C4                 2185 	swap	a
-   04FF CA                 2186 	xch	a,r2
-   0500 6A                 2187 	xrl	a,r2
-   0501 CA                 2188 	xch	a,r2
-   0502 54 F0              2189 	anl	a,#0xf0
-   0504 CA                 2190 	xch	a,r2
-   0505 6A                 2191 	xrl	a,r2
-   0506 FB                 2192 	mov	r3,a
-   0507                    2193 00111$:
-   0507 C3                 2194 	clr	c
-   0508 EC                 2195 	mov	a,r4
-   0509 94 09              2196 	subb	a,#0x09
-   050B ED                 2197 	mov	a,r5
-   050C 64 80              2198 	xrl	a,#0x80
-   050E 94 80              2199 	subb	a,#0x80
-   0510 40 01              2200 	jc	00130$
-   0512 22                 2201 	ret
-   0513                    2202 00130$:
-                    04A5   2203 	C$final.c$141$1$1 ==.
-                           2204 ;	C:\Users\SSP\Documents\Microprocessor Systems\Final\final.c:141: if(i%3 == 0)
-   0513 75 10 03           2205 	mov	__modsint_PARM_2,#0x03
-   0516 E4                 2206 	clr	a
-   0517 F5 11              2207 	mov	(__modsint_PARM_2 + 1),a
-   0519 8C 82              2208 	mov	dpl,r4
-   051B 8D 83              2209 	mov	dph,r5
-   051D C0 02              2210 	push	ar2
-   051F C0 03              2211 	push	ar3
-   0521 C0 04              2212 	push	ar4
-   0523 C0 05              2213 	push	ar5
-   0525 C0 06              2214 	push	ar6
-   0527 C0 07              2215 	push	ar7
-   0529 12 0D 57           2216 	lcall	__modsint
-   052C E5 82              2217 	mov	a,dpl
-   052E 85 83 F0           2218 	mov	b,dph
-   0531 D0 07              2219 	pop	ar7
-   0533 D0 06              2220 	pop	ar6
-   0535 D0 05              2221 	pop	ar5
-   0537 D0 04              2222 	pop	ar4
-   0539 D0 03              2223 	pop	ar3
-   053B D0 02              2224 	pop	ar2
-   053D 45 F0              2225 	orl	a,b
-   053F 60 03              2226 	jz	00131$
-   0541 02 05 D8           2227 	ljmp	00102$
-   0544                    2228 00131$:
-                    04D6   2229 	C$final.c$142$1$1 ==.
-                           2230 ;	C:\Users\SSP\Documents\Microprocessor Systems\Final\final.c:142: printf("\033[%d;%dH", startRow[pos/3]+i/3, startCol[pos%3]);
-   0544 C0 02              2231 	push	ar2
-   0546 C0 03              2232 	push	ar3
-   0548 EE                 2233 	mov	a,r6
-   0549 24 CF              2234 	add	a,#_startCol
-   054B F5 82              2235 	mov	dpl,a
-   054D EF                 2236 	mov	a,r7
-   054E 34 0D              2237 	addc	a,#(_startCol >> 8)
-   0550 F5 83              2238 	mov	dph,a
-   0552 E4                 2239 	clr	a
-   0553 93                 2240 	movc	a,@a+dptr
-   0554 FA                 2241 	mov	r2,a
-   0555 A3                 2242 	inc	dptr
-   0556 E4                 2243 	clr	a
-   0557 93                 2244 	movc	a,@a+dptr
-   0558 FB                 2245 	mov	r3,a
-   0559 E5 0A              2246 	mov	a,_printSubBoard_sloc0_1_0
-   055B 24 C9              2247 	add	a,#_startRow
-   055D F5 82              2248 	mov	dpl,a
-   055F E5 0B              2249 	mov	a,(_printSubBoard_sloc0_1_0 + 1)
-   0561 34 0D              2250 	addc	a,#(_startRow >> 8)
-   0563 F5 83              2251 	mov	dph,a
-   0565 E4                 2252 	clr	a
-   0566 93                 2253 	movc	a,@a+dptr
-   0567 F5 0C              2254 	mov	_printSubBoard_sloc1_1_0,a
-   0569 A3                 2255 	inc	dptr
-   056A E4                 2256 	clr	a
-   056B 93                 2257 	movc	a,@a+dptr
-   056C F5 0D              2258 	mov	(_printSubBoard_sloc1_1_0 + 1),a
-   056E 75 10 03           2259 	mov	__divsint_PARM_2,#0x03
-   0571 E4                 2260 	clr	a
-   0572 F5 11              2261 	mov	(__divsint_PARM_2 + 1),a
-   0574 8C 82              2262 	mov	dpl,r4
-   0576 8D 83              2263 	mov	dph,r5
-   0578 C0 02              2264 	push	ar2
-   057A C0 03              2265 	push	ar3
-   057C C0 04              2266 	push	ar4
-   057E C0 05              2267 	push	ar5
-   0580 C0 06              2268 	push	ar6
-   0582 C0 07              2269 	push	ar7
-   0584 12 0D 8D           2270 	lcall	__divsint
-   0587 A8 82              2271 	mov	r0,dpl
-   0589 A9 83              2272 	mov	r1,dph
-   058B D0 07              2273 	pop	ar7
-   058D D0 06              2274 	pop	ar6
-   058F D0 05              2275 	pop	ar5
-   0591 D0 04              2276 	pop	ar4
-   0593 D0 03              2277 	pop	ar3
-   0595 D0 02              2278 	pop	ar2
-   0597 E8                 2279 	mov	a,r0
-   0598 25 0C              2280 	add	a,_printSubBoard_sloc1_1_0
-   059A F8                 2281 	mov	r0,a
-   059B E9                 2282 	mov	a,r1
-   059C 35 0D              2283 	addc	a,(_printSubBoard_sloc1_1_0 + 1)
-   059E F9                 2284 	mov	r1,a
-   059F C0 02              2285 	push	ar2
-   05A1 C0 03              2286 	push	ar3
-   05A3 C0 04              2287 	push	ar4
-   05A5 C0 05              2288 	push	ar5
-   05A7 C0 06              2289 	push	ar6
-   05A9 C0 07              2290 	push	ar7
-   05AB C0 02              2291 	push	ar2
-   05AD C0 03              2292 	push	ar3
-   05AF C0 00              2293 	push	ar0
-   05B1 C0 01              2294 	push	ar1
-   05B3 74 73              2295 	mov	a,#__str_8
-   05B5 C0 E0              2296 	push	acc
-   05B7 74 0E              2297 	mov	a,#(__str_8 >> 8)
-   05B9 C0 E0              2298 	push	acc
-   05BB 74 80              2299 	mov	a,#0x80
-   05BD C0 E0              2300 	push	acc
-   05BF 12 07 75           2301 	lcall	_printf
-   05C2 E5 81              2302 	mov	a,sp
-   05C4 24 F9              2303 	add	a,#0xf9
-   05C6 F5 81              2304 	mov	sp,a
-   05C8 D0 07              2305 	pop	ar7
-   05CA D0 06              2306 	pop	ar6
-   05CC D0 05              2307 	pop	ar5
-   05CE D0 04              2308 	pop	ar4
-   05D0 D0 03              2309 	pop	ar3
-   05D2 D0 02              2310 	pop	ar2
-                    0566   2311 	C$final.c$139$1$1 ==.
-                           2312 ;	C:\Users\SSP\Documents\Microprocessor Systems\Final\final.c:139: for(i=0; i<9; i++)
-   05D4 D0 03              2313 	pop	ar3
-   05D6 D0 02              2314 	pop	ar2
-                    056A   2315 	C$final.c$142$3$5 ==.
-                           2316 ;	C:\Users\SSP\Documents\Microprocessor Systems\Final\final.c:142: printf("\033[%d;%dH", startRow[pos/3]+i/3, startCol[pos%3]);
-   05D8                    2317 00102$:
-                    056A   2318 	C$final.c$144$3$5 ==.
-                           2319 ;	C:\Users\SSP\Documents\Microprocessor Systems\Final\final.c:144: printf("%c", board[pos][i]);
-   05D8 EA                 2320 	mov	a,r2
-   05D9 24 00              2321 	add	a,#_board
-   05DB F8                 2322 	mov	r0,a
-   05DC EB                 2323 	mov	a,r3
-   05DD 34 00              2324 	addc	a,#(_board >> 8)
-   05DF F9                 2325 	mov	r1,a
-   05E0 EC                 2326 	mov	a,r4
-   05E1 28                 2327 	add	a,r0
-   05E2 F5 82              2328 	mov	dpl,a
-   05E4 ED                 2329 	mov	a,r5
-   05E5 39                 2330 	addc	a,r1
-   05E6 F5 83              2331 	mov	dph,a
-   05E8 E0                 2332 	movx	a,@dptr
-   05E9 F8                 2333 	mov	r0,a
-   05EA 33                 2334 	rlc	a
-   05EB 95 E0              2335 	subb	a,acc
-   05ED F9                 2336 	mov	r1,a
-   05EE C0 02              2337 	push	ar2
-   05F0 C0 03              2338 	push	ar3
-   05F2 C0 04              2339 	push	ar4
-   05F4 C0 05              2340 	push	ar5
-   05F6 C0 06              2341 	push	ar6
-   05F8 C0 07              2342 	push	ar7
-   05FA C0 00              2343 	push	ar0
-   05FC C0 01              2344 	push	ar1
-   05FE 74 B9              2345 	mov	a,#__str_15
-   0600 C0 E0              2346 	push	acc
-   0602 74 0E              2347 	mov	a,#(__str_15 >> 8)
-   0604 C0 E0              2348 	push	acc
-   0606 74 80              2349 	mov	a,#0x80
-   0608 C0 E0              2350 	push	acc
-   060A 12 07 75           2351 	lcall	_printf
-   060D E5 81              2352 	mov	a,sp
-   060F 24 FB              2353 	add	a,#0xfb
-   0611 F5 81              2354 	mov	sp,a
-   0613 D0 07              2355 	pop	ar7
-   0615 D0 06              2356 	pop	ar6
-   0617 D0 05              2357 	pop	ar5
-   0619 D0 04              2358 	pop	ar4
-                    05AD   2359 	C$final.c$145$1$1 ==.
-                           2360 ;	C:\Users\SSP\Documents\Microprocessor Systems\Final\final.c:145: if(i%3!=2)	
-   061B 75 10 03           2361 	mov	__modsint_PARM_2,#0x03
-   061E E4                 2362 	clr	a
-   061F F5 11              2363 	mov	(__modsint_PARM_2 + 1),a
-   0621 8C 82              2364 	mov	dpl,r4
-   0623 8D 83              2365 	mov	dph,r5
-   0625 C0 04              2366 	push	ar4
-   0627 C0 05              2367 	push	ar5
-   0629 C0 06              2368 	push	ar6
-   062B C0 07              2369 	push	ar7
-   062D 12 0D 57           2370 	lcall	__modsint
-   0630 A8 82              2371 	mov	r0,dpl
-   0632 A9 83              2372 	mov	r1,dph
-   0634 D0 07              2373 	pop	ar7
-   0636 D0 06              2374 	pop	ar6
-   0638 D0 05              2375 	pop	ar5
-   063A D0 04              2376 	pop	ar4
-   063C D0 03              2377 	pop	ar3
-   063E D0 02              2378 	pop	ar2
-   0640 B8 02 05           2379 	cjne	r0,#0x02,00132$
-   0643 B9 00 02           2380 	cjne	r1,#0x00,00132$
-   0646 80 2D              2381 	sjmp	00113$
-   0648                    2382 00132$:
-                    05DA   2383 	C$final.c$146$3$5 ==.
-                           2384 ;	C:\Users\SSP\Documents\Microprocessor Systems\Final\final.c:146: printf("|");
-   0648 C0 02              2385 	push	ar2
-   064A C0 03              2386 	push	ar3
-   064C C0 04              2387 	push	ar4
-   064E C0 05              2388 	push	ar5
-   0650 C0 06              2389 	push	ar6
-   0652 C0 07              2390 	push	ar7
-   0654 74 BC              2391 	mov	a,#__str_16
-   0656 C0 E0              2392 	push	acc
-   0658 74 0E              2393 	mov	a,#(__str_16 >> 8)
-   065A C0 E0              2394 	push	acc
-   065C 74 80              2395 	mov	a,#0x80
-   065E C0 E0              2396 	push	acc
-   0660 12 07 75           2397 	lcall	_printf
-   0663 15 81              2398 	dec	sp
-   0665 15 81              2399 	dec	sp
-   0667 15 81              2400 	dec	sp
-   0669 D0 07              2401 	pop	ar7
-   066B D0 06              2402 	pop	ar6
-   066D D0 05              2403 	pop	ar5
-   066F D0 04              2404 	pop	ar4
-   0671 D0 03              2405 	pop	ar3
-   0673 D0 02              2406 	pop	ar2
-   0675                    2407 00113$:
-                    0607   2408 	C$final.c$139$2$4 ==.
-                           2409 ;	C:\Users\SSP\Documents\Microprocessor Systems\Final\final.c:139: for(i=0; i<9; i++)
-   0675 0C                 2410 	inc	r4
-   0676 BC 00 01           2411 	cjne	r4,#0x00,00133$
-   0679 0D                 2412 	inc	r5
-   067A                    2413 00133$:
-                    060C   2414 	C$final.c$149$1$1 ==.
-                    060C   2415 	XG$printSubBoard$0$0 ==.
-   067A 02 05 07           2416 	ljmp	00111$
-                           2417 ;------------------------------------------------------------
-                           2418 ;Allocation info for local variables in function 'SYSCLK_INIT'
-                           2419 ;------------------------------------------------------------
-                           2420 ;i                         Allocated to registers r3 r4 
-                           2421 ;SFRPAGE_SAVE              Allocated to registers r2 
-                           2422 ;------------------------------------------------------------
-                    060F   2423 	G$SYSCLK_INIT$0$0 ==.
-                    060F   2424 	C$final.c$157$1$1 ==.
-                           2425 ;	C:\Users\SSP\Documents\Microprocessor Systems\Final\final.c:157: void SYSCLK_INIT(void)
-                           2426 ;	-----------------------------------------
-                           2427 ;	 function SYSCLK_INIT
-                           2428 ;	-----------------------------------------
-   067D                    2429 _SYSCLK_INIT:
-                    060F   2430 	C$final.c$162$1$1 ==.
-                           2431 ;	C:\Users\SSP\Documents\Microprocessor Systems\Final\final.c:162: SFRPAGE_SAVE = SFRPAGE;				// Save Current SFR page	SFRPAGE = CONFIG_PAGE;
-   067D AA 84              2432 	mov	r2,_SFRPAGE
-                    0611   2433 	C$final.c$163$1$1 ==.
-                           2434 ;	C:\Users\SSP\Documents\Microprocessor Systems\Final\final.c:163: SFRPAGE   = CONFIG_PAGE;
-   067F 75 84 0F           2435 	mov	_SFRPAGE,#0x0F
-                    0614   2436 	C$final.c$165$1$1 ==.
-                           2437 ;	C:\Users\SSP\Documents\Microprocessor Systems\Final\final.c:165: OSCXCN = 0x67;						// Start ext osc with 22.1184MHz crystal
-   0682 75 8C 67           2438 	mov	_OSCXCN,#0x67
-                    0617   2439 	C$final.c$166$1$1 ==.
-                           2440 ;	C:\Users\SSP\Documents\Microprocessor Systems\Final\final.c:166: for(i=0; i < 3000; i++);			// Wait for the oscillator to start up
-   0685 7B B8              2441 	mov	r3,#0xB8
-   0687 7C 0B              2442 	mov	r4,#0x0B
-   0689                    2443 00106$:
-   0689 1B                 2444 	dec	r3
-   068A BB FF 01           2445 	cjne	r3,#0xff,00114$
-   068D 1C                 2446 	dec	r4
-   068E                    2447 00114$:
-   068E EB                 2448 	mov	a,r3
-   068F 4C                 2449 	orl	a,r4
-   0690 70 F7              2450 	jnz	00106$
-                    0624   2451 	C$final.c$167$1$1 ==.
-                           2452 ;	C:\Users\SSP\Documents\Microprocessor Systems\Final\final.c:167: while(!(OSCXCN & 0x80));
-   0692                    2453 00101$:
-   0692 E5 8C              2454 	mov	a,_OSCXCN
-   0694 30 E7 FB           2455 	jnb	acc.7,00101$
-                    0629   2456 	C$final.c$168$1$1 ==.
-                           2457 ;	C:\Users\SSP\Documents\Microprocessor Systems\Final\final.c:168: CLKSEL = 0x01;						// Switch to the external crystal oscillator
-   0697 75 97 01           2458 	mov	_CLKSEL,#0x01
-                    062C   2459 	C$final.c$169$1$1 ==.
-                           2460 ;	C:\Users\SSP\Documents\Microprocessor Systems\Final\final.c:169: OSCICN = 0x00;						// Disable the internal oscillator
-   069A 75 8A 00           2461 	mov	_OSCICN,#0x00
-                    062F   2462 	C$final.c$171$1$1 ==.
-                           2463 ;	C:\Users\SSP\Documents\Microprocessor Systems\Final\final.c:171: SFRPAGE = SFRPAGE_SAVE;             // Restore SFR page
-   069D 8A 84              2464 	mov	_SFRPAGE,r2
-                    0631   2465 	C$final.c$172$1$1 ==.
-                    0631   2466 	XG$SYSCLK_INIT$0$0 ==.
-   069F 22                 2467 	ret
-                           2468 ;------------------------------------------------------------
-                           2469 ;Allocation info for local variables in function 'PORT_INIT'
-                           2470 ;------------------------------------------------------------
-                           2471 ;SFRPAGE_SAVE              Allocated to registers r2 
-                           2472 ;------------------------------------------------------------
-                    0632   2473 	G$PORT_INIT$0$0 ==.
-                    0632   2474 	C$final.c$180$1$1 ==.
-                           2475 ;	C:\Users\SSP\Documents\Microprocessor Systems\Final\final.c:180: void PORT_INIT(void)
-                           2476 ;	-----------------------------------------
-                           2477 ;	 function PORT_INIT
-                           2478 ;	-----------------------------------------
-   06A0                    2479 _PORT_INIT:
-                    0632   2480 	C$final.c$184$1$1 ==.
-                           2481 ;	C:\Users\SSP\Documents\Microprocessor Systems\Final\final.c:184: SFRPAGE_SAVE = SFRPAGE;				// Save Current SFR page
-   06A0 AA 84              2482 	mov	r2,_SFRPAGE
-                    0634   2483 	C$final.c$185$1$1 ==.
-                           2484 ;	C:\Users\SSP\Documents\Microprocessor Systems\Final\final.c:185: SFRPAGE = CONFIG_PAGE;
-   06A2 75 84 0F           2485 	mov	_SFRPAGE,#0x0F
-                    0637   2486 	C$final.c$187$1$1 ==.
-                           2487 ;	C:\Users\SSP\Documents\Microprocessor Systems\Final\final.c:187: XBR0	 = 0x04;					// Enable UART0
-   06A5 75 E1 04           2488 	mov	_XBR0,#0x04
-                    063A   2489 	C$final.c$188$1$1 ==.
-                           2490 ;	C:\Users\SSP\Documents\Microprocessor Systems\Final\final.c:188: XBR1	 = 0x00;
-   06A8 75 E2 00           2491 	mov	_XBR1,#0x00
-                    063D   2492 	C$final.c$189$1$1 ==.
-                           2493 ;	C:\Users\SSP\Documents\Microprocessor Systems\Final\final.c:189: XBR2	 = 0x40;					// Enable Crossbar and weak pull-up
-   06AB 75 E3 40           2494 	mov	_XBR2,#0x40
-                    0640   2495 	C$final.c$190$1$1 ==.
-                           2496 ;	C:\Users\SSP\Documents\Microprocessor Systems\Final\final.c:190: P0MDOUT |= 0x01;					// Set TX0 on P0.0 pin to push-pull
-   06AE 43 A4 01           2497 	orl	_P0MDOUT,#0x01
-                    0643   2498 	C$final.c$191$1$1 ==.
-                           2499 ;	C:\Users\SSP\Documents\Microprocessor Systems\Final\final.c:191: P1MDOUT	|= 0x40;					// Set green LED ooutput P1.6 to push-pull
-   06B1 43 A5 40           2500 	orl	_P1MDOUT,#0x40
-                    0646   2501 	C$final.c$193$1$1 ==.
-                           2502 ;	C:\Users\SSP\Documents\Microprocessor Systems\Final\final.c:193: SFRPAGE = SFRPAGE_SAVE;             // Restore SFR page
-   06B4 8A 84              2503 	mov	_SFRPAGE,r2
-                    0648   2504 	C$final.c$194$1$1 ==.
-                    0648   2505 	XG$PORT_INIT$0$0 ==.
-   06B6 22                 2506 	ret
-                           2507 ;------------------------------------------------------------
-                           2508 ;Allocation info for local variables in function 'UART0_INIT'
-                           2509 ;------------------------------------------------------------
-                           2510 ;SFRPAGE_SAVE              Allocated to registers r2 
-                           2511 ;------------------------------------------------------------
-                    0649   2512 	G$UART0_INIT$0$0 ==.
-                    0649   2513 	C$final.c$202$1$1 ==.
-                           2514 ;	C:\Users\SSP\Documents\Microprocessor Systems\Final\final.c:202: void UART0_INIT(void)
-                           2515 ;	-----------------------------------------
-                           2516 ;	 function UART0_INIT
-                           2517 ;	-----------------------------------------
-   06B7                    2518 _UART0_INIT:
-                    0649   2519 	C$final.c$206$1$1 ==.
-                           2520 ;	C:\Users\SSP\Documents\Microprocessor Systems\Final\final.c:206: SFRPAGE_SAVE = SFRPAGE;				// Save Current SFR page
-   06B7 AA 84              2521 	mov	r2,_SFRPAGE
-                    064B   2522 	C$final.c$207$1$1 ==.
-                           2523 ;	C:\Users\SSP\Documents\Microprocessor Systems\Final\final.c:207: SFRPAGE = TIMER01_PAGE;
-   06B9 75 84 00           2524 	mov	_SFRPAGE,#0x00
-                    064E   2525 	C$final.c$209$1$1 ==.
-                           2526 ;	C:\Users\SSP\Documents\Microprocessor Systems\Final\final.c:209: TCON	 = 0x40;
-   06BC 75 88 40           2527 	mov	_TCON,#0x40
-                    0651   2528 	C$final.c$210$1$1 ==.
-                           2529 ;	C:\Users\SSP\Documents\Microprocessor Systems\Final\final.c:210: TMOD	&= 0x0F;
-   06BF 53 89 0F           2530 	anl	_TMOD,#0x0F
-                    0654   2531 	C$final.c$211$1$1 ==.
-                           2532 ;	C:\Users\SSP\Documents\Microprocessor Systems\Final\final.c:211: TMOD	|= 0x20;					// Timer1, Mode 2, 8-bit reload
-   06C2 43 89 20           2533 	orl	_TMOD,#0x20
-                    0657   2534 	C$final.c$212$1$1 ==.
-                           2535 ;	C:\Users\SSP\Documents\Microprocessor Systems\Final\final.c:212: CKCON	|= 0x10;					// Timer1 uses SYSCLK as time base
-   06C5 43 8E 10           2536 	orl	_CKCON,#0x10
-                    065A   2537 	C$final.c$214$1$1 ==.
-                           2538 ;	C:\Users\SSP\Documents\Microprocessor Systems\Final\final.c:214: TH1		 = 0xE8;					// 0xE8 = 232
-   06C8 75 8D E8           2539 	mov	_TH1,#0xE8
-                    065D   2540 	C$final.c$215$1$1 ==.
-                           2541 ;	C:\Users\SSP\Documents\Microprocessor Systems\Final\final.c:215: TR1		 = 1;						// Start Timer1
-   06CB D2 8E              2542 	setb	_TR1
-                    065F   2543 	C$final.c$217$1$1 ==.
-                           2544 ;	C:\Users\SSP\Documents\Microprocessor Systems\Final\final.c:217: SFRPAGE = UART0_PAGE;
-   06CD 75 84 00           2545 	mov	_SFRPAGE,#0x00
-                    0662   2546 	C$final.c$218$1$1 ==.
-                           2547 ;	C:\Users\SSP\Documents\Microprocessor Systems\Final\final.c:218: SCON0	 = 0x50;					// Mode 1, 8-bit UART, enable RX
-   06D0 75 98 50           2548 	mov	_SCON0,#0x50
-                    0665   2549 	C$final.c$219$1$1 ==.
-                           2550 ;	C:\Users\SSP\Documents\Microprocessor Systems\Final\final.c:219: SSTA0	 = 0x00;					// SMOD0 = 0, in this mode
-   06D3 75 91 00           2551 	mov	_SSTA0,#0x00
-                    0668   2552 	C$final.c$222$1$1 ==.
-                           2553 ;	C:\Users\SSP\Documents\Microprocessor Systems\Final\final.c:222: TI0 = 1;							// Indicate TX0 ready
-   06D6 D2 99              2554 	setb	_TI0
-                    066A   2555 	C$final.c$224$1$1 ==.
-                           2556 ;	C:\Users\SSP\Documents\Microprocessor Systems\Final\final.c:224: SFRPAGE = SFRPAGE_SAVE;             // Restore SFR page
-   06D8 8A 84              2557 	mov	_SFRPAGE,r2
-                    066C   2558 	C$final.c$225$1$1 ==.
-                    066C   2559 	XG$UART0_INIT$0$0 ==.
-   06DA 22                 2560 	ret
-                           2561 	.area CSEG    (CODE)
-                           2562 	.area CONST   (CODE)
-                    0000   2563 Ffinal$startRow$0$0 == .
-   0DC9                    2564 _startRow:
-   0DC9 03 00              2565 	.byte #0x03,#0x00
-   0DCB 07 00              2566 	.byte #0x07,#0x00
-   0DCD 0B 00              2567 	.byte #0x0B,#0x00
-                    0006   2568 Ffinal$startCol$0$0 == .
-   0DCF                    2569 _startCol:
-   0DCF 01 00              2570 	.byte #0x01,#0x00
-   0DD1 07 00              2571 	.byte #0x07,#0x00
-   0DD3 0D 00              2572 	.byte #0x0D,#0x00
-                    000C   2573 Ffinal$_str_0$0$0 == .
-   0DD5                    2574 __str_0:
-   0DD5 1B                 2575 	.db 0x1B
-   0DD6 5B 32 4A           2576 	.ascii "[2J"
-   0DD9 00                 2577 	.db 0x00
-                    0011   2578 Ffinal$_str_1$0$0 == .
-   0DDA                    2579 __str_1:
-   0DDA 57 69 74 68 20 65  2580 	.ascii "With each revolution, we get one step closer; that's how a d"
+   03AE 74 80              1982 	mov	a,#0x80
+   03B0 C0 E0              1983 	push	acc
+   03B2 12 0C 2C           1984 	lcall	_printf
+   03B5 E5 81              1985 	mov	a,sp
+   03B7 24 F9              1986 	add	a,#0xf9
+   03B9 F5 81              1987 	mov	sp,a
+   03BB D0 01              1988 	pop	ar1
+   03BD D0 00              1989 	pop	ar0
+   03BF D0 05              1990 	pop	ar5
+   03C1 D0 04              1991 	pop	ar4
+                    035A   1992 	C$final.c$148$2$2 ==.
+                           1993 ;	C:\Users\SSP\Documents\Microprocessor Systems\Final\final.c:148: printf("\033[%d;%dHX  X", startRow[pos/3]+2, startCol[pos%3]);
+   03C3 EC                 1994 	mov	a,r4
+   03C4 24 86              1995 	add	a,#_startCol
+   03C6 F5 82              1996 	mov	dpl,a
+   03C8 ED                 1997 	mov	a,r5
+   03C9 34 12              1998 	addc	a,#(_startCol >> 8)
+   03CB F5 83              1999 	mov	dph,a
+   03CD E4                 2000 	clr	a
+   03CE 93                 2001 	movc	a,@a+dptr
+   03CF FC                 2002 	mov	r4,a
+   03D0 A3                 2003 	inc	dptr
+   03D1 E4                 2004 	clr	a
+   03D2 93                 2005 	movc	a,@a+dptr
+   03D3 FD                 2006 	mov	r5,a
+   03D4 E8                 2007 	mov	a,r0
+   03D5 24 80              2008 	add	a,#_startRow
+   03D7 F5 82              2009 	mov	dpl,a
+   03D9 E9                 2010 	mov	a,r1
+   03DA 34 12              2011 	addc	a,#(_startRow >> 8)
+   03DC F5 83              2012 	mov	dph,a
+   03DE E4                 2013 	clr	a
+   03DF 93                 2014 	movc	a,@a+dptr
+   03E0 FE                 2015 	mov	r6,a
+   03E1 A3                 2016 	inc	dptr
+   03E2 E4                 2017 	clr	a
+   03E3 93                 2018 	movc	a,@a+dptr
+   03E4 FF                 2019 	mov	r7,a
+   03E5 74 02              2020 	mov	a,#0x02
+   03E7 2E                 2021 	add	a,r6
+   03E8 FE                 2022 	mov	r6,a
+   03E9 E4                 2023 	clr	a
+   03EA 3F                 2024 	addc	a,r7
+   03EB FF                 2025 	mov	r7,a
+   03EC C0 04              2026 	push	ar4
+   03EE C0 05              2027 	push	ar5
+   03F0 C0 06              2028 	push	ar6
+   03F2 C0 07              2029 	push	ar7
+   03F4 74 89              2030 	mov	a,#__str_13
+   03F6 C0 E0              2031 	push	acc
+   03F8 74 13              2032 	mov	a,#(__str_13 >> 8)
+   03FA C0 E0              2033 	push	acc
+   03FC 74 80              2034 	mov	a,#0x80
+   03FE C0 E0              2035 	push	acc
+   0400 12 0C 2C           2036 	lcall	_printf
+   0403 E5 81              2037 	mov	a,sp
+   0405 24 F9              2038 	add	a,#0xf9
+   0407 F5 81              2039 	mov	sp,a
+   0409 22                 2040 	ret
+   040A                    2041 00109$:
+                    03A1   2042 	C$final.c$150$1$1 ==.
+                           2043 ;	C:\Users\SSP\Documents\Microprocessor Systems\Final\final.c:150: else if (board[9][pos] == 0)
+   040A EA                 2044 	mov	a,r2
+   040B 24 90              2045 	add	a,#(_board + 0x0090)
+   040D FC                 2046 	mov	r4,a
+   040E EB                 2047 	mov	a,r3
+   040F 34 00              2048 	addc	a,#((_board + 0x0090) >> 8)
+   0411 FD                 2049 	mov	r5,a
+   0412 8C 82              2050 	mov	dpl,r4
+   0414 8D 83              2051 	mov	dph,r5
+   0416 E0                 2052 	movx	a,@dptr
+   0417 60 03              2053 	jz	00127$
+   0419 02 05 16           2054 	ljmp	00106$
+   041C                    2055 00127$:
+                    03B3   2056 	C$final.c$152$2$3 ==.
+                           2057 ;	C:\Users\SSP\Documents\Microprocessor Systems\Final\final.c:152: printf(" OO ");
+   041C C0 02              2058 	push	ar2
+   041E C0 03              2059 	push	ar3
+   0420 74 96              2060 	mov	a,#__str_14
+   0422 C0 E0              2061 	push	acc
+   0424 74 13              2062 	mov	a,#(__str_14 >> 8)
+   0426 C0 E0              2063 	push	acc
+   0428 74 80              2064 	mov	a,#0x80
+   042A C0 E0              2065 	push	acc
+   042C 12 0C 2C           2066 	lcall	_printf
+   042F 15 81              2067 	dec	sp
+   0431 15 81              2068 	dec	sp
+   0433 15 81              2069 	dec	sp
+   0435 D0 03              2070 	pop	ar3
+   0437 D0 02              2071 	pop	ar2
+                    03D0   2072 	C$final.c$153$2$3 ==.
+                           2073 ;	C:\Users\SSP\Documents\Microprocessor Systems\Final\final.c:153: printf("\033[%d;%dHO  O", startRow[pos/3]+1, startCol[pos%3]);
+   0439 75 0F 03           2074 	mov	__modsint_PARM_2,#0x03
+   043C E4                 2075 	clr	a
+   043D F5 10              2076 	mov	(__modsint_PARM_2 + 1),a
+   043F 8A 82              2077 	mov	dpl,r2
+   0441 8B 83              2078 	mov	dph,r3
+   0443 C0 02              2079 	push	ar2
+   0445 C0 03              2080 	push	ar3
+   0447 12 12 0E           2081 	lcall	__modsint
+   044A AC 82              2082 	mov	r4,dpl
+   044C AD 83              2083 	mov	r5,dph
+   044E D0 03              2084 	pop	ar3
+   0450 D0 02              2085 	pop	ar2
+   0452 ED                 2086 	mov	a,r5
+   0453 CC                 2087 	xch	a,r4
+   0454 25 E0              2088 	add	a,acc
+   0456 CC                 2089 	xch	a,r4
+   0457 33                 2090 	rlc	a
+   0458 FD                 2091 	mov	r5,a
+   0459 EC                 2092 	mov	a,r4
+   045A 24 86              2093 	add	a,#_startCol
+   045C F5 82              2094 	mov	dpl,a
+   045E ED                 2095 	mov	a,r5
+   045F 34 12              2096 	addc	a,#(_startCol >> 8)
+   0461 F5 83              2097 	mov	dph,a
+   0463 E4                 2098 	clr	a
+   0464 93                 2099 	movc	a,@a+dptr
+   0465 F5 09              2100 	mov	_printSubBoard_sloc0_1_0,a
+   0467 A3                 2101 	inc	dptr
+   0468 E4                 2102 	clr	a
+   0469 93                 2103 	movc	a,@a+dptr
+   046A F5 0A              2104 	mov	(_printSubBoard_sloc0_1_0 + 1),a
+   046C 75 0F 03           2105 	mov	__divsint_PARM_2,#0x03
+   046F E4                 2106 	clr	a
+   0470 F5 10              2107 	mov	(__divsint_PARM_2 + 1),a
+   0472 8A 82              2108 	mov	dpl,r2
+   0474 8B 83              2109 	mov	dph,r3
+   0476 C0 04              2110 	push	ar4
+   0478 C0 05              2111 	push	ar5
+   047A 12 12 44           2112 	lcall	__divsint
+   047D A8 82              2113 	mov	r0,dpl
+   047F A9 83              2114 	mov	r1,dph
+   0481 D0 05              2115 	pop	ar5
+   0483 D0 04              2116 	pop	ar4
+   0485 E9                 2117 	mov	a,r1
+   0486 C8                 2118 	xch	a,r0
+   0487 25 E0              2119 	add	a,acc
+   0489 C8                 2120 	xch	a,r0
+   048A 33                 2121 	rlc	a
+   048B F9                 2122 	mov	r1,a
+   048C E8                 2123 	mov	a,r0
+   048D 24 80              2124 	add	a,#_startRow
+   048F F5 82              2125 	mov	dpl,a
+   0491 E9                 2126 	mov	a,r1
+   0492 34 12              2127 	addc	a,#(_startRow >> 8)
+   0494 F5 83              2128 	mov	dph,a
+   0496 E4                 2129 	clr	a
+   0497 93                 2130 	movc	a,@a+dptr
+   0498 FE                 2131 	mov	r6,a
+   0499 A3                 2132 	inc	dptr
+   049A E4                 2133 	clr	a
+   049B 93                 2134 	movc	a,@a+dptr
+   049C FF                 2135 	mov	r7,a
+   049D 0E                 2136 	inc	r6
+   049E BE 00 01           2137 	cjne	r6,#0x00,00128$
+   04A1 0F                 2138 	inc	r7
+   04A2                    2139 00128$:
+   04A2 C0 04              2140 	push	ar4
+   04A4 C0 05              2141 	push	ar5
+   04A6 C0 00              2142 	push	ar0
+   04A8 C0 01              2143 	push	ar1
+   04AA C0 09              2144 	push	_printSubBoard_sloc0_1_0
+   04AC C0 0A              2145 	push	(_printSubBoard_sloc0_1_0 + 1)
+   04AE C0 06              2146 	push	ar6
+   04B0 C0 07              2147 	push	ar7
+   04B2 74 9B              2148 	mov	a,#__str_15
+   04B4 C0 E0              2149 	push	acc
+   04B6 74 13              2150 	mov	a,#(__str_15 >> 8)
+   04B8 C0 E0              2151 	push	acc
+   04BA 74 80              2152 	mov	a,#0x80
+   04BC C0 E0              2153 	push	acc
+   04BE 12 0C 2C           2154 	lcall	_printf
+   04C1 E5 81              2155 	mov	a,sp
+   04C3 24 F9              2156 	add	a,#0xf9
+   04C5 F5 81              2157 	mov	sp,a
+   04C7 D0 01              2158 	pop	ar1
+   04C9 D0 00              2159 	pop	ar0
+   04CB D0 05              2160 	pop	ar5
+   04CD D0 04              2161 	pop	ar4
+                    0466   2162 	C$final.c$154$2$3 ==.
+                           2163 ;	C:\Users\SSP\Documents\Microprocessor Systems\Final\final.c:154: printf("\033[%d;%dH OO", startRow[pos/3]+2, startCol[pos%3]);
+   04CF EC                 2164 	mov	a,r4
+   04D0 24 86              2165 	add	a,#_startCol
+   04D2 F5 82              2166 	mov	dpl,a
+   04D4 ED                 2167 	mov	a,r5
+   04D5 34 12              2168 	addc	a,#(_startCol >> 8)
+   04D7 F5 83              2169 	mov	dph,a
+   04D9 E4                 2170 	clr	a
+   04DA 93                 2171 	movc	a,@a+dptr
+   04DB FC                 2172 	mov	r4,a
+   04DC A3                 2173 	inc	dptr
+   04DD E4                 2174 	clr	a
+   04DE 93                 2175 	movc	a,@a+dptr
+   04DF FD                 2176 	mov	r5,a
+   04E0 E8                 2177 	mov	a,r0
+   04E1 24 80              2178 	add	a,#_startRow
+   04E3 F5 82              2179 	mov	dpl,a
+   04E5 E9                 2180 	mov	a,r1
+   04E6 34 12              2181 	addc	a,#(_startRow >> 8)
+   04E8 F5 83              2182 	mov	dph,a
+   04EA E4                 2183 	clr	a
+   04EB 93                 2184 	movc	a,@a+dptr
+   04EC FE                 2185 	mov	r6,a
+   04ED A3                 2186 	inc	dptr
+   04EE E4                 2187 	clr	a
+   04EF 93                 2188 	movc	a,@a+dptr
+   04F0 FF                 2189 	mov	r7,a
+   04F1 74 02              2190 	mov	a,#0x02
+   04F3 2E                 2191 	add	a,r6
+   04F4 FE                 2192 	mov	r6,a
+   04F5 E4                 2193 	clr	a
+   04F6 3F                 2194 	addc	a,r7
+   04F7 FF                 2195 	mov	r7,a
+   04F8 C0 04              2196 	push	ar4
+   04FA C0 05              2197 	push	ar5
+   04FC C0 06              2198 	push	ar6
+   04FE C0 07              2199 	push	ar7
+   0500 74 A8              2200 	mov	a,#__str_16
+   0502 C0 E0              2201 	push	acc
+   0504 74 13              2202 	mov	a,#(__str_16 >> 8)
+   0506 C0 E0              2203 	push	acc
+   0508 74 80              2204 	mov	a,#0x80
+   050A C0 E0              2205 	push	acc
+   050C 12 0C 2C           2206 	lcall	_printf
+   050F E5 81              2207 	mov	a,sp
+   0511 24 F9              2208 	add	a,#0xf9
+   0513 F5 81              2209 	mov	sp,a
+   0515 22                 2210 	ret
+   0516                    2211 00106$:
+                    04AD   2212 	C$final.c$158$2$4 ==.
+                           2213 ;	C:\Users\SSP\Documents\Microprocessor Systems\Final\final.c:158: for(i=0; i<9; i++)
+   0516 7C 00              2214 	mov	r4,#0x00
+   0518 7D 00              2215 	mov	r5,#0x00
+   051A 75 0F 03           2216 	mov	__modsint_PARM_2,#0x03
+   051D E4                 2217 	clr	a
+   051E F5 10              2218 	mov	(__modsint_PARM_2 + 1),a
+   0520 8A 82              2219 	mov	dpl,r2
+   0522 8B 83              2220 	mov	dph,r3
+   0524 C0 02              2221 	push	ar2
+   0526 C0 03              2222 	push	ar3
+   0528 C0 04              2223 	push	ar4
+   052A C0 05              2224 	push	ar5
+   052C 12 12 0E           2225 	lcall	__modsint
+   052F AE 82              2226 	mov	r6,dpl
+   0531 AF 83              2227 	mov	r7,dph
+   0533 D0 05              2228 	pop	ar5
+   0535 D0 04              2229 	pop	ar4
+   0537 D0 03              2230 	pop	ar3
+   0539 D0 02              2231 	pop	ar2
+   053B EF                 2232 	mov	a,r7
+   053C CE                 2233 	xch	a,r6
+   053D 25 E0              2234 	add	a,acc
+   053F CE                 2235 	xch	a,r6
+   0540 33                 2236 	rlc	a
+   0541 FF                 2237 	mov	r7,a
+   0542 75 0F 03           2238 	mov	__divsint_PARM_2,#0x03
+   0545 E4                 2239 	clr	a
+   0546 F5 10              2240 	mov	(__divsint_PARM_2 + 1),a
+   0548 8A 82              2241 	mov	dpl,r2
+   054A 8B 83              2242 	mov	dph,r3
+   054C C0 02              2243 	push	ar2
+   054E C0 03              2244 	push	ar3
+   0550 C0 04              2245 	push	ar4
+   0552 C0 05              2246 	push	ar5
+   0554 C0 06              2247 	push	ar6
+   0556 C0 07              2248 	push	ar7
+   0558 12 12 44           2249 	lcall	__divsint
+   055B A8 82              2250 	mov	r0,dpl
+   055D A9 83              2251 	mov	r1,dph
+   055F D0 07              2252 	pop	ar7
+   0561 D0 06              2253 	pop	ar6
+   0563 D0 05              2254 	pop	ar5
+   0565 D0 04              2255 	pop	ar4
+   0567 D0 03              2256 	pop	ar3
+   0569 D0 02              2257 	pop	ar2
+   056B 88 09              2258 	mov	_printSubBoard_sloc0_1_0,r0
+   056D E9                 2259 	mov	a,r1
+   056E C5 09              2260 	xch	a,_printSubBoard_sloc0_1_0
+   0570 25 E0              2261 	add	a,acc
+   0572 C5 09              2262 	xch	a,_printSubBoard_sloc0_1_0
+   0574 33                 2263 	rlc	a
+   0575 F5 0A              2264 	mov	(_printSubBoard_sloc0_1_0 + 1),a
+   0577 EB                 2265 	mov	a,r3
+   0578 C4                 2266 	swap	a
+   0579 54 F0              2267 	anl	a,#0xf0
+   057B CA                 2268 	xch	a,r2
+   057C C4                 2269 	swap	a
+   057D CA                 2270 	xch	a,r2
+   057E 6A                 2271 	xrl	a,r2
+   057F CA                 2272 	xch	a,r2
+   0580 54 F0              2273 	anl	a,#0xf0
+   0582 CA                 2274 	xch	a,r2
+   0583 6A                 2275 	xrl	a,r2
+   0584 FB                 2276 	mov	r3,a
+   0585                    2277 00111$:
+   0585 C3                 2278 	clr	c
+   0586 EC                 2279 	mov	a,r4
+   0587 94 09              2280 	subb	a,#0x09
+   0589 ED                 2281 	mov	a,r5
+   058A 64 80              2282 	xrl	a,#0x80
+   058C 94 80              2283 	subb	a,#0x80
+   058E 40 01              2284 	jc	00129$
+   0590 22                 2285 	ret
+   0591                    2286 00129$:
+                    0528   2287 	C$final.c$160$1$1 ==.
+                           2288 ;	C:\Users\SSP\Documents\Microprocessor Systems\Final\final.c:160: if(i%3 == 0)
+   0591 75 0F 03           2289 	mov	__modsint_PARM_2,#0x03
+   0594 E4                 2290 	clr	a
+   0595 F5 10              2291 	mov	(__modsint_PARM_2 + 1),a
+   0597 8C 82              2292 	mov	dpl,r4
+   0599 8D 83              2293 	mov	dph,r5
+   059B C0 02              2294 	push	ar2
+   059D C0 03              2295 	push	ar3
+   059F C0 04              2296 	push	ar4
+   05A1 C0 05              2297 	push	ar5
+   05A3 C0 06              2298 	push	ar6
+   05A5 C0 07              2299 	push	ar7
+   05A7 12 12 0E           2300 	lcall	__modsint
+   05AA E5 82              2301 	mov	a,dpl
+   05AC 85 83 F0           2302 	mov	b,dph
+   05AF D0 07              2303 	pop	ar7
+   05B1 D0 06              2304 	pop	ar6
+   05B3 D0 05              2305 	pop	ar5
+   05B5 D0 04              2306 	pop	ar4
+   05B7 D0 03              2307 	pop	ar3
+   05B9 D0 02              2308 	pop	ar2
+   05BB 45 F0              2309 	orl	a,b
+   05BD 60 03              2310 	jz	00130$
+   05BF 02 06 56           2311 	ljmp	00102$
+   05C2                    2312 00130$:
+                    0559   2313 	C$final.c$161$1$1 ==.
+                           2314 ;	C:\Users\SSP\Documents\Microprocessor Systems\Final\final.c:161: printf("\033[%d;%dH", startRow[pos/3]+i/3, startCol[pos%3]);
+   05C2 C0 02              2315 	push	ar2
+   05C4 C0 03              2316 	push	ar3
+   05C6 EE                 2317 	mov	a,r6
+   05C7 24 86              2318 	add	a,#_startCol
+   05C9 F5 82              2319 	mov	dpl,a
+   05CB EF                 2320 	mov	a,r7
+   05CC 34 12              2321 	addc	a,#(_startCol >> 8)
+   05CE F5 83              2322 	mov	dph,a
+   05D0 E4                 2323 	clr	a
+   05D1 93                 2324 	movc	a,@a+dptr
+   05D2 FA                 2325 	mov	r2,a
+   05D3 A3                 2326 	inc	dptr
+   05D4 E4                 2327 	clr	a
+   05D5 93                 2328 	movc	a,@a+dptr
+   05D6 FB                 2329 	mov	r3,a
+   05D7 E5 09              2330 	mov	a,_printSubBoard_sloc0_1_0
+   05D9 24 80              2331 	add	a,#_startRow
+   05DB F5 82              2332 	mov	dpl,a
+   05DD E5 0A              2333 	mov	a,(_printSubBoard_sloc0_1_0 + 1)
+   05DF 34 12              2334 	addc	a,#(_startRow >> 8)
+   05E1 F5 83              2335 	mov	dph,a
+   05E3 E4                 2336 	clr	a
+   05E4 93                 2337 	movc	a,@a+dptr
+   05E5 F5 0B              2338 	mov	_printSubBoard_sloc1_1_0,a
+   05E7 A3                 2339 	inc	dptr
+   05E8 E4                 2340 	clr	a
+   05E9 93                 2341 	movc	a,@a+dptr
+   05EA F5 0C              2342 	mov	(_printSubBoard_sloc1_1_0 + 1),a
+   05EC 75 0F 03           2343 	mov	__divsint_PARM_2,#0x03
+   05EF E4                 2344 	clr	a
+   05F0 F5 10              2345 	mov	(__divsint_PARM_2 + 1),a
+   05F2 8C 82              2346 	mov	dpl,r4
+   05F4 8D 83              2347 	mov	dph,r5
+   05F6 C0 02              2348 	push	ar2
+   05F8 C0 03              2349 	push	ar3
+   05FA C0 04              2350 	push	ar4
+   05FC C0 05              2351 	push	ar5
+   05FE C0 06              2352 	push	ar6
+   0600 C0 07              2353 	push	ar7
+   0602 12 12 44           2354 	lcall	__divsint
+   0605 A8 82              2355 	mov	r0,dpl
+   0607 A9 83              2356 	mov	r1,dph
+   0609 D0 07              2357 	pop	ar7
+   060B D0 06              2358 	pop	ar6
+   060D D0 05              2359 	pop	ar5
+   060F D0 04              2360 	pop	ar4
+   0611 D0 03              2361 	pop	ar3
+   0613 D0 02              2362 	pop	ar2
+   0615 E8                 2363 	mov	a,r0
+   0616 25 0B              2364 	add	a,_printSubBoard_sloc1_1_0
+   0618 F8                 2365 	mov	r0,a
+   0619 E9                 2366 	mov	a,r1
+   061A 35 0C              2367 	addc	a,(_printSubBoard_sloc1_1_0 + 1)
+   061C F9                 2368 	mov	r1,a
+   061D C0 02              2369 	push	ar2
+   061F C0 03              2370 	push	ar3
+   0621 C0 04              2371 	push	ar4
+   0623 C0 05              2372 	push	ar5
+   0625 C0 06              2373 	push	ar6
+   0627 C0 07              2374 	push	ar7
+   0629 C0 02              2375 	push	ar2
+   062B C0 03              2376 	push	ar3
+   062D C0 00              2377 	push	ar0
+   062F C0 01              2378 	push	ar1
+   0631 74 6E              2379 	mov	a,#__str_10
+   0633 C0 E0              2380 	push	acc
+   0635 74 13              2381 	mov	a,#(__str_10 >> 8)
+   0637 C0 E0              2382 	push	acc
+   0639 74 80              2383 	mov	a,#0x80
+   063B C0 E0              2384 	push	acc
+   063D 12 0C 2C           2385 	lcall	_printf
+   0640 E5 81              2386 	mov	a,sp
+   0642 24 F9              2387 	add	a,#0xf9
+   0644 F5 81              2388 	mov	sp,a
+   0646 D0 07              2389 	pop	ar7
+   0648 D0 06              2390 	pop	ar6
+   064A D0 05              2391 	pop	ar5
+   064C D0 04              2392 	pop	ar4
+   064E D0 03              2393 	pop	ar3
+   0650 D0 02              2394 	pop	ar2
+                    05E9   2395 	C$final.c$158$1$1 ==.
+                           2396 ;	C:\Users\SSP\Documents\Microprocessor Systems\Final\final.c:158: for(i=0; i<9; i++)
+   0652 D0 03              2397 	pop	ar3
+   0654 D0 02              2398 	pop	ar2
+                    05ED   2399 	C$final.c$161$3$5 ==.
+                           2400 ;	C:\Users\SSP\Documents\Microprocessor Systems\Final\final.c:161: printf("\033[%d;%dH", startRow[pos/3]+i/3, startCol[pos%3]);
+   0656                    2401 00102$:
+                    05ED   2402 	C$final.c$163$3$5 ==.
+                           2403 ;	C:\Users\SSP\Documents\Microprocessor Systems\Final\final.c:163: printf("%c", board[pos][i]);
+   0656 EA                 2404 	mov	a,r2
+   0657 24 00              2405 	add	a,#_board
+   0659 F8                 2406 	mov	r0,a
+   065A EB                 2407 	mov	a,r3
+   065B 34 00              2408 	addc	a,#(_board >> 8)
+   065D F9                 2409 	mov	r1,a
+   065E EC                 2410 	mov	a,r4
+   065F 28                 2411 	add	a,r0
+   0660 F5 82              2412 	mov	dpl,a
+   0662 ED                 2413 	mov	a,r5
+   0663 39                 2414 	addc	a,r1
+   0664 F5 83              2415 	mov	dph,a
+   0666 E0                 2416 	movx	a,@dptr
+   0667 F8                 2417 	mov	r0,a
+   0668 33                 2418 	rlc	a
+   0669 95 E0              2419 	subb	a,acc
+   066B F9                 2420 	mov	r1,a
+   066C C0 02              2421 	push	ar2
+   066E C0 03              2422 	push	ar3
+   0670 C0 04              2423 	push	ar4
+   0672 C0 05              2424 	push	ar5
+   0674 C0 06              2425 	push	ar6
+   0676 C0 07              2426 	push	ar7
+   0678 C0 00              2427 	push	ar0
+   067A C0 01              2428 	push	ar1
+   067C 74 B4              2429 	mov	a,#__str_17
+   067E C0 E0              2430 	push	acc
+   0680 74 13              2431 	mov	a,#(__str_17 >> 8)
+   0682 C0 E0              2432 	push	acc
+   0684 74 80              2433 	mov	a,#0x80
+   0686 C0 E0              2434 	push	acc
+   0688 12 0C 2C           2435 	lcall	_printf
+   068B E5 81              2436 	mov	a,sp
+   068D 24 FB              2437 	add	a,#0xfb
+   068F F5 81              2438 	mov	sp,a
+   0691 D0 07              2439 	pop	ar7
+   0693 D0 06              2440 	pop	ar6
+   0695 D0 05              2441 	pop	ar5
+   0697 D0 04              2442 	pop	ar4
+                    0630   2443 	C$final.c$164$1$1 ==.
+                           2444 ;	C:\Users\SSP\Documents\Microprocessor Systems\Final\final.c:164: if(i%3!=2)	
+   0699 75 0F 03           2445 	mov	__modsint_PARM_2,#0x03
+   069C E4                 2446 	clr	a
+   069D F5 10              2447 	mov	(__modsint_PARM_2 + 1),a
+   069F 8C 82              2448 	mov	dpl,r4
+   06A1 8D 83              2449 	mov	dph,r5
+   06A3 C0 04              2450 	push	ar4
+   06A5 C0 05              2451 	push	ar5
+   06A7 C0 06              2452 	push	ar6
+   06A9 C0 07              2453 	push	ar7
+   06AB 12 12 0E           2454 	lcall	__modsint
+   06AE A8 82              2455 	mov	r0,dpl
+   06B0 A9 83              2456 	mov	r1,dph
+   06B2 D0 07              2457 	pop	ar7
+   06B4 D0 06              2458 	pop	ar6
+   06B6 D0 05              2459 	pop	ar5
+   06B8 D0 04              2460 	pop	ar4
+   06BA D0 03              2461 	pop	ar3
+   06BC D0 02              2462 	pop	ar2
+   06BE B8 02 05           2463 	cjne	r0,#0x02,00131$
+   06C1 B9 00 02           2464 	cjne	r1,#0x00,00131$
+   06C4 80 2D              2465 	sjmp	00113$
+   06C6                    2466 00131$:
+                    065D   2467 	C$final.c$165$3$5 ==.
+                           2468 ;	C:\Users\SSP\Documents\Microprocessor Systems\Final\final.c:165: printf("|");
+   06C6 C0 02              2469 	push	ar2
+   06C8 C0 03              2470 	push	ar3
+   06CA C0 04              2471 	push	ar4
+   06CC C0 05              2472 	push	ar5
+   06CE C0 06              2473 	push	ar6
+   06D0 C0 07              2474 	push	ar7
+   06D2 74 B7              2475 	mov	a,#__str_18
+   06D4 C0 E0              2476 	push	acc
+   06D6 74 13              2477 	mov	a,#(__str_18 >> 8)
+   06D8 C0 E0              2478 	push	acc
+   06DA 74 80              2479 	mov	a,#0x80
+   06DC C0 E0              2480 	push	acc
+   06DE 12 0C 2C           2481 	lcall	_printf
+   06E1 15 81              2482 	dec	sp
+   06E3 15 81              2483 	dec	sp
+   06E5 15 81              2484 	dec	sp
+   06E7 D0 07              2485 	pop	ar7
+   06E9 D0 06              2486 	pop	ar6
+   06EB D0 05              2487 	pop	ar5
+   06ED D0 04              2488 	pop	ar4
+   06EF D0 03              2489 	pop	ar3
+   06F1 D0 02              2490 	pop	ar2
+   06F3                    2491 00113$:
+                    068A   2492 	C$final.c$158$2$4 ==.
+                           2493 ;	C:\Users\SSP\Documents\Microprocessor Systems\Final\final.c:158: for(i=0; i<9; i++)
+   06F3 0C                 2494 	inc	r4
+   06F4 BC 00 01           2495 	cjne	r4,#0x00,00132$
+   06F7 0D                 2496 	inc	r5
+   06F8                    2497 00132$:
+                    068F   2498 	C$final.c$168$1$1 ==.
+                    068F   2499 	XG$printSubBoard$0$0 ==.
+   06F8 02 05 85           2500 	ljmp	00111$
+                           2501 ;------------------------------------------------------------
+                           2502 ;Allocation info for local variables in function 'checkBoardWin'
+                           2503 ;------------------------------------------------------------
+                           2504 ;b                         Allocated with name '_checkBoardWin_b_1_1'
+                           2505 ;i                         Allocated to registers r5 r6 
+                           2506 ;------------------------------------------------------------
+                    0692   2507 	G$checkBoardWin$0$0 ==.
+                    0692   2508 	C$final.c$170$1$1 ==.
+                           2509 ;	C:\Users\SSP\Documents\Microprocessor Systems\Final\final.c:170: bit checkBoardWin(char b[])
+                           2510 ;	-----------------------------------------
+                           2511 ;	 function checkBoardWin
+                           2512 ;	-----------------------------------------
+   06FB                    2513 _checkBoardWin:
+   06FB 85 82 0F           2514 	mov	_checkBoardWin_b_1_1,dpl
+   06FE 85 83 10           2515 	mov	(_checkBoardWin_b_1_1 + 1),dph
+   0701 85 F0 11           2516 	mov	(_checkBoardWin_b_1_1 + 2),b
+                    069B   2517 	C$final.c$174$1$1 ==.
+                           2518 ;	C:\Users\SSP\Documents\Microprocessor Systems\Final\final.c:174: for(i=0; i<3; i++)			//verticals
+   0704 7D 00              2519 	mov	r5,#0x00
+   0706 7E 00              2520 	mov	r6,#0x00
+   0708 8D 07              2521 	mov	ar7,r5
+   070A 8E 00              2522 	mov	ar0,r6
+   070C                    2523 00117$:
+   070C C3                 2524 	clr	c
+   070D EF                 2525 	mov	a,r7
+   070E 94 03              2526 	subb	a,#0x03
+   0710 E8                 2527 	mov	a,r0
+   0711 64 80              2528 	xrl	a,#0x80
+   0713 94 80              2529 	subb	a,#0x80
+   0715 40 03              2530 	jc	00143$
+   0717 02 07 A3           2531 	ljmp	00120$
+   071A                    2532 00143$:
+                    06B1   2533 	C$final.c$176$2$2 ==.
+                           2534 ;	C:\Users\SSP\Documents\Microprocessor Systems\Final\final.c:176: if(b[i] == b[i+3] && b[i] == b[i+6] && b[i] != ' ')
+   071A EF                 2535 	mov	a,r7
+   071B 25 0F              2536 	add	a,_checkBoardWin_b_1_1
+   071D F9                 2537 	mov	r1,a
+   071E E8                 2538 	mov	a,r0
+   071F 35 10              2539 	addc	a,(_checkBoardWin_b_1_1 + 1)
+   0721 FA                 2540 	mov	r2,a
+   0722 AB 11              2541 	mov	r3,(_checkBoardWin_b_1_1 + 2)
+   0724 89 82              2542 	mov	dpl,r1
+   0726 8A 83              2543 	mov	dph,r2
+   0728 8B F0              2544 	mov	b,r3
+   072A 12 11 F2           2545 	lcall	__gptrget
+   072D F9                 2546 	mov	r1,a
+   072E 74 03              2547 	mov	a,#0x03
+   0730 2F                 2548 	add	a,r7
+   0731 FA                 2549 	mov	r2,a
+   0732 E4                 2550 	clr	a
+   0733 38                 2551 	addc	a,r0
+   0734 FB                 2552 	mov	r3,a
+   0735 EA                 2553 	mov	a,r2
+   0736 25 0F              2554 	add	a,_checkBoardWin_b_1_1
+   0738 FA                 2555 	mov	r2,a
+   0739 EB                 2556 	mov	a,r3
+   073A 35 10              2557 	addc	a,(_checkBoardWin_b_1_1 + 1)
+   073C FB                 2558 	mov	r3,a
+   073D AC 11              2559 	mov	r4,(_checkBoardWin_b_1_1 + 2)
+   073F 8A 82              2560 	mov	dpl,r2
+   0741 8B 83              2561 	mov	dph,r3
+   0743 8C F0              2562 	mov	b,r4
+   0745 12 11 F2           2563 	lcall	__gptrget
+   0748 FA                 2564 	mov	r2,a
+   0749 E9                 2565 	mov	a,r1
+   074A B5 02 4E           2566 	cjne	a,ar2,00119$
+   074D EF                 2567 	mov	a,r7
+   074E 25 0F              2568 	add	a,_checkBoardWin_b_1_1
+   0750 FA                 2569 	mov	r2,a
+   0751 E8                 2570 	mov	a,r0
+   0752 35 10              2571 	addc	a,(_checkBoardWin_b_1_1 + 1)
+   0754 FB                 2572 	mov	r3,a
+   0755 AC 11              2573 	mov	r4,(_checkBoardWin_b_1_1 + 2)
+   0757 8A 82              2574 	mov	dpl,r2
+   0759 8B 83              2575 	mov	dph,r3
+   075B 8C F0              2576 	mov	b,r4
+   075D 12 11 F2           2577 	lcall	__gptrget
+   0760 FA                 2578 	mov	r2,a
+   0761 74 06              2579 	mov	a,#0x06
+   0763 2F                 2580 	add	a,r7
+   0764 FB                 2581 	mov	r3,a
+   0765 E4                 2582 	clr	a
+   0766 38                 2583 	addc	a,r0
+   0767 FC                 2584 	mov	r4,a
+   0768 EB                 2585 	mov	a,r3
+   0769 25 0F              2586 	add	a,_checkBoardWin_b_1_1
+   076B FB                 2587 	mov	r3,a
+   076C EC                 2588 	mov	a,r4
+   076D 35 10              2589 	addc	a,(_checkBoardWin_b_1_1 + 1)
+   076F FC                 2590 	mov	r4,a
+   0770 A9 11              2591 	mov	r1,(_checkBoardWin_b_1_1 + 2)
+   0772 8B 82              2592 	mov	dpl,r3
+   0774 8C 83              2593 	mov	dph,r4
+   0776 89 F0              2594 	mov	b,r1
+   0778 12 11 F2           2595 	lcall	__gptrget
+   077B FB                 2596 	mov	r3,a
+   077C EA                 2597 	mov	a,r2
+   077D B5 03 1B           2598 	cjne	a,ar3,00119$
+   0780 EF                 2599 	mov	a,r7
+   0781 25 0F              2600 	add	a,_checkBoardWin_b_1_1
+   0783 FA                 2601 	mov	r2,a
+   0784 E8                 2602 	mov	a,r0
+   0785 35 10              2603 	addc	a,(_checkBoardWin_b_1_1 + 1)
+   0787 FB                 2604 	mov	r3,a
+   0788 AC 11              2605 	mov	r4,(_checkBoardWin_b_1_1 + 2)
+   078A 8A 82              2606 	mov	dpl,r2
+   078C 8B 83              2607 	mov	dph,r3
+   078E 8C F0              2608 	mov	b,r4
+   0790 12 11 F2           2609 	lcall	__gptrget
+   0793 FA                 2610 	mov	r2,a
+   0794 BA 20 02           2611 	cjne	r2,#0x20,00148$
+   0797 80 02              2612 	sjmp	00119$
+   0799                    2613 00148$:
+                    0730   2614 	C$final.c$177$2$2 ==.
+                           2615 ;	C:\Users\SSP\Documents\Microprocessor Systems\Final\final.c:177: return 1;
+   0799 D3                 2616 	setb	c
+   079A 22                 2617 	ret
+   079B                    2618 00119$:
+                    0732   2619 	C$final.c$174$1$1 ==.
+                           2620 ;	C:\Users\SSP\Documents\Microprocessor Systems\Final\final.c:174: for(i=0; i<3; i++)			//verticals
+   079B 0F                 2621 	inc	r7
+   079C BF 00 01           2622 	cjne	r7,#0x00,00149$
+   079F 08                 2623 	inc	r0
+   07A0                    2624 00149$:
+   07A0 02 07 0C           2625 	ljmp	00117$
+   07A3                    2626 00120$:
+                    073A   2627 	C$final.c$180$1$1 ==.
+                           2628 ;	C:\Users\SSP\Documents\Microprocessor Systems\Final\final.c:180: for(i=0; i<6; i+=3)			//horizontals
+   07A3 7D 00              2629 	mov	r5,#0x00
+   07A5 7E 00              2630 	mov	r6,#0x00
+   07A7 8D 02              2631 	mov	ar2,r5
+   07A9 8E 03              2632 	mov	ar3,r6
+   07AB                    2633 00121$:
+   07AB C3                 2634 	clr	c
+   07AC EA                 2635 	mov	a,r2
+   07AD 94 06              2636 	subb	a,#0x06
+   07AF EB                 2637 	mov	a,r3
+   07B0 64 80              2638 	xrl	a,#0x80
+   07B2 94 80              2639 	subb	a,#0x80
+   07B4 40 03              2640 	jc	00150$
+   07B6 02 08 44           2641 	ljmp	00124$
+   07B9                    2642 00150$:
+                    0750   2643 	C$final.c$182$2$3 ==.
+                           2644 ;	C:\Users\SSP\Documents\Microprocessor Systems\Final\final.c:182: if(b[i] == b[i+1] && b[i] == b[i+2] && b[i] != ' ')
+   07B9 EA                 2645 	mov	a,r2
+   07BA 25 0F              2646 	add	a,_checkBoardWin_b_1_1
+   07BC FC                 2647 	mov	r4,a
+   07BD EB                 2648 	mov	a,r3
+   07BE 35 10              2649 	addc	a,(_checkBoardWin_b_1_1 + 1)
+   07C0 FD                 2650 	mov	r5,a
+   07C1 AE 11              2651 	mov	r6,(_checkBoardWin_b_1_1 + 2)
+   07C3 8C 82              2652 	mov	dpl,r4
+   07C5 8D 83              2653 	mov	dph,r5
+   07C7 8E F0              2654 	mov	b,r6
+   07C9 12 11 F2           2655 	lcall	__gptrget
+   07CC FC                 2656 	mov	r4,a
+   07CD 74 01              2657 	mov	a,#0x01
+   07CF 2A                 2658 	add	a,r2
+   07D0 FD                 2659 	mov	r5,a
+   07D1 E4                 2660 	clr	a
+   07D2 3B                 2661 	addc	a,r3
+   07D3 FE                 2662 	mov	r6,a
+   07D4 ED                 2663 	mov	a,r5
+   07D5 25 0F              2664 	add	a,_checkBoardWin_b_1_1
+   07D7 FD                 2665 	mov	r5,a
+   07D8 EE                 2666 	mov	a,r6
+   07D9 35 10              2667 	addc	a,(_checkBoardWin_b_1_1 + 1)
+   07DB FE                 2668 	mov	r6,a
+   07DC AF 11              2669 	mov	r7,(_checkBoardWin_b_1_1 + 2)
+   07DE 8D 82              2670 	mov	dpl,r5
+   07E0 8E 83              2671 	mov	dph,r6
+   07E2 8F F0              2672 	mov	b,r7
+   07E4 12 11 F2           2673 	lcall	__gptrget
+   07E7 FD                 2674 	mov	r5,a
+   07E8 EC                 2675 	mov	a,r4
+   07E9 B5 05 4E           2676 	cjne	a,ar5,00123$
+   07EC EA                 2677 	mov	a,r2
+   07ED 25 0F              2678 	add	a,_checkBoardWin_b_1_1
+   07EF FC                 2679 	mov	r4,a
+   07F0 EB                 2680 	mov	a,r3
+   07F1 35 10              2681 	addc	a,(_checkBoardWin_b_1_1 + 1)
+   07F3 FD                 2682 	mov	r5,a
+   07F4 AE 11              2683 	mov	r6,(_checkBoardWin_b_1_1 + 2)
+   07F6 8C 82              2684 	mov	dpl,r4
+   07F8 8D 83              2685 	mov	dph,r5
+   07FA 8E F0              2686 	mov	b,r6
+   07FC 12 11 F2           2687 	lcall	__gptrget
+   07FF FC                 2688 	mov	r4,a
+   0800 74 02              2689 	mov	a,#0x02
+   0802 2A                 2690 	add	a,r2
+   0803 FD                 2691 	mov	r5,a
+   0804 E4                 2692 	clr	a
+   0805 3B                 2693 	addc	a,r3
+   0806 FE                 2694 	mov	r6,a
+   0807 ED                 2695 	mov	a,r5
+   0808 25 0F              2696 	add	a,_checkBoardWin_b_1_1
+   080A FD                 2697 	mov	r5,a
+   080B EE                 2698 	mov	a,r6
+   080C 35 10              2699 	addc	a,(_checkBoardWin_b_1_1 + 1)
+   080E FE                 2700 	mov	r6,a
+   080F AF 11              2701 	mov	r7,(_checkBoardWin_b_1_1 + 2)
+   0811 8D 82              2702 	mov	dpl,r5
+   0813 8E 83              2703 	mov	dph,r6
+   0815 8F F0              2704 	mov	b,r7
+   0817 12 11 F2           2705 	lcall	__gptrget
+   081A FD                 2706 	mov	r5,a
+   081B EC                 2707 	mov	a,r4
+   081C B5 05 1B           2708 	cjne	a,ar5,00123$
+   081F EA                 2709 	mov	a,r2
+   0820 25 0F              2710 	add	a,_checkBoardWin_b_1_1
+   0822 FC                 2711 	mov	r4,a
+   0823 EB                 2712 	mov	a,r3
+   0824 35 10              2713 	addc	a,(_checkBoardWin_b_1_1 + 1)
+   0826 FD                 2714 	mov	r5,a
+   0827 AE 11              2715 	mov	r6,(_checkBoardWin_b_1_1 + 2)
+   0829 8C 82              2716 	mov	dpl,r4
+   082B 8D 83              2717 	mov	dph,r5
+   082D 8E F0              2718 	mov	b,r6
+   082F 12 11 F2           2719 	lcall	__gptrget
+   0832 FC                 2720 	mov	r4,a
+   0833 BC 20 02           2721 	cjne	r4,#0x20,00155$
+   0836 80 02              2722 	sjmp	00123$
+   0838                    2723 00155$:
+                    07CF   2724 	C$final.c$183$2$3 ==.
+                           2725 ;	C:\Users\SSP\Documents\Microprocessor Systems\Final\final.c:183: return 1;
+   0838 D3                 2726 	setb	c
+   0839 22                 2727 	ret
+   083A                    2728 00123$:
+                    07D1   2729 	C$final.c$180$1$1 ==.
+                           2730 ;	C:\Users\SSP\Documents\Microprocessor Systems\Final\final.c:180: for(i=0; i<6; i+=3)			//horizontals
+   083A 74 03              2731 	mov	a,#0x03
+   083C 2A                 2732 	add	a,r2
+   083D FA                 2733 	mov	r2,a
+   083E E4                 2734 	clr	a
+   083F 3B                 2735 	addc	a,r3
+   0840 FB                 2736 	mov	r3,a
+   0841 02 07 AB           2737 	ljmp	00121$
+   0844                    2738 00124$:
+                    07DB   2739 	C$final.c$186$1$1 ==.
+                           2740 ;	C:\Users\SSP\Documents\Microprocessor Systems\Final\final.c:186: if(b[0] == b[4] && b[0] == b[8] && b[0] != ' ')	//diagonal from 0
+   0844 85 0F 82           2741 	mov	dpl,_checkBoardWin_b_1_1
+   0847 85 10 83           2742 	mov	dph,(_checkBoardWin_b_1_1 + 1)
+   084A 85 11 F0           2743 	mov	b,(_checkBoardWin_b_1_1 + 2)
+   084D 12 11 F2           2744 	lcall	__gptrget
+   0850 FA                 2745 	mov	r2,a
+   0851 74 04              2746 	mov	a,#0x04
+   0853 25 0F              2747 	add	a,_checkBoardWin_b_1_1
+   0855 FB                 2748 	mov	r3,a
+   0856 E4                 2749 	clr	a
+   0857 35 10              2750 	addc	a,(_checkBoardWin_b_1_1 + 1)
+   0859 FC                 2751 	mov	r4,a
+   085A AD 11              2752 	mov	r5,(_checkBoardWin_b_1_1 + 2)
+   085C 8B 82              2753 	mov	dpl,r3
+   085E 8C 83              2754 	mov	dph,r4
+   0860 8D F0              2755 	mov	b,r5
+   0862 12 11 F2           2756 	lcall	__gptrget
+   0865 FB                 2757 	mov	r3,a
+   0866 EA                 2758 	mov	a,r2
+   0867 B5 03 3A           2759 	cjne	a,ar3,00110$
+   086A 85 0F 82           2760 	mov	dpl,_checkBoardWin_b_1_1
+   086D 85 10 83           2761 	mov	dph,(_checkBoardWin_b_1_1 + 1)
+   0870 85 11 F0           2762 	mov	b,(_checkBoardWin_b_1_1 + 2)
+   0873 12 11 F2           2763 	lcall	__gptrget
+   0876 FA                 2764 	mov	r2,a
+   0877 74 08              2765 	mov	a,#0x08
+   0879 25 0F              2766 	add	a,_checkBoardWin_b_1_1
+   087B FB                 2767 	mov	r3,a
+   087C E4                 2768 	clr	a
+   087D 35 10              2769 	addc	a,(_checkBoardWin_b_1_1 + 1)
+   087F FC                 2770 	mov	r4,a
+   0880 AD 11              2771 	mov	r5,(_checkBoardWin_b_1_1 + 2)
+   0882 8B 82              2772 	mov	dpl,r3
+   0884 8C 83              2773 	mov	dph,r4
+   0886 8D F0              2774 	mov	b,r5
+   0888 12 11 F2           2775 	lcall	__gptrget
+   088B FB                 2776 	mov	r3,a
+   088C EA                 2777 	mov	a,r2
+   088D B5 03 14           2778 	cjne	a,ar3,00110$
+   0890 85 0F 82           2779 	mov	dpl,_checkBoardWin_b_1_1
+   0893 85 10 83           2780 	mov	dph,(_checkBoardWin_b_1_1 + 1)
+   0896 85 11 F0           2781 	mov	b,(_checkBoardWin_b_1_1 + 2)
+   0899 12 11 F2           2782 	lcall	__gptrget
+   089C FA                 2783 	mov	r2,a
+   089D BA 20 02           2784 	cjne	r2,#0x20,00160$
+   08A0 80 02              2785 	sjmp	00110$
+   08A2                    2786 00160$:
+                    0839   2787 	C$final.c$187$1$1 ==.
+                           2788 ;	C:\Users\SSP\Documents\Microprocessor Systems\Final\final.c:187: return 1;
+   08A2 D3                 2789 	setb	c
+   08A3 22                 2790 	ret
+   08A4                    2791 00110$:
+                    083B   2792 	C$final.c$189$1$1 ==.
+                           2793 ;	C:\Users\SSP\Documents\Microprocessor Systems\Final\final.c:189: if(b[2] == b[4] && b[2] == b[6] && b[2] != ' ')	//diagonal from 2
+   08A4 74 02              2794 	mov	a,#0x02
+   08A6 25 0F              2795 	add	a,_checkBoardWin_b_1_1
+   08A8 FA                 2796 	mov	r2,a
+   08A9 E4                 2797 	clr	a
+   08AA 35 10              2798 	addc	a,(_checkBoardWin_b_1_1 + 1)
+   08AC FB                 2799 	mov	r3,a
+   08AD AC 11              2800 	mov	r4,(_checkBoardWin_b_1_1 + 2)
+   08AF 8A 82              2801 	mov	dpl,r2
+   08B1 8B 83              2802 	mov	dph,r3
+   08B3 8C F0              2803 	mov	b,r4
+   08B5 12 11 F2           2804 	lcall	__gptrget
+   08B8 FA                 2805 	mov	r2,a
+   08B9 74 04              2806 	mov	a,#0x04
+   08BB 25 0F              2807 	add	a,_checkBoardWin_b_1_1
+   08BD FB                 2808 	mov	r3,a
+   08BE E4                 2809 	clr	a
+   08BF 35 10              2810 	addc	a,(_checkBoardWin_b_1_1 + 1)
+   08C1 FC                 2811 	mov	r4,a
+   08C2 AD 11              2812 	mov	r5,(_checkBoardWin_b_1_1 + 2)
+   08C4 8B 82              2813 	mov	dpl,r3
+   08C6 8C 83              2814 	mov	dph,r4
+   08C8 8D F0              2815 	mov	b,r5
+   08CA 12 11 F2           2816 	lcall	__gptrget
+   08CD FB                 2817 	mov	r3,a
+   08CE EA                 2818 	mov	a,r2
+   08CF B5 03 4A           2819 	cjne	a,ar3,00114$
+   08D2 74 02              2820 	mov	a,#0x02
+   08D4 25 0F              2821 	add	a,_checkBoardWin_b_1_1
+   08D6 FA                 2822 	mov	r2,a
+   08D7 E4                 2823 	clr	a
+   08D8 35 10              2824 	addc	a,(_checkBoardWin_b_1_1 + 1)
+   08DA FB                 2825 	mov	r3,a
+   08DB AC 11              2826 	mov	r4,(_checkBoardWin_b_1_1 + 2)
+   08DD 8A 82              2827 	mov	dpl,r2
+   08DF 8B 83              2828 	mov	dph,r3
+   08E1 8C F0              2829 	mov	b,r4
+   08E3 12 11 F2           2830 	lcall	__gptrget
+   08E6 FA                 2831 	mov	r2,a
+   08E7 74 06              2832 	mov	a,#0x06
+   08E9 25 0F              2833 	add	a,_checkBoardWin_b_1_1
+   08EB FB                 2834 	mov	r3,a
+   08EC E4                 2835 	clr	a
+   08ED 35 10              2836 	addc	a,(_checkBoardWin_b_1_1 + 1)
+   08EF FC                 2837 	mov	r4,a
+   08F0 AD 11              2838 	mov	r5,(_checkBoardWin_b_1_1 + 2)
+   08F2 8B 82              2839 	mov	dpl,r3
+   08F4 8C 83              2840 	mov	dph,r4
+   08F6 8D F0              2841 	mov	b,r5
+   08F8 12 11 F2           2842 	lcall	__gptrget
+   08FB FB                 2843 	mov	r3,a
+   08FC EA                 2844 	mov	a,r2
+   08FD B5 03 1C           2845 	cjne	a,ar3,00114$
+   0900 74 02              2846 	mov	a,#0x02
+   0902 25 0F              2847 	add	a,_checkBoardWin_b_1_1
+   0904 FA                 2848 	mov	r2,a
+   0905 E4                 2849 	clr	a
+   0906 35 10              2850 	addc	a,(_checkBoardWin_b_1_1 + 1)
+   0908 FB                 2851 	mov	r3,a
+   0909 AC 11              2852 	mov	r4,(_checkBoardWin_b_1_1 + 2)
+   090B 8A 82              2853 	mov	dpl,r2
+   090D 8B 83              2854 	mov	dph,r3
+   090F 8C F0              2855 	mov	b,r4
+   0911 12 11 F2           2856 	lcall	__gptrget
+   0914 FA                 2857 	mov	r2,a
+   0915 BA 20 02           2858 	cjne	r2,#0x20,00165$
+   0918 80 02              2859 	sjmp	00114$
+   091A                    2860 00165$:
+                    08B1   2861 	C$final.c$190$1$1 ==.
+                           2862 ;	C:\Users\SSP\Documents\Microprocessor Systems\Final\final.c:190: return 1;
+   091A D3                 2863 	setb	c
+   091B 22                 2864 	ret
+   091C                    2865 00114$:
+                    08B3   2866 	C$final.c$192$1$1 ==.
+                           2867 ;	C:\Users\SSP\Documents\Microprocessor Systems\Final\final.c:192: return 0;
+   091C C3                 2868 	clr	c
+                    08B4   2869 	C$final.c$193$1$1 ==.
+                    08B4   2870 	XG$checkBoardWin$0$0 ==.
+   091D 22                 2871 	ret
+                           2872 ;------------------------------------------------------------
+                           2873 ;Allocation info for local variables in function 'gameWon'
+                           2874 ;------------------------------------------------------------
+                           2875 ;------------------------------------------------------------
+                    08B5   2876 	G$gameWon$0$0 ==.
+                    08B5   2877 	C$final.c$195$1$1 ==.
+                           2878 ;	C:\Users\SSP\Documents\Microprocessor Systems\Final\final.c:195: bit gameWon(void)
+                           2879 ;	-----------------------------------------
+                           2880 ;	 function gameWon
+                           2881 ;	-----------------------------------------
+   091E                    2882 _gameWon:
+                    08B5   2883 	C$final.c$197$1$1 ==.
+                           2884 ;	C:\Users\SSP\Documents\Microprocessor Systems\Final\final.c:197: if(checkBoardWin(board[9]))
+   091E 90 00 90           2885 	mov	dptr,#(_board + 0x0090)
+   0921 75 F0 00           2886 	mov	b,#0x00
+   0924 12 06 FB           2887 	lcall	_checkBoardWin
+   0927 50 46              2888 	jnc	00105$
+                    08C0   2889 	C$final.c$199$2$2 ==.
+                           2890 ;	C:\Users\SSP\Documents\Microprocessor Systems\Final\final.c:199: printf("\033[20;1H");
+   0929 74 B9              2891 	mov	a,#__str_19
+   092B C0 E0              2892 	push	acc
+   092D 74 13              2893 	mov	a,#(__str_19 >> 8)
+   092F C0 E0              2894 	push	acc
+   0931 74 80              2895 	mov	a,#0x80
+   0933 C0 E0              2896 	push	acc
+   0935 12 0C 2C           2897 	lcall	_printf
+   0938 15 81              2898 	dec	sp
+   093A 15 81              2899 	dec	sp
+   093C 15 81              2900 	dec	sp
+                    08D5   2901 	C$final.c$200$2$2 ==.
+                           2902 ;	C:\Users\SSP\Documents\Microprocessor Systems\Final\final.c:200: if (turn==0)
+   093E 20 00 17           2903 	jb	_turn,00102$
+                    08D8   2904 	C$final.c$201$2$2 ==.
+                           2905 ;	C:\Users\SSP\Documents\Microprocessor Systems\Final\final.c:201: printf("Game has been won by player O");
+   0941 74 C1              2906 	mov	a,#__str_20
+   0943 C0 E0              2907 	push	acc
+   0945 74 13              2908 	mov	a,#(__str_20 >> 8)
+   0947 C0 E0              2909 	push	acc
+   0949 74 80              2910 	mov	a,#0x80
+   094B C0 E0              2911 	push	acc
+   094D 12 0C 2C           2912 	lcall	_printf
+   0950 15 81              2913 	dec	sp
+   0952 15 81              2914 	dec	sp
+   0954 15 81              2915 	dec	sp
+   0956 80 15              2916 	sjmp	00103$
+   0958                    2917 00102$:
+                    08EF   2918 	C$final.c$203$2$2 ==.
+                           2919 ;	C:\Users\SSP\Documents\Microprocessor Systems\Final\final.c:203: printf("Game has been won by player X");
+   0958 74 DF              2920 	mov	a,#__str_21
+   095A C0 E0              2921 	push	acc
+   095C 74 13              2922 	mov	a,#(__str_21 >> 8)
+   095E C0 E0              2923 	push	acc
+   0960 74 80              2924 	mov	a,#0x80
+   0962 C0 E0              2925 	push	acc
+   0964 12 0C 2C           2926 	lcall	_printf
+   0967 15 81              2927 	dec	sp
+   0969 15 81              2928 	dec	sp
+   096B 15 81              2929 	dec	sp
+   096D                    2930 00103$:
+                    0904   2931 	C$final.c$205$2$2 ==.
+                           2932 ;	C:\Users\SSP\Documents\Microprocessor Systems\Final\final.c:205: return 1;
+   096D D3                 2933 	setb	c
+   096E 22                 2934 	ret
+   096F                    2935 00105$:
+                    0906   2936 	C$final.c$208$1$1 ==.
+                           2937 ;	C:\Users\SSP\Documents\Microprocessor Systems\Final\final.c:208: return 0;
+   096F C3                 2938 	clr	c
+                    0907   2939 	C$final.c$209$1$1 ==.
+                    0907   2940 	XG$gameWon$0$0 ==.
+   0970 22                 2941 	ret
+                           2942 ;------------------------------------------------------------
+                           2943 ;Allocation info for local variables in function 'getMove'
+                           2944 ;------------------------------------------------------------
+                           2945 ;move                      Allocated to registers r2 
+                           2946 ;------------------------------------------------------------
+                    0908   2947 	G$getMove$0$0 ==.
+                    0908   2948 	C$final.c$211$1$1 ==.
+                           2949 ;	C:\Users\SSP\Documents\Microprocessor Systems\Final\final.c:211: void getMove(bit freeMove)
+                           2950 ;	-----------------------------------------
+                           2951 ;	 function getMove
+                           2952 ;	-----------------------------------------
+   0971                    2953 _getMove:
+                    0908   2954 	C$final.c$215$1$1 ==.
+                           2955 ;	C:\Users\SSP\Documents\Microprocessor Systems\Final\final.c:215: if(freeMove)
+   0971 30 01 5D           2956 	jnb	_getMove_PARM_1,00107$
+                    090B   2957 	C$final.c$217$2$2 ==.
+                           2958 ;	C:\Users\SSP\Documents\Microprocessor Systems\Final\final.c:217: printf("\033[16;1H");
+   0974 74 1B              2959 	mov	a,#__str_5
+   0976 C0 E0              2960 	push	acc
+   0978 74 13              2961 	mov	a,#(__str_5 >> 8)
+   097A C0 E0              2962 	push	acc
+   097C 74 80              2963 	mov	a,#0x80
+   097E C0 E0              2964 	push	acc
+   0980 12 0C 2C           2965 	lcall	_printf
+   0983 15 81              2966 	dec	sp
+   0985 15 81              2967 	dec	sp
+   0987 15 81              2968 	dec	sp
+                    0920   2969 	C$final.c$218$2$2 ==.
+                           2970 ;	C:\Users\SSP\Documents\Microprocessor Systems\Final\final.c:218: printf("Free move. Choose sub-board.\n\r");
+   0989 74 FD              2971 	mov	a,#__str_22
+   098B C0 E0              2972 	push	acc
+   098D 74 13              2973 	mov	a,#(__str_22 >> 8)
+   098F C0 E0              2974 	push	acc
+   0991 74 80              2975 	mov	a,#0x80
+   0993 C0 E0              2976 	push	acc
+   0995 12 0C 2C           2977 	lcall	_printf
+   0998 15 81              2978 	dec	sp
+   099A 15 81              2979 	dec	sp
+   099C 15 81              2980 	dec	sp
+                    0935   2981 	C$final.c$220$2$2 ==.
+                           2982 ;	C:\Users\SSP\Documents\Microprocessor Systems\Final\final.c:220: current = 0xff;
+   099E 75 08 FF           2983 	mov	_current,#0xFF
+                    0938   2984 	C$final.c$222$2$2 ==.
+                           2985 ;	C:\Users\SSP\Documents\Microprocessor Systems\Final\final.c:222: while(current < 0 || current > 8  || board[9][current] != ' ')		//valid sub-board number and board not yet won
+   09A1                    2986 00103$:
+   09A1 E5 08              2987 	mov	a,_current
+   09A3 20 E7 1F           2988 	jb	acc.7,00104$
+   09A6 C3                 2989 	clr	c
+   09A7 74 88              2990 	mov	a,#(0x08 ^ 0x80)
+   09A9 85 08 F0           2991 	mov	b,_current
+   09AC 63 F0 80           2992 	xrl	b,#0x80
+   09AF 95 F0              2993 	subb	a,b
+   09B1 40 12              2994 	jc	00104$
+   09B3 E5 08              2995 	mov	a,_current
+   09B5 24 90              2996 	add	a,#(_board + 0x0090)
+   09B7 F5 82              2997 	mov	dpl,a
+   09B9 E4                 2998 	clr	a
+   09BA 34 00              2999 	addc	a,#((_board + 0x0090) >> 8)
+   09BC F5 83              3000 	mov	dph,a
+   09BE E0                 3001 	movx	a,@dptr
+   09BF FA                 3002 	mov	r2,a
+   09C0 BA 20 02           3003 	cjne	r2,#0x20,00136$
+   09C3 80 0C              3004 	sjmp	00107$
+   09C5                    3005 00136$:
+   09C5                    3006 00104$:
+                    095C   3007 	C$final.c$224$3$3 ==.
+                           3008 ;	C:\Users\SSP\Documents\Microprocessor Systems\Final\final.c:224: move = getchar();
+   09C5 12 00 73           3009 	lcall	_getchar
+                    095F   3010 	C$final.c$225$3$3 ==.
+                           3011 ;	C:\Users\SSP\Documents\Microprocessor Systems\Final\final.c:225: current = move-49;
+   09C8 E5 82              3012 	mov	a,dpl
+   09CA FA                 3013 	mov	r2,a
+   09CB 24 CF              3014 	add	a,#0xcf
+   09CD F5 08              3015 	mov	_current,a
+   09CF 80 D0              3016 	sjmp	00103$
+   09D1                    3017 00107$:
+                    0968   3018 	C$final.c$229$1$1 ==.
+                           3019 ;	C:\Users\SSP\Documents\Microprocessor Systems\Final\final.c:229: printf("\033[16;1H");
+   09D1 74 1B              3020 	mov	a,#__str_5
+   09D3 C0 E0              3021 	push	acc
+   09D5 74 13              3022 	mov	a,#(__str_5 >> 8)
+   09D7 C0 E0              3023 	push	acc
+   09D9 74 80              3024 	mov	a,#0x80
+   09DB C0 E0              3025 	push	acc
+   09DD 12 0C 2C           3026 	lcall	_printf
+   09E0 15 81              3027 	dec	sp
+   09E2 15 81              3028 	dec	sp
+   09E4 15 81              3029 	dec	sp
+                    097D   3030 	C$final.c$230$1$1 ==.
+                           3031 ;	C:\Users\SSP\Documents\Microprocessor Systems\Final\final.c:230: printf("                              \n\r");
+   09E6 74 1C              3032 	mov	a,#__str_23
+   09E8 C0 E0              3033 	push	acc
+   09EA 74 14              3034 	mov	a,#(__str_23 >> 8)
+   09EC C0 E0              3035 	push	acc
+   09EE 74 80              3036 	mov	a,#0x80
+   09F0 C0 E0              3037 	push	acc
+   09F2 12 0C 2C           3038 	lcall	_printf
+   09F5 15 81              3039 	dec	sp
+   09F7 15 81              3040 	dec	sp
+   09F9 15 81              3041 	dec	sp
+                    0992   3042 	C$final.c$232$1$1 ==.
+                           3043 ;	C:\Users\SSP\Documents\Microprocessor Systems\Final\final.c:232: printf("\033[%d;%dH", startRow[current/3], startCol[current%3]);
+   09FB 75 F0 03           3044 	mov	b,#0x03
+   09FE E5 08              3045 	mov	a,_current
+   0A00 C2 D5              3046 	clr	F0
+   0A02 30 E7 04           3047 	jnb	acc.7,00137$
+   0A05 D2 D5              3048 	setb	F0
+   0A07 F4                 3049 	cpl	a
+   0A08 04                 3050 	inc	a
+   0A09                    3051 00137$:
+   0A09 84                 3052 	div	ab
+   0A0A E5 F0              3053 	mov	a,b
+   0A0C 30 D5 02           3054 	jnb	F0,00138$
+   0A0F F4                 3055 	cpl	a
+   0A10 04                 3056 	inc	a
+   0A11                    3057 00138$:
+   0A11 25 E0              3058 	add	a,acc
+   0A13 FB                 3059 	mov	r3,a
+   0A14 90 12 86           3060 	mov	dptr,#_startCol
+   0A17 93                 3061 	movc	a,@a+dptr
+   0A18 CB                 3062 	xch	a,r3
+   0A19 A3                 3063 	inc	dptr
+   0A1A 93                 3064 	movc	a,@a+dptr
+   0A1B FC                 3065 	mov	r4,a
+   0A1C C2 D5              3066 	clr	F0
+   0A1E 75 F0 03           3067 	mov	b,#0x03
+   0A21 E5 08              3068 	mov	a,_current
+   0A23 30 E7 04           3069 	jnb	acc.7,00139$
+   0A26 B2 D5              3070 	cpl	F0
+   0A28 F4                 3071 	cpl	a
+   0A29 04                 3072 	inc	a
+   0A2A                    3073 00139$:
+   0A2A 84                 3074 	div	ab
+   0A2B 30 D5 02           3075 	jnb	F0,00140$
+   0A2E F4                 3076 	cpl	a
+   0A2F 04                 3077 	inc	a
+   0A30                    3078 00140$:
+   0A30 25 E0              3079 	add	a,acc
+   0A32 FD                 3080 	mov	r5,a
+   0A33 90 12 80           3081 	mov	dptr,#_startRow
+   0A36 93                 3082 	movc	a,@a+dptr
+   0A37 CD                 3083 	xch	a,r5
+   0A38 A3                 3084 	inc	dptr
+   0A39 93                 3085 	movc	a,@a+dptr
+   0A3A FE                 3086 	mov	r6,a
+   0A3B C0 03              3087 	push	ar3
+   0A3D C0 04              3088 	push	ar4
+   0A3F C0 05              3089 	push	ar5
+   0A41 C0 06              3090 	push	ar6
+   0A43 74 6E              3091 	mov	a,#__str_10
+   0A45 C0 E0              3092 	push	acc
+   0A47 74 13              3093 	mov	a,#(__str_10 >> 8)
+   0A49 C0 E0              3094 	push	acc
+   0A4B 74 80              3095 	mov	a,#0x80
+   0A4D C0 E0              3096 	push	acc
+   0A4F 12 0C 2C           3097 	lcall	_printf
+   0A52 E5 81              3098 	mov	a,sp
+   0A54 24 F9              3099 	add	a,#0xf9
+   0A56 F5 81              3100 	mov	sp,a
+                    09EF   3101 	C$final.c$234$1$1 ==.
+                           3102 ;	C:\Users\SSP\Documents\Microprocessor Systems\Final\final.c:234: move = 0xff;
+   0A58 7A FF              3103 	mov	r2,#0xFF
+                    09F1   3104 	C$final.c$236$1$1 ==.
+                           3105 ;	C:\Users\SSP\Documents\Microprocessor Systems\Final\final.c:236: while(move < 0 || move > 8 || board[current][move] != ' ')			//valid move and not already occupied	
+   0A5A                    3106 00110$:
+   0A5A EA                 3107 	mov	a,r2
+   0A5B 20 E7 27           3108 	jb	acc.7,00111$
+   0A5E C3                 3109 	clr	c
+   0A5F 74 88              3110 	mov	a,#(0x08 ^ 0x80)
+   0A61 8A F0              3111 	mov	b,r2
+   0A63 63 F0 80           3112 	xrl	b,#0x80
+   0A66 95 F0              3113 	subb	a,b
+   0A68 40 1B              3114 	jc	00111$
+   0A6A E5 08              3115 	mov	a,_current
+   0A6C C4                 3116 	swap	a
+   0A6D 54 F0              3117 	anl	a,#0xf0
+   0A6F 24 00              3118 	add	a,#_board
+   0A71 FB                 3119 	mov	r3,a
+   0A72 E4                 3120 	clr	a
+   0A73 34 00              3121 	addc	a,#(_board >> 8)
+   0A75 FC                 3122 	mov	r4,a
+   0A76 EA                 3123 	mov	a,r2
+   0A77 2B                 3124 	add	a,r3
+   0A78 F5 82              3125 	mov	dpl,a
+   0A7A E4                 3126 	clr	a
+   0A7B 3C                 3127 	addc	a,r4
+   0A7C F5 83              3128 	mov	dph,a
+   0A7E E0                 3129 	movx	a,@dptr
+   0A7F FB                 3130 	mov	r3,a
+   0A80 BB 20 02           3131 	cjne	r3,#0x20,00143$
+   0A83 80 0A              3132 	sjmp	00112$
+   0A85                    3133 00143$:
+   0A85                    3134 00111$:
+                    0A1C   3135 	C$final.c$238$2$4 ==.
+                           3136 ;	C:\Users\SSP\Documents\Microprocessor Systems\Final\final.c:238: move = getchar();
+   0A85 12 00 73           3137 	lcall	_getchar
+                    0A1F   3138 	C$final.c$239$2$4 ==.
+                           3139 ;	C:\Users\SSP\Documents\Microprocessor Systems\Final\final.c:239: move = move-49;
+   0A88 E5 82              3140 	mov	a,dpl
+   0A8A 24 CF              3141 	add	a,#0xcf
+   0A8C FA                 3142 	mov	r2,a
+   0A8D 80 CB              3143 	sjmp	00110$
+   0A8F                    3144 00112$:
+                    0A26   3145 	C$final.c$242$1$1 ==.
+                           3146 ;	C:\Users\SSP\Documents\Microprocessor Systems\Final\final.c:242: if (turn == 0)
+   0A8F 20 00 2E           3147 	jb	_turn,00114$
+                    0A29   3148 	C$final.c$243$1$1 ==.
+                           3149 ;	C:\Users\SSP\Documents\Microprocessor Systems\Final\final.c:243: board[(int) current][(int) move] = 'O';
+   0A92 E5 08              3150 	mov	a,_current
+   0A94 FB                 3151 	mov	r3,a
+   0A95 33                 3152 	rlc	a
+   0A96 95 E0              3153 	subb	a,acc
+   0A98 C4                 3154 	swap	a
+   0A99 54 F0              3155 	anl	a,#0xf0
+   0A9B CB                 3156 	xch	a,r3
+   0A9C C4                 3157 	swap	a
+   0A9D CB                 3158 	xch	a,r3
+   0A9E 6B                 3159 	xrl	a,r3
+   0A9F CB                 3160 	xch	a,r3
+   0AA0 54 F0              3161 	anl	a,#0xf0
+   0AA2 CB                 3162 	xch	a,r3
+   0AA3 6B                 3163 	xrl	a,r3
+   0AA4 FC                 3164 	mov	r4,a
+   0AA5 EB                 3165 	mov	a,r3
+   0AA6 24 00              3166 	add	a,#_board
+   0AA8 FB                 3167 	mov	r3,a
+   0AA9 EC                 3168 	mov	a,r4
+   0AAA 34 00              3169 	addc	a,#(_board >> 8)
+   0AAC FC                 3170 	mov	r4,a
+   0AAD EA                 3171 	mov	a,r2
+   0AAE FD                 3172 	mov	r5,a
+   0AAF 33                 3173 	rlc	a
+   0AB0 95 E0              3174 	subb	a,acc
+   0AB2 FE                 3175 	mov	r6,a
+   0AB3 ED                 3176 	mov	a,r5
+   0AB4 2B                 3177 	add	a,r3
+   0AB5 F5 82              3178 	mov	dpl,a
+   0AB7 EE                 3179 	mov	a,r6
+   0AB8 3C                 3180 	addc	a,r4
+   0AB9 F5 83              3181 	mov	dph,a
+   0ABB 74 4F              3182 	mov	a,#0x4F
+   0ABD F0                 3183 	movx	@dptr,a
+   0ABE 80 2C              3184 	sjmp	00115$
+   0AC0                    3185 00114$:
+                    0A57   3186 	C$final.c$245$1$1 ==.
+                           3187 ;	C:\Users\SSP\Documents\Microprocessor Systems\Final\final.c:245: board[(int) current][(int) move] = 'X';
+   0AC0 E5 08              3188 	mov	a,_current
+   0AC2 FB                 3189 	mov	r3,a
+   0AC3 33                 3190 	rlc	a
+   0AC4 95 E0              3191 	subb	a,acc
+   0AC6 C4                 3192 	swap	a
+   0AC7 54 F0              3193 	anl	a,#0xf0
+   0AC9 CB                 3194 	xch	a,r3
+   0ACA C4                 3195 	swap	a
+   0ACB CB                 3196 	xch	a,r3
+   0ACC 6B                 3197 	xrl	a,r3
+   0ACD CB                 3198 	xch	a,r3
+   0ACE 54 F0              3199 	anl	a,#0xf0
+   0AD0 CB                 3200 	xch	a,r3
+   0AD1 6B                 3201 	xrl	a,r3
+   0AD2 FC                 3202 	mov	r4,a
+   0AD3 EB                 3203 	mov	a,r3
+   0AD4 24 00              3204 	add	a,#_board
+   0AD6 FB                 3205 	mov	r3,a
+   0AD7 EC                 3206 	mov	a,r4
+   0AD8 34 00              3207 	addc	a,#(_board >> 8)
+   0ADA FC                 3208 	mov	r4,a
+   0ADB EA                 3209 	mov	a,r2
+   0ADC FD                 3210 	mov	r5,a
+   0ADD 33                 3211 	rlc	a
+   0ADE 95 E0              3212 	subb	a,acc
+   0AE0 FE                 3213 	mov	r6,a
+   0AE1 ED                 3214 	mov	a,r5
+   0AE2 2B                 3215 	add	a,r3
+   0AE3 F5 82              3216 	mov	dpl,a
+   0AE5 EE                 3217 	mov	a,r6
+   0AE6 3C                 3218 	addc	a,r4
+   0AE7 F5 83              3219 	mov	dph,a
+   0AE9 74 58              3220 	mov	a,#0x58
+   0AEB F0                 3221 	movx	@dptr,a
+   0AEC                    3222 00115$:
+                    0A83   3223 	C$final.c$247$1$1 ==.
+                           3224 ;	C:\Users\SSP\Documents\Microprocessor Systems\Final\final.c:247: if(checkBoardWin(board[(int) current]))
+   0AEC E5 08              3225 	mov	a,_current
+   0AEE FB                 3226 	mov	r3,a
+   0AEF 33                 3227 	rlc	a
+   0AF0 95 E0              3228 	subb	a,acc
+   0AF2 C4                 3229 	swap	a
+   0AF3 54 F0              3230 	anl	a,#0xf0
+   0AF5 CB                 3231 	xch	a,r3
+   0AF6 C4                 3232 	swap	a
+   0AF7 CB                 3233 	xch	a,r3
+   0AF8 6B                 3234 	xrl	a,r3
+   0AF9 CB                 3235 	xch	a,r3
+   0AFA 54 F0              3236 	anl	a,#0xf0
+   0AFC CB                 3237 	xch	a,r3
+   0AFD 6B                 3238 	xrl	a,r3
+   0AFE FC                 3239 	mov	r4,a
+   0AFF EB                 3240 	mov	a,r3
+   0B00 24 00              3241 	add	a,#_board
+   0B02 FB                 3242 	mov	r3,a
+   0B03 EC                 3243 	mov	a,r4
+   0B04 34 00              3244 	addc	a,#(_board >> 8)
+   0B06 FC                 3245 	mov	r4,a
+   0B07 7D 00              3246 	mov	r5,#0x00
+   0B09 8B 82              3247 	mov	dpl,r3
+   0B0B 8C 83              3248 	mov	dph,r4
+   0B0D 8D F0              3249 	mov	b,r5
+   0B0F C0 02              3250 	push	ar2
+   0B11 12 06 FB           3251 	lcall	_checkBoardWin
+   0B14 D0 02              3252 	pop	ar2
+   0B16 50 11              3253 	jnc	00117$
+                    0AAF   3254 	C$final.c$248$1$1 ==.
+                           3255 ;	C:\Users\SSP\Documents\Microprocessor Systems\Final\final.c:248: board[9][current] = turn;
+   0B18 E5 08              3256 	mov	a,_current
+   0B1A 24 90              3257 	add	a,#(_board + 0x0090)
+   0B1C F5 82              3258 	mov	dpl,a
+   0B1E E4                 3259 	clr	a
+   0B1F 34 00              3260 	addc	a,#((_board + 0x0090) >> 8)
+   0B21 F5 83              3261 	mov	dph,a
+   0B23 A2 00              3262 	mov	c,_turn
+   0B25 E4                 3263 	clr	a
+   0B26 33                 3264 	rlc	a
+   0B27 FB                 3265 	mov	r3,a
+   0B28 F0                 3266 	movx	@dptr,a
+   0B29                    3267 00117$:
+                    0AC0   3268 	C$final.c$250$1$1 ==.
+                           3269 ;	C:\Users\SSP\Documents\Microprocessor Systems\Final\final.c:250: current = move;
+   0B29 8A 08              3270 	mov	_current,r2
+                    0AC2   3271 	C$final.c$252$1$1 ==.
+                           3272 ;	C:\Users\SSP\Documents\Microprocessor Systems\Final\final.c:252: if(turn == 1)
+                    0AC2   3273 	C$final.c$253$1$1 ==.
+                           3274 ;	C:\Users\SSP\Documents\Microprocessor Systems\Final\final.c:253: turn = 0;
+   0B2B 10 00 02           3275 	jbc	_turn,00146$
+   0B2E 80 01              3276 	sjmp	00119$
+   0B30                    3277 00146$:
+   0B30 22                 3278 	ret
+   0B31                    3279 00119$:
+                    0AC8   3280 	C$final.c$255$1$1 ==.
+                           3281 ;	C:\Users\SSP\Documents\Microprocessor Systems\Final\final.c:255: turn = 1;
+   0B31 D2 00              3282 	setb	_turn
+                    0ACA   3283 	C$final.c$256$1$1 ==.
+                    0ACA   3284 	XG$getMove$0$0 ==.
+   0B33 22                 3285 	ret
+                           3286 ;------------------------------------------------------------
+                           3287 ;Allocation info for local variables in function 'SYSCLK_INIT'
+                           3288 ;------------------------------------------------------------
+                           3289 ;i                         Allocated to registers r3 r4 
+                           3290 ;SFRPAGE_SAVE              Allocated to registers r2 
+                           3291 ;------------------------------------------------------------
+                    0ACB   3292 	G$SYSCLK_INIT$0$0 ==.
+                    0ACB   3293 	C$final.c$264$1$1 ==.
+                           3294 ;	C:\Users\SSP\Documents\Microprocessor Systems\Final\final.c:264: void SYSCLK_INIT(void)
+                           3295 ;	-----------------------------------------
+                           3296 ;	 function SYSCLK_INIT
+                           3297 ;	-----------------------------------------
+   0B34                    3298 _SYSCLK_INIT:
+                    0ACB   3299 	C$final.c$269$1$1 ==.
+                           3300 ;	C:\Users\SSP\Documents\Microprocessor Systems\Final\final.c:269: SFRPAGE_SAVE = SFRPAGE;				// Save Current SFR page	SFRPAGE = CONFIG_PAGE;
+   0B34 AA 84              3301 	mov	r2,_SFRPAGE
+                    0ACD   3302 	C$final.c$270$1$1 ==.
+                           3303 ;	C:\Users\SSP\Documents\Microprocessor Systems\Final\final.c:270: SFRPAGE   = CONFIG_PAGE;
+   0B36 75 84 0F           3304 	mov	_SFRPAGE,#0x0F
+                    0AD0   3305 	C$final.c$272$1$1 ==.
+                           3306 ;	C:\Users\SSP\Documents\Microprocessor Systems\Final\final.c:272: OSCXCN = 0x67;						// Start ext osc with 22.1184MHz crystal
+   0B39 75 8C 67           3307 	mov	_OSCXCN,#0x67
+                    0AD3   3308 	C$final.c$273$1$1 ==.
+                           3309 ;	C:\Users\SSP\Documents\Microprocessor Systems\Final\final.c:273: for(i=0; i < 3000; i++);			// Wait for the oscillator to start up
+   0B3C 7B B8              3310 	mov	r3,#0xB8
+   0B3E 7C 0B              3311 	mov	r4,#0x0B
+   0B40                    3312 00106$:
+   0B40 1B                 3313 	dec	r3
+   0B41 BB FF 01           3314 	cjne	r3,#0xff,00114$
+   0B44 1C                 3315 	dec	r4
+   0B45                    3316 00114$:
+   0B45 EB                 3317 	mov	a,r3
+   0B46 4C                 3318 	orl	a,r4
+   0B47 70 F7              3319 	jnz	00106$
+                    0AE0   3320 	C$final.c$274$1$1 ==.
+                           3321 ;	C:\Users\SSP\Documents\Microprocessor Systems\Final\final.c:274: while(!(OSCXCN & 0x80));
+   0B49                    3322 00101$:
+   0B49 E5 8C              3323 	mov	a,_OSCXCN
+   0B4B 30 E7 FB           3324 	jnb	acc.7,00101$
+                    0AE5   3325 	C$final.c$275$1$1 ==.
+                           3326 ;	C:\Users\SSP\Documents\Microprocessor Systems\Final\final.c:275: CLKSEL = 0x01;						// Switch to the external crystal oscillator
+   0B4E 75 97 01           3327 	mov	_CLKSEL,#0x01
+                    0AE8   3328 	C$final.c$276$1$1 ==.
+                           3329 ;	C:\Users\SSP\Documents\Microprocessor Systems\Final\final.c:276: OSCICN = 0x00;						// Disable the internal oscillator
+   0B51 75 8A 00           3330 	mov	_OSCICN,#0x00
+                    0AEB   3331 	C$final.c$278$1$1 ==.
+                           3332 ;	C:\Users\SSP\Documents\Microprocessor Systems\Final\final.c:278: SFRPAGE = SFRPAGE_SAVE;             // Restore SFR page
+   0B54 8A 84              3333 	mov	_SFRPAGE,r2
+                    0AED   3334 	C$final.c$279$1$1 ==.
+                    0AED   3335 	XG$SYSCLK_INIT$0$0 ==.
+   0B56 22                 3336 	ret
+                           3337 ;------------------------------------------------------------
+                           3338 ;Allocation info for local variables in function 'PORT_INIT'
+                           3339 ;------------------------------------------------------------
+                           3340 ;SFRPAGE_SAVE              Allocated to registers r2 
+                           3341 ;------------------------------------------------------------
+                    0AEE   3342 	G$PORT_INIT$0$0 ==.
+                    0AEE   3343 	C$final.c$287$1$1 ==.
+                           3344 ;	C:\Users\SSP\Documents\Microprocessor Systems\Final\final.c:287: void PORT_INIT(void)
+                           3345 ;	-----------------------------------------
+                           3346 ;	 function PORT_INIT
+                           3347 ;	-----------------------------------------
+   0B57                    3348 _PORT_INIT:
+                    0AEE   3349 	C$final.c$291$1$1 ==.
+                           3350 ;	C:\Users\SSP\Documents\Microprocessor Systems\Final\final.c:291: SFRPAGE_SAVE = SFRPAGE;				// Save Current SFR page
+   0B57 AA 84              3351 	mov	r2,_SFRPAGE
+                    0AF0   3352 	C$final.c$292$1$1 ==.
+                           3353 ;	C:\Users\SSP\Documents\Microprocessor Systems\Final\final.c:292: SFRPAGE = CONFIG_PAGE;
+   0B59 75 84 0F           3354 	mov	_SFRPAGE,#0x0F
+                    0AF3   3355 	C$final.c$294$1$1 ==.
+                           3356 ;	C:\Users\SSP\Documents\Microprocessor Systems\Final\final.c:294: XBR0	 = 0x04;					// Enable UART0
+   0B5C 75 E1 04           3357 	mov	_XBR0,#0x04
+                    0AF6   3358 	C$final.c$295$1$1 ==.
+                           3359 ;	C:\Users\SSP\Documents\Microprocessor Systems\Final\final.c:295: XBR1	 = 0x00;
+   0B5F 75 E2 00           3360 	mov	_XBR1,#0x00
+                    0AF9   3361 	C$final.c$296$1$1 ==.
+                           3362 ;	C:\Users\SSP\Documents\Microprocessor Systems\Final\final.c:296: XBR2	 = 0x40;					// Enable Crossbar and weak pull-up
+   0B62 75 E3 40           3363 	mov	_XBR2,#0x40
+                    0AFC   3364 	C$final.c$297$1$1 ==.
+                           3365 ;	C:\Users\SSP\Documents\Microprocessor Systems\Final\final.c:297: P0MDOUT |= 0x01;					// Set TX0 on P0.0 pin to push-pull
+   0B65 43 A4 01           3366 	orl	_P0MDOUT,#0x01
+                    0AFF   3367 	C$final.c$298$1$1 ==.
+                           3368 ;	C:\Users\SSP\Documents\Microprocessor Systems\Final\final.c:298: P1MDOUT	|= 0x40;					// Set green LED ooutput P1.6 to push-pull
+   0B68 43 A5 40           3369 	orl	_P1MDOUT,#0x40
+                    0B02   3370 	C$final.c$300$1$1 ==.
+                           3371 ;	C:\Users\SSP\Documents\Microprocessor Systems\Final\final.c:300: SFRPAGE = SFRPAGE_SAVE;             // Restore SFR page
+   0B6B 8A 84              3372 	mov	_SFRPAGE,r2
+                    0B04   3373 	C$final.c$301$1$1 ==.
+                    0B04   3374 	XG$PORT_INIT$0$0 ==.
+   0B6D 22                 3375 	ret
+                           3376 ;------------------------------------------------------------
+                           3377 ;Allocation info for local variables in function 'UART0_INIT'
+                           3378 ;------------------------------------------------------------
+                           3379 ;SFRPAGE_SAVE              Allocated to registers r2 
+                           3380 ;------------------------------------------------------------
+                    0B05   3381 	G$UART0_INIT$0$0 ==.
+                    0B05   3382 	C$final.c$309$1$1 ==.
+                           3383 ;	C:\Users\SSP\Documents\Microprocessor Systems\Final\final.c:309: void UART0_INIT(void)
+                           3384 ;	-----------------------------------------
+                           3385 ;	 function UART0_INIT
+                           3386 ;	-----------------------------------------
+   0B6E                    3387 _UART0_INIT:
+                    0B05   3388 	C$final.c$313$1$1 ==.
+                           3389 ;	C:\Users\SSP\Documents\Microprocessor Systems\Final\final.c:313: SFRPAGE_SAVE = SFRPAGE;				// Save Current SFR page
+   0B6E AA 84              3390 	mov	r2,_SFRPAGE
+                    0B07   3391 	C$final.c$314$1$1 ==.
+                           3392 ;	C:\Users\SSP\Documents\Microprocessor Systems\Final\final.c:314: SFRPAGE = TIMER01_PAGE;
+   0B70 75 84 00           3393 	mov	_SFRPAGE,#0x00
+                    0B0A   3394 	C$final.c$316$1$1 ==.
+                           3395 ;	C:\Users\SSP\Documents\Microprocessor Systems\Final\final.c:316: TCON	 = 0x40;
+   0B73 75 88 40           3396 	mov	_TCON,#0x40
+                    0B0D   3397 	C$final.c$317$1$1 ==.
+                           3398 ;	C:\Users\SSP\Documents\Microprocessor Systems\Final\final.c:317: TMOD	&= 0x0F;
+   0B76 53 89 0F           3399 	anl	_TMOD,#0x0F
+                    0B10   3400 	C$final.c$318$1$1 ==.
+                           3401 ;	C:\Users\SSP\Documents\Microprocessor Systems\Final\final.c:318: TMOD	|= 0x20;					// Timer1, Mode 2, 8-bit reload
+   0B79 43 89 20           3402 	orl	_TMOD,#0x20
+                    0B13   3403 	C$final.c$319$1$1 ==.
+                           3404 ;	C:\Users\SSP\Documents\Microprocessor Systems\Final\final.c:319: CKCON	|= 0x10;					// Timer1 uses SYSCLK as time base
+   0B7C 43 8E 10           3405 	orl	_CKCON,#0x10
+                    0B16   3406 	C$final.c$321$1$1 ==.
+                           3407 ;	C:\Users\SSP\Documents\Microprocessor Systems\Final\final.c:321: TH1		 = 0xE8;					// 0xE8 = 232
+   0B7F 75 8D E8           3408 	mov	_TH1,#0xE8
+                    0B19   3409 	C$final.c$322$1$1 ==.
+                           3410 ;	C:\Users\SSP\Documents\Microprocessor Systems\Final\final.c:322: TR1		 = 1;						// Start Timer1
+   0B82 D2 8E              3411 	setb	_TR1
+                    0B1B   3412 	C$final.c$324$1$1 ==.
+                           3413 ;	C:\Users\SSP\Documents\Microprocessor Systems\Final\final.c:324: SFRPAGE = UART0_PAGE;
+   0B84 75 84 00           3414 	mov	_SFRPAGE,#0x00
+                    0B1E   3415 	C$final.c$325$1$1 ==.
+                           3416 ;	C:\Users\SSP\Documents\Microprocessor Systems\Final\final.c:325: SCON0	 = 0x50;					// Mode 1, 8-bit UART, enable RX
+   0B87 75 98 50           3417 	mov	_SCON0,#0x50
+                    0B21   3418 	C$final.c$326$1$1 ==.
+                           3419 ;	C:\Users\SSP\Documents\Microprocessor Systems\Final\final.c:326: SSTA0	 = 0x00;					// SMOD0 = 0, in this mode
+   0B8A 75 91 00           3420 	mov	_SSTA0,#0x00
+                    0B24   3421 	C$final.c$329$1$1 ==.
+                           3422 ;	C:\Users\SSP\Documents\Microprocessor Systems\Final\final.c:329: TI0 = 1;							// Indicate TX0 ready
+   0B8D D2 99              3423 	setb	_TI0
+                    0B26   3424 	C$final.c$331$1$1 ==.
+                           3425 ;	C:\Users\SSP\Documents\Microprocessor Systems\Final\final.c:331: SFRPAGE = SFRPAGE_SAVE;             // Restore SFR page
+   0B8F 8A 84              3426 	mov	_SFRPAGE,r2
+                    0B28   3427 	C$final.c$332$1$1 ==.
+                    0B28   3428 	XG$UART0_INIT$0$0 ==.
+   0B91 22                 3429 	ret
+                           3430 	.area CSEG    (CODE)
+                           3431 	.area CONST   (CODE)
+                    0000   3432 Ffinal$startRow$0$0 == .
+   1280                    3433 _startRow:
+   1280 03 00              3434 	.byte #0x03,#0x00
+   1282 07 00              3435 	.byte #0x07,#0x00
+   1284 0B 00              3436 	.byte #0x0B,#0x00
+                    0006   3437 Ffinal$startCol$0$0 == .
+   1286                    3438 _startCol:
+   1286 01 00              3439 	.byte #0x01,#0x00
+   1288 07 00              3440 	.byte #0x07,#0x00
+   128A 0D 00              3441 	.byte #0x0D,#0x00
+                    000C   3442 Ffinal$_str_0$0$0 == .
+   128C                    3443 __str_0:
+   128C 1B                 3444 	.db 0x1B
+   128D 5B 32 4A           3445 	.ascii "[2J"
+   1290 00                 3446 	.db 0x00
+                    0011   3447 Ffinal$_str_1$0$0 == .
+   1291                    3448 __str_1:
+   1291 57 69 74 68 20 65  3449 	.ascii "With each revolution, we get one step closer; that's how a d"
         61 63 68 20 72 65
         76 6F 6C 75 74 69
         6F 6E 2C 20 77 65
@@ -2587,96 +3456,156 @@
         65 72 3B 20 74 68
         61 74 27 73 20 68
         6F 77 20 61 20 64
-   0E16 72 69 6C 6C 20 77  2581 	.ascii "rill works."
+   12CD 72 69 6C 6C 20 77  3450 	.ascii "rill works."
         6F 72 6B 73 2E
-   0E21 0A                 2582 	.db 0x0A
-   0E22 0D                 2583 	.db 0x0D
-   0E23 00                 2584 	.db 0x00
-                    005B   2585 Ffinal$_str_2$0$0 == .
-   0E24                    2586 __str_2:
-   0E24 1B                 2587 	.db 0x1B
-   0E25 5B 31 35 3B 31 48  2588 	.ascii "[15;1H"
-   0E2B 00                 2589 	.db 0x00
-                    0063   2590 Ffinal$_str_3$0$0 == .
-   0E2C                    2591 __str_3:
-   0E2C 4F 27 73 20 74 75  2592 	.ascii "O's turn."
-        72 6E 2E
-   0E35 0A                 2593 	.db 0x0A
-   0E36 0D                 2594 	.db 0x0D
-   0E37 00                 2595 	.db 0x00
-                    006F   2596 Ffinal$_str_4$0$0 == .
-   0E38                    2597 __str_4:
-   0E38 58 27 73 20 74 75  2598 	.ascii "X's turn."
-        72 6E 2E
-   0E41 0A                 2599 	.db 0x0A
-   0E42 0D                 2600 	.db 0x0D
-   0E43 00                 2601 	.db 0x00
-                    007B   2602 Ffinal$_str_5$0$0 == .
-   0E44                    2603 __str_5:
-   0E44 1B                 2604 	.db 0x1B
-   0E45 5B 33 3B 31 48     2605 	.ascii "[3;1H"
-   0E4A 00                 2606 	.db 0x00
-                    0082   2607 Ffinal$_str_6$0$0 == .
-   0E4B                    2608 __str_6:
-   0E4B 2D 2D 2D 2D 2D 7C  2609 	.ascii "-----|-----|-----"
+   12D8 0A                 3451 	.db 0x0A
+   12D9 0D                 3452 	.db 0x0D
+   12DA 00                 3453 	.db 0x00
+                    005B   3454 Ffinal$_str_2$0$0 == .
+   12DB                    3455 __str_2:
+   12DB 1B                 3456 	.db 0x1B
+   12DC 5B 31 35 3B 31 48  3457 	.ascii "[15;1H"
+   12E2 00                 3458 	.db 0x00
+                    0063   3459 Ffinal$_str_3$0$0 == .
+   12E3                    3460 __str_3:
+   12E3 49 74 20 69 73 20  3461 	.ascii "It is currently O's turn."
+        63 75 72 72 65 6E
+        74 6C 79 20 4F 27
+        73 20 74 75 72 6E
+        2E
+   12FC 0A                 3462 	.db 0x0A
+   12FD 0D                 3463 	.db 0x0D
+   12FE 00                 3464 	.db 0x00
+                    007F   3465 Ffinal$_str_4$0$0 == .
+   12FF                    3466 __str_4:
+   12FF 49 74 20 69 73 20  3467 	.ascii "It is currently X's turn."
+        63 75 72 72 65 6E
+        74 6C 79 20 58 27
+        73 20 74 75 72 6E
+        2E
+   1318 0A                 3468 	.db 0x0A
+   1319 0D                 3469 	.db 0x0D
+   131A 00                 3470 	.db 0x00
+                    009B   3471 Ffinal$_str_5$0$0 == .
+   131B                    3472 __str_5:
+   131B 1B                 3473 	.db 0x1B
+   131C 5B 31 36 3B 31 48  3474 	.ascii "[16;1H"
+   1322 00                 3475 	.db 0x00
+                    00A3   3476 Ffinal$_str_6$0$0 == .
+   1323                    3477 __str_6:
+   1323 50 72 65 73 73 20  3478 	.ascii "Press any key to play again"
+        61 6E 79 20 6B 65
+        79 20 74 6F 20 70
+        6C 61 79 20 61 67
+        61 69 6E
+   133E 00                 3479 	.db 0x00
+                    00BF   3480 Ffinal$_str_7$0$0 == .
+   133F                    3481 __str_7:
+   133F 1B                 3482 	.db 0x1B
+   1340 5B 33 3B 31 48     3483 	.ascii "[3;1H"
+   1345 00                 3484 	.db 0x00
+                    00C6   3485 Ffinal$_str_8$0$0 == .
+   1346                    3486 __str_8:
+   1346 2D 2D 2D 2D 2D 7C  3487 	.ascii "-----|-----|-----"
         2D 2D 2D 2D 2D 7C
         2D 2D 2D 2D 2D
-   0E5C 0A                 2610 	.db 0x0A
-   0E5D 0D                 2611 	.db 0x0D
-   0E5E 00                 2612 	.db 0x00
-                    0096   2613 Ffinal$_str_7$0$0 == .
-   0E5F                    2614 __str_7:
-   0E5F 20 20 20 20 20 7C  2615 	.ascii "     |     |     "
+   1357 0A                 3488 	.db 0x0A
+   1358 0D                 3489 	.db 0x0D
+   1359 00                 3490 	.db 0x00
+                    00DA   3491 Ffinal$_str_9$0$0 == .
+   135A                    3492 __str_9:
+   135A 20 20 20 20 20 7C  3493 	.ascii "     |     |     "
         20 20 20 20 20 7C
         20 20 20 20 20
-   0E70 0A                 2616 	.db 0x0A
-   0E71 0D                 2617 	.db 0x0D
-   0E72 00                 2618 	.db 0x00
-                    00AA   2619 Ffinal$_str_8$0$0 == .
-   0E73                    2620 __str_8:
-   0E73 1B                 2621 	.db 0x1B
-   0E74 5B 25 64 3B 25 64  2622 	.ascii "[%d;%dH"
+   136B 0A                 3494 	.db 0x0A
+   136C 0D                 3495 	.db 0x0D
+   136D 00                 3496 	.db 0x00
+                    00EE   3497 Ffinal$_str_10$0$0 == .
+   136E                    3498 __str_10:
+   136E 1B                 3499 	.db 0x1B
+   136F 5B 25 64 3B 25 64  3500 	.ascii "[%d;%dH"
         48
-   0E7B 00                 2623 	.db 0x00
-                    00B3   2624 Ffinal$_str_9$0$0 == .
-   0E7C                    2625 __str_9:
-   0E7C 58 20 20 58        2626 	.ascii "X  X"
-   0E80 00                 2627 	.db 0x00
-                    00B8   2628 Ffinal$_str_10$0$0 == .
-   0E81                    2629 __str_10:
-   0E81 1B                 2630 	.db 0x1B
-   0E82 5B 25 64 3B 25 64  2631 	.ascii "[%d;%dH XX "
+   1376 00                 3501 	.db 0x00
+                    00F7   3502 Ffinal$_str_11$0$0 == .
+   1377                    3503 __str_11:
+   1377 58 20 20 58        3504 	.ascii "X  X"
+   137B 00                 3505 	.db 0x00
+                    00FC   3506 Ffinal$_str_12$0$0 == .
+   137C                    3507 __str_12:
+   137C 1B                 3508 	.db 0x1B
+   137D 5B 25 64 3B 25 64  3509 	.ascii "[%d;%dH XX "
         48 20 58 58 20
-   0E8D 00                 2632 	.db 0x00
-                    00C5   2633 Ffinal$_str_11$0$0 == .
-   0E8E                    2634 __str_11:
-   0E8E 1B                 2635 	.db 0x1B
-   0E8F 5B 25 64 3B 25 64  2636 	.ascii "[%d;%dHX  X"
+   1388 00                 3510 	.db 0x00
+                    0109   3511 Ffinal$_str_13$0$0 == .
+   1389                    3512 __str_13:
+   1389 1B                 3513 	.db 0x1B
+   138A 5B 25 64 3B 25 64  3514 	.ascii "[%d;%dHX  X"
         48 58 20 20 58
-   0E9A 00                 2637 	.db 0x00
-                    00D2   2638 Ffinal$_str_12$0$0 == .
-   0E9B                    2639 __str_12:
-   0E9B 20 4F 4F 20        2640 	.ascii " OO "
-   0E9F 00                 2641 	.db 0x00
-                    00D7   2642 Ffinal$_str_13$0$0 == .
-   0EA0                    2643 __str_13:
-   0EA0 1B                 2644 	.db 0x1B
-   0EA1 5B 25 64 3B 25 64  2645 	.ascii "[%d;%dHO  O"
+   1395 00                 3515 	.db 0x00
+                    0116   3516 Ffinal$_str_14$0$0 == .
+   1396                    3517 __str_14:
+   1396 20 4F 4F 20        3518 	.ascii " OO "
+   139A 00                 3519 	.db 0x00
+                    011B   3520 Ffinal$_str_15$0$0 == .
+   139B                    3521 __str_15:
+   139B 1B                 3522 	.db 0x1B
+   139C 5B 25 64 3B 25 64  3523 	.ascii "[%d;%dHO  O"
         48 4F 20 20 4F
-   0EAC 00                 2646 	.db 0x00
-                    00E4   2647 Ffinal$_str_14$0$0 == .
-   0EAD                    2648 __str_14:
-   0EAD 1B                 2649 	.db 0x1B
-   0EAE 5B 25 64 3B 25 64  2650 	.ascii "[%d;%dH OO"
+   13A7 00                 3524 	.db 0x00
+                    0128   3525 Ffinal$_str_16$0$0 == .
+   13A8                    3526 __str_16:
+   13A8 1B                 3527 	.db 0x1B
+   13A9 5B 25 64 3B 25 64  3528 	.ascii "[%d;%dH OO"
         48 20 4F 4F
-   0EB8 00                 2651 	.db 0x00
-                    00F0   2652 Ffinal$_str_15$0$0 == .
-   0EB9                    2653 __str_15:
-   0EB9 25 63              2654 	.ascii "%c"
-   0EBB 00                 2655 	.db 0x00
-                    00F3   2656 Ffinal$_str_16$0$0 == .
-   0EBC                    2657 __str_16:
-   0EBC 7C                 2658 	.ascii "|"
-   0EBD 00                 2659 	.db 0x00
-                           2660 	.area XINIT   (CODE)
-                           2661 	.area CABS    (ABS,CODE)
+   13B3 00                 3529 	.db 0x00
+                    0134   3530 Ffinal$_str_17$0$0 == .
+   13B4                    3531 __str_17:
+   13B4 25 63              3532 	.ascii "%c"
+   13B6 00                 3533 	.db 0x00
+                    0137   3534 Ffinal$_str_18$0$0 == .
+   13B7                    3535 __str_18:
+   13B7 7C                 3536 	.ascii "|"
+   13B8 00                 3537 	.db 0x00
+                    0139   3538 Ffinal$_str_19$0$0 == .
+   13B9                    3539 __str_19:
+   13B9 1B                 3540 	.db 0x1B
+   13BA 5B 32 30 3B 31 48  3541 	.ascii "[20;1H"
+   13C0 00                 3542 	.db 0x00
+                    0141   3543 Ffinal$_str_20$0$0 == .
+   13C1                    3544 __str_20:
+   13C1 47 61 6D 65 20 68  3545 	.ascii "Game has been won by player O"
+        61 73 20 62 65 65
+        6E 20 77 6F 6E 20
+        62 79 20 70 6C 61
+        79 65 72 20 4F
+   13DE 00                 3546 	.db 0x00
+                    015F   3547 Ffinal$_str_21$0$0 == .
+   13DF                    3548 __str_21:
+   13DF 47 61 6D 65 20 68  3549 	.ascii "Game has been won by player X"
+        61 73 20 62 65 65
+        6E 20 77 6F 6E 20
+        62 79 20 70 6C 61
+        79 65 72 20 58
+   13FC 00                 3550 	.db 0x00
+                    017D   3551 Ffinal$_str_22$0$0 == .
+   13FD                    3552 __str_22:
+   13FD 46 72 65 65 20 6D  3553 	.ascii "Free move. Choose sub-board."
+        6F 76 65 2E 20 43
+        68 6F 6F 73 65 20
+        73 75 62 2D 62 6F
+        61 72 64 2E
+   1419 0A                 3554 	.db 0x0A
+   141A 0D                 3555 	.db 0x0D
+   141B 00                 3556 	.db 0x00
+                    019C   3557 Ffinal$_str_23$0$0 == .
+   141C                    3558 __str_23:
+   141C 20 20 20 20 20 20  3559 	.ascii "                              "
+        20 20 20 20 20 20
+        20 20 20 20 20 20
+        20 20 20 20 20 20
+        20 20 20 20 20 20
+   143A 0A                 3560 	.db 0x0A
+   143B 0D                 3561 	.db 0x0D
+   143C 00                 3562 	.db 0x00
+                           3563 	.area XINIT   (CODE)
+                           3564 	.area CABS    (ABS,CODE)

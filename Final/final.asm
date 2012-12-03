@@ -1,7 +1,7 @@
 ;--------------------------------------------------------
 ; File Created by SDCC : free open source ANSI-C Compiler
 ; Version 2.9.0 #5416 (Mar 22 2009) (MINGW32)
-; This file was generated Thu Nov 29 17:58:58 2012
+; This file was generated Mon Dec 03 17:28:14 2012
 ;--------------------------------------------------------
 	.module final
 	.optsdcc -mmcs51 --model-small
@@ -393,9 +393,8 @@
 	.globl _SP
 	.globl _P0
 	.globl _board
+	.globl _getMove_PARM_1
 	.globl _turn
-	.globl _won
-	.globl _move
 	.globl _current
 	.globl _putchar
 	.globl _getchar
@@ -403,6 +402,9 @@
 	.globl _gameStart
 	.globl _printBoard
 	.globl _printSubBoard
+	.globl _checkBoardWin
+	.globl _gameWon
+	.globl _getMove
 	.globl _SYSCLK_INIT
 	.globl _PORT_INIT
 	.globl _UART0_INIT
@@ -1192,9 +1194,6 @@ _P7_7	=	0x00ff
 G$current$0$0==.
 _current::
 	.ds 1
-G$move$0$0==.
-_move::
-	.ds 1
 LprintSubBoard$sloc0$1$0==.
 _printSubBoard_sloc0_1_0:
 	.ds 2
@@ -1206,6 +1205,10 @@ _printSubBoard_sloc1_1_0:
 ;--------------------------------------------------------
 	.area	OSEG    (OVR,DATA)
 	.area	OSEG    (OVR,DATA)
+	.area	OSEG    (OVR,DATA)
+LcheckBoardWin$b$1$1==.
+_checkBoardWin_b_1_1::
+	.ds 3
 	.area	OSEG    (OVR,DATA)
 	.area	OSEG    (OVR,DATA)
 	.area	OSEG    (OVR,DATA)
@@ -1229,11 +1232,11 @@ __start__stack:
 ; bit data
 ;--------------------------------------------------------
 	.area BSEG    (BIT)
-G$won$0$0==.
-_won::
-	.ds 1
 G$turn$0$0==.
 _turn::
+	.ds 1
+LgetMove$freeMove$1$1==.
+_getMove_PARM_1:
 	.ds 1
 ;--------------------------------------------------------
 ; paged external ram data
@@ -1284,20 +1287,12 @@ __interrupt_vect:
 	.globl __mcs51_genXRAMCLEAR
 	.globl __mcs51_genRAMCLEAR
 	G$UART0_INIT$0$0 ==.
-	C$final.c$45$1$1 ==.
-;	C:\Users\SSP\Documents\Microprocessor Systems\Final\final.c:45: char current = 0;	//current subboard
+	C$final.c$47$1$1 ==.
+;	C:\Users\SSP\Documents\Microprocessor Systems\Final\final.c:47: char current = 0;	//current subboard
 	mov	_current,#0x00
 	G$UART0_INIT$0$0 ==.
 	C$final.c$46$1$1 ==.
-;	C:\Users\SSP\Documents\Microprocessor Systems\Final\final.c:46: char move = 0;		//player move
-	mov	_move,#0x00
-	G$UART0_INIT$0$0 ==.
-	C$final.c$42$1$1 ==.
-;	C:\Users\SSP\Documents\Microprocessor Systems\Final\final.c:42: bit won = 0;
-	clr	_won
-	G$UART0_INIT$0$0 ==.
-	C$final.c$43$1$1 ==.
-;	C:\Users\SSP\Documents\Microprocessor Systems\Final\final.c:43: bit turn = 0;		//0 = O, 1 = X
+;	C:\Users\SSP\Documents\Microprocessor Systems\Final\final.c:46: bit turn = 0;		//0 = O, 1 = X
 	clr	_turn
 	.area GSFINAL (CODE)
 	ljmp	__sdcc_program_startup
@@ -1382,32 +1377,32 @@ _getchar:
 ;------------------------------------------------------------
 ;------------------------------------------------------------
 	G$main$0$0 ==.
-	C$final.c$53$1$1 ==.
-;	C:\Users\SSP\Documents\Microprocessor Systems\Final\final.c:53: void main(void)
+	C$final.c$54$1$1 ==.
+;	C:\Users\SSP\Documents\Microprocessor Systems\Final\final.c:54: void main(void)
 ;	-----------------------------------------
 ;	 function main
 ;	-----------------------------------------
 _main:
-	C$final.c$55$1$1 ==.
-;	C:\Users\SSP\Documents\Microprocessor Systems\Final\final.c:55: WDTCN = 0xDE;						// Disable the watchdog timer
-	mov	_WDTCN,#0xDE
 	C$final.c$56$1$1 ==.
-;	C:\Users\SSP\Documents\Microprocessor Systems\Final\final.c:56: WDTCN = 0xAD;						// Note: = "DEAD"!
+;	C:\Users\SSP\Documents\Microprocessor Systems\Final\final.c:56: WDTCN = 0xDE;						// Disable the watchdog timer
+	mov	_WDTCN,#0xDE
+	C$final.c$57$1$1 ==.
+;	C:\Users\SSP\Documents\Microprocessor Systems\Final\final.c:57: WDTCN = 0xAD;						// Note: = "DEAD"!
 	mov	_WDTCN,#0xAD
-	C$final.c$58$1$1 ==.
-;	C:\Users\SSP\Documents\Microprocessor Systems\Final\final.c:58: SYSCLK_INIT();						// Initialize the oscillator
-	lcall	_SYSCLK_INIT
 	C$final.c$59$1$1 ==.
-;	C:\Users\SSP\Documents\Microprocessor Systems\Final\final.c:59: PORT_INIT();						// Initialize the Crossbar and GPIO
-	lcall	_PORT_INIT
+;	C:\Users\SSP\Documents\Microprocessor Systems\Final\final.c:59: SYSCLK_INIT();						// Initialize the oscillator
+	lcall	_SYSCLK_INIT
 	C$final.c$60$1$1 ==.
-;	C:\Users\SSP\Documents\Microprocessor Systems\Final\final.c:60: UART0_INIT();						// Initialize UART0
+;	C:\Users\SSP\Documents\Microprocessor Systems\Final\final.c:60: PORT_INIT();						// Initialize the Crossbar and GPIO
+	lcall	_PORT_INIT
+	C$final.c$61$1$1 ==.
+;	C:\Users\SSP\Documents\Microprocessor Systems\Final\final.c:61: UART0_INIT();						// Initialize UART0
 	lcall	_UART0_INIT
-	C$final.c$62$1$1 ==.
-;	C:\Users\SSP\Documents\Microprocessor Systems\Final\final.c:62: SFRPAGE = UART0_PAGE;				// Direct output to UART0
+	C$final.c$63$1$1 ==.
+;	C:\Users\SSP\Documents\Microprocessor Systems\Final\final.c:63: SFRPAGE = UART0_PAGE;				// Direct output to UART0
 	mov	_SFRPAGE,#0x00
-	C$final.c$64$1$1 ==.
-;	C:\Users\SSP\Documents\Microprocessor Systems\Final\final.c:64: printf("\033[2J");					// Erase ANSI terminal & move cursor to home position
+	C$final.c$65$1$1 ==.
+;	C:\Users\SSP\Documents\Microprocessor Systems\Final\final.c:65: printf("\033[2J");					// Erase ANSI terminal & move cursor to home position
 	mov	a,#__str_0
 	push	acc
 	mov	a,#(__str_0 >> 8)
@@ -1418,8 +1413,8 @@ _main:
 	dec	sp
 	dec	sp
 	dec	sp
-	C$final.c$65$1$1 ==.
-;	C:\Users\SSP\Documents\Microprocessor Systems\Final\final.c:65: printf("With each revolution, we get one step closer; that's how a drill works.\n\r");
+	C$final.c$66$1$1 ==.
+;	C:\Users\SSP\Documents\Microprocessor Systems\Final\final.c:66: printf("With each revolution, we get one step closer; that's how a drill works.\n\r");
 	mov	a,#__str_1
 	push	acc
 	mov	a,#(__str_1 >> 8)
@@ -1430,14 +1425,19 @@ _main:
 	dec	sp
 	dec	sp
 	dec	sp
-	C$final.c$68$1$1 ==.
-;	C:\Users\SSP\Documents\Microprocessor Systems\Final\final.c:68: while(1)
-00105$:
-	C$final.c$70$2$2 ==.
-;	C:\Users\SSP\Documents\Microprocessor Systems\Final\final.c:70: gameStart();
+	C$final.c$69$1$1 ==.
+;	C:\Users\SSP\Documents\Microprocessor Systems\Final\final.c:69: while(1)
+00111$:
+	C$final.c$71$2$2 ==.
+;	C:\Users\SSP\Documents\Microprocessor Systems\Final\final.c:71: gameStart();
 	lcall	_gameStart
-	C$final.c$73$2$2 ==.
-;	C:\Users\SSP\Documents\Microprocessor Systems\Final\final.c:73: printf("\033[15;1H");
+	C$final.c$73$3$3 ==.
+;	C:\Users\SSP\Documents\Microprocessor Systems\Final\final.c:73: while(!gameWon())
+00107$:
+	lcall	_gameWon
+	jc	00109$
+	C$final.c$76$3$3 ==.
+;	C:\Users\SSP\Documents\Microprocessor Systems\Final\final.c:76: printf("\033[15;1H");
 	mov	a,#__str_2
 	push	acc
 	mov	a,#(__str_2 >> 8)
@@ -1448,11 +1448,11 @@ _main:
 	dec	sp
 	dec	sp
 	dec	sp
-	C$final.c$74$2$2 ==.
-;	C:\Users\SSP\Documents\Microprocessor Systems\Final\final.c:74: if(turn == 0)
+	C$final.c$77$3$3 ==.
+;	C:\Users\SSP\Documents\Microprocessor Systems\Final\final.c:77: if(turn == 0)
 	jb	_turn,00102$
-	C$final.c$75$2$2 ==.
-;	C:\Users\SSP\Documents\Microprocessor Systems\Final\final.c:75: printf("O's turn.\n\r");
+	C$final.c$78$3$3 ==.
+;	C:\Users\SSP\Documents\Microprocessor Systems\Final\final.c:78: printf("It is currently O's turn.\n\r");
 	mov	a,#__str_3
 	push	acc
 	mov	a,#(__str_3 >> 8)
@@ -1465,8 +1465,8 @@ _main:
 	dec	sp
 	sjmp	00103$
 00102$:
-	C$final.c$77$2$2 ==.
-;	C:\Users\SSP\Documents\Microprocessor Systems\Final\final.c:77: printf("X's turn.\n\r");
+	C$final.c$80$3$3 ==.
+;	C:\Users\SSP\Documents\Microprocessor Systems\Final\final.c:80: printf("It is currently X's turn.\n\r");
 	mov	a,#__str_4
 	push	acc
 	mov	a,#(__str_4 >> 8)
@@ -1478,12 +1478,63 @@ _main:
 	dec	sp
 	dec	sp
 00103$:
-	C$final.c$78$2$2 ==.
-;	C:\Users\SSP\Documents\Microprocessor Systems\Final\final.c:78: getchar();
+	C$final.c$82$3$3 ==.
+;	C:\Users\SSP\Documents\Microprocessor Systems\Final\final.c:82: if(board[9][current] == ' ')
+	mov	a,_current
+	add	a,#(_board + 0x0090)
+	mov	dpl,a
+	clr	a
+	addc	a,#((_board + 0x0090) >> 8)
+	mov	dph,a
+	movx	a,@dptr
+	mov	r2,a
+	cjne	r2,#0x20,00105$
+	C$final.c$83$3$3 ==.
+;	C:\Users\SSP\Documents\Microprocessor Systems\Final\final.c:83: getMove(0);
+	clr	_getMove_PARM_1
+	lcall	_getMove
+	sjmp	00106$
+00105$:
+	C$final.c$85$3$3 ==.
+;	C:\Users\SSP\Documents\Microprocessor Systems\Final\final.c:85: getMove(1);
+	setb	_getMove_PARM_1
+	lcall	_getMove
+00106$:
+	C$final.c$87$3$3 ==.
+;	C:\Users\SSP\Documents\Microprocessor Systems\Final\final.c:87: printBoard();
+	lcall	_printBoard
+	sjmp	00107$
+00109$:
+	C$final.c$90$2$2 ==.
+;	C:\Users\SSP\Documents\Microprocessor Systems\Final\final.c:90: printf("\033[16;1H");
+	mov	a,#__str_5
+	push	acc
+	mov	a,#(__str_5 >> 8)
+	push	acc
+	mov	a,#0x80
+	push	acc
+	lcall	_printf
+	dec	sp
+	dec	sp
+	dec	sp
+	C$final.c$91$2$2 ==.
+;	C:\Users\SSP\Documents\Microprocessor Systems\Final\final.c:91: printf("Press any key to play again");
+	mov	a,#__str_6
+	push	acc
+	mov	a,#(__str_6 >> 8)
+	push	acc
+	mov	a,#0x80
+	push	acc
+	lcall	_printf
+	dec	sp
+	dec	sp
+	dec	sp
+	C$final.c$92$2$2 ==.
+;	C:\Users\SSP\Documents\Microprocessor Systems\Final\final.c:92: getchar();
 	lcall	_getchar
-	C$final.c$80$1$1 ==.
+	C$final.c$94$1$1 ==.
 	XG$main$0$0 ==.
-	sjmp	00105$
+	ljmp	00111$
 ;------------------------------------------------------------
 ;Allocation info for local variables in function 'gameStart'
 ;------------------------------------------------------------
@@ -1491,14 +1542,14 @@ _main:
 ;j                         Allocated to registers r4 r5 
 ;------------------------------------------------------------
 	G$gameStart$0$0 ==.
-	C$final.c$83$1$1 ==.
-;	C:\Users\SSP\Documents\Microprocessor Systems\Final\final.c:83: void gameStart(void)
+	C$final.c$97$1$1 ==.
+;	C:\Users\SSP\Documents\Microprocessor Systems\Final\final.c:97: void gameStart(void)
 ;	-----------------------------------------
 ;	 function gameStart
 ;	-----------------------------------------
 _gameStart:
-	C$final.c$89$1$1 ==.
-;	C:\Users\SSP\Documents\Microprocessor Systems\Final\final.c:89: for(i=0; i<10; i++)
+	C$final.c$103$1$1 ==.
+;	C:\Users\SSP\Documents\Microprocessor Systems\Final\final.c:103: for(i=0; i<10; i++)
 	mov	r2,#0x00
 	mov	r3,#0x00
 00105$:
@@ -1509,8 +1560,8 @@ _gameStart:
 	xrl	a,#0x80
 	subb	a,#0x80
 	jnc	00108$
-	C$final.c$91$2$2 ==.
-;	C:\Users\SSP\Documents\Microprocessor Systems\Final\final.c:91: for(j=0; j<9; j++)
+	C$final.c$105$2$2 ==.
+;	C:\Users\SSP\Documents\Microprocessor Systems\Final\final.c:105: for(j=0; j<9; j++)
 	mov	r4,#0x00
 	mov	r5,#0x00
 	mov	ar6,r2
@@ -1540,8 +1591,8 @@ _gameStart:
 	xrl	a,#0x80
 	subb	a,#0x80
 	jnc	00107$
-	C$final.c$93$3$3 ==.
-;	C:\Users\SSP\Documents\Microprocessor Systems\Final\final.c:93: board[i][j] = ' ';
+	C$final.c$107$3$3 ==.
+;	C:\Users\SSP\Documents\Microprocessor Systems\Final\final.c:107: board[i][j] = ' ';
 	mov	a,r4
 	add	a,r6
 	mov	dpl,a
@@ -1550,23 +1601,57 @@ _gameStart:
 	mov	dph,a
 	mov	a,#0x20
 	movx	@dptr,a
-	C$final.c$91$2$2 ==.
-;	C:\Users\SSP\Documents\Microprocessor Systems\Final\final.c:91: for(j=0; j<9; j++)
+	C$final.c$105$2$2 ==.
+;	C:\Users\SSP\Documents\Microprocessor Systems\Final\final.c:105: for(j=0; j<9; j++)
 	inc	r4
 	cjne	r4,#0x00,00101$
 	inc	r5
 	sjmp	00101$
 00107$:
-	C$final.c$89$1$1 ==.
-;	C:\Users\SSP\Documents\Microprocessor Systems\Final\final.c:89: for(i=0; i<10; i++)
+	C$final.c$103$1$1 ==.
+;	C:\Users\SSP\Documents\Microprocessor Systems\Final\final.c:103: for(i=0; i<10; i++)
 	inc	r2
 	cjne	r2,#0x00,00105$
 	inc	r3
 	sjmp	00105$
 00108$:
-	C$final.c$98$1$1 ==.
-;	C:\Users\SSP\Documents\Microprocessor Systems\Final\final.c:98: printBoard();
-	C$final.c$99$1$1 ==.
+	C$final.c$111$1$1 ==.
+;	C:\Users\SSP\Documents\Microprocessor Systems\Final\final.c:111: turn = 0;
+	clr	_turn
+	C$final.c$113$1$1 ==.
+;	C:\Users\SSP\Documents\Microprocessor Systems\Final\final.c:113: printBoard();
+	lcall	_printBoard
+	C$final.c$114$1$1 ==.
+;	C:\Users\SSP\Documents\Microprocessor Systems\Final\final.c:114: printf("\033[15;1H");
+	mov	a,#__str_2
+	push	acc
+	mov	a,#(__str_2 >> 8)
+	push	acc
+	mov	a,#0x80
+	push	acc
+	lcall	_printf
+	dec	sp
+	dec	sp
+	dec	sp
+	C$final.c$115$1$1 ==.
+;	C:\Users\SSP\Documents\Microprocessor Systems\Final\final.c:115: printf("It is currently O's turn.\n\r");
+	mov	a,#__str_3
+	push	acc
+	mov	a,#(__str_3 >> 8)
+	push	acc
+	mov	a,#0x80
+	push	acc
+	lcall	_printf
+	dec	sp
+	dec	sp
+	dec	sp
+	C$final.c$116$1$1 ==.
+;	C:\Users\SSP\Documents\Microprocessor Systems\Final\final.c:116: getMove(1);
+	setb	_getMove_PARM_1
+	lcall	_getMove
+	C$final.c$117$1$1 ==.
+;	C:\Users\SSP\Documents\Microprocessor Systems\Final\final.c:117: printBoard();
+	C$final.c$118$1$1 ==.
 	XG$gameStart$0$0 ==.
 	ljmp	_printBoard
 ;------------------------------------------------------------
@@ -1575,17 +1660,17 @@ _gameStart:
 ;i                         Allocated to registers r2 r3 
 ;------------------------------------------------------------
 	G$printBoard$0$0 ==.
-	C$final.c$101$1$1 ==.
-;	C:\Users\SSP\Documents\Microprocessor Systems\Final\final.c:101: void printBoard(void)
+	C$final.c$120$1$1 ==.
+;	C:\Users\SSP\Documents\Microprocessor Systems\Final\final.c:120: void printBoard(void)
 ;	-----------------------------------------
 ;	 function printBoard
 ;	-----------------------------------------
 _printBoard:
-	C$final.c$105$1$1 ==.
-;	C:\Users\SSP\Documents\Microprocessor Systems\Final\final.c:105: printf("\033[3;1H");
-	mov	a,#__str_5
+	C$final.c$124$1$1 ==.
+;	C:\Users\SSP\Documents\Microprocessor Systems\Final\final.c:124: printf("\033[3;1H");
+	mov	a,#__str_7
 	push	acc
-	mov	a,#(__str_5 >> 8)
+	mov	a,#(__str_7 >> 8)
 	push	acc
 	mov	a,#0x80
 	push	acc
@@ -1593,8 +1678,8 @@ _printBoard:
 	dec	sp
 	dec	sp
 	dec	sp
-	C$final.c$108$1$1 ==.
-;	C:\Users\SSP\Documents\Microprocessor Systems\Final\final.c:108: for(i=0; i<11; i++)
+	C$final.c$127$1$1 ==.
+;	C:\Users\SSP\Documents\Microprocessor Systems\Final\final.c:127: for(i=0; i<11; i++)
 	mov	r2,#0x00
 	mov	r3,#0x00
 	mov	ar4,r2
@@ -1607,8 +1692,8 @@ _printBoard:
 	xrl	a,#0x80
 	subb	a,#0x80
 	jnc	00108$
-	C$final.c$110$2$2 ==.
-;	C:\Users\SSP\Documents\Microprocessor Systems\Final\final.c:110: if(i==3 || i==7)
+	C$final.c$129$2$2 ==.
+;	C:\Users\SSP\Documents\Microprocessor Systems\Final\final.c:129: if(i==3 || i==7)
 	cjne	r4,#0x03,00123$
 	cjne	r5,#0x00,00123$
 	sjmp	00101$
@@ -1616,13 +1701,13 @@ _printBoard:
 	cjne	r4,#0x07,00102$
 	cjne	r5,#0x00,00102$
 00101$:
-	C$final.c$111$2$2 ==.
-;	C:\Users\SSP\Documents\Microprocessor Systems\Final\final.c:111: printf("-----|-----|-----\n\r");
+	C$final.c$130$2$2 ==.
+;	C:\Users\SSP\Documents\Microprocessor Systems\Final\final.c:130: printf("-----|-----|-----\n\r");
 	push	ar4
 	push	ar5
-	mov	a,#__str_6
+	mov	a,#__str_8
 	push	acc
-	mov	a,#(__str_6 >> 8)
+	mov	a,#(__str_8 >> 8)
 	push	acc
 	mov	a,#0x80
 	push	acc
@@ -1634,13 +1719,13 @@ _printBoard:
 	pop	ar4
 	sjmp	00107$
 00102$:
-	C$final.c$113$2$2 ==.
-;	C:\Users\SSP\Documents\Microprocessor Systems\Final\final.c:113: printf("     |     |     \n\r");
+	C$final.c$132$2$2 ==.
+;	C:\Users\SSP\Documents\Microprocessor Systems\Final\final.c:132: printf("     |     |     \n\r");
 	push	ar4
 	push	ar5
-	mov	a,#__str_7
+	mov	a,#__str_9
 	push	acc
-	mov	a,#(__str_7 >> 8)
+	mov	a,#(__str_9 >> 8)
 	push	acc
 	mov	a,#0x80
 	push	acc
@@ -1651,15 +1736,15 @@ _printBoard:
 	pop	ar5
 	pop	ar4
 00107$:
-	C$final.c$108$1$1 ==.
-;	C:\Users\SSP\Documents\Microprocessor Systems\Final\final.c:108: for(i=0; i<11; i++)
+	C$final.c$127$1$1 ==.
+;	C:\Users\SSP\Documents\Microprocessor Systems\Final\final.c:127: for(i=0; i<11; i++)
 	inc	r4
 	cjne	r4,#0x00,00105$
 	inc	r5
 	sjmp	00105$
 00108$:
-	C$final.c$116$1$1 ==.
-;	C:\Users\SSP\Documents\Microprocessor Systems\Final\final.c:116: for(i=0; i<9; i++)
+	C$final.c$135$1$1 ==.
+;	C:\Users\SSP\Documents\Microprocessor Systems\Final\final.c:135: for(i=0; i<9; i++)
 	mov	r2,#0x00
 	mov	r3,#0x00
 00109$:
@@ -1670,8 +1755,8 @@ _printBoard:
 	xrl	a,#0x80
 	subb	a,#0x80
 	jnc	00113$
-	C$final.c$117$1$1 ==.
-;	C:\Users\SSP\Documents\Microprocessor Systems\Final\final.c:117: printSubBoard(i);
+	C$final.c$136$1$1 ==.
+;	C:\Users\SSP\Documents\Microprocessor Systems\Final\final.c:136: printSubBoard(i);
 	mov	dpl,r2
 	mov	dph,r3
 	push	ar2
@@ -1679,14 +1764,14 @@ _printBoard:
 	lcall	_printSubBoard
 	pop	ar3
 	pop	ar2
-	C$final.c$116$1$1 ==.
-;	C:\Users\SSP\Documents\Microprocessor Systems\Final\final.c:116: for(i=0; i<9; i++)
+	C$final.c$135$1$1 ==.
+;	C:\Users\SSP\Documents\Microprocessor Systems\Final\final.c:135: for(i=0; i<9; i++)
 	inc	r2
 	cjne	r2,#0x00,00109$
 	inc	r3
 	sjmp	00109$
 00113$:
-	C$final.c$118$1$1 ==.
+	C$final.c$137$1$1 ==.
 	XG$printBoard$0$0 ==.
 	ret
 ;------------------------------------------------------------
@@ -1698,16 +1783,16 @@ _printBoard:
 ;sloc1                     Allocated with name '_printSubBoard_sloc1_1_0'
 ;------------------------------------------------------------
 	G$printSubBoard$0$0 ==.
-	C$final.c$120$1$1 ==.
-;	C:\Users\SSP\Documents\Microprocessor Systems\Final\final.c:120: void printSubBoard(int pos)
+	C$final.c$139$1$1 ==.
+;	C:\Users\SSP\Documents\Microprocessor Systems\Final\final.c:139: void printSubBoard(int pos)
 ;	-----------------------------------------
 ;	 function printSubBoard
 ;	-----------------------------------------
 _printSubBoard:
 	mov	r2,dpl
 	mov	r3,dph
-	C$final.c$123$1$1 ==.
-;	C:\Users\SSP\Documents\Microprocessor Systems\Final\final.c:123: printf("\033[%d;%dH", startRow[pos/3], startCol[pos%3]);
+	C$final.c$142$1$1 ==.
+;	C:\Users\SSP\Documents\Microprocessor Systems\Final\final.c:142: printf("\033[%d;%dH", startRow[pos/3], startCol[pos%3]);
 	mov	__modsint_PARM_2,#0x03
 	clr	a
 	mov	(__modsint_PARM_2 + 1),a
@@ -1771,9 +1856,9 @@ _printSubBoard:
 	mov	r7,a
 	push	ar6
 	push	ar7
-	mov	a,#__str_8
+	mov	a,#__str_10
 	push	acc
-	mov	a,#(__str_8 >> 8)
+	mov	a,#(__str_10 >> 8)
 	push	acc
 	mov	a,#0x80
 	push	acc
@@ -1783,8 +1868,8 @@ _printSubBoard:
 	mov	sp,a
 	pop	ar3
 	pop	ar2
-	C$final.c$125$1$1 ==.
-;	C:\Users\SSP\Documents\Microprocessor Systems\Final\final.c:125: if(board[9][pos] == 'X')
+	C$final.c$144$1$1 ==.
+;	C:\Users\SSP\Documents\Microprocessor Systems\Final\final.c:144: if(board[9][pos] == 1)
 	mov	a,r2
 	add	a,#(_board + 0x0090)
 	mov	dpl,a
@@ -1793,18 +1878,18 @@ _printSubBoard:
 	mov	dph,a
 	movx	a,@dptr
 	mov	r4,a
-	cjne	r4,#0x58,00124$
+	cjne	r4,#0x01,00124$
 	sjmp	00125$
 00124$:
 	ljmp	00109$
 00125$:
-	C$final.c$127$2$2 ==.
-;	C:\Users\SSP\Documents\Microprocessor Systems\Final\final.c:127: printf("X  X");
+	C$final.c$146$2$2 ==.
+;	C:\Users\SSP\Documents\Microprocessor Systems\Final\final.c:146: printf("X  X");
 	push	ar2
 	push	ar3
-	mov	a,#__str_9
+	mov	a,#__str_11
 	push	acc
-	mov	a,#(__str_9 >> 8)
+	mov	a,#(__str_11 >> 8)
 	push	acc
 	mov	a,#0x80
 	push	acc
@@ -1814,8 +1899,8 @@ _printSubBoard:
 	dec	sp
 	pop	ar3
 	pop	ar2
-	C$final.c$128$2$2 ==.
-;	C:\Users\SSP\Documents\Microprocessor Systems\Final\final.c:128: printf("\033[%d;%dH XX ", startRow[pos/3]+1, startCol[pos%3]);
+	C$final.c$147$2$2 ==.
+;	C:\Users\SSP\Documents\Microprocessor Systems\Final\final.c:147: printf("\033[%d;%dH XX ", startRow[pos/3]+1, startCol[pos%3]);
 	mov	__modsint_PARM_2,#0x03
 	clr	a
 	mov	(__modsint_PARM_2 + 1),a
@@ -1890,9 +1975,9 @@ _printSubBoard:
 	push	(_printSubBoard_sloc0_1_0 + 1)
 	push	ar6
 	push	ar7
-	mov	a,#__str_10
+	mov	a,#__str_12
 	push	acc
-	mov	a,#(__str_10 >> 8)
+	mov	a,#(__str_12 >> 8)
 	push	acc
 	mov	a,#0x80
 	push	acc
@@ -1904,8 +1989,8 @@ _printSubBoard:
 	pop	ar0
 	pop	ar5
 	pop	ar4
-	C$final.c$129$2$2 ==.
-;	C:\Users\SSP\Documents\Microprocessor Systems\Final\final.c:129: printf("\033[%d;%dHX  X", startRow[pos/3]+2, startCol[pos%3]);
+	C$final.c$148$2$2 ==.
+;	C:\Users\SSP\Documents\Microprocessor Systems\Final\final.c:148: printf("\033[%d;%dHX  X", startRow[pos/3]+2, startCol[pos%3]);
 	mov	a,r4
 	add	a,#_startCol
 	mov	dpl,a
@@ -1942,9 +2027,9 @@ _printSubBoard:
 	push	ar5
 	push	ar6
 	push	ar7
-	mov	a,#__str_11
+	mov	a,#__str_13
 	push	acc
-	mov	a,#(__str_11 >> 8)
+	mov	a,#(__str_13 >> 8)
 	push	acc
 	mov	a,#0x80
 	push	acc
@@ -1954,28 +2039,27 @@ _printSubBoard:
 	mov	sp,a
 	ret
 00109$:
-	C$final.c$131$1$1 ==.
-;	C:\Users\SSP\Documents\Microprocessor Systems\Final\final.c:131: else if (board[9][pos] == 'O')
+	C$final.c$150$1$1 ==.
+;	C:\Users\SSP\Documents\Microprocessor Systems\Final\final.c:150: else if (board[9][pos] == 0)
 	mov	a,r2
 	add	a,#(_board + 0x0090)
-	mov	dpl,a
+	mov	r4,a
 	mov	a,r3
 	addc	a,#((_board + 0x0090) >> 8)
-	mov	dph,a
+	mov	r5,a
+	mov	dpl,r4
+	mov	dph,r5
 	movx	a,@dptr
-	mov	r4,a
-	cjne	r4,#0x4F,00127$
-	sjmp	00128$
-00127$:
+	jz	00127$
 	ljmp	00106$
-00128$:
-	C$final.c$133$2$3 ==.
-;	C:\Users\SSP\Documents\Microprocessor Systems\Final\final.c:133: printf(" OO ");
+00127$:
+	C$final.c$152$2$3 ==.
+;	C:\Users\SSP\Documents\Microprocessor Systems\Final\final.c:152: printf(" OO ");
 	push	ar2
 	push	ar3
-	mov	a,#__str_12
+	mov	a,#__str_14
 	push	acc
-	mov	a,#(__str_12 >> 8)
+	mov	a,#(__str_14 >> 8)
 	push	acc
 	mov	a,#0x80
 	push	acc
@@ -1985,8 +2069,8 @@ _printSubBoard:
 	dec	sp
 	pop	ar3
 	pop	ar2
-	C$final.c$134$2$3 ==.
-;	C:\Users\SSP\Documents\Microprocessor Systems\Final\final.c:134: printf("\033[%d;%dHO  O", startRow[pos/3]+1, startCol[pos%3]);
+	C$final.c$153$2$3 ==.
+;	C:\Users\SSP\Documents\Microprocessor Systems\Final\final.c:153: printf("\033[%d;%dHO  O", startRow[pos/3]+1, startCol[pos%3]);
 	mov	__modsint_PARM_2,#0x03
 	clr	a
 	mov	(__modsint_PARM_2 + 1),a
@@ -2050,9 +2134,9 @@ _printSubBoard:
 	movc	a,@a+dptr
 	mov	r7,a
 	inc	r6
-	cjne	r6,#0x00,00129$
+	cjne	r6,#0x00,00128$
 	inc	r7
-00129$:
+00128$:
 	push	ar4
 	push	ar5
 	push	ar0
@@ -2061,9 +2145,9 @@ _printSubBoard:
 	push	(_printSubBoard_sloc0_1_0 + 1)
 	push	ar6
 	push	ar7
-	mov	a,#__str_13
+	mov	a,#__str_15
 	push	acc
-	mov	a,#(__str_13 >> 8)
+	mov	a,#(__str_15 >> 8)
 	push	acc
 	mov	a,#0x80
 	push	acc
@@ -2075,8 +2159,8 @@ _printSubBoard:
 	pop	ar0
 	pop	ar5
 	pop	ar4
-	C$final.c$135$2$3 ==.
-;	C:\Users\SSP\Documents\Microprocessor Systems\Final\final.c:135: printf("\033[%d;%dH OO", startRow[pos/3]+2, startCol[pos%3]);
+	C$final.c$154$2$3 ==.
+;	C:\Users\SSP\Documents\Microprocessor Systems\Final\final.c:154: printf("\033[%d;%dH OO", startRow[pos/3]+2, startCol[pos%3]);
 	mov	a,r4
 	add	a,#_startCol
 	mov	dpl,a
@@ -2113,9 +2197,9 @@ _printSubBoard:
 	push	ar5
 	push	ar6
 	push	ar7
-	mov	a,#__str_14
+	mov	a,#__str_16
 	push	acc
-	mov	a,#(__str_14 >> 8)
+	mov	a,#(__str_16 >> 8)
 	push	acc
 	mov	a,#0x80
 	push	acc
@@ -2125,8 +2209,8 @@ _printSubBoard:
 	mov	sp,a
 	ret
 00106$:
-	C$final.c$139$2$4 ==.
-;	C:\Users\SSP\Documents\Microprocessor Systems\Final\final.c:139: for(i=0; i<9; i++)
+	C$final.c$158$2$4 ==.
+;	C:\Users\SSP\Documents\Microprocessor Systems\Final\final.c:158: for(i=0; i<9; i++)
 	mov	r4,#0x00
 	mov	r5,#0x00
 	mov	__modsint_PARM_2,#0x03
@@ -2197,11 +2281,11 @@ _printSubBoard:
 	mov	a,r5
 	xrl	a,#0x80
 	subb	a,#0x80
-	jc	00130$
+	jc	00129$
 	ret
-00130$:
-	C$final.c$141$1$1 ==.
-;	C:\Users\SSP\Documents\Microprocessor Systems\Final\final.c:141: if(i%3 == 0)
+00129$:
+	C$final.c$160$1$1 ==.
+;	C:\Users\SSP\Documents\Microprocessor Systems\Final\final.c:160: if(i%3 == 0)
 	mov	__modsint_PARM_2,#0x03
 	clr	a
 	mov	(__modsint_PARM_2 + 1),a
@@ -2223,11 +2307,11 @@ _printSubBoard:
 	pop	ar3
 	pop	ar2
 	orl	a,b
-	jz	00131$
+	jz	00130$
 	ljmp	00102$
-00131$:
-	C$final.c$142$1$1 ==.
-;	C:\Users\SSP\Documents\Microprocessor Systems\Final\final.c:142: printf("\033[%d;%dH", startRow[pos/3]+i/3, startCol[pos%3]);
+00130$:
+	C$final.c$161$1$1 ==.
+;	C:\Users\SSP\Documents\Microprocessor Systems\Final\final.c:161: printf("\033[%d;%dH", startRow[pos/3]+i/3, startCol[pos%3]);
 	push	ar2
 	push	ar3
 	mov	a,r6
@@ -2292,9 +2376,9 @@ _printSubBoard:
 	push	ar3
 	push	ar0
 	push	ar1
-	mov	a,#__str_8
+	mov	a,#__str_10
 	push	acc
-	mov	a,#(__str_8 >> 8)
+	mov	a,#(__str_10 >> 8)
 	push	acc
 	mov	a,#0x80
 	push	acc
@@ -2308,15 +2392,15 @@ _printSubBoard:
 	pop	ar4
 	pop	ar3
 	pop	ar2
-	C$final.c$139$1$1 ==.
-;	C:\Users\SSP\Documents\Microprocessor Systems\Final\final.c:139: for(i=0; i<9; i++)
+	C$final.c$158$1$1 ==.
+;	C:\Users\SSP\Documents\Microprocessor Systems\Final\final.c:158: for(i=0; i<9; i++)
 	pop	ar3
 	pop	ar2
-	C$final.c$142$3$5 ==.
-;	C:\Users\SSP\Documents\Microprocessor Systems\Final\final.c:142: printf("\033[%d;%dH", startRow[pos/3]+i/3, startCol[pos%3]);
+	C$final.c$161$3$5 ==.
+;	C:\Users\SSP\Documents\Microprocessor Systems\Final\final.c:161: printf("\033[%d;%dH", startRow[pos/3]+i/3, startCol[pos%3]);
 00102$:
-	C$final.c$144$3$5 ==.
-;	C:\Users\SSP\Documents\Microprocessor Systems\Final\final.c:144: printf("%c", board[pos][i]);
+	C$final.c$163$3$5 ==.
+;	C:\Users\SSP\Documents\Microprocessor Systems\Final\final.c:163: printf("%c", board[pos][i]);
 	mov	a,r2
 	add	a,#_board
 	mov	r0,a
@@ -2342,9 +2426,9 @@ _printSubBoard:
 	push	ar7
 	push	ar0
 	push	ar1
-	mov	a,#__str_15
+	mov	a,#__str_17
 	push	acc
-	mov	a,#(__str_15 >> 8)
+	mov	a,#(__str_17 >> 8)
 	push	acc
 	mov	a,#0x80
 	push	acc
@@ -2356,8 +2440,8 @@ _printSubBoard:
 	pop	ar6
 	pop	ar5
 	pop	ar4
-	C$final.c$145$1$1 ==.
-;	C:\Users\SSP\Documents\Microprocessor Systems\Final\final.c:145: if(i%3!=2)	
+	C$final.c$164$1$1 ==.
+;	C:\Users\SSP\Documents\Microprocessor Systems\Final\final.c:164: if(i%3!=2)	
 	mov	__modsint_PARM_2,#0x03
 	clr	a
 	mov	(__modsint_PARM_2 + 1),a
@@ -2376,21 +2460,21 @@ _printSubBoard:
 	pop	ar4
 	pop	ar3
 	pop	ar2
-	cjne	r0,#0x02,00132$
-	cjne	r1,#0x00,00132$
+	cjne	r0,#0x02,00131$
+	cjne	r1,#0x00,00131$
 	sjmp	00113$
-00132$:
-	C$final.c$146$3$5 ==.
-;	C:\Users\SSP\Documents\Microprocessor Systems\Final\final.c:146: printf("|");
+00131$:
+	C$final.c$165$3$5 ==.
+;	C:\Users\SSP\Documents\Microprocessor Systems\Final\final.c:165: printf("|");
 	push	ar2
 	push	ar3
 	push	ar4
 	push	ar5
 	push	ar6
 	push	ar7
-	mov	a,#__str_16
+	mov	a,#__str_18
 	push	acc
-	mov	a,#(__str_16 >> 8)
+	mov	a,#(__str_18 >> 8)
 	push	acc
 	mov	a,#0x80
 	push	acc
@@ -2405,15 +2489,800 @@ _printSubBoard:
 	pop	ar3
 	pop	ar2
 00113$:
-	C$final.c$139$2$4 ==.
-;	C:\Users\SSP\Documents\Microprocessor Systems\Final\final.c:139: for(i=0; i<9; i++)
+	C$final.c$158$2$4 ==.
+;	C:\Users\SSP\Documents\Microprocessor Systems\Final\final.c:158: for(i=0; i<9; i++)
 	inc	r4
-	cjne	r4,#0x00,00133$
+	cjne	r4,#0x00,00132$
 	inc	r5
-00133$:
-	C$final.c$149$1$1 ==.
+00132$:
+	C$final.c$168$1$1 ==.
 	XG$printSubBoard$0$0 ==.
 	ljmp	00111$
+;------------------------------------------------------------
+;Allocation info for local variables in function 'checkBoardWin'
+;------------------------------------------------------------
+;b                         Allocated with name '_checkBoardWin_b_1_1'
+;i                         Allocated to registers r5 r6 
+;------------------------------------------------------------
+	G$checkBoardWin$0$0 ==.
+	C$final.c$170$1$1 ==.
+;	C:\Users\SSP\Documents\Microprocessor Systems\Final\final.c:170: bit checkBoardWin(char b[])
+;	-----------------------------------------
+;	 function checkBoardWin
+;	-----------------------------------------
+_checkBoardWin:
+	mov	_checkBoardWin_b_1_1,dpl
+	mov	(_checkBoardWin_b_1_1 + 1),dph
+	mov	(_checkBoardWin_b_1_1 + 2),b
+	C$final.c$174$1$1 ==.
+;	C:\Users\SSP\Documents\Microprocessor Systems\Final\final.c:174: for(i=0; i<3; i++)			//verticals
+	mov	r5,#0x00
+	mov	r6,#0x00
+	mov	ar7,r5
+	mov	ar0,r6
+00117$:
+	clr	c
+	mov	a,r7
+	subb	a,#0x03
+	mov	a,r0
+	xrl	a,#0x80
+	subb	a,#0x80
+	jc	00143$
+	ljmp	00120$
+00143$:
+	C$final.c$176$2$2 ==.
+;	C:\Users\SSP\Documents\Microprocessor Systems\Final\final.c:176: if(b[i] == b[i+3] && b[i] == b[i+6] && b[i] != ' ')
+	mov	a,r7
+	add	a,_checkBoardWin_b_1_1
+	mov	r1,a
+	mov	a,r0
+	addc	a,(_checkBoardWin_b_1_1 + 1)
+	mov	r2,a
+	mov	r3,(_checkBoardWin_b_1_1 + 2)
+	mov	dpl,r1
+	mov	dph,r2
+	mov	b,r3
+	lcall	__gptrget
+	mov	r1,a
+	mov	a,#0x03
+	add	a,r7
+	mov	r2,a
+	clr	a
+	addc	a,r0
+	mov	r3,a
+	mov	a,r2
+	add	a,_checkBoardWin_b_1_1
+	mov	r2,a
+	mov	a,r3
+	addc	a,(_checkBoardWin_b_1_1 + 1)
+	mov	r3,a
+	mov	r4,(_checkBoardWin_b_1_1 + 2)
+	mov	dpl,r2
+	mov	dph,r3
+	mov	b,r4
+	lcall	__gptrget
+	mov	r2,a
+	mov	a,r1
+	cjne	a,ar2,00119$
+	mov	a,r7
+	add	a,_checkBoardWin_b_1_1
+	mov	r2,a
+	mov	a,r0
+	addc	a,(_checkBoardWin_b_1_1 + 1)
+	mov	r3,a
+	mov	r4,(_checkBoardWin_b_1_1 + 2)
+	mov	dpl,r2
+	mov	dph,r3
+	mov	b,r4
+	lcall	__gptrget
+	mov	r2,a
+	mov	a,#0x06
+	add	a,r7
+	mov	r3,a
+	clr	a
+	addc	a,r0
+	mov	r4,a
+	mov	a,r3
+	add	a,_checkBoardWin_b_1_1
+	mov	r3,a
+	mov	a,r4
+	addc	a,(_checkBoardWin_b_1_1 + 1)
+	mov	r4,a
+	mov	r1,(_checkBoardWin_b_1_1 + 2)
+	mov	dpl,r3
+	mov	dph,r4
+	mov	b,r1
+	lcall	__gptrget
+	mov	r3,a
+	mov	a,r2
+	cjne	a,ar3,00119$
+	mov	a,r7
+	add	a,_checkBoardWin_b_1_1
+	mov	r2,a
+	mov	a,r0
+	addc	a,(_checkBoardWin_b_1_1 + 1)
+	mov	r3,a
+	mov	r4,(_checkBoardWin_b_1_1 + 2)
+	mov	dpl,r2
+	mov	dph,r3
+	mov	b,r4
+	lcall	__gptrget
+	mov	r2,a
+	cjne	r2,#0x20,00148$
+	sjmp	00119$
+00148$:
+	C$final.c$177$2$2 ==.
+;	C:\Users\SSP\Documents\Microprocessor Systems\Final\final.c:177: return 1;
+	setb	c
+	ret
+00119$:
+	C$final.c$174$1$1 ==.
+;	C:\Users\SSP\Documents\Microprocessor Systems\Final\final.c:174: for(i=0; i<3; i++)			//verticals
+	inc	r7
+	cjne	r7,#0x00,00149$
+	inc	r0
+00149$:
+	ljmp	00117$
+00120$:
+	C$final.c$180$1$1 ==.
+;	C:\Users\SSP\Documents\Microprocessor Systems\Final\final.c:180: for(i=0; i<6; i+=3)			//horizontals
+	mov	r5,#0x00
+	mov	r6,#0x00
+	mov	ar2,r5
+	mov	ar3,r6
+00121$:
+	clr	c
+	mov	a,r2
+	subb	a,#0x06
+	mov	a,r3
+	xrl	a,#0x80
+	subb	a,#0x80
+	jc	00150$
+	ljmp	00124$
+00150$:
+	C$final.c$182$2$3 ==.
+;	C:\Users\SSP\Documents\Microprocessor Systems\Final\final.c:182: if(b[i] == b[i+1] && b[i] == b[i+2] && b[i] != ' ')
+	mov	a,r2
+	add	a,_checkBoardWin_b_1_1
+	mov	r4,a
+	mov	a,r3
+	addc	a,(_checkBoardWin_b_1_1 + 1)
+	mov	r5,a
+	mov	r6,(_checkBoardWin_b_1_1 + 2)
+	mov	dpl,r4
+	mov	dph,r5
+	mov	b,r6
+	lcall	__gptrget
+	mov	r4,a
+	mov	a,#0x01
+	add	a,r2
+	mov	r5,a
+	clr	a
+	addc	a,r3
+	mov	r6,a
+	mov	a,r5
+	add	a,_checkBoardWin_b_1_1
+	mov	r5,a
+	mov	a,r6
+	addc	a,(_checkBoardWin_b_1_1 + 1)
+	mov	r6,a
+	mov	r7,(_checkBoardWin_b_1_1 + 2)
+	mov	dpl,r5
+	mov	dph,r6
+	mov	b,r7
+	lcall	__gptrget
+	mov	r5,a
+	mov	a,r4
+	cjne	a,ar5,00123$
+	mov	a,r2
+	add	a,_checkBoardWin_b_1_1
+	mov	r4,a
+	mov	a,r3
+	addc	a,(_checkBoardWin_b_1_1 + 1)
+	mov	r5,a
+	mov	r6,(_checkBoardWin_b_1_1 + 2)
+	mov	dpl,r4
+	mov	dph,r5
+	mov	b,r6
+	lcall	__gptrget
+	mov	r4,a
+	mov	a,#0x02
+	add	a,r2
+	mov	r5,a
+	clr	a
+	addc	a,r3
+	mov	r6,a
+	mov	a,r5
+	add	a,_checkBoardWin_b_1_1
+	mov	r5,a
+	mov	a,r6
+	addc	a,(_checkBoardWin_b_1_1 + 1)
+	mov	r6,a
+	mov	r7,(_checkBoardWin_b_1_1 + 2)
+	mov	dpl,r5
+	mov	dph,r6
+	mov	b,r7
+	lcall	__gptrget
+	mov	r5,a
+	mov	a,r4
+	cjne	a,ar5,00123$
+	mov	a,r2
+	add	a,_checkBoardWin_b_1_1
+	mov	r4,a
+	mov	a,r3
+	addc	a,(_checkBoardWin_b_1_1 + 1)
+	mov	r5,a
+	mov	r6,(_checkBoardWin_b_1_1 + 2)
+	mov	dpl,r4
+	mov	dph,r5
+	mov	b,r6
+	lcall	__gptrget
+	mov	r4,a
+	cjne	r4,#0x20,00155$
+	sjmp	00123$
+00155$:
+	C$final.c$183$2$3 ==.
+;	C:\Users\SSP\Documents\Microprocessor Systems\Final\final.c:183: return 1;
+	setb	c
+	ret
+00123$:
+	C$final.c$180$1$1 ==.
+;	C:\Users\SSP\Documents\Microprocessor Systems\Final\final.c:180: for(i=0; i<6; i+=3)			//horizontals
+	mov	a,#0x03
+	add	a,r2
+	mov	r2,a
+	clr	a
+	addc	a,r3
+	mov	r3,a
+	ljmp	00121$
+00124$:
+	C$final.c$186$1$1 ==.
+;	C:\Users\SSP\Documents\Microprocessor Systems\Final\final.c:186: if(b[0] == b[4] && b[0] == b[8] && b[0] != ' ')	//diagonal from 0
+	mov	dpl,_checkBoardWin_b_1_1
+	mov	dph,(_checkBoardWin_b_1_1 + 1)
+	mov	b,(_checkBoardWin_b_1_1 + 2)
+	lcall	__gptrget
+	mov	r2,a
+	mov	a,#0x04
+	add	a,_checkBoardWin_b_1_1
+	mov	r3,a
+	clr	a
+	addc	a,(_checkBoardWin_b_1_1 + 1)
+	mov	r4,a
+	mov	r5,(_checkBoardWin_b_1_1 + 2)
+	mov	dpl,r3
+	mov	dph,r4
+	mov	b,r5
+	lcall	__gptrget
+	mov	r3,a
+	mov	a,r2
+	cjne	a,ar3,00110$
+	mov	dpl,_checkBoardWin_b_1_1
+	mov	dph,(_checkBoardWin_b_1_1 + 1)
+	mov	b,(_checkBoardWin_b_1_1 + 2)
+	lcall	__gptrget
+	mov	r2,a
+	mov	a,#0x08
+	add	a,_checkBoardWin_b_1_1
+	mov	r3,a
+	clr	a
+	addc	a,(_checkBoardWin_b_1_1 + 1)
+	mov	r4,a
+	mov	r5,(_checkBoardWin_b_1_1 + 2)
+	mov	dpl,r3
+	mov	dph,r4
+	mov	b,r5
+	lcall	__gptrget
+	mov	r3,a
+	mov	a,r2
+	cjne	a,ar3,00110$
+	mov	dpl,_checkBoardWin_b_1_1
+	mov	dph,(_checkBoardWin_b_1_1 + 1)
+	mov	b,(_checkBoardWin_b_1_1 + 2)
+	lcall	__gptrget
+	mov	r2,a
+	cjne	r2,#0x20,00160$
+	sjmp	00110$
+00160$:
+	C$final.c$187$1$1 ==.
+;	C:\Users\SSP\Documents\Microprocessor Systems\Final\final.c:187: return 1;
+	setb	c
+	ret
+00110$:
+	C$final.c$189$1$1 ==.
+;	C:\Users\SSP\Documents\Microprocessor Systems\Final\final.c:189: if(b[2] == b[4] && b[2] == b[6] && b[2] != ' ')	//diagonal from 2
+	mov	a,#0x02
+	add	a,_checkBoardWin_b_1_1
+	mov	r2,a
+	clr	a
+	addc	a,(_checkBoardWin_b_1_1 + 1)
+	mov	r3,a
+	mov	r4,(_checkBoardWin_b_1_1 + 2)
+	mov	dpl,r2
+	mov	dph,r3
+	mov	b,r4
+	lcall	__gptrget
+	mov	r2,a
+	mov	a,#0x04
+	add	a,_checkBoardWin_b_1_1
+	mov	r3,a
+	clr	a
+	addc	a,(_checkBoardWin_b_1_1 + 1)
+	mov	r4,a
+	mov	r5,(_checkBoardWin_b_1_1 + 2)
+	mov	dpl,r3
+	mov	dph,r4
+	mov	b,r5
+	lcall	__gptrget
+	mov	r3,a
+	mov	a,r2
+	cjne	a,ar3,00114$
+	mov	a,#0x02
+	add	a,_checkBoardWin_b_1_1
+	mov	r2,a
+	clr	a
+	addc	a,(_checkBoardWin_b_1_1 + 1)
+	mov	r3,a
+	mov	r4,(_checkBoardWin_b_1_1 + 2)
+	mov	dpl,r2
+	mov	dph,r3
+	mov	b,r4
+	lcall	__gptrget
+	mov	r2,a
+	mov	a,#0x06
+	add	a,_checkBoardWin_b_1_1
+	mov	r3,a
+	clr	a
+	addc	a,(_checkBoardWin_b_1_1 + 1)
+	mov	r4,a
+	mov	r5,(_checkBoardWin_b_1_1 + 2)
+	mov	dpl,r3
+	mov	dph,r4
+	mov	b,r5
+	lcall	__gptrget
+	mov	r3,a
+	mov	a,r2
+	cjne	a,ar3,00114$
+	mov	a,#0x02
+	add	a,_checkBoardWin_b_1_1
+	mov	r2,a
+	clr	a
+	addc	a,(_checkBoardWin_b_1_1 + 1)
+	mov	r3,a
+	mov	r4,(_checkBoardWin_b_1_1 + 2)
+	mov	dpl,r2
+	mov	dph,r3
+	mov	b,r4
+	lcall	__gptrget
+	mov	r2,a
+	cjne	r2,#0x20,00165$
+	sjmp	00114$
+00165$:
+	C$final.c$190$1$1 ==.
+;	C:\Users\SSP\Documents\Microprocessor Systems\Final\final.c:190: return 1;
+	setb	c
+	ret
+00114$:
+	C$final.c$192$1$1 ==.
+;	C:\Users\SSP\Documents\Microprocessor Systems\Final\final.c:192: return 0;
+	clr	c
+	C$final.c$193$1$1 ==.
+	XG$checkBoardWin$0$0 ==.
+	ret
+;------------------------------------------------------------
+;Allocation info for local variables in function 'gameWon'
+;------------------------------------------------------------
+;------------------------------------------------------------
+	G$gameWon$0$0 ==.
+	C$final.c$195$1$1 ==.
+;	C:\Users\SSP\Documents\Microprocessor Systems\Final\final.c:195: bit gameWon(void)
+;	-----------------------------------------
+;	 function gameWon
+;	-----------------------------------------
+_gameWon:
+	C$final.c$197$1$1 ==.
+;	C:\Users\SSP\Documents\Microprocessor Systems\Final\final.c:197: if(checkBoardWin(board[9]))
+	mov	dptr,#(_board + 0x0090)
+	mov	b,#0x00
+	lcall	_checkBoardWin
+	jnc	00105$
+	C$final.c$199$2$2 ==.
+;	C:\Users\SSP\Documents\Microprocessor Systems\Final\final.c:199: printf("\033[20;1H");
+	mov	a,#__str_19
+	push	acc
+	mov	a,#(__str_19 >> 8)
+	push	acc
+	mov	a,#0x80
+	push	acc
+	lcall	_printf
+	dec	sp
+	dec	sp
+	dec	sp
+	C$final.c$200$2$2 ==.
+;	C:\Users\SSP\Documents\Microprocessor Systems\Final\final.c:200: if (turn==0)
+	jb	_turn,00102$
+	C$final.c$201$2$2 ==.
+;	C:\Users\SSP\Documents\Microprocessor Systems\Final\final.c:201: printf("Game has been won by player O");
+	mov	a,#__str_20
+	push	acc
+	mov	a,#(__str_20 >> 8)
+	push	acc
+	mov	a,#0x80
+	push	acc
+	lcall	_printf
+	dec	sp
+	dec	sp
+	dec	sp
+	sjmp	00103$
+00102$:
+	C$final.c$203$2$2 ==.
+;	C:\Users\SSP\Documents\Microprocessor Systems\Final\final.c:203: printf("Game has been won by player X");
+	mov	a,#__str_21
+	push	acc
+	mov	a,#(__str_21 >> 8)
+	push	acc
+	mov	a,#0x80
+	push	acc
+	lcall	_printf
+	dec	sp
+	dec	sp
+	dec	sp
+00103$:
+	C$final.c$205$2$2 ==.
+;	C:\Users\SSP\Documents\Microprocessor Systems\Final\final.c:205: return 1;
+	setb	c
+	ret
+00105$:
+	C$final.c$208$1$1 ==.
+;	C:\Users\SSP\Documents\Microprocessor Systems\Final\final.c:208: return 0;
+	clr	c
+	C$final.c$209$1$1 ==.
+	XG$gameWon$0$0 ==.
+	ret
+;------------------------------------------------------------
+;Allocation info for local variables in function 'getMove'
+;------------------------------------------------------------
+;move                      Allocated to registers r2 
+;------------------------------------------------------------
+	G$getMove$0$0 ==.
+	C$final.c$211$1$1 ==.
+;	C:\Users\SSP\Documents\Microprocessor Systems\Final\final.c:211: void getMove(bit freeMove)
+;	-----------------------------------------
+;	 function getMove
+;	-----------------------------------------
+_getMove:
+	C$final.c$215$1$1 ==.
+;	C:\Users\SSP\Documents\Microprocessor Systems\Final\final.c:215: if(freeMove)
+	jnb	_getMove_PARM_1,00107$
+	C$final.c$217$2$2 ==.
+;	C:\Users\SSP\Documents\Microprocessor Systems\Final\final.c:217: printf("\033[16;1H");
+	mov	a,#__str_5
+	push	acc
+	mov	a,#(__str_5 >> 8)
+	push	acc
+	mov	a,#0x80
+	push	acc
+	lcall	_printf
+	dec	sp
+	dec	sp
+	dec	sp
+	C$final.c$218$2$2 ==.
+;	C:\Users\SSP\Documents\Microprocessor Systems\Final\final.c:218: printf("Free move. Choose sub-board.\n\r");
+	mov	a,#__str_22
+	push	acc
+	mov	a,#(__str_22 >> 8)
+	push	acc
+	mov	a,#0x80
+	push	acc
+	lcall	_printf
+	dec	sp
+	dec	sp
+	dec	sp
+	C$final.c$220$2$2 ==.
+;	C:\Users\SSP\Documents\Microprocessor Systems\Final\final.c:220: current = 0xff;
+	mov	_current,#0xFF
+	C$final.c$222$2$2 ==.
+;	C:\Users\SSP\Documents\Microprocessor Systems\Final\final.c:222: while(current < 0 || current > 8  || board[9][current] != ' ')		//valid sub-board number and board not yet won
+00103$:
+	mov	a,_current
+	jb	acc.7,00104$
+	clr	c
+	mov	a,#(0x08 ^ 0x80)
+	mov	b,_current
+	xrl	b,#0x80
+	subb	a,b
+	jc	00104$
+	mov	a,_current
+	add	a,#(_board + 0x0090)
+	mov	dpl,a
+	clr	a
+	addc	a,#((_board + 0x0090) >> 8)
+	mov	dph,a
+	movx	a,@dptr
+	mov	r2,a
+	cjne	r2,#0x20,00136$
+	sjmp	00107$
+00136$:
+00104$:
+	C$final.c$224$3$3 ==.
+;	C:\Users\SSP\Documents\Microprocessor Systems\Final\final.c:224: move = getchar();
+	lcall	_getchar
+	C$final.c$225$3$3 ==.
+;	C:\Users\SSP\Documents\Microprocessor Systems\Final\final.c:225: current = move-49;
+	mov	a,dpl
+	mov	r2,a
+	add	a,#0xcf
+	mov	_current,a
+	sjmp	00103$
+00107$:
+	C$final.c$229$1$1 ==.
+;	C:\Users\SSP\Documents\Microprocessor Systems\Final\final.c:229: printf("\033[16;1H");
+	mov	a,#__str_5
+	push	acc
+	mov	a,#(__str_5 >> 8)
+	push	acc
+	mov	a,#0x80
+	push	acc
+	lcall	_printf
+	dec	sp
+	dec	sp
+	dec	sp
+	C$final.c$230$1$1 ==.
+;	C:\Users\SSP\Documents\Microprocessor Systems\Final\final.c:230: printf("                              \n\r");
+	mov	a,#__str_23
+	push	acc
+	mov	a,#(__str_23 >> 8)
+	push	acc
+	mov	a,#0x80
+	push	acc
+	lcall	_printf
+	dec	sp
+	dec	sp
+	dec	sp
+	C$final.c$232$1$1 ==.
+;	C:\Users\SSP\Documents\Microprocessor Systems\Final\final.c:232: printf("\033[%d;%dH", startRow[current/3], startCol[current%3]);
+	mov	b,#0x03
+	mov	a,_current
+	clr	F0
+	jnb	acc.7,00137$
+	setb	F0
+	cpl	a
+	inc	a
+00137$:
+	div	ab
+	mov	a,b
+	jnb	F0,00138$
+	cpl	a
+	inc	a
+00138$:
+	add	a,acc
+	mov	r3,a
+	mov	dptr,#_startCol
+	movc	a,@a+dptr
+	xch	a,r3
+	inc	dptr
+	movc	a,@a+dptr
+	mov	r4,a
+	clr	F0
+	mov	b,#0x03
+	mov	a,_current
+	jnb	acc.7,00139$
+	cpl	F0
+	cpl	a
+	inc	a
+00139$:
+	div	ab
+	jnb	F0,00140$
+	cpl	a
+	inc	a
+00140$:
+	add	a,acc
+	mov	r5,a
+	mov	dptr,#_startRow
+	movc	a,@a+dptr
+	xch	a,r5
+	inc	dptr
+	movc	a,@a+dptr
+	mov	r6,a
+	push	ar3
+	push	ar4
+	push	ar5
+	push	ar6
+	mov	a,#__str_10
+	push	acc
+	mov	a,#(__str_10 >> 8)
+	push	acc
+	mov	a,#0x80
+	push	acc
+	lcall	_printf
+	mov	a,sp
+	add	a,#0xf9
+	mov	sp,a
+	C$final.c$234$1$1 ==.
+;	C:\Users\SSP\Documents\Microprocessor Systems\Final\final.c:234: move = 0xff;
+	mov	r2,#0xFF
+	C$final.c$236$1$1 ==.
+;	C:\Users\SSP\Documents\Microprocessor Systems\Final\final.c:236: while(move < 0 || move > 8 || board[current][move] != ' ')			//valid move and not already occupied	
+00110$:
+	mov	a,r2
+	jb	acc.7,00111$
+	clr	c
+	mov	a,#(0x08 ^ 0x80)
+	mov	b,r2
+	xrl	b,#0x80
+	subb	a,b
+	jc	00111$
+	mov	a,_current
+	swap	a
+	anl	a,#0xf0
+	add	a,#_board
+	mov	r3,a
+	clr	a
+	addc	a,#(_board >> 8)
+	mov	r4,a
+	mov	a,r2
+	add	a,r3
+	mov	dpl,a
+	clr	a
+	addc	a,r4
+	mov	dph,a
+	movx	a,@dptr
+	mov	r3,a
+	cjne	r3,#0x20,00143$
+	sjmp	00112$
+00143$:
+00111$:
+	C$final.c$238$2$4 ==.
+;	C:\Users\SSP\Documents\Microprocessor Systems\Final\final.c:238: move = getchar();
+	lcall	_getchar
+	C$final.c$239$2$4 ==.
+;	C:\Users\SSP\Documents\Microprocessor Systems\Final\final.c:239: move = move-49;
+	mov	a,dpl
+	add	a,#0xcf
+	mov	r2,a
+	sjmp	00110$
+00112$:
+	C$final.c$242$1$1 ==.
+;	C:\Users\SSP\Documents\Microprocessor Systems\Final\final.c:242: if (turn == 0)
+	jb	_turn,00114$
+	C$final.c$243$1$1 ==.
+;	C:\Users\SSP\Documents\Microprocessor Systems\Final\final.c:243: board[(int) current][(int) move] = 'O';
+	mov	a,_current
+	mov	r3,a
+	rlc	a
+	subb	a,acc
+	swap	a
+	anl	a,#0xf0
+	xch	a,r3
+	swap	a
+	xch	a,r3
+	xrl	a,r3
+	xch	a,r3
+	anl	a,#0xf0
+	xch	a,r3
+	xrl	a,r3
+	mov	r4,a
+	mov	a,r3
+	add	a,#_board
+	mov	r3,a
+	mov	a,r4
+	addc	a,#(_board >> 8)
+	mov	r4,a
+	mov	a,r2
+	mov	r5,a
+	rlc	a
+	subb	a,acc
+	mov	r6,a
+	mov	a,r5
+	add	a,r3
+	mov	dpl,a
+	mov	a,r6
+	addc	a,r4
+	mov	dph,a
+	mov	a,#0x4F
+	movx	@dptr,a
+	sjmp	00115$
+00114$:
+	C$final.c$245$1$1 ==.
+;	C:\Users\SSP\Documents\Microprocessor Systems\Final\final.c:245: board[(int) current][(int) move] = 'X';
+	mov	a,_current
+	mov	r3,a
+	rlc	a
+	subb	a,acc
+	swap	a
+	anl	a,#0xf0
+	xch	a,r3
+	swap	a
+	xch	a,r3
+	xrl	a,r3
+	xch	a,r3
+	anl	a,#0xf0
+	xch	a,r3
+	xrl	a,r3
+	mov	r4,a
+	mov	a,r3
+	add	a,#_board
+	mov	r3,a
+	mov	a,r4
+	addc	a,#(_board >> 8)
+	mov	r4,a
+	mov	a,r2
+	mov	r5,a
+	rlc	a
+	subb	a,acc
+	mov	r6,a
+	mov	a,r5
+	add	a,r3
+	mov	dpl,a
+	mov	a,r6
+	addc	a,r4
+	mov	dph,a
+	mov	a,#0x58
+	movx	@dptr,a
+00115$:
+	C$final.c$247$1$1 ==.
+;	C:\Users\SSP\Documents\Microprocessor Systems\Final\final.c:247: if(checkBoardWin(board[(int) current]))
+	mov	a,_current
+	mov	r3,a
+	rlc	a
+	subb	a,acc
+	swap	a
+	anl	a,#0xf0
+	xch	a,r3
+	swap	a
+	xch	a,r3
+	xrl	a,r3
+	xch	a,r3
+	anl	a,#0xf0
+	xch	a,r3
+	xrl	a,r3
+	mov	r4,a
+	mov	a,r3
+	add	a,#_board
+	mov	r3,a
+	mov	a,r4
+	addc	a,#(_board >> 8)
+	mov	r4,a
+	mov	r5,#0x00
+	mov	dpl,r3
+	mov	dph,r4
+	mov	b,r5
+	push	ar2
+	lcall	_checkBoardWin
+	pop	ar2
+	jnc	00117$
+	C$final.c$248$1$1 ==.
+;	C:\Users\SSP\Documents\Microprocessor Systems\Final\final.c:248: board[9][current] = turn;
+	mov	a,_current
+	add	a,#(_board + 0x0090)
+	mov	dpl,a
+	clr	a
+	addc	a,#((_board + 0x0090) >> 8)
+	mov	dph,a
+	mov	c,_turn
+	clr	a
+	rlc	a
+	mov	r3,a
+	movx	@dptr,a
+00117$:
+	C$final.c$250$1$1 ==.
+;	C:\Users\SSP\Documents\Microprocessor Systems\Final\final.c:250: current = move;
+	mov	_current,r2
+	C$final.c$252$1$1 ==.
+;	C:\Users\SSP\Documents\Microprocessor Systems\Final\final.c:252: if(turn == 1)
+	C$final.c$253$1$1 ==.
+;	C:\Users\SSP\Documents\Microprocessor Systems\Final\final.c:253: turn = 0;
+	jbc	_turn,00146$
+	sjmp	00119$
+00146$:
+	ret
+00119$:
+	C$final.c$255$1$1 ==.
+;	C:\Users\SSP\Documents\Microprocessor Systems\Final\final.c:255: turn = 1;
+	setb	_turn
+	C$final.c$256$1$1 ==.
+	XG$getMove$0$0 ==.
+	ret
 ;------------------------------------------------------------
 ;Allocation info for local variables in function 'SYSCLK_INIT'
 ;------------------------------------------------------------
@@ -2421,23 +3290,23 @@ _printSubBoard:
 ;SFRPAGE_SAVE              Allocated to registers r2 
 ;------------------------------------------------------------
 	G$SYSCLK_INIT$0$0 ==.
-	C$final.c$157$1$1 ==.
-;	C:\Users\SSP\Documents\Microprocessor Systems\Final\final.c:157: void SYSCLK_INIT(void)
+	C$final.c$264$1$1 ==.
+;	C:\Users\SSP\Documents\Microprocessor Systems\Final\final.c:264: void SYSCLK_INIT(void)
 ;	-----------------------------------------
 ;	 function SYSCLK_INIT
 ;	-----------------------------------------
 _SYSCLK_INIT:
-	C$final.c$162$1$1 ==.
-;	C:\Users\SSP\Documents\Microprocessor Systems\Final\final.c:162: SFRPAGE_SAVE = SFRPAGE;				// Save Current SFR page	SFRPAGE = CONFIG_PAGE;
+	C$final.c$269$1$1 ==.
+;	C:\Users\SSP\Documents\Microprocessor Systems\Final\final.c:269: SFRPAGE_SAVE = SFRPAGE;				// Save Current SFR page	SFRPAGE = CONFIG_PAGE;
 	mov	r2,_SFRPAGE
-	C$final.c$163$1$1 ==.
-;	C:\Users\SSP\Documents\Microprocessor Systems\Final\final.c:163: SFRPAGE   = CONFIG_PAGE;
+	C$final.c$270$1$1 ==.
+;	C:\Users\SSP\Documents\Microprocessor Systems\Final\final.c:270: SFRPAGE   = CONFIG_PAGE;
 	mov	_SFRPAGE,#0x0F
-	C$final.c$165$1$1 ==.
-;	C:\Users\SSP\Documents\Microprocessor Systems\Final\final.c:165: OSCXCN = 0x67;						// Start ext osc with 22.1184MHz crystal
+	C$final.c$272$1$1 ==.
+;	C:\Users\SSP\Documents\Microprocessor Systems\Final\final.c:272: OSCXCN = 0x67;						// Start ext osc with 22.1184MHz crystal
 	mov	_OSCXCN,#0x67
-	C$final.c$166$1$1 ==.
-;	C:\Users\SSP\Documents\Microprocessor Systems\Final\final.c:166: for(i=0; i < 3000; i++);			// Wait for the oscillator to start up
+	C$final.c$273$1$1 ==.
+;	C:\Users\SSP\Documents\Microprocessor Systems\Final\final.c:273: for(i=0; i < 3000; i++);			// Wait for the oscillator to start up
 	mov	r3,#0xB8
 	mov	r4,#0x0B
 00106$:
@@ -2448,21 +3317,21 @@ _SYSCLK_INIT:
 	mov	a,r3
 	orl	a,r4
 	jnz	00106$
-	C$final.c$167$1$1 ==.
-;	C:\Users\SSP\Documents\Microprocessor Systems\Final\final.c:167: while(!(OSCXCN & 0x80));
+	C$final.c$274$1$1 ==.
+;	C:\Users\SSP\Documents\Microprocessor Systems\Final\final.c:274: while(!(OSCXCN & 0x80));
 00101$:
 	mov	a,_OSCXCN
 	jnb	acc.7,00101$
-	C$final.c$168$1$1 ==.
-;	C:\Users\SSP\Documents\Microprocessor Systems\Final\final.c:168: CLKSEL = 0x01;						// Switch to the external crystal oscillator
+	C$final.c$275$1$1 ==.
+;	C:\Users\SSP\Documents\Microprocessor Systems\Final\final.c:275: CLKSEL = 0x01;						// Switch to the external crystal oscillator
 	mov	_CLKSEL,#0x01
-	C$final.c$169$1$1 ==.
-;	C:\Users\SSP\Documents\Microprocessor Systems\Final\final.c:169: OSCICN = 0x00;						// Disable the internal oscillator
+	C$final.c$276$1$1 ==.
+;	C:\Users\SSP\Documents\Microprocessor Systems\Final\final.c:276: OSCICN = 0x00;						// Disable the internal oscillator
 	mov	_OSCICN,#0x00
-	C$final.c$171$1$1 ==.
-;	C:\Users\SSP\Documents\Microprocessor Systems\Final\final.c:171: SFRPAGE = SFRPAGE_SAVE;             // Restore SFR page
+	C$final.c$278$1$1 ==.
+;	C:\Users\SSP\Documents\Microprocessor Systems\Final\final.c:278: SFRPAGE = SFRPAGE_SAVE;             // Restore SFR page
 	mov	_SFRPAGE,r2
-	C$final.c$172$1$1 ==.
+	C$final.c$279$1$1 ==.
 	XG$SYSCLK_INIT$0$0 ==.
 	ret
 ;------------------------------------------------------------
@@ -2471,37 +3340,37 @@ _SYSCLK_INIT:
 ;SFRPAGE_SAVE              Allocated to registers r2 
 ;------------------------------------------------------------
 	G$PORT_INIT$0$0 ==.
-	C$final.c$180$1$1 ==.
-;	C:\Users\SSP\Documents\Microprocessor Systems\Final\final.c:180: void PORT_INIT(void)
+	C$final.c$287$1$1 ==.
+;	C:\Users\SSP\Documents\Microprocessor Systems\Final\final.c:287: void PORT_INIT(void)
 ;	-----------------------------------------
 ;	 function PORT_INIT
 ;	-----------------------------------------
 _PORT_INIT:
-	C$final.c$184$1$1 ==.
-;	C:\Users\SSP\Documents\Microprocessor Systems\Final\final.c:184: SFRPAGE_SAVE = SFRPAGE;				// Save Current SFR page
+	C$final.c$291$1$1 ==.
+;	C:\Users\SSP\Documents\Microprocessor Systems\Final\final.c:291: SFRPAGE_SAVE = SFRPAGE;				// Save Current SFR page
 	mov	r2,_SFRPAGE
-	C$final.c$185$1$1 ==.
-;	C:\Users\SSP\Documents\Microprocessor Systems\Final\final.c:185: SFRPAGE = CONFIG_PAGE;
+	C$final.c$292$1$1 ==.
+;	C:\Users\SSP\Documents\Microprocessor Systems\Final\final.c:292: SFRPAGE = CONFIG_PAGE;
 	mov	_SFRPAGE,#0x0F
-	C$final.c$187$1$1 ==.
-;	C:\Users\SSP\Documents\Microprocessor Systems\Final\final.c:187: XBR0	 = 0x04;					// Enable UART0
+	C$final.c$294$1$1 ==.
+;	C:\Users\SSP\Documents\Microprocessor Systems\Final\final.c:294: XBR0	 = 0x04;					// Enable UART0
 	mov	_XBR0,#0x04
-	C$final.c$188$1$1 ==.
-;	C:\Users\SSP\Documents\Microprocessor Systems\Final\final.c:188: XBR1	 = 0x00;
+	C$final.c$295$1$1 ==.
+;	C:\Users\SSP\Documents\Microprocessor Systems\Final\final.c:295: XBR1	 = 0x00;
 	mov	_XBR1,#0x00
-	C$final.c$189$1$1 ==.
-;	C:\Users\SSP\Documents\Microprocessor Systems\Final\final.c:189: XBR2	 = 0x40;					// Enable Crossbar and weak pull-up
+	C$final.c$296$1$1 ==.
+;	C:\Users\SSP\Documents\Microprocessor Systems\Final\final.c:296: XBR2	 = 0x40;					// Enable Crossbar and weak pull-up
 	mov	_XBR2,#0x40
-	C$final.c$190$1$1 ==.
-;	C:\Users\SSP\Documents\Microprocessor Systems\Final\final.c:190: P0MDOUT |= 0x01;					// Set TX0 on P0.0 pin to push-pull
+	C$final.c$297$1$1 ==.
+;	C:\Users\SSP\Documents\Microprocessor Systems\Final\final.c:297: P0MDOUT |= 0x01;					// Set TX0 on P0.0 pin to push-pull
 	orl	_P0MDOUT,#0x01
-	C$final.c$191$1$1 ==.
-;	C:\Users\SSP\Documents\Microprocessor Systems\Final\final.c:191: P1MDOUT	|= 0x40;					// Set green LED ooutput P1.6 to push-pull
+	C$final.c$298$1$1 ==.
+;	C:\Users\SSP\Documents\Microprocessor Systems\Final\final.c:298: P1MDOUT	|= 0x40;					// Set green LED ooutput P1.6 to push-pull
 	orl	_P1MDOUT,#0x40
-	C$final.c$193$1$1 ==.
-;	C:\Users\SSP\Documents\Microprocessor Systems\Final\final.c:193: SFRPAGE = SFRPAGE_SAVE;             // Restore SFR page
+	C$final.c$300$1$1 ==.
+;	C:\Users\SSP\Documents\Microprocessor Systems\Final\final.c:300: SFRPAGE = SFRPAGE_SAVE;             // Restore SFR page
 	mov	_SFRPAGE,r2
-	C$final.c$194$1$1 ==.
+	C$final.c$301$1$1 ==.
 	XG$PORT_INIT$0$0 ==.
 	ret
 ;------------------------------------------------------------
@@ -2510,52 +3379,52 @@ _PORT_INIT:
 ;SFRPAGE_SAVE              Allocated to registers r2 
 ;------------------------------------------------------------
 	G$UART0_INIT$0$0 ==.
-	C$final.c$202$1$1 ==.
-;	C:\Users\SSP\Documents\Microprocessor Systems\Final\final.c:202: void UART0_INIT(void)
+	C$final.c$309$1$1 ==.
+;	C:\Users\SSP\Documents\Microprocessor Systems\Final\final.c:309: void UART0_INIT(void)
 ;	-----------------------------------------
 ;	 function UART0_INIT
 ;	-----------------------------------------
 _UART0_INIT:
-	C$final.c$206$1$1 ==.
-;	C:\Users\SSP\Documents\Microprocessor Systems\Final\final.c:206: SFRPAGE_SAVE = SFRPAGE;				// Save Current SFR page
+	C$final.c$313$1$1 ==.
+;	C:\Users\SSP\Documents\Microprocessor Systems\Final\final.c:313: SFRPAGE_SAVE = SFRPAGE;				// Save Current SFR page
 	mov	r2,_SFRPAGE
-	C$final.c$207$1$1 ==.
-;	C:\Users\SSP\Documents\Microprocessor Systems\Final\final.c:207: SFRPAGE = TIMER01_PAGE;
+	C$final.c$314$1$1 ==.
+;	C:\Users\SSP\Documents\Microprocessor Systems\Final\final.c:314: SFRPAGE = TIMER01_PAGE;
 	mov	_SFRPAGE,#0x00
-	C$final.c$209$1$1 ==.
-;	C:\Users\SSP\Documents\Microprocessor Systems\Final\final.c:209: TCON	 = 0x40;
+	C$final.c$316$1$1 ==.
+;	C:\Users\SSP\Documents\Microprocessor Systems\Final\final.c:316: TCON	 = 0x40;
 	mov	_TCON,#0x40
-	C$final.c$210$1$1 ==.
-;	C:\Users\SSP\Documents\Microprocessor Systems\Final\final.c:210: TMOD	&= 0x0F;
+	C$final.c$317$1$1 ==.
+;	C:\Users\SSP\Documents\Microprocessor Systems\Final\final.c:317: TMOD	&= 0x0F;
 	anl	_TMOD,#0x0F
-	C$final.c$211$1$1 ==.
-;	C:\Users\SSP\Documents\Microprocessor Systems\Final\final.c:211: TMOD	|= 0x20;					// Timer1, Mode 2, 8-bit reload
+	C$final.c$318$1$1 ==.
+;	C:\Users\SSP\Documents\Microprocessor Systems\Final\final.c:318: TMOD	|= 0x20;					// Timer1, Mode 2, 8-bit reload
 	orl	_TMOD,#0x20
-	C$final.c$212$1$1 ==.
-;	C:\Users\SSP\Documents\Microprocessor Systems\Final\final.c:212: CKCON	|= 0x10;					// Timer1 uses SYSCLK as time base
+	C$final.c$319$1$1 ==.
+;	C:\Users\SSP\Documents\Microprocessor Systems\Final\final.c:319: CKCON	|= 0x10;					// Timer1 uses SYSCLK as time base
 	orl	_CKCON,#0x10
-	C$final.c$214$1$1 ==.
-;	C:\Users\SSP\Documents\Microprocessor Systems\Final\final.c:214: TH1		 = 0xE8;					// 0xE8 = 232
+	C$final.c$321$1$1 ==.
+;	C:\Users\SSP\Documents\Microprocessor Systems\Final\final.c:321: TH1		 = 0xE8;					// 0xE8 = 232
 	mov	_TH1,#0xE8
-	C$final.c$215$1$1 ==.
-;	C:\Users\SSP\Documents\Microprocessor Systems\Final\final.c:215: TR1		 = 1;						// Start Timer1
+	C$final.c$322$1$1 ==.
+;	C:\Users\SSP\Documents\Microprocessor Systems\Final\final.c:322: TR1		 = 1;						// Start Timer1
 	setb	_TR1
-	C$final.c$217$1$1 ==.
-;	C:\Users\SSP\Documents\Microprocessor Systems\Final\final.c:217: SFRPAGE = UART0_PAGE;
+	C$final.c$324$1$1 ==.
+;	C:\Users\SSP\Documents\Microprocessor Systems\Final\final.c:324: SFRPAGE = UART0_PAGE;
 	mov	_SFRPAGE,#0x00
-	C$final.c$218$1$1 ==.
-;	C:\Users\SSP\Documents\Microprocessor Systems\Final\final.c:218: SCON0	 = 0x50;					// Mode 1, 8-bit UART, enable RX
+	C$final.c$325$1$1 ==.
+;	C:\Users\SSP\Documents\Microprocessor Systems\Final\final.c:325: SCON0	 = 0x50;					// Mode 1, 8-bit UART, enable RX
 	mov	_SCON0,#0x50
-	C$final.c$219$1$1 ==.
-;	C:\Users\SSP\Documents\Microprocessor Systems\Final\final.c:219: SSTA0	 = 0x00;					// SMOD0 = 0, in this mode
+	C$final.c$326$1$1 ==.
+;	C:\Users\SSP\Documents\Microprocessor Systems\Final\final.c:326: SSTA0	 = 0x00;					// SMOD0 = 0, in this mode
 	mov	_SSTA0,#0x00
-	C$final.c$222$1$1 ==.
-;	C:\Users\SSP\Documents\Microprocessor Systems\Final\final.c:222: TI0 = 1;							// Indicate TX0 ready
+	C$final.c$329$1$1 ==.
+;	C:\Users\SSP\Documents\Microprocessor Systems\Final\final.c:329: TI0 = 1;							// Indicate TX0 ready
 	setb	_TI0
-	C$final.c$224$1$1 ==.
-;	C:\Users\SSP\Documents\Microprocessor Systems\Final\final.c:224: SFRPAGE = SFRPAGE_SAVE;             // Restore SFR page
+	C$final.c$331$1$1 ==.
+;	C:\Users\SSP\Documents\Microprocessor Systems\Final\final.c:331: SFRPAGE = SFRPAGE_SAVE;             // Restore SFR page
 	mov	_SFRPAGE,r2
-	C$final.c$225$1$1 ==.
+	C$final.c$332$1$1 ==.
 	XG$UART0_INIT$0$0 ==.
 	ret
 	.area CSEG    (CODE)
@@ -2589,73 +3458,107 @@ __str_2:
 	.db 0x00
 Ffinal$_str_3$0$0 == .
 __str_3:
-	.ascii "O's turn."
+	.ascii "It is currently O's turn."
 	.db 0x0A
 	.db 0x0D
 	.db 0x00
 Ffinal$_str_4$0$0 == .
 __str_4:
-	.ascii "X's turn."
+	.ascii "It is currently X's turn."
 	.db 0x0A
 	.db 0x0D
 	.db 0x00
 Ffinal$_str_5$0$0 == .
 __str_5:
 	.db 0x1B
-	.ascii "[3;1H"
+	.ascii "[16;1H"
 	.db 0x00
 Ffinal$_str_6$0$0 == .
 __str_6:
+	.ascii "Press any key to play again"
+	.db 0x00
+Ffinal$_str_7$0$0 == .
+__str_7:
+	.db 0x1B
+	.ascii "[3;1H"
+	.db 0x00
+Ffinal$_str_8$0$0 == .
+__str_8:
 	.ascii "-----|-----|-----"
 	.db 0x0A
 	.db 0x0D
 	.db 0x00
-Ffinal$_str_7$0$0 == .
-__str_7:
+Ffinal$_str_9$0$0 == .
+__str_9:
 	.ascii "     |     |     "
 	.db 0x0A
 	.db 0x0D
 	.db 0x00
-Ffinal$_str_8$0$0 == .
-__str_8:
-	.db 0x1B
-	.ascii "[%d;%dH"
-	.db 0x00
-Ffinal$_str_9$0$0 == .
-__str_9:
-	.ascii "X  X"
-	.db 0x00
 Ffinal$_str_10$0$0 == .
 __str_10:
 	.db 0x1B
-	.ascii "[%d;%dH XX "
+	.ascii "[%d;%dH"
 	.db 0x00
 Ffinal$_str_11$0$0 == .
 __str_11:
-	.db 0x1B
-	.ascii "[%d;%dHX  X"
+	.ascii "X  X"
 	.db 0x00
 Ffinal$_str_12$0$0 == .
 __str_12:
-	.ascii " OO "
+	.db 0x1B
+	.ascii "[%d;%dH XX "
 	.db 0x00
 Ffinal$_str_13$0$0 == .
 __str_13:
 	.db 0x1B
-	.ascii "[%d;%dHO  O"
+	.ascii "[%d;%dHX  X"
 	.db 0x00
 Ffinal$_str_14$0$0 == .
 __str_14:
-	.db 0x1B
-	.ascii "[%d;%dH OO"
+	.ascii " OO "
 	.db 0x00
 Ffinal$_str_15$0$0 == .
 __str_15:
-	.ascii "%c"
+	.db 0x1B
+	.ascii "[%d;%dHO  O"
 	.db 0x00
 Ffinal$_str_16$0$0 == .
 __str_16:
+	.db 0x1B
+	.ascii "[%d;%dH OO"
+	.db 0x00
+Ffinal$_str_17$0$0 == .
+__str_17:
+	.ascii "%c"
+	.db 0x00
+Ffinal$_str_18$0$0 == .
+__str_18:
 	.ascii "|"
+	.db 0x00
+Ffinal$_str_19$0$0 == .
+__str_19:
+	.db 0x1B
+	.ascii "[20;1H"
+	.db 0x00
+Ffinal$_str_20$0$0 == .
+__str_20:
+	.ascii "Game has been won by player O"
+	.db 0x00
+Ffinal$_str_21$0$0 == .
+__str_21:
+	.ascii "Game has been won by player X"
+	.db 0x00
+Ffinal$_str_22$0$0 == .
+__str_22:
+	.ascii "Free move. Choose sub-board."
+	.db 0x0A
+	.db 0x0D
+	.db 0x00
+Ffinal$_str_23$0$0 == .
+__str_23:
+	.ascii "                              "
+	.db 0x0A
+	.db 0x0D
 	.db 0x00
 	.area XINIT   (CODE)
 	.area CABS    (ABS,CODE)

@@ -35,15 +35,16 @@ void UART0_INIT(void);
 void gameStart(void);
 void printBoard(void);
 void printSubBoard(int pos);
+void getMove(bit freeMove);
+
+bit checkBoardWin(char b[]);
+bit gameWon(void);
 
 static const startRow[] = {3,7,11};		//subboard starting rows
 static const startCol[] = {1,7,13};		//subboard starting cols
 
-bit won = 0;
 bit turn = 0;		//0 = O, 1 = X
-
 char current = 0;	//current subboard
-char move = 0;		//player move
 
 xdata char board[10][16];		//[large board pos; 9->winners of sub-boards][sub-board pos]
 
@@ -69,12 +70,27 @@ void main(void)
 	{
 		gameStart();
 
-		//print current player's turn
-		printf("\033[15;1H");
-		if(turn == 0)
-			printf("O's turn.\n\r");
-		else
-			printf("X's turn.\n\r");
+		while(!gameWon())
+		{
+			//print current player's turn
+			printf("\033[15;1H");
+			if(turn == 0)
+				printf("It is currently O's turn.\n\r");
+			else
+				printf("It is currently X's turn.\n\r");
+			
+			//if current subboard is not yet won, no free move
+			if(board[9][current] == ' ')
+				getMove(0);
+			else
+				getMove(1);
+
+			//update board
+			printBoard();
+		}
+
+		printf("\033[16;1H");
+		printf("Press any key to play again");
 		getchar();
 	}
 }
@@ -94,7 +110,18 @@ void gameStart(void)
 		}
 	}
 
-	//print board
+	turn = 0;
+
+	//print empty board
+	printBoard();
+
+	//print player's turn
+	printf("\033[15;1H");
+	printf("It is currently O's turn.\n\r");
+
+	//get first move (free move)
+	getMove(1);
+
 	printBoard();
 }
 
@@ -120,20 +147,27 @@ void printBoard(void)
 void printSubBoard(int pos)
 {
 	int i;
+
+	//move to start position of subboard
 	printf("\033[%d;%dH", startRow[pos/3], startCol[pos%3]);
 	
-	if(board[9][pos] == 'X')
+	//if won by X, print large X
+	if(board[9][pos] == 1)
 	{
 		printf("X  X");
 		printf("\033[%d;%dH XX ", startRow[pos/3]+1, startCol[pos%3]);
 		printf("\033[%d;%dHX  X", startRow[pos/3]+2, startCol[pos%3]);
 	}
-	else if (board[9][pos] == 'O')
+
+	//if won by O, print large O
+	else if (board[9][pos] == 0)
 	{
 		printf(" OO ");
 		printf("\033[%d;%dHO  O", startRow[pos/3]+1, startCol[pos%3]);
 		printf("\033[%d;%dH OO", startRow[pos/3]+2, startCol[pos%3]);
 	}
+
+	//else print current status of board
 	else
 	{
 		for(i=0; i<9; i++)
@@ -146,6 +180,103 @@ void printSubBoard(int pos)
 				printf("|");
 		}
 	}
+}
+
+bit checkBoardWin(char b[])
+{
+	int i;
+
+	//check verticals for win
+	for(i=0; i<3; i++)
+	{
+		if(b[i] == b[i+3] && b[i] == b[i+6] && b[i] != ' ')
+			return 1;
+	}
+
+	//check horizontals
+	for(i=0; i<6; i+=3)
+	{
+		if(b[i] == b[i+1] && b[i] == b[i+2] && b[i] != ' ')
+			return 1;
+	}
+
+	//check diagonal from 0
+	if(b[0] == b[4] && b[0] == b[8] && b[0] != ' ')
+		return 1;
+	
+	//check diagonal from 2
+	if(b[2] == b[4] && b[2] == b[6] && b[2] != ' ')
+		return 1;
+
+	return 0;
+}
+
+bit gameWon(void)
+{
+	//check large board
+	if(checkBoardWin(board[9]))
+	{
+		//game won by last player that moved.
+		printf("\033[15;1H");
+		if (turn==0)
+			printf("Game has been won by player X");
+		else
+			printf("Game has been won by player O");
+
+		return 1;
+	}
+
+	return 0;
+}
+
+void getMove(bit freeMove)
+{
+	char move = 0xff;
+
+	//if free move, get subboard first
+	if(freeMove)
+	{
+		printf("\033[16;1H");
+		printf("Free move. Choose sub-board.\n\r");
+
+		current = 0xff;
+
+		//get valid sub-board number that has not yet been won
+		while(current < 0 || current > 8  || board[9][current] != ' ')	
+		{
+			move = getchar();
+			current = move-49;			//adjust for position on keypad
+		}	
+	}
+
+	printf("\033[16;1H");
+	printf("                              \n\r");
+	
+	printf("\033[%d;%dH", startRow[current/3], startCol[current%3]);
+
+	move = 0xff;
+
+	//get valid move
+	while(move < 0 || move > 8 || board[current][move] != ' ')				
+	{
+		move = getchar();
+		move = move-49;
+	}
+
+	if (turn == 0)
+		board[current][move] = 'O';
+	else
+		board[current][move] = 'X';
+
+	if(checkBoardWin(board[current]))
+		board[9][current] = turn;
+
+	current = move;
+	
+	if(turn == 1)
+		turn = 0;
+	else
+		turn = 1;
 }
 
 //------------------------------------------------------------------------------------

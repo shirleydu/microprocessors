@@ -17,6 +17,7 @@
 //#include <stdlib.h>
 #include "putget.h"
 
+
 //------------------------------------------------------------------------------------
 // Global Constants
 //------------------------------------------------------------------------------------
@@ -37,7 +38,10 @@ void printBoard(void);
 void printSubBoard(int pos);
 void getMove(bit freeMove);
 
-bit checkBoardWin(char b[]);
+char getPos(int bd, int pos);
+void setPos(int bd, int pos, char val);
+
+bit checkBoardWin(int bd);
 bit gameWon(void);
 
 void lightMainBoard(void);
@@ -49,7 +53,7 @@ static const char startCol[] = {1,7,13};		//subboard starting cols
 bit turn = 0;		//0 = O, 1 = X
 char current = 0;	//current subboard
 
-xdata char board[10][16];		//[large board pos; 9->winners of sub-boards][sub-board pos]
+char board[10][4];		//[large board pos; 9->winners of sub-boards][sub-board pos]
 
 //------------------------------------------------------------------------------------
 // MAIN Routine
@@ -83,15 +87,13 @@ void main(void)
 				printf("It is currently X's turn.\n\r");
 			
 			//if current subboard is not yet won, no free move
-			if(board[9][current] == ' ')
+			if(getPos(9,current) == ' ')
 				getMove(0);
 			else
 				getMove(1);
 
 			//update board
 			printBoard();
-
-			//P5 = 0xFF;
 		}
 
 		printf("\033[16;1H");
@@ -109,9 +111,9 @@ void gameStart(void)
 	//clear board
 	for(i=0; i<10; i++)
 	{
-		for(j=0; j<9; j++)
+		for(j=0; j<4; j++)
 		{
-			board[i][j] = ' ';
+			board[i][j] = 0x00;
 		}
 	}
 
@@ -159,7 +161,7 @@ void printSubBoard(int pos)
 	printf("\033[%d;%dH", startRow[pos/3], startCol[pos%3]);
 	
 	//if won by X, print large X
-	if(board[9][pos] == 1)
+	if(getPos(9,pos)=='X')
 	{
 		printf("X  X");
 		printf("\033[%d;%dH XX ", startRow[pos/3]+1, startCol[pos%3]);
@@ -167,7 +169,7 @@ void printSubBoard(int pos)
 	}
 
 	//if won by O, print large O
-	else if (board[9][pos] == 0)
+	else if (getPos(9, pos) == 'O')
 	{
 		printf(" OO ");
 		printf("\033[%d;%dHO  O", startRow[pos/3]+1, startCol[pos%3]);
@@ -182,16 +184,21 @@ void printSubBoard(int pos)
 			if(i%3 == 0)
 				printf("\033[%d;%dH", startRow[pos/3]+i/3, startCol[pos%3]);
 
-			printf("%c", board[pos][i]);
+			printf("%c", getPos(pos,i));
 			if(i%3!=2)	
 				printf("|");
 		}
 	}
 }
 
-bit checkBoardWin(char b[])
+bit checkBoardWin(int bd)
 {
 	int i;
+	char b[9];
+	for(i = 0; i < 9; i++)
+	{
+		b[i] = getPos(bd,i);
+	}
 
 	//check verticals for win
 	for(i=0; i<3; i++)
@@ -221,7 +228,7 @@ bit checkBoardWin(char b[])
 bit gameWon(void)
 {
 	//check large board
-	if(checkBoardWin(board[9]))
+	if(checkBoardWin(9))
 	{
 		//game won by last player that moved.
 		printf("\033[15;1H");
@@ -249,7 +256,7 @@ void getMove(bit freeMove)
 		current = 0xff;
 
 		//get valid sub-board number that has not yet been won
-		while(current < 0 || current > 8  || board[9][current] != ' ')	
+		while(current < 0 || current > 8  || getPos(9,current) != ' ')	
 		{
 			move = getchar();
 			current = move-49;			//adjust for position on keypad
@@ -264,7 +271,7 @@ void getMove(bit freeMove)
 	move = 0xff;
 
 	//get valid move
-	while(move < 0 || move > 8 || board[current][move] != ' ')				
+	while(move < 0 || move > 8 || getPos(current,move) != ' ')				
 	{
 		move = getchar();
 		move = move-49;
@@ -272,13 +279,16 @@ void getMove(bit freeMove)
 
 	//place move
 	if (turn == 0)
-		board[current][move] = 'O';
+		setPos(current,move,'O');
 	else
-		board[current][move] = 'X';
+		setPos(current,move,'X');
 
 	//if resulted in winning subboard, update subboards
-	if(checkBoardWin(board[current]))
-		board[9][current] = turn;
+	if(checkBoardWin(current))
+		if(turn == 0)
+			setPos(9,current,'O');
+		else
+			setPos(9,current,'X');
 
 	//change current subboard
 	current = move;
@@ -290,44 +300,118 @@ void getMove(bit freeMove)
 		turn = 1;
 }
 
+//------------------HARDCORE MODE------------------------------------------------------------
+
+char getPos(int bd, int pos)
+{
+	int sub = 0;
+	char row;
+	char ans;
+	sub = pos/3;
+
+	row = board[bd][sub];
+	pos = pos % 3;
+
+	if(pos == 0)
+	{
+		ans = row & 0x03;
+	}	
+	if(pos == 1)
+	{
+		ans = (row & 0x0C)>>2;
+	}
+	if(pos == 2)
+	{
+		ans = (row & 0x30)>>4;
+	}
+	if(ans == 0x01)
+	{
+		return 'X';
+	}
+	else if(ans == 0x02)
+	{
+		return 'O';
+	}
+	else
+	{
+		return ' ';
+	}
+}
+
+void setPos(int bd, int pos, char val)
+{
+	int sub = 0;
+	char row;
+	char binVal;
+	
+	sub = pos/3;
+
+	pos = pos % 3;
+	if(val == 'X')
+	{
+		binVal = 0x01;
+	}
+	else if (val == 'O')
+	{
+		binVal = 0x02;
+	}
+	if(pos == 0){
+		board[bd][sub]&=0xFC;
+		board[bd][sub]|=binVal;
+	}
+	else if(pos == 1){
+		board[bd][sub]&=0xF3;
+		board[bd][sub]|=(binVal<<2);
+	}
+	else if(pos == 2){
+		board[bd][sub]&=0xCF;
+		board[bd][sub]|=(binVal<<4);
+	}
+}
+
+
 //-----------------------------------Hardware Stuff-------------------------------------
 void lightMainBoard(void)
 {
 	int i;
+
+	SFRPAGE = CONFIG_PAGE;
 	
 	//P5 (subboard 0)
-	if (board[9][0] == 0)
-		P1 = 0x01;
-	else if (board[9][0] == 1)
-		P1 = 0x02;
+	if (getPos(9,0) == 'O')
+		P5 = 0x01;
+	else if (getPos(9,0) == 'X')
+		P5 = 0x02;
 	else
-		P1 = 0x00;
+		P5 = 0x00;
 		
 	//P6 (subboards 1-4)
-	P2 = 0x00;
+	P6 = 0x00;
 	for(i=1; i<5; i++)
 	{
-		P2 = P2<<2;
-		if (board[9][i] == 0)
-			P2 += 0x01;
-		else if (board[9][i] == 1)
-			P2 += 0x02;
+		P6 = P6<<2;
+		if (getPos(9,i) == 'O')
+			P6 = P6 + 0x01;
+		else if (getPos(9,i) == 'X')
+			P6= P6 + 0x02;
 		else
-			P2 += 0x00;
+			P6= P6 + 0x00;
 	}
 
 	//P7 (subboards 5-8)
-	P4 = 0x00;
+	P7 = 0x00;
 	for(i=5; i<9; i++)
 	{
-		P4 = P4<<2;
-		if (board[9][i] == 0)
-			P4 += 0x01;
-		else if (board[9][i] == 1)
-			P4 += 0x02;
+		P7 = P7<<2;
+		if (getPos(9,i) == 'O')
+			P7 = P7+0x01;
+		else if (getPos(9,i) == 'X')
+			P7 = P7+0x02;
 		else
-			P4 += 0x00;
+			P7 = P7+0x00;
 	}
+
+	SFRPAGE = UART0_PAGE;
 }
 
 void lightSubBoard(void)

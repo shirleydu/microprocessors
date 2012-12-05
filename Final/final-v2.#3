@@ -1,22 +1,35 @@
 //FINAL PROJECT
-//SUPER TIC-TAC-TOE
+//Shirley Du
+//Victor Huang
+//TIC-TAC-TOE INCEPTIOOOONNNN
 
-//SET 1:
+//SET 1: Sub-boards
 //PORT 1.0, 1.1
 //PORT 2.0-2.7
 //PORT 4.0-4.7
 
-//SET 2:
+//SET 2: Main Board
+//PORT 5.0, 5.1
+//PORT 6.0-6.7
+//PORT 7.0-7.7
 
+//SET 3: Current lit sub-board
+//PORT 1.2-1.5
+
+//SET 4: Current sub-board
+//PORT 5.2-5.5
+
+//KEYPAD:
+//P3
+//PORT 0.2: Keypad interrupt 
 
 //------------------------------------------------------------------------------------
 // Includes
 //------------------------------------------------------------------------------------
 #include <c8051f120.h>
 #include <stdio.h>
-//#include <stdlib.h>
 #include "putget.h"
-
+#include "keypad.h"
 
 //------------------------------------------------------------------------------------
 // Global Constants
@@ -45,7 +58,7 @@ bit checkBoardWin(int bd);
 bit gameWon(void);
 
 void lightMainBoard(void);
-void lightSubBoard(void);
+void lightSubBoard(int boardNum);
 
 static const char startRow[] = {3,7,11};		//subboard starting rows
 static const char startCol[] = {1,7,13};		//subboard starting cols
@@ -66,6 +79,7 @@ void main(void)
 	SYSCLK_INIT();						// Initialize the oscillator
 	PORT_INIT();						// Initialize the Crossbar and GPIO
 	UART0_INIT();						// Initialize UART0
+	init_keypad();
 
 	SFRPAGE = UART0_PAGE;				// Direct output to UART0
 
@@ -94,22 +108,11 @@ void main(void)
 
 			//update board
 			printBoard();
-
-			SFRPAGE = CONFIG_PAGE;
-			P1 = 0xAA;
-			P2 = 0xAA;
-			P4 = 0xAA;
-			P5 = 0xAA;
-			P7 = 0xAA;
-			P6 = 0xAA;
-			SFRPAGE = UART0_PAGE;
-			printf("\033[21;1H");
-			printf("%x\n\r", P6);
 		}
 
 		printf("\033[16;1H");
 		printf("Press any key to play again");
-		getchar();
+		getLetter();
 	}
 }
 
@@ -159,8 +162,7 @@ void printBoard(void)
 	}
 
 	lightMainBoard();
-	printf("\033[23;1H");
-	printf("%x\n\r", P6);
+	lightSubBoard(current);
 
 	for(i=0; i<9; i++)
 		printSubBoard(i);
@@ -259,6 +261,18 @@ bit gameWon(void)
 void getMove(bit freeMove)
 {
 	char move = 0xff;
+	int litBoard = current;
+
+	//look through subboards
+	while(move == '*' || move == '#' || move == '0xff')
+	{
+		move = getLetter();
+		if (move == '*')
+			litBoard--;
+		else if (move == '#')
+			litBoard++;
+		lightSubBoard(litBoard);
+	}
 
 	//if free move, get subboard first
 	if(freeMove)
@@ -271,8 +285,9 @@ void getMove(bit freeMove)
 		//get valid sub-board number that has not yet been won
 		while(current < 0 || current > 8  || getPos(9,current) != ' ')	
 		{
-			move = getchar();
+			move = getLetter();
 			current = move-49;			//adjust for position on keypad
+			lightSubBoard(current+1);
 		}	
 	}
 
@@ -286,7 +301,7 @@ void getMove(bit freeMove)
 	//get valid move
 	while(move < 0 || move > 8 || getPos(current,move) != ' ')				
 	{
-		move = getchar();
+		move = getLetter();
 		move = move-49;
 	}
 
@@ -319,7 +334,7 @@ char getPos(int bd, int pos)
 {
 	int sub = 0;
 	char row;
-	char ans;
+	char ans = 0xff;
 	sub = pos/3;
 
 	row = board[bd][sub];
@@ -354,8 +369,7 @@ char getPos(int bd, int pos)
 void setPos(int bd, int pos, char val)
 {
 	int sub = 0;
-	char row;
-	char binVal;
+	char binVal = 0xff;
 	
 	sub = pos/3;
 
@@ -411,10 +425,6 @@ void lightMainBoard(void)
 			P6= P6 + 0x00;
 	}
 
-	P6 = 0xAA;
-	//printf("\033[20;1H");
-	//printf("%x\n\r", P6);
-
 	//P7 (subboards 5-8)
 	P7 = 0x00;
 	for(i=5; i<9; i++)
@@ -428,12 +438,50 @@ void lightMainBoard(void)
 			P7 = P7+0x00;
 	}
 
-	P7 = 0xAA;
 	SFRPAGE = UART0_PAGE;
 }
 
-void lightSubBoard(void)
+void lightSubBoard(int boardNum)
 {
+	int i;
+
+	SFRPAGE = CONFIG_PAGE;
+	
+	//P1 (subboard 0)
+	if (getPos(boardNum,0) == 'O')
+		P1 = 0x01;
+	else if (getPos(boardNum,0) == 'X')
+		P1 = 0x02;
+	else
+		P1 = 0x00;
+		
+	//P2 (subboards 1-4)
+	P2 = 0x00;
+	for(i=1; i<5; i++)
+	{
+		P2 = P2<<2;
+		if (getPos(boardNum,i) == 'O')
+			P2 = P2 + 0x01;
+		else if (getPos(boardNum,i) == 'X')
+			P2 = P2 + 0x02;
+		else
+			P2 = P2 + 0x00;
+	}
+
+	//P4 (subboards 5-8)
+	P4 = 0x00;
+	for(i=5; i<9; i++)
+	{
+		P4 = P4<<2;
+		if (getPos(boardNum,i) == 'O')
+			P4 = P4+0x01;
+		else if (getPos(boardNum,i) == 'X')
+			P4 = P4+0x02;
+		else
+			P4 = P4+0x00;
+	}
+
+	SFRPAGE = UART0_PAGE;
 }
 
 //------------------------------------------------------------------------------------
@@ -523,5 +571,3 @@ void UART0_INIT(void)
 	
 	SFRPAGE = SFRPAGE_SAVE;             // Restore SFR page
 }
-
-

@@ -1,0 +1,9 @@
+Results
+
+This game has a main display on the UART terminal which shows the current state of the whole board, with all the subboards, as well as the current player's turn. It also has two sets of 9 LEDs representing the game's state: one set represents the main board, showing which subboards have been won by which player, and one which a player can use to look through all the subboards. Another two sets, of 4 LEDs, are used to display the current subboard number on which a move is to be made, and the current subboard number being displayed, in binary. An additional LED is used to show which player's turn it is. A keypad is used to receive players' moves, with the number keys being used to select a subboard or a position on a subboard to make a move on, and the # and * keys to scroll through subboards on the LED display.
+
+In the initial setup, a 2D array of size [10][16] was used to record the current state of the game. A length of 16 was used for the second dimension because it had to be a power of 2, or else it would not compile. However, this array took up too much memory and required the use of xdata. Xdata hijacks ports 5, 6 and 7 as memory control lines, which were necessary to control the LED displays of the board; thus bitpacking had to be used to reduce the size of the array to such that it would fit into the microcontroller's internal memory. The resulting size of the array was [10][4], in which three squares of a subboard were represented by a single char, with three chars per subboard.
+
+
+Conclusion
+

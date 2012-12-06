@@ -18,6 +18,7 @@ F:G$lightMainBoard$0$0({2}DF,SV:S),Z,0,0,0,0,0
 F:G$lightSubBoard$0$0({2}DF,SV:S),Z,0,0,0,0,0
 F:G$lightCurrentNum$0$0({2}DF,SV:S),Z,0,0,0,0,0
 F:G$lightDisplayedNum$0$0({2}DF,SV:S),Z,0,0,0,0,0
+F:G$lightPlayerTurn$0$0({2}DF,SV:S),Z,0,0,0,0,0
 F:G$SYSCLK_INIT$0$0({2}DF,SV:S),Z,0,0,0,0,0
 F:G$PORT_INIT$0$0({2}DF,SV:S),Z,0,0,0,0,0
 F:G$UART0_INIT$0$0({2}DF,SV:S),Z,0,0,0,0,0
@@ -472,5 +473,7 @@ S:Ffinal_v2$_str_17$0$0({3}DA3,SC:S),D,0,0
 S:Ffinal_v2$_str_18$0$0({2}DA2,SC:S),D,0,0
 S:Ffinal_v2$_str_19$0$0({30}DA30,SC:S),D,0,0
 S:Ffinal_v2$_str_20$0$0({30}DA30,SC:S),D,0,0
-S:Ffinal_v2$_str_21$0$0({31}DA31,SC:S),D,0,0
-S:Ffinal_v2$_str_22$0$0({33}DA33,SC:S),D,0,0
+S:Ffinal_v2$_str_21$0$0({8}DA8,SC:S),D,0,0
+S:Ffinal_v2$_str_22$0$0({44}DA44,SC:S),D,0,0
+S:Ffinal_v2$_str_23$0$0({31}DA31,SC:S),D,0,0
+S:Ffinal_v2$_str_24$0$0({33}DA33,SC:S),D,0,0

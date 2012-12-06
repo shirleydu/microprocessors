@@ -23,6 +23,9 @@
 //P3
 //PORT 0.2: Keypad interrupt 
 
+//Player O: 10, turn 0
+//Player X: 01, turn 1
+
 //------------------------------------------------------------------------------------
 // Includes
 //------------------------------------------------------------------------------------
@@ -46,25 +49,28 @@ void SYSCLK_INIT(void);
 void PORT_INIT(void);
 void UART0_INIT(void);
 
-void gameStart(void);
-void printBoard(void);
-void printSubBoard(int pos);
-void getMove(bit freeMove);
+void gameStart(void);							//initiates game
+void printBoard(void);							//prints whole board
+void printSubBoard(int pos);					//prints subboard
+void getMove(bit freeMove);						//get player move
 
-char getPos(int bd, int pos);
-void setPos(int bd, int pos, char val);
+char getPos(int bd, int pos);					//converts from bitpacked pos to normal pos
+void setPos(int bd, int pos, char val);			//changes value in pos
 
-bit checkBoardWin(int bd);
-bit gameWon(void);
+bit checkBoardWin(int bd);						//check if a subboard has been won
+bit gameWon(void);								//check if game has been won
 
-void lightMainBoard(void);
-void lightSubBoard(int boardNum);
+void lightMainBoard(void);						//lights LED display for main board
+void lightSubBoard(int boardNum);				//lights LED display for subboard
+void lightCurrentNum(void);						//lights LEDs for current subboard num to make move on
+void lightDisplayedNum(int boardNum);			//lights LEDs for current displayed subboard num
+void lightPlayerTurn(void);						//lights LED that indicates which player's turn it is
 
 static const char startRow[] = {3,7,11};		//subboard starting rows
 static const char startCol[] = {1,7,13};		//subboard starting cols
 
-bit turn = 0;		//0 = O, 1 = X
-char current = 0;	//current subboard
+bit turn = 0;									//0 = O, 1 = X
+char current = 0;								//current subboard
 
 char board[10][4];		//[large board pos; 9->winners of sub-boards][sub-board pos]
 
@@ -142,7 +148,6 @@ void gameStart(void)
 
 	//get first move (free move)
 	getMove(1);
-
 	printBoard();
 }
 
@@ -164,6 +169,7 @@ void printBoard(void)
 	lightMainBoard();
 	lightSubBoard(current);
 	lightCurrentNum();
+	lightPlayerTurn();
 
 	for(i=0; i<9; i++)
 		printSubBoard(i);
@@ -265,16 +271,22 @@ void getMove(bit freeMove)
 	int litBoard = current;
 
 	//look through subboards
-	while(move == '*' || move == '#' || move == '0xff')
+	while(move == '*' || move == '#' || move == 0xffff)
 	{
 		move = getLetter();
-		if (move == '*')
+
+		if (move == '*' && litBoard > 0)
 			litBoard--;
-		else if (move == '#')
+		else if (move == '#' && litBoard < 8)
 			litBoard++;
 		lightSubBoard(litBoard);
 		lightDisplayedNum(litBoard);
+
+		printf("\033[20;1H");
+		printf("Current subboard: %d\n\rCurrent lit board: %d", current, litBoard);
 	}
+	
+
 
 	//if free move, get subboard first
 	if(freeMove)
@@ -490,7 +502,10 @@ void lightCurrentNum(void)
 {
 	SFRPAGE = CONFIG_PAGE;
 	
-	P5 = ~current;
+	P5 &= 0x03;
+	P5 |= current<<2;
+
+	//P5 |= ~0x03;
 
 	SFRPAGE = UART0_PAGE;
 }
@@ -499,7 +514,22 @@ void lightDisplayedNum(int boardNum)
 {
 	SFRPAGE = CONFIG_PAGE;
 
-	P1 = ~boardNum;
+	P1 &= 0x03;
+	P1 |= boardNum<<2;
+
+	SFRPAGE = UART0_PAGE;
+}
+
+void lightPlayerTurn(void)
+{
+	SFRPAGE = CONFIG_PAGE;
+
+	P5 &= 0x3F;
+
+	if (turn == 0)
+		P5 |= 0x80;
+	else
+		P5 |= 0x40;
 
 	SFRPAGE = UART0_PAGE;
 }
